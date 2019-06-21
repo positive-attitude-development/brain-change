@@ -91,9 +91,4 @@ This page should display a list of users along with the total number of items th
 - A new route to display all items for a specific user. `/shelf/2` would display items uploaded by user with the id of `2`.
 - Filestack for image upload on the add page.
 - Style with Material-UI
-# positive-attitude-development
-# positive-attitude-development
-# positive-attitude-development
-# positive-attitude-development
-# positive-attitude-development
-# positive-attitude-development
+
