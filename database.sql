@@ -9,14 +9,14 @@
 --     "password" VARCHAR (1000) NOT NULL
 -- );
 
-CREATE Table "admin" (
-  "ID" SERIAL PRIMARY KEY,
-  "username" VARCHAR (80) UNIQUE NOT NULL,
-  "password" VARCHAR (1000) NOT NULL,
-  "level"  INT
-);
 
-
+CREATE TABLE "admin" (
+  "id" SERIAL PRIMARY KEY, 
+  "username" VARCHAR UNIQUE NOT NULL,
+  "password" VARCHAR NOT NULL,
+  "level" INT
+  );
+  
 CREATE TABLE "admin_contact"(
   "id" SERIAL PRIMARY KEY,
   "admin_id" INT REFERENCES "admin",
@@ -101,7 +101,7 @@ CREATE TABLE "result_violators"(
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
   "value_id" INT REFERENCES "value"
-);
+);/Users/jessegjerde/Downloads/brain_change_database.sql
 
 CREATE TABLE "url" (
   "id" SERIAL PRIMARY KEY,
