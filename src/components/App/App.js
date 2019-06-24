@@ -21,6 +21,8 @@ import ViewShelf from '../ViewShelf/ViewShelf';
 import TotalItems from '../TotalItems/TotalItems';
 import ShelfForm from '../ShelfForm/ShelfForm';
 
+import AllRecords from '../AllRecords/AllRecords';
+
 
 import './App.css';
 
@@ -52,6 +54,10 @@ class App extends Component {
               exact
               path="/home"
               component={UserPage}
+            />
+            <Route
+              exact path="/all-records"
+              component={AllRecords}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
