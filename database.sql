@@ -9,13 +9,12 @@
 --     "password" VARCHAR (1000) NOT NULL
 -- );
 
-    CREATE Table "admin" {
+CREATE Table "admin" (
   "ID" SERIAL PRIMARY KEY,
   "username" VARCHAR (80) UNIQUE NOT NULL,
   "password" VARCHAR (1000) NOT NULL,
   "level"  INT
-  
-  }
+);
 
 
 CREATE TABLE "admin_contact"(
