@@ -9,7 +9,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('is authenticated?:', req.isAuthenticated());
     console.log('shelf req.user:', req.user);
-    let queryText = `SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
+    let queryText = `SELECT "admin"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
         JOIN "item" ON "user".id = "item".user_id;`;
     pool.query(queryText)
     .then((results) => {
