@@ -6,6 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * Get all of the items on the shelf
  */
+
 // router.get('/', rejectUnauthenticated, (req, res) => {
 //     console.log('is authenticated?:', req.isAuthenticated());
 //     console.log('shelf req.user:', req.user);
@@ -20,6 +21,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //         res.sendStatus(500);
 //     });
 // });
+
 
 
 /**

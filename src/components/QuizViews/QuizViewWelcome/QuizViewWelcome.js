@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import './QuizViewWelcome'
+import './QuizViewWelcome.css';
+import { Link } from 'react-router-dom'; 
 
 export class QuizViewWelcome extends Component {
     render() {
@@ -32,6 +33,7 @@ export class QuizViewWelcome extends Component {
                 // onclick={this.startQuiz}
                 >
                 Start
+                <
                 </Button>
             </div>
             </div>
