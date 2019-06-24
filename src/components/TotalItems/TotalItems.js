@@ -10,11 +10,6 @@ componentDidMount() {
     render() {
         return (
             <div>
-                <ul>
-                    {this.props.reduxState.totalItemsReducer.map((total, i) => {
-                        return <li key={i}>{total.username} added {total.total_items} items</li>
-                    })}
-                </ul>
             </div>
         )
     }

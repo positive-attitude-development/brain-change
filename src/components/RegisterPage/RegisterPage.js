@@ -19,7 +19,7 @@ class RegisterPage extends Component {
 	zipcode: ''
   };
 
-  registerUser = (event) => {
+  registerAdmin = (event) => {
     event.preventDefault();
 
     if (this.state.username && this.state.password) {
@@ -44,7 +44,7 @@ class RegisterPage extends Component {
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
-  } // end registerUser
+  } // end registerAdmin
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -60,7 +60,7 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-		<form onSubmit={this.registerUser}>
+		<form onSubmit={this.registerAdmin}>
         <FormGroup>
           <h2>Register Owner/Admin</h2>
           <div>

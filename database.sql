@@ -29,7 +29,7 @@ CREATE TABLE "admin_contact"(
   "street_address2" VARCHAR,
   "city" VARCHAR,
   "state" VARCHAR,
-  "zip" INT
+  "zipcode" INT
 );
 
 CREATE TABLE "participant" (
