@@ -18,11 +18,15 @@ const styles = {
 class Profile extends Component{
 
 	state = {
-		isEditable: false
+		isEditable: false,
+		profile: {},
 	}
 
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_PROFILE', payload: this.props.admin.id})
+		this.setState({
+			profile: this.props.profile[0]
+		})
 	}
 
 	handleEdit = () => {
@@ -33,6 +37,7 @@ class Profile extends Component{
 
 	render(){
 		const {classes} = this.props;
+		console.log('username:', this.props.profile[0])
 		return(
 			<div>
 				{this.state.isEditable ?
