@@ -22,7 +22,9 @@ class RegisterPage extends Component {
   registerAdmin = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.username && this.state.password && this.state.firstName && 
+	this.state.lastName && this.state.organization && this.state.title && 
+	this.state.phoneNumber && this.state.emailAddress && this.state.state) {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
@@ -65,72 +67,72 @@ class RegisterPage extends Component {
           <h2>Register Owner/Admin</h2>
           <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}>
-				</TextField>}
+				<TextField required label="Required"
+				value={this.state.username}
+                onChange={this.handleInputChangeFor('username')}/>}
         	label="Username:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.password}
+                onChange={this.handleInputChangeFor('password')}/>}
         	label="Password:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.firstName}
+                onChange={this.handleInputChangeFor('firstName')}/>}
         	label="First Name:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.lastName}
-                onChange={this.handleInputChangeFor('lastName')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.lastName}
+                onChange={this.handleInputChangeFor('lastName')}/>}
         	label="Last Name:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.organization}
-                onChange={this.handleInputChangeFor('organization')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.organization}
+                onChange={this.handleInputChangeFor('organization')}/>}
         	label="Organization:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.title}
-                onChange={this.handleInputChangeFor('title')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.title}
+                onChange={this.handleInputChangeFor('title')}/>}
         	label="Title:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.phoneNumber}
-                onChange={this.handleInputChangeFor('phoneNumber')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.phoneNumber}
+                onChange={this.handleInputChangeFor('phoneNumber')}/>}
         	label="Phone Number:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-          		<TextField value={this.state.emailAddress}
-                onChange={this.handleInputChangeFor('emailAddress')}>
-				</TextField>}
+          		<TextField required label="Required"
+				value={this.state.emailAddress}
+                onChange={this.handleInputChangeFor('emailAddress')}/>}
         	label="Email Address:"
 			labelPlacement="start"/>
           </div>
@@ -138,8 +140,7 @@ class RegisterPage extends Component {
 		  <div>
 			<FormControlLabel control={
           		<TextField value={this.state.streetAddress}
-                onChange={this.handleInputChangeFor('streetAddress')}>
-				</TextField>}
+                onChange={this.handleInputChangeFor('streetAddress')}/>}
         	label="Street Address:"
 			labelPlacement="start"/>
           </div>
@@ -147,8 +148,7 @@ class RegisterPage extends Component {
 		  <div>
 			<FormControlLabel control={
           		<TextField value={this.state.streetAddressTwo}
-                onChange={this.handleInputChangeFor('streetAddressTwo')}>
-				</TextField>}
+                onChange={this.handleInputChangeFor('streetAddressTwo')}/>}
         	label="Street Address Line 2:"
 			labelPlacement="start"/>
           </div>
@@ -156,15 +156,15 @@ class RegisterPage extends Component {
 		  <div>
 			<FormControlLabel control={
           		<TextField value={this.state.city}
-                onChange={this.handleInputChangeFor('city')}>
-				</TextField>}
+                onChange={this.handleInputChangeFor('city')}/>}
         	label="City:"
 			labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
-				<Select value={this.state.state}
+				<Select required value={this.state.state}
+				label="Required"
 				onChange={this.handleInputChangeFor('state')}
 				input={<OutlinedInput name="state" labelWidth={100} id="outlined-age-native-simple"/>}>
 					<MenuItem value=""><em>Select State</em></MenuItem>
@@ -247,11 +247,8 @@ class RegisterPage extends Component {
         </FormGroup>
 		</form>
         <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
+          <button type="button" className="link-button"
+            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
             Login
           </button>
         </center>
@@ -260,9 +257,6 @@ class RegisterPage extends Component {
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
 });
