@@ -10,12 +10,16 @@ import { Link} from 'react-router-dom';
 
 
 export class QuizViewWelcome extends Component {
+
+    startQuiz = (event) => {
+    event.preventDefault(); 
+
+    }
+
     render() {
         return (
 
-            // startQuiz() => {
-
-            // }
+           
 
             <div>
 
@@ -34,10 +38,9 @@ export class QuizViewWelcome extends Component {
                 <Button
                 color="primary"
                 variant="contained"
-                // onclick={this.startQuiz}
+                onclick={this.startQuiz}
                 >
                 Start
-                <Link to="/ElimInstructions1"> </Link>
                 </Button>
                 <Link to="/ElimInstructions1"> link </Link>
             </div>
