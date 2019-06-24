@@ -27,7 +27,7 @@ import { QuizViewWelcome } from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 
 class App extends Component {
   componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type: 'FETCH_ADMIN'})
   }
 
   render() {
