@@ -6,6 +6,15 @@ export class BeliefInstructions2 extends Component {
         return (
             <div>
                 
+                <div>
+                    Choose the belief that causes the most internal or external conflict in your life and categorize it as personal, religious, or political
+                </div>
+
+
+                <div>
+                    Here is a short tutorial 
+
+                </div>
 
                 <Link to="/Belief2"> link </Link>
             </div>
