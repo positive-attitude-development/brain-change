@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 
-export class Elimination4 extends Component {
+export class PickViolators extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ export class Elimination4 extends Component {
     }
 }
 
-export default Elimination4
+export default PickViolators

@@ -1,25 +1,14 @@
 import React, { Component } from 'react'
-import { TextField, Button } from '@material-ui/core';
-import { connect } from 'react-redux';
-import './QuizViewBeliefs1.css'
+import { Link} from 'react-router-dom'; 
 
-export class QuizView1 extends Component {
+export class QuizViewBeliefs1 extends Component {
     render() {
         return (
-
-           
-
-            
-
             <div>
-           
+                
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    user: state.user,
-  });
-
-export default connect()(QuizViewBeliefs1)
+export default QuizViewBeliefs1
