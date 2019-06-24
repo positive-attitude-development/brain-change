@@ -6,20 +6,22 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * Get all of the items on the shelf
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('is authenticated?:', req.isAuthenticated());
-    console.log('shelf req.user:', req.user);
-    let queryText = `SELECT "admin"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
-        JOIN "item" ON "user".id = "item".user_id;`;
-    pool.query(queryText)
-    .then((results) => {
-        console.log('results.row:', results.rows);
-        res.send(results.rows)
-    }).catch(error => {
-        console.log('error in shelf GET:', error);
-        res.sendStatus(500);
-    });
-});
+
+// router.get('/', rejectUnauthenticated, (req, res) => {
+//     console.log('is authenticated?:', req.isAuthenticated());
+//     console.log('shelf req.user:', req.user);
+//     let queryText = `SELECT "admin"."id" AS userID, "admin"."username", "item".description, "item".image_url, "item".id AS itemID FROM "admin"
+//         JOIN "item" ON "u".id = "item".user_id;`;
+//     pool.query(queryText)
+//     .then((results) => {
+//         console.log('results.row:', results.rows);
+//         res.send(results.rows)
+//     }).catch(error => {
+//         console.log('error in shelf GET:', error);
+//         res.sendStatus(500);
+//     });
+// });
+
 
 
 /**
