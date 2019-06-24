@@ -15,14 +15,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {  
+router.post('/register', (req, res, next) => {
+  console.log('register admin req.body:', req.body)
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
-
   const queryText = 'INSERT INTO "admin" (username, password) VALUES ($1, $2) RETURNING id';
-  pool.query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+  // pool.query(queryText, [username, password])
+  //   .then(() => res.sendStatus(201))
+  //   .catch(() => res.sendStatus(500));
 });
 
 // Handles login form authenticate/login POST
