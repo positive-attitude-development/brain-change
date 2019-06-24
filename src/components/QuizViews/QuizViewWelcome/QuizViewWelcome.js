@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import { TextField, Button } from '@material-ui/core';
+import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import './QuizViewWelcome'
+
+
+import './QuizViewWelcome.css';
+
+import { Link} from 'react-router-dom'; 
+
+
 
 export class QuizViewWelcome extends Component {
     render() {
@@ -11,9 +17,8 @@ export class QuizViewWelcome extends Component {
 
             // }
 
-            
-
             <div>
+
                 <h1>Welcome,
                 {this.props.reduxState} 
                 </h1>
@@ -26,14 +31,18 @@ export class QuizViewWelcome extends Component {
                     This exercise of choices will cause you to focus more as you go through
                     the process, but that is natural 
                 </div>
+            
                 <Button
                 color="primary"
                 variant="contained"
                 // onclick={this.startQuiz}
                 >
                 Start
+                <Link to="/ElimInstructions1"> </Link>
                 </Button>
+                <Link to="/ElimInstructions1"> link </Link>
             </div>
+
             </div>
         )
     }
