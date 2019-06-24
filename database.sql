@@ -9,13 +9,12 @@
 --     "password" VARCHAR (1000) NOT NULL
 -- );
 
-    CREATE Table "admin" {
-  "ID" SERIAL PRIMARY KEY,
+CREATE Table "admin" (
+  "id" SERIAL PRIMARY KEY,
   "username" VARCHAR (80) UNIQUE NOT NULL,
   "password" VARCHAR (1000) NOT NULL,
   "level"  INT
-  
-  }
+);
 
 
 CREATE TABLE "admin_contact"(
@@ -44,6 +43,16 @@ CREATE TABLE "participant" (
   "state" VARCHAR,
   "email" VARCHAR,
   "phone_number" INT
+);
+
+CREATE TABLE "offender_system" (
+  "id" SERIAL PRIMARY KEY,
+  "system" VARCHAR
+);
+
+CREATE TABLE "offender_population" (
+  "id" SERIAL PRIMARY KEY,
+  "population" VARCHAR
 );
 
 CREATE TABLE "offender" (
@@ -112,12 +121,16 @@ CREATE TABLE "url" (
   "admin_id" INT REFERENCES "admin"
 );
 
-CREATE TABLE "offender_system" (
-  "id" SERIAL PRIMARY KEY,
-  "system" VARCHAR
-);
+INSERT INTO "value" ("values")
+VALUES ('Accountability'), ('Adventure'), ('Being Right'), ('Communication'), ('Community'), 
+('Compassion'), ('Confidentiality'), ('Control'), ('Courage'), ('Creativity'), ('Diversity'), 
+('Empathy'), ('Flexibility'), ('Forgiveness'), ('Fun'), ('Greed'), ('Happiness'), ('Humor'), 
+('Independence'), ('Instant Gratification'), ('Integrity'), ('Justice'), ('Loyalty'), ('Money'), 
+('Nonjudgmental'), ('Order'), ('Patience'), ('Perfection'), ('Persistence'), ('Power'), ('Privacy'), 
+('Relationships'), ('Respect'), ('Security'), ('Status'), ('Structure'), ('Transparency'), ('Wellness');
 
-CREATE TABLE "offender_population" (
-  "id" SERIAL PRIMARY KEY,
-  "poplulation" VARCHAR
-);
+INSERT INTO "offender_system" ("system")
+VALUES ('State Prison'), ('Federal Prison'), ('DAIP'), ('Juvenile System');
+
+INSERT INTO "offender_population" ("population")
+VALUES ('General Population'), ('Release'), ('Parole'), ('Other Program');
