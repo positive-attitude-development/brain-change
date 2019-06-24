@@ -6,6 +6,8 @@ export class RankInstructions extends Component {
         return (
             <div>
                 
+
+                <Link to="/RankPercents"> link </Link>
             </div>
         )
     }

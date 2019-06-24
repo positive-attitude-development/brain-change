@@ -6,6 +6,8 @@ export class BeliefInstructions2 extends Component {
         return (
             <div>
                 
+
+                <Link to="/Belief2"> link </Link>
             </div>
         )
     }

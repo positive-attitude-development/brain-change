@@ -6,6 +6,8 @@ export class ViolatersInstructions extends Component {
         return (
             <div>
                 
+
+                <Link to="/PickViolators"> link </Link>
             </div>
         )
     }

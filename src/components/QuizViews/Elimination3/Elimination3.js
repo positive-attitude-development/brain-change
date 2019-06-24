@@ -7,7 +7,7 @@ export class Elimination3 extends Component {
             <div>
                 
 
-                <Link to="/"> link </Link>
+                <Link to="/ElimInstructions4"> link </Link>
             </div>
         )
     }

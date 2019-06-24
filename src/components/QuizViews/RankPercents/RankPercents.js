@@ -6,6 +6,7 @@ export class RankPercents extends Component {
         return (
             <div>
                 
+                <Link to="FinalResults"> link </Link>
             </div>
         )
     }

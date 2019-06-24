@@ -6,6 +6,8 @@ export class OrderValuesInstructions extends Component {
         return (
             <div>
                 
+
+                <Link to="OrderValues"> link </Link>
             </div>
         )
     }

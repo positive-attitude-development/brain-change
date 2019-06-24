@@ -6,6 +6,8 @@ export class QuizViewBeliefs2 extends Component {
         return (
             <div>
                 
+
+                <Link to="/ElimInstructions5"> link </Link>
             </div>
         )
     }

@@ -6,6 +6,8 @@ export class FinalResults extends Component {
         return (
             <div>
                 
+
+                FINISHED !!
             </div>
         )
     }

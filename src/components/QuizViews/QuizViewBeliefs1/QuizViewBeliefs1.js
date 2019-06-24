@@ -5,7 +5,10 @@ export class QuizViewBeliefs1 extends Component {
     render() {
         return (
             <div>
-                
+
+
+
+                <Link to="/ElimInstructions3"> link </Link>
             </div>
         )
     }

@@ -30,7 +30,9 @@ import OrderViolators from '../QuizViews/OrderViolators/OrderViolators';
 import OrderViolatorsInstructions from '../QuizViews/OrderViolators/OrderViolatorsInstructions'; 
 
 import RankPercents from '../QuizViews/RankPercents/RankPercents'; 
-import RankInstructions from '../QuizViews/RankPercents/RankInstructions'; 
+import RankInstructions from '../QuizViews/RankPercents/RankInstructions';
+
+import FinalResults from '../QuizViews/FinalResults/FinalResults';
 
 
 
@@ -154,6 +156,11 @@ export class QuizRoutes extends Component {
                     component={RankInstructions}
                     />
                 
+                    <Route 
+                    exact path="/FinalResults"
+                    component={FinalResults}
+                    />
+
                 </div>
         </div> 
         )

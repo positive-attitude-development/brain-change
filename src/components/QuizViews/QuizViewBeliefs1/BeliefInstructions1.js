@@ -7,7 +7,7 @@ export class BeliefInstructions1 extends Component {
             <div>
                 
 
-                
+                <Link to="/Belief1"> link </Link>
             </div>
         )
     }

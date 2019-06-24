@@ -6,6 +6,8 @@ export class EliminationInstructions5 extends Component {
         return (
             <div>
                 
+
+                <Link to="/Elim5"> link </Link>
             </div>
         )
     }

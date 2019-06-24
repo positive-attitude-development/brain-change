@@ -6,6 +6,7 @@ export class OrderViolaters1 extends Component {
         return (
             <div>
                 
+                <Link to="/RankInstructions"> link </Link>
             </div>
         )
     }
