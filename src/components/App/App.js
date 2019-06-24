@@ -16,19 +16,20 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import ViewShelf from '../ViewShelf/ViewShelf';
-
-import TotalItems from '../TotalItems/TotalItems';
+import Profile from '../Profile/Profile';
 import ShelfForm from '../ShelfForm/ShelfForm';
+import QuizRoutes from './QuizRoutes';
 
 import AllRecords from '../AllRecords/AllRecords';
 
 
 import './App.css';
 
+import {QuizViewWelcome} from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
+
 class App extends Component {
   componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type: 'FETCH_ADMIN'})
   }
 
   render() {
@@ -37,6 +38,7 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
+          
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
@@ -46,6 +48,7 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -67,13 +70,13 @@ class App extends Component {
               component={InfoPage}
             />
             <ProtectedRoute
-              exact path="/shelf"
-              component={ViewShelf}
+              exact path="/profile"
+              component={Profile}
             />
 
             <ProtectedRoute
-              exact path="/shelf/count"
-              component={TotalItems}
+              exact path="/quiz"
+              component={QuizViewWelcome}
             />
 
             <ProtectedRoute
@@ -82,8 +85,9 @@ class App extends Component {
               />
 
             {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
+            {/* <Route render={() => <h1>404</h1>} /> */}
           </Switch>
+          <QuizRoutes />
           <Footer />
         </div>
       </Router>
