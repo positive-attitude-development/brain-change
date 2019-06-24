@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
-import userSaga from './userSaga';
+import adminSaga from './adminSaga';
 import postItem from './itemSaga';
 import viewShelfSaga from './viewShelfSaga';
 import totalItemsSaga from './totalItemsSaga';
@@ -17,7 +17,7 @@ export default function* rootSaga() {
   yield all([
     loginSaga(),
     registrationSaga(),
-    userSaga(),
+    adminSaga(),
     postItem(),
     viewShelfSaga(),
     totalItemsSaga()

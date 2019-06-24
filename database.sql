@@ -22,9 +22,9 @@ CREATE TABLE "admin_contact"(
   "first_name" VARCHAR NOT NULL,
   "last_name" VARCHAR NOT NULL,
   "title" VARCHAR,
-  "phone_number" VARCHAR,
   "organization" VARCHAR,
-  "mail_address" VARCHAR,
+  "phone_number" VARCHAR,
+  "email_address" VARCHAR,
   "street_address" VARCHAR,
   "street_address2" VARCHAR,
   "city" VARCHAR,
@@ -41,7 +41,7 @@ CREATE TABLE "participant" (
   "category" VARCHAR,
   "state" VARCHAR,
   "email" VARCHAR,
-  "phone_number" INT
+  "phone_number" VARCHAR
 );
 
 CREATE TABLE "offender_system" (
@@ -110,7 +110,7 @@ CREATE TABLE "result_violators"(
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
   "value_id" INT REFERENCES "value"
-);/Users/jessegjerde/Downloads/brain_change_database.sql
+);
 
 CREATE TABLE "url" (
   "id" SERIAL PRIMARY KEY,
