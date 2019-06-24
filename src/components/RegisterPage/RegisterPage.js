@@ -16,7 +16,7 @@ class RegisterPage extends Component {
 	streetAddressTwo: '',
 	city: '',
 	state: '',
-	zipcode: ''
+	zipcode: 0
   };
 
   registerAdmin = (event) => {

@@ -16,16 +16,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import ViewShelf from '../ViewShelf/ViewShelf';
-
-import TotalItems from '../TotalItems/TotalItems';
+import Profile from '../Profile/Profile';
 import ShelfForm from '../ShelfForm/ShelfForm';
-import QuizRoutes from './QuizRoutes'
+import QuizRoutes from './QuizRoutes';
 
 
 import './App.css';
 
-import { QuizViewWelcome } from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
+import {QuizViewWelcome} from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 
 class App extends Component {
   componentDidMount () {
@@ -66,13 +64,8 @@ class App extends Component {
               component={InfoPage}
             />
             <ProtectedRoute
-              exact path="/shelf"
-              component={ViewShelf}
-            />
-
-            <ProtectedRoute
-              exact path="/shelf/count"
-              component={TotalItems}
+              exact path="/profile"
+              component={Profile}
             />
 
             <ProtectedRoute
