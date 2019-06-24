@@ -3,29 +3,29 @@ const LocalStrategy = require('passport-local').Strategy;
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+passport.serializeUser((admin, done) => {
+  done(null, admin.id);
 });
 
 passport.deserializeUser((id, done) => {
-  pool.query('SELECT * FROM "user" WHERE id = $1', [id]).then((result) => {
+  pool.query('SELECT * FROM "admin" WHERE id = $1', [id]).then((result) => {
     // Handle Errors
-    const user = result && result.rows && result.rows[0];
+    const admin = result && result.rows && result.rows[0];
 
-    if (user) {
-      // user found
-      delete user.password; // remove password so it doesn't get sent
-      // done takes an error (null in this case) and a user
-      done(null, user);
+    if (admin) {
+      // admin found
+      delete admin.password; // remove password so it doesn't get sent
+      // done takes an error (null in this case) and an admin
+      done(null, admin);
     } else {
-      // user not found
-      // done takes an error (null in this case) and a user (also null in this case)
+      // admin not found
+      // done takes an error (null in this case) and an admin (also null in this case)
       // this will result in the server returning a 401 status code
       done(null, null);
     }
   }).catch((error) => {
-    console.log('Error with query during deserializing user ', error);
-    // done takes an error (we have one) and a user (null in this case)
+    console.log('Error with query during deserializing admin', error);
+    // done takes an error (we have one) and an admin (null in this case)
     // this will result in the server returning a 500 status code
     done(error, null);
   });
@@ -33,22 +33,22 @@ passport.deserializeUser((id, done) => {
 
 // Does actual work of logging in
 passport.use('local', new LocalStrategy((username, password, done) => {
-    pool.query('SELECT * FROM "user" WHERE username = $1', [username])
+    pool.query('SELECT * FROM "admin" WHERE username = $1', [username])
       .then((result) => {
-        const user = result && result.rows && result.rows[0];
-        if (user && encryptLib.comparePassword(password, user.password)) {
+        const admin = result && result.rows && result.rows[0];
+        if (admin && encryptLib.comparePassword(password, admin.password)) {
           // All good! Passwords match!
-          // done takes an error (null in this case) and a user
-          done(null, user);
+          // done takes an error (null in this case) and an admin
+          done(null, admin);
         } else {
           // Not good! Username and password do not match.
-          // done takes an error (null in this case) and a user (also null in this case)
+          // done takes an error (null in this case) and an admin(also null in this case)
           // this will result in the server returning a 401 status code
           done(null, null);
         }
       }).catch((error) => {
-        console.log('Error with query for user ', error);
-        // done takes an error (we have one) and a user (null in this case)
+        console.log('Error with query for admin', error);
+        // done takes an error (we have one) and an admin(null in this case)
         // this will result in the server returning a 500 status code
         done(error, null);
       });

@@ -14,10 +14,10 @@ const Nav = (props) => (
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
+        {props.admin.id ? 'Home' : 'Login / Register'}
       </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
+      {/* Show the link to the info page and the logout button if the  is logged in */}
+      {props.admin.id && (
         <>
           <Link className="nav-link" to="/info">
             Info Page</Link>
@@ -40,13 +40,8 @@ const Nav = (props) => (
   </div>
 );
 
-// Instead of taking everything from state, we just want the user
-// object to determine if they are logged in
-// if they are logged in, we show them a few more links 
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
-  user: state.user,
+  admin: state.admin,
 });
 
 export default connect(mapStateToProps)(Nav);
