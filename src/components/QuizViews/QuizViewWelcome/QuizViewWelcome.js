@@ -22,7 +22,6 @@ export class QuizViewWelcome extends Component {
                 <h1>Welcome,
                 {this.props.reduxState} 
                 </h1>
-
             <div className="table">
             <h2> Digital Brain Coach</h2>
                 <div className="welcome-div">Our goal today is to help you identify your core values and key beliefs. 
