@@ -12,6 +12,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/profile', rejectUnauthenticated, (req, res) => {
+	console.log('profile req.user:', req.user.id)
+	let queryText = `SELECT * FROM "admin"
+		JOIN "admin_contact" ON "admin_contact".admin_id = "admin".id
+		WHERE "admin".id = $1 
+		ORDER BY "admin".id;`;
+		let queryValue = req.user.id
+	pool.query(queryText, [queryValue])
+	.then((result) => {
+		console.log('admin profile get results:', result.rows);
+		res.send(result.rows)
+	}).catch((error) => {
+		console.log('error in admin profile GET:', error)
+	});
+})
+
+
 router.post('/register', async (req, res, next) => {
   console.log('register admin req.body:', req.body)
   const connection = await pool.connect()
