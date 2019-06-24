@@ -23,6 +23,7 @@ import ShelfForm from '../ShelfForm/ShelfForm';
 
 
 import './App.css';
+import { QuizViewWelcome } from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 
 class App extends Component {
   componentDidMount () {
@@ -68,6 +69,11 @@ class App extends Component {
             <ProtectedRoute
               exact path="/shelf/count"
               component={TotalItems}
+            />
+
+            <ProtectedRoute
+              exact path="/quiz"
+              component={QuizViewWelcome}
             />
 
             <ProtectedRoute

@@ -28,6 +28,11 @@ const Nav = (props) => (
             Total Items</Link>
           <Link className="nav-link" to="/shelf/form">
           
+          <Link className="nav-link" to="/quiz">
+            quiz
+          </Link>
+
+
             Add Item to Shelf</Link>
           <LogOutButton className="nav-link"/>
         </>
