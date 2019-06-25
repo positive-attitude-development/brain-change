@@ -41,45 +41,29 @@ class MyParticipants extends Component{
 						Add a Participant:
 						<br></br>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="First Name:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="First Name:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Last Name:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Last Name:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Age:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Age:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Gender:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Gender:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Category:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Category:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="State:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="State:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Email Address:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Email Address:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Phone Number:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Phone Number:" labelPlacement="start"/>
 					</CardContent>
 					<CardActions>
 						<Button variant="contained" color="primary" disabled>Add Participant</Button>

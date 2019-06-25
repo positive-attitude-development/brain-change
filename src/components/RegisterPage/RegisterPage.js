@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {FormGroup, FormControlLabel, TextField, Select, MenuItem, OutlinedInput, Button} from '@material-ui/core';
+import {FormGroup, FormControlLabel, TextField, Select, MenuItem, OutlinedInput} from '@material-ui/core';
 
 class RegisterPage extends Component {
   state = {
@@ -66,106 +66,75 @@ class RegisterPage extends Component {
         <FormGroup>
           <h2>Register Owner/Admin</h2>
           <div>
-			<FormControlLabel control={
-				<TextField required label="Required"
-				value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}/>}
-        	label="Username:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.username} onChange={this.handleInputChangeFor('username')}/>}
+        	label="Username:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}/>}
-        	label="Password:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.password} onChange={this.handleInputChangeFor('password')}/>}
+        	label="Password:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}/>}
-        	label="First Name:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.firstName} onChange={this.handleInputChangeFor('firstName')}/>}
+        	label="First Name:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.lastName}
-                onChange={this.handleInputChangeFor('lastName')}/>}
-        	label="Last Name:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.lastName} onChange={this.handleInputChangeFor('lastName')}/>}
+        	label="Last Name:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.organization}
-                onChange={this.handleInputChangeFor('organization')}/>}
-        	label="Organization:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.organization} onChange={this.handleInputChangeFor('organization')}/>}
+        	label="Organization:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.title}
-                onChange={this.handleInputChangeFor('title')}/>}
-        	label="Title:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.title} onChange={this.handleInputChangeFor('title')}/>}
+        	label="Title:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.phoneNumber}
-                onChange={this.handleInputChangeFor('phoneNumber')}/>}
-        	label="Phone Number:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.phoneNumber} onChange={this.handleInputChangeFor('phoneNumber')}/>}
+        	label="Phone Number:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField required label="Required"
-				value={this.state.emailAddress}
-                onChange={this.handleInputChangeFor('emailAddress')}/>}
-        	label="Email Address:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField required label="Required"
+				value={this.state.emailAddress} onChange={this.handleInputChangeFor('emailAddress')}/>}
+        	label="Email Address:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField value={this.state.streetAddress}
+			<FormControlLabel control={<TextField value={this.state.streetAddress}
                 onChange={this.handleInputChangeFor('streetAddress')}/>}
-        	label="Street Address:"
-			labelPlacement="start"/>
+        	label="Street Address:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField value={this.state.streetAddressTwo}
+			<FormControlLabel control={<TextField value={this.state.streetAddressTwo}
                 onChange={this.handleInputChangeFor('streetAddressTwo')}/>}
-        	label="Street Address Line 2:"
-			labelPlacement="start"/>
+        	label="Street Address Line 2:" labelPlacement="start"/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField value={this.state.city}
+			<FormControlLabel control={<TextField value={this.state.city}
                 onChange={this.handleInputChangeFor('city')}/>}
-        	label="City:"
-			labelPlacement="start"/>
+        	label="City:" labelPlacement="start"/>
           </div>
 
 		  <div>
 			<FormControlLabel control={
 				<Select required value={this.state.state}
-				label="Required"
-				onChange={this.handleInputChangeFor('state')}
+				onChange={this.handleInputChangeFor('state')} label="Required"
 				input={<OutlinedInput name="state" labelWidth={100} id="outlined-age-native-simple"/>}>
 					<MenuItem value=""><em>Select State</em></MenuItem>
 					<MenuItem value="AL">Alabama</MenuItem>
@@ -227,15 +196,10 @@ class RegisterPage extends Component {
           </div>
 
 		  <div>
-			<FormControlLabel control={
-          		<TextField value={this.state.zipcode}
-                onChange={this.handleInputChangeFor('zipcode')}>
-				</TextField>}
-        	label="Zipcode:"
-			labelPlacement="start"/>
+			<FormControlLabel control={<TextField value={this.state.zipcode}
+                onChange={this.handleInputChangeFor('zipcode')}/>}
+        	label="Zipcode:" labelPlacement="start"/>
           </div>
-
-		  {/* <Button variant="contained" color="primary" type="submit" value="Register">Register</Button> */}
 
           <div>
             <input

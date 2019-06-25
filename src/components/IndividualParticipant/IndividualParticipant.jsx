@@ -80,7 +80,7 @@ class IndividualParticipant extends Component{
 								{offenderData}
 						</CardContent>
 						<CardActions>
-
+							<Button>Edit Participant</Button>
 						</CardActions>
 					</Card>
 					)
