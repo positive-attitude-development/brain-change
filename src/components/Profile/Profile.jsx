@@ -66,67 +66,43 @@ class Profile extends Component{
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.username}
+								<FormControlLabel control={<TextField defaultValue={profile.username}
 									  onChange={this.handleChange('username')}/>}
-        						label="Username: "
-								labelPlacement="start"/>
+        						label="Username:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.first_name}/>}
-        						label="First Name: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.first_name}/>}
+        						label="First Name:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.last_name}/>}
-        						label="Last Name: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.last_name}/>}
+        						label="Last Name:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.title}/>}
-        						label="Title: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.title}/>}
+        						label="Title:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.organization}
+								<FormControlLabel control={<TextField defaultValue={profile.organization}
 									  onChange={this.handleChange('organization')}/>}
-        						label="Organization: "
-								labelPlacement="start"/>
+        						label="Organization:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.phone_number}/>}
-        						label="Phone Number: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.phone_number}/>}
+        						label="Phone Number:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.email_address}/>}
-        						label="Email Address: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.email_address}/>}
+        						label="Email Address:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.street_address}/>}
-        						label="Street Address Line 1: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.street_address}/>}
+        						label="Street Address Line 1:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.street_address2}/>}
-        						label="Street Address Line 2: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.street_address2}/>}
+        						label="Street Address Line 2:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.city}/>}
-        						label="City: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.city}/>}
+        						label="City:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.state}/>}
-        						label="State: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.state}/>}
+        						label="State:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.zipcode}/>}
-        						label="Zipcode: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.zipcode}/>}
+        						label="Zipcode:" labelPlacement="start"/>
 							</CardContent>
 							<CardActions>
 								<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
@@ -143,64 +119,41 @@ class Profile extends Component{
 						<Card raised key={profile.id} className={classes.card}>
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.username} disabled/>}
-        						label="Username: "
-								labelPlacement="start"/>
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.first_name} disabled/>}
-        						label="First Name: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.username} disabled/>}
+        						label="Username:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.last_name} disabled/>}
-        						label="Last Name: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.first_name} disabled/>}
+        						label="First Name:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.title} disabled/>}
-        						label="Title: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.last_name} disabled/>}
+        						label="Last Name:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.organization} disabled/>}
-        						label="Organization: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.title} disabled/>}
+        						label="Title:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.phone_number} disabled/>}
-        						label="Phone Number: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.organization} disabled/>}
+        						label="Organization:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.email_address} disabled/>}
-        						label="Email Address: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.phone_number} disabled/>}
+        						label="Phone Number:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.street_address} disabled/>}
-        						label="Street Address Line 1: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.email_address} disabled/>}
+        						label="Email Address:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.street_address2} disabled/>}
-        						label="Street Address Line 2: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.street_address} disabled/>}
+        						label="Street Address Line 1:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.city} disabled/>}
-        						label="City: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.street_address2} disabled/>}
+        						label="Street Address Line 2:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.state} disabled/>}
-        						label="State: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.city} disabled/>}
+        						label="City:" labelPlacement="start"/>
 
-								<FormControlLabel control={
-          							<TextField defaultValue={profile.zipcode} disabled/>}
-        						label="Zipcode: "
-								labelPlacement="start"/>
+								<FormControlLabel control={<TextField defaultValue={profile.state} disabled/>}
+        						label="State:" labelPlacement="start"/>
+
+								<FormControlLabel control={<TextField defaultValue={profile.zipcode} disabled/>}
+        						label="Zipcode:" labelPlacement="start"/>
 							</CardContent>
 							<CardActions>
 								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Profile</Button>
