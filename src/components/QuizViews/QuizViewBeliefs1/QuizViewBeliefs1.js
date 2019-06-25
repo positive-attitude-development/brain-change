@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
+import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs1.css'
 
@@ -12,6 +13,7 @@ state = {
     belief1: " ",
     belief2: " ",
     belief3: " ",
+    statusBar : 21
 }
 
 //setting beliefs to state
@@ -33,6 +35,8 @@ sendBeliefs = (event) => {
     render() {
         return (
             <div>
+                <StatusBar status={this.state.statusBar} />
+
                 <div>
                     Type out your 3 beliefs below
 

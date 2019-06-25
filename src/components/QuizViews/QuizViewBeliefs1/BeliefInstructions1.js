@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
+import StatusBar from '../StatusBar'; 
 
 import './BeliefInstructions1.css'
 
 export class BeliefInstructions1 extends Component {
+
+    state = {
+        statusBar : 17
+    }
+
     render() {
         return (
             <div>
+                 <StatusBar status={this.state.statusBar} />
+                 
                 <div className ="instructions">
                     <div>
                 On the next screen please write 3 of your beliefs that you would not want to give up. 
