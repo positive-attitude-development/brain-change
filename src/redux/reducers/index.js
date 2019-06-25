@@ -6,6 +6,7 @@ import valuesReducer from './valuesReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
 import participant from './participantReducer';
+import individual from './individualParticipantReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   valuesReducer,
   profile,
   editProfile,
-  participant,
+  participant, //this is all participants for MyParticipants view
+  individual, //this is a single participant for the IndividualParticipant view
 });
 
 export default rootReducer;
