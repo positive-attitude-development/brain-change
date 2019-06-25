@@ -4,7 +4,6 @@ import './Elimination1.css';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
-import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'
 
@@ -52,30 +51,31 @@ export class Elimination1 extends Component {
 
 
     render() {
-        console.log('checking array',this.state.round1)
+        console.log('checking array', this.state.round1)
         return (
-            <Paper className="paper">
-                <div className="valuesList">
-                    <h2 className="inst">Remove the 9 least important values</h2>
-                    <ul>
-                        {this.props.values.map(value => {
-                            return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
             <div>
-                <StatusBar status={this.state.statusBar} />
                 <div>
-                    <ul>
-                        {this.props.values.map(value => {
-                            return <li  onClick={this.handleSelect} value={value.id}>{value.values}</li>
-                        })}
-                    </ul>
+                    <StatusBar status={this.state.statusBar} />
                 </div>
-                <div>
-                    <Button onClick={this.handleNext}>Next</Button>
-                </div>
-            </Paper>
+                <Paper className="paper">
+                        
+                    <div className="valuesList">
+                        <h2 className="inst">Remove the 9 least important values</h2>
+                        <ul>
+                            {this.props.values.map(value => {
+                                return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <div>
+                        <button onClick={this.handleNext}>Next</button>
+                    </div>
+                </Paper>
+            </div>
         )
     }
 }
+
 
 const mapStateToProps = (reduxState) => {
     return {
