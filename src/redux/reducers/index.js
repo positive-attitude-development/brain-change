@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import admin from './adminReducer';

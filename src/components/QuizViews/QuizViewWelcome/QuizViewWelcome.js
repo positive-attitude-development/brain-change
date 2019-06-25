@@ -10,14 +10,17 @@ import { Link} from 'react-router-dom';
 
 
 export class QuizViewWelcome extends Component {
+
+    startQuiz = (event) => {
+    event.preventDefault();
+    }
+
     render() {
         return (
 
-            // startQuiz() => {
+           
 
-            // }
-
-            <div>
+            <div className="grid">
 
                 <h1>Welcome,
                 {this.props.reduxState} 
@@ -31,15 +34,17 @@ export class QuizViewWelcome extends Component {
                     the process, but that is natural 
                 </div>
             
-                <Button
-                color="primary"
-                variant="contained"
-                // onclick={this.startQuiz}
-                >
-                Start
-                <Link to="/ElimInstructions1"> </Link>
-                </Button>
-                <Link to="/ElimInstructions1"> link </Link>
+
+               
+                <Link to="/ElimInstructions1"> 
+                    <Button
+                    color="primary"
+                    variant="contained"
+                    onclick={this.startQuiz}
+                    >
+                    Start
+                    </Button>
+                </Link>
             </div>
 
             </div>
