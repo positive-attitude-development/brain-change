@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import {  Button } from '@material-ui/core';
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio} from"@material-ui/core";
+import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs2.css'
 
@@ -12,7 +13,8 @@ export class QuizViewBeliefs2 extends Component {
     state = {
             belief1 : "",
             belief2 : "",
-            belief3 : ""
+            belief3 : " ",
+            statusBar : 47
     }
 
 
@@ -27,6 +29,8 @@ export class QuizViewBeliefs2 extends Component {
     render() {
         return (
             <div>
+                 <StatusBar status={this.state.statusBar} />
+                 
                 <div>
                     <FormControl component="fieldset"
                     //  className={classes.formControl}
