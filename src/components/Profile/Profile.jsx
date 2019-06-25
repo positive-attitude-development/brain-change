@@ -53,10 +53,6 @@ class Profile extends Component{
 		this.props.dispatch({type: 'CANCEL_EDIT'})
 	};//end handleCancelEdit
 
-	setProfile = () => {
-
-	}
-
 	render(){
 		const {classes} = this.props;
 		console.log('editProfile reducer:', this.props.edit)
@@ -65,11 +61,6 @@ class Profile extends Component{
 				{this.state.isEditable ?
 				<>
 					{this.props.profile.map((profile, i) => {
-						// this.setState({
-						// 	...this.state,
-						// 	profile: profile
-						// })
-						this.setProfile()
 					return(
 						<Card raised key={profile.id} className={classes.card}>
 							<CardContent>
