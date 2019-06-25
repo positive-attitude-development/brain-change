@@ -25,7 +25,10 @@ function* fetchProfile(action){
   try{
     console.log('admin id:', action.payload)
     const response = yield axios.get('api/admin/profile')
+    console.log('adminSage fetchProfile response.data:', response.data)
     yield put({type: 'SET_PROFILE', payload: response.data})
+    //and send this info to the editProfileReducer so it's stored there if admin edits profile info
+    yield put({type: 'EDIT_PROFILE', payload: response.data})
   }catch(error){
     console.log('Profile get request failed', error)
   }
