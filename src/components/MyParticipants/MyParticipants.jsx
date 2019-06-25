@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, Select, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -23,6 +23,7 @@ class MyParticipants extends Component{
 
 	componentDidMount(){
 		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
+		this.props.dispatch({type: 'FETCH_CATEGORY'})
 	};//end componentDidMount
 
 	viewParticipant = (id) =>{
