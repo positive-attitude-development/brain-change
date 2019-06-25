@@ -10,7 +10,7 @@ function* fetchCategories() {
     }
 }
 
-function* displayValuesSaga() {
+function* categorySaga() {
     yield takeLatest('FETCH_CATEGORY', fetchCategories);
 }
 
