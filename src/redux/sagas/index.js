@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import adminSaga from './adminSaga';
 import displayValuesSaga from './displayValuesSaga';
 import participantSaga from './participantSaga';
+import categorySaga from './categorySaga';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     adminSaga(),
     displayValuesSaga(),
     participantSaga(),
+    categorySaga(),
   ]);
 }
