@@ -31,7 +31,6 @@ import {QuizViewWelcome} from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_ADMIN'})
-    this.props.dispatch({type: 'FETCH_PROFILE'})
   }
 
   render() {
