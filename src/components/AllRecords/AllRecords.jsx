@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import AllRecordsTable from './AllRecordsTable';
 import './AllRecords.css';
 
@@ -7,10 +8,16 @@ class AllRecords extends Component {
         return (
             <div>
                 <h2>All Records:</h2>
-                <AllRecordsTable />
+                <AllRecordsTable search={this.props.searchTerm || ""} />
             </div>
         )
     }
 }
 
-export default AllRecords;
+const mapRedux = redux => {
+    return {
+        searchTerm : redux.searchTermReducer
+    }
+}
+
+export default connect(mapRedux)(AllRecords);

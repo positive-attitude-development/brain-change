@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, Paper} from '@material-ui/core';
-import {Pageview} from '@material-ui/icons'
+import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment, Paper} from '@material-ui/core';
+import {Pageview, Clear} from '@material-ui/icons'
 import {CSVLink} from 'react-csv';
 import './AllRecords.css';
 
@@ -14,7 +13,7 @@ const rows = [
         age: 87,
         gender: 'M',
         category: 'general public',
-        state: 'MN',
+        state: 'WA',
         email: 'tgroselyn@gmail.com',
         phone: '425-761-8920',
         admin: 'Lyle Wildes'
@@ -133,32 +132,32 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table styles
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing(3),
-    },
-    paper: {
-        width: '100%',
-        marginBottom: theme.spacing(2),
-    },
-    table: {
-        minWidth: 750,
-        
-    },
-    tableWrapper: {
-        overflowX: 'auto',
-    },
-}));
+//table props
+EnhancedTable.propTypes = {
+        search: PropTypes.string.isRequired
+    };
 
 //table
-export default function EnhancedTable() {
-    const classes = useStyles();
+export default function EnhancedTable(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('firstname');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    //filter by search term
+    const {search} = props;
+    const [searchTerm, setSearchTerm] = React.useState(search);
+    const filteredRows = rows.filter(x =>
+        x['firstname'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['lastname'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['age'].toString().includes(searchTerm) ||
+        x['gender'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['category'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['state'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['email'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['phone'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['admin'].toLowerCase().includes(searchTerm.toLowerCase())
+    )
 
     //sorting function
     function handleRequestSort(event, property) {
@@ -178,36 +177,57 @@ export default function EnhancedTable() {
     }
 
     //empty row handler
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, filteredRows.length - page * rowsPerPage);
 
     //render table
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <div className={classes.tableWrapper}>
+        <div className="container">
+            <Paper className="paper">
+                <div className="wrapper">
                     {/* CSV exporter */}
                     <CSVLink
                         className="CSVLink"
                         filename={"brain-change-export.csv"}
-                        data={rows}
+                        data={filteredRows}
                         headers={headRows}>
-                        <Button variant="contained" color="primary">
-                            Download My Data
+                        <Button variant="contained" color="primary" size="large">
+                            Export to CSV
                         </Button>
                     </CSVLink>
+                    {/* search input */}
+                    <TextField
+                        className="searchInput"
+                        variant="outlined"
+                        autoFocus
+                        label="Search"
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        disabled={!searchTerm}
+                                        onClick={e => setSearchTerm("")}
+                                    >
+                                        <Clear color="inherit" fontSize="small" />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
+                    />
                     {/* table */}
                     <Table
-                        className={classes.table}
+                        className="table"
                         aria-labelledby="tableTitle"
                     >
                         <EnhancedTableHead
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={filteredRows.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getSorting(order, orderBy))
+                            {stableSort(filteredRows, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, i) => {
                                     return (
@@ -240,7 +260,7 @@ export default function EnhancedTable() {
                 <TablePagination
                     rowsPerPageOptions={[10, 20]}
                     component="div"
-                    count={rows.length}
+                    count={filteredRows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{
