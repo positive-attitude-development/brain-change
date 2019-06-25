@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
+import StatusBar from '../StatusBar'
 
 
 export class Elimination1 extends Component {
@@ -18,19 +19,19 @@ export class Elimination1 extends Component {
     }
 
     handleSelect = (event) => {
-        // console.log('value is:', event.target.value)
-        for(let i=0; i<this.props.values.length; i++) {
-            console.log('value is:', event.target.value)
+        console.log('value is:', event.target.value)
+        // for(let i=0; i<this.props.values.length; i++) {
+        //     console.log('value is:', event.target.value)
 
-            console.log('now checking value', this.props.values[i].values)
-            if(event.target.value === this.props.values[i].values) {
-                this.state.round1.splice(i, 1)
-                return;
-            }
-        } 
-        this.setState({
-            round1: [...this.state.round1, event.target.value]
-        })
+        //     console.log('now checking value', this.props.values[i].values)
+        //     if(event.target.value === this.props.values[i].values) {
+        //         this.state.round1.splice(i, 1)
+        //         return;
+        //     }
+        // } 
+        // this.setState({
+        //     round1: [...this.state.round1, event.target.value]
+        // })
     }
 
     componentDidMount() {
@@ -41,16 +42,17 @@ export class Elimination1 extends Component {
         console.log(this.state.round1)
         return (
             <div>
+                <StatusBar />
                 <div>
                     <ul>
                         {this.props.values.map(value => {
-                            return <li  onClick={this.handleSelect} value={value.values}>{value.values}</li>
+                            return <li  onClick={this.handleSelect} value={value.id}>{value.values}</li>
                         })}
                     </ul>
                 </div>
                 {/* <Link to="/ElimInstructions2"> link </Link> */}
                 <div>
-                    <button onClick={this.handleNext}>Next</button>
+                    <Button onClick={this.handleNext}>Next</Button>
                 </div>
 
             </div>
