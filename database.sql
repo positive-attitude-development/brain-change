@@ -34,7 +34,8 @@ CREATE TABLE "admin_contact"(
 
 CREATE TABLE "participant" (
   "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR,
+  "first_name" VARCHAR,
+  "last_name" VARCHAR,
   "admin_id" INT REFERENCES "admin",
   "age" INT,
   "gender" VARCHAR,

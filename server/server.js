@@ -11,7 +11,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const adminRouter = require('./routes/admin.router');
 const valueRouter = require('./routes/values.router');
-const snapshotRouter = require('./routes/snapshot.router')
+const snapshotRouter = require('./routes/snapshot.router');
+const participantRouter = require('./routes/participant.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use(passport.session());
 app.use('/api/admin', adminRouter);
 app.use('/api/values', valueRouter);
 app.use('/api/snapshot', snapshotRouter);
+app.use('/api/participant', participantRouter);
 
 // Serve static files
 app.use(express.static('build'));

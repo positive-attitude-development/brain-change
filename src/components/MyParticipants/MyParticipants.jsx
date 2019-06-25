@@ -22,7 +22,7 @@ const styles = {
 class MyParticipants extends Component{
 
 	componentDidMount(){
-		this.props.dispatch({type: ''})
+		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
 	}
 
 	render(){
@@ -84,7 +84,8 @@ class MyParticipants extends Component{
 		<Table className={classes.table}>
 			<TableHead>
 				<TableRow>
-					<TableCell>Name</TableCell>
+					<TableCell>First Name</TableCell>
+					<TableCell>Last Name</TableCell>
 					<TableCell>Age</TableCell>
 					<TableCell>Gender</TableCell>
 					<TableCell>Category</TableCell>
@@ -95,17 +96,18 @@ class MyParticipants extends Component{
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{this.props.participants.map((person) => {
+				{this.props.participant.map((person) => {
 					return(
 						<TableRow key={person.id}>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
+							<TableCell>{person.first_name}</TableCell>
+							<TableCell>{person.last_name}</TableCell>
+							<TableCell>{person.age}</TableCell>
+							<TableCell>{person.gender}</TableCell>
+							<TableCell>{person.category}</TableCell>
+							<TableCell>{person.state}</TableCell>
+							<TableCell>{person.email}</TableCell>
+							<TableCell>{person.phone_number}</TableCell>
+							<TableCell><Button>View/Edit</Button></TableCell>
 						</TableRow>
 					)
 				})}
