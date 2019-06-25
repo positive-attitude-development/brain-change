@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
+import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 
-
+import './QuizViewBeliefs1.css'
 
 export class QuizViewBeliefs1 extends Component {
 
@@ -13,7 +14,7 @@ state = {
     belief3: " ",
 }
 
-
+//setting beliefs to state
 propertyChange = propertyName => (event) => {
     event.preventDefault();
     this.setState({
@@ -22,9 +23,10 @@ propertyChange = propertyName => (event) => {
     console.log(this.state);
 }
 
-onClick = (event) => {
+//send beliefs to reducer
+sendBeliefs = (event) => {
     event.preventDefault();
-    this.props.dispatch({type: "" , payload: this.state})
+    this.props.dispatch({ type: "" , payload: this.state })
 }
 
 
@@ -36,7 +38,7 @@ onClick = (event) => {
 
                     <ul>Example
                         <li>Climate change is real</li>
-                        <li>Attitude is the ost important tool for success</li>
+                        <li>Attitude is the most important tool for success</li>
                         <li>There is life after death or there is no life after death</li>
                     </ul>
 
@@ -73,10 +75,22 @@ onClick = (event) => {
                     </div>
                 </div>
 
-                <Link to="/ElimInstructions3"> link </Link>
+             
+                <Link to="/ElimInstructions3">    
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        // onClick={this.sendBeliefs}
+                        >
+                        Next
+                    </Button> 
+                </Link>
             </div>
         )
     }
 }
 
-export default QuizViewBeliefs1
+const mapState = reduxState => {
+    return { reduxState }   
+    }
+    export default connect(mapState)(QuizViewBeliefs1);

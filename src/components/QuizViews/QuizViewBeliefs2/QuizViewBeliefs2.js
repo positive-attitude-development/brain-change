@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-// import Radio from '@material-ui/core/Radio';
-
+import {  Button } from '@material-ui/core';
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio} from"@material-ui/core";
+
+import './QuizViewBeliefs2.css'
 
 export class QuizViewBeliefs2 extends Component {
 
@@ -47,7 +48,14 @@ export class QuizViewBeliefs2 extends Component {
                 </div>
 
                 <div>
-                    <Link to="/ElimInstructions5"> link </Link>
+                    <Link to="/ElimInstructions5">    
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            >
+                            Next
+                        </Button> 
+                    </Link>
                 </div>
             </div>
         )

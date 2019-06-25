@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import Profile from '../Profile/Profile';
 import ShelfForm from '../ShelfForm/ShelfForm';
 import QuizRoutes from './QuizRoutes';
+import MyParticipants from '../MyParticipants/MyParticipants';
 
 import AllRecords from '../AllRecords/AllRecords';
 
@@ -30,6 +31,7 @@ import {QuizViewWelcome} from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_ADMIN'})
+    this.props.dispatch({type: 'FETCH_PROFILE'})
   }
 
   render() {
@@ -72,6 +74,11 @@ class App extends Component {
             <ProtectedRoute
               exact path="/profile"
               component={Profile}
+            />
+
+            <ProtectedRoute
+              exact path="/myparticipants"
+              component={MyParticipants}
             />
 
             <ProtectedRoute
