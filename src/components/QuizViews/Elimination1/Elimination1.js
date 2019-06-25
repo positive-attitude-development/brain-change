@@ -11,6 +11,7 @@ export class Elimination1 extends Component {
     state = {
         round1: [],
         time: '',
+        statusBar: 5
     }
 
     handleNext = () => {
@@ -42,7 +43,7 @@ export class Elimination1 extends Component {
         console.log(this.state.round1)
         return (
             <div>
-                <StatusBar />
+                <StatusBar status={this.state.statusBar} />
                 <div>
                     <ul>
                         {this.props.values.map(value => {
