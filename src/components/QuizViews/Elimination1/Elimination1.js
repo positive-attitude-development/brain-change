@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Elimination1.css';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+
 
 
 export class Elimination1 extends Component {
@@ -22,10 +24,11 @@ export class Elimination1 extends Component {
     }
 
     handleSelect = (event) => {
-        // console.log('value is:', event.target.value)
         for(let i=0; i<this.state.round1.length; i++) {
             if(event.target.value === this.state.round1[i]) {
-                this.state.round1.splice(i, 1)
+                this.setState({
+                    round1: this.state.round1.filter((_, j) => j !== i)
+                })
                 return;
             } 
         } 
@@ -33,7 +36,7 @@ export class Elimination1 extends Component {
             return;
         }
         this.setState({
-            round1: [...this.state.round1, event.target.value]
+            round1: [...this.state.round1, event.target.value],
         })
     }
 
@@ -41,18 +44,19 @@ export class Elimination1 extends Component {
     render() {
         console.log('checking array',this.state.round1)
         return (
-            <div>
-                <div>
+            <Paper className="paper">
+                <div className="valuesList">
+                    <h2 className="inst">Remove the 9 least important values</h2>
                     <ul>
                         {this.props.values.map(value => {
-                            return <li key={value.id} onClick={this.handleSelect} className="lineItem" value={value.id}>{value.values}</li>
+                            return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
                         })}
                     </ul>
                 </div>
                 <div>
                     <button onClick={this.handleNext}>Next</button>
                 </div>
-            </div>
+            </Paper>
         )
     }
 }
