@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import {  Button } from '@material-ui/core';
-// import Radio from '@material-ui/core/Radio';
-
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio} from"@material-ui/core";
+
+import './QuizViewBeliefs2.css'
 
 export class QuizViewBeliefs2 extends Component {
 
