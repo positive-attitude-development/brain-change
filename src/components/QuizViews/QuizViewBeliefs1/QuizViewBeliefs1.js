@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 
-
+import './QuizViewBeliefs1.css'
 
 export class QuizViewBeliefs1 extends Component {
 

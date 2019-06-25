@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 export class Elimination2 extends Component {
     render() {
@@ -21,4 +22,10 @@ export class Elimination2 extends Component {
     }
 }
 
-export default Elimination2
+const mapStateToProps = (reduxState) => {
+    return {
+        reduxState
+    }
+}
+export default connect(mapStateToProps)(Elimination2);
+

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
+import { connect } from 'react-redux';
 
-export class OrderViolaters1 extends Component {
+import './OrderViolators.css'
+
+export class OrderViolators extends Component {
     render() {
         return (
             <div>
@@ -20,4 +23,11 @@ export class OrderViolaters1 extends Component {
     }
 }
 
-export default OrderViolaters1
+
+const mapStateToProps = (reduxState) => {
+    return {
+        reduxState
+    }
+}
+export default connect(mapStateToProps)(OrderViolators);
+
