@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 
+let start = new Date();
 
 
 export class Elimination1 extends Component {
@@ -16,11 +17,16 @@ export class Elimination1 extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_VALUES' });
+        
     }
 
     handleNext = () => {
-        this.props.dispatch({ type: 'SET_NEW_VALUES', payload: this.state})
-        this.props.history.push('/ElimInstructions2')
+        if(this.state.round1.length === 9) {
+            this.props.dispatch({ type: 'SET_NEW_VALUES', name: 'round1', payload: this.state.round1 })
+            this.props.history.push('/ElimInstructions2')
+        } else {
+            return alert('Please select 9 values that are least important to you')
+        }
     }
 
     handleSelect = (event) => {

@@ -5,7 +5,6 @@ export class EliminationInstructions2 extends Component {
     render() {
         return (
             <div>
-                
 
                 <Link to="/Elim2"> link </Link>
             </div>
