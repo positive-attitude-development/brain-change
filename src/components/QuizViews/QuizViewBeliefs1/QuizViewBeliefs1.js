@@ -14,7 +14,7 @@ state = {
     belief3: " ",
 }
 
-
+//setting beliefs to state
 propertyChange = propertyName => (event) => {
     event.preventDefault();
     this.setState({
@@ -23,6 +23,7 @@ propertyChange = propertyName => (event) => {
     console.log(this.state);
 }
 
+//send beliefs to reducer
 sendBeliefs = (event) => {
     event.preventDefault();
     this.props.dispatch({ type: "" , payload: this.state })
@@ -74,14 +75,16 @@ sendBeliefs = (event) => {
                     </div>
                 </div>
 
-                <Button
-                color="primary"
-                variant="contained"
-                onClick={this.sendBeliefs}
-                >
-                Next  
-                </Button>
-                <Link to="/ElimInstructions3"> link </Link>
+             
+                <Link to="/ElimInstructions3">    
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        // onClick={this.sendBeliefs}
+                        >
+                        Next
+                    </Button> 
+                </Link>
             </div>
         )
     }

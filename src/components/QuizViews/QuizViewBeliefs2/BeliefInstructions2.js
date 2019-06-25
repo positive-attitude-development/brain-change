@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
+import {  Button } from '@material-ui/core';
 
 export class BeliefInstructions2 extends Component {
     render() {
@@ -16,7 +17,14 @@ export class BeliefInstructions2 extends Component {
 
                 </div>
 
-                <Link to="/Belief2"> link </Link>
+                <Link to="/Belief2">   
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        >
+                        Next
+                    </Button> 
+                </Link>
             </div>
         )
     }

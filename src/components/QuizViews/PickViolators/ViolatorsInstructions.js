@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
+import {  Button } from '@material-ui/core';
 
 export class ViolatersInstructions extends Component {
     render() {
@@ -7,7 +8,14 @@ export class ViolatersInstructions extends Component {
             <div>
                 
 
-                <Link to="/PickViolators"> link </Link>
+                <Link to="/PickViolators">   
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        >
+                        Next
+                    </Button> 
+                </Link>
             </div>
         )
     }

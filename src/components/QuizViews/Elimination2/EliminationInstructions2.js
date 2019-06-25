@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
+import {  Button } from '@material-ui/core';
 
 export class EliminationInstructions2 extends Component {
     render() {
@@ -7,7 +8,14 @@ export class EliminationInstructions2 extends Component {
             <div>
                 
 
-                <Link to="/Elim2"> link </Link>
+                <Link to="/Elim2">
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        >
+                        Next
+                    </Button> 
+                 </Link>
             </div>
         )
     }

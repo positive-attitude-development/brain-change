@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link} from 'react-router-dom'; 
-
+import {  Button } from '@material-ui/core';
 
 export class Elimination1 extends Component {
 
@@ -23,7 +23,14 @@ export class Elimination1 extends Component {
                 
 
 
-                <Link to="/ElimInstructions2"> link </Link>
+                <Link to="/ElimInstructions2"> 
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        >
+                        Next
+                    </Button> 
+                </Link>
 
             </div>
         )
