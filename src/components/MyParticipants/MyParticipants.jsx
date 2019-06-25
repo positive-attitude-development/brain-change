@@ -20,6 +20,11 @@ const styles = {
 }
 
 class MyParticipants extends Component{
+
+	componentDidMount(){
+		this.props.dispatch({type: ''})
+	}
+
 	render(){
 		const {classes} = this.props;
 		let offenderInputs;
