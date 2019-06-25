@@ -23,7 +23,13 @@ class MyParticipants extends Component{
 
 	componentDidMount(){
 		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
-	}
+	};//end componentDidMount
+
+	viewParticipant = (id) =>{
+		console.log('viewParticipant id:', id)
+		this.props.history.push(`/individualparticipant/${id}`)
+
+	};//end viewParticipant
 
 	render(){
 		const {classes} = this.props;
@@ -107,7 +113,7 @@ class MyParticipants extends Component{
 							<TableCell>{person.state}</TableCell>
 							<TableCell>{person.email}</TableCell>
 							<TableCell>{person.phone_number}</TableCell>
-							<TableCell><Button>View/Edit</Button></TableCell>
+							<TableCell><Button variant="contained" color="primary" onClick={()=>this.viewParticipant(`${person.id}`)}>View/Edit</Button></TableCell>
 						</TableRow>
 					)
 				})}
