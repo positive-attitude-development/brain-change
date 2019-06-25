@@ -8,6 +8,7 @@ import valuesReducer from './valuesReducer';
 import searchTermReducer from './searchTermReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
+import allRecordsReducer from './allRecordsReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   searchTermReducer,
   profile,
   editProfile,
+  allRecordsReducer,
 });
 
 export default rootReducer;

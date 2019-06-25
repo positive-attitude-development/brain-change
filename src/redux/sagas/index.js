@@ -6,6 +6,7 @@ import postItem from './itemSaga';
 import viewShelfSaga from './viewShelfSaga';
 import totalItemsSaga from './totalItemsSaga';
 import displayValuesSaga from './displayValuesSaga';
+import allRecordsSaga from './allRecordsSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     postItem(),
     viewShelfSaga(),
     totalItemsSaga(),
-    displayValuesSaga()
+    displayValuesSaga(),
+    allRecordsSaga(),
   ]);
 }
