@@ -5,6 +5,7 @@ import admin from './adminReducer';
 import valuesReducer from './valuesReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
+import participant from './participantReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   valuesReducer,
   profile,
   editProfile,
+  participant,
 });
 
 export default rootReducer;

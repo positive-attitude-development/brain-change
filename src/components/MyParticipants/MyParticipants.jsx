@@ -117,7 +117,9 @@ class MyParticipants extends Component{
 }
 
 const mapStateToProps = state => ({
-  state
+  admin: state.admin,
+  profile: state.profile,
+  participant: state.participant,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MyParticipants));
