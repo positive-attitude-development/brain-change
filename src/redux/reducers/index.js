@@ -6,6 +6,7 @@ import viewShelfReducer from './viewShelfReducer';
 import totalItemsReducer from './totalItemsReducer';
 import valuesReducer from './valuesReducer';
 import profile from './profileReducer';
+import editProfile from './editProfileReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   totalItemsReducer,
   valuesReducer,
   profile,
+  editProfile,
 });
 
 export default rootReducer;
