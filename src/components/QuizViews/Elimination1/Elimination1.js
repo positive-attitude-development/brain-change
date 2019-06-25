@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; 
+
+import { Link} from 'react-router-dom'; 
+import {  Button } from '@material-ui/core';
 
 
 export class Elimination1 extends Component {
@@ -50,6 +52,7 @@ export class Elimination1 extends Component {
                 <div>
                     <button onClick={this.handleNext}>Next</button>
                 </div>
+
             </div>
         )
     }
