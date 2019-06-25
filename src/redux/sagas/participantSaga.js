@@ -14,6 +14,7 @@ function* fetchIndividual(action){
     try{
         const response = yield axios.get(`/api/participant/individual/${action.payload}`);
         console.log('individual participant response.data:', response.data)
+        yield put({type: 'SET_INDIVIDUAL', payload: response.data});
     }catch(error){
         console.log('Error in fetchIndividual:', error)
     }
