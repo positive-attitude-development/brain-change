@@ -6,6 +6,7 @@ import valuesReducer from './valuesReducer';
 import searchTermReducer from './searchTermReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
+import participant from './participantReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   searchTermReducer,
   profile,
   editProfile,
+  participant,
 });
 
 export default rootReducer;
