@@ -2,13 +2,22 @@ import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
+import StatusBar from '../StatusBar'; 
 
 import './RankPercents.css'
 
 export class RankPercents extends Component {
+
+    state = {
+
+        statusBar : 95
+    }
+
     render() {
         return (
             <div>
+
+                <StatusBar status={this.state.statusBar} />
                 
                 <Link to="FinalResults">   
                     <Button
