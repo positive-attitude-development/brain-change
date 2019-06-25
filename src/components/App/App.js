@@ -17,8 +17,9 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import Profile from '../Profile/Profile';
-import ShelfForm from '../ShelfForm/ShelfForm';
 import QuizRoutes from './QuizRoutes';
+import MyParticipants from '../MyParticipants/MyParticipants';
+import IndividualParticipant from '../IndividualParticipant/IndividualParticipant';
 
 import AllRecords from '../AllRecords/AllRecords';
 
@@ -75,14 +76,19 @@ class App extends Component {
             />
 
             <ProtectedRoute
-              exact path="/quiz"
-              component={QuizViewWelcome}
+              exact path="/myparticipants"
+              component={MyParticipants}
             />
 
             <ProtectedRoute
-              exact path = "/shelf/form"
-              component = {ShelfForm}
-              />
+              exact path="/individualparticipant/:id"
+              component={IndividualParticipant}
+            />
+
+            <ProtectedRoute
+              exact path="/quiz"
+              component={QuizViewWelcome}
+            />
 
             {/* If none of the other routes matched, we will show a 404. */}
             {/* <Route render={() => <h1>404</h1>} /> */}

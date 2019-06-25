@@ -4,8 +4,10 @@ import './Elimination1.css';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
+import { Link} from 'react-router-dom'; 
+import {  Button } from '@material-ui/core';
+import StatusBar from '../StatusBar'
 
-let start = new Date();
 
 
 export class Elimination1 extends Component {
@@ -13,6 +15,7 @@ export class Elimination1 extends Component {
     state = {
         round1: [],
         time: '',
+        statusBar: 5
     }
 
     componentDidMount() {
@@ -30,6 +33,7 @@ export class Elimination1 extends Component {
     }
 
     handleSelect = (event) => {
+
         for(let i=0; i<this.state.round1.length; i++) {
             if(event.target.value === this.state.round1[i]) {
                 this.setState({
@@ -56,11 +60,17 @@ export class Elimination1 extends Component {
                     <ul>
                         {this.props.values.map(value => {
                             return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+            <div>
+                <StatusBar status={this.state.statusBar} />
+                <div>
+                    <ul>
+                        {this.props.values.map(value => {
+                            return <li  onClick={this.handleSelect} value={value.id}>{value.values}</li>
                         })}
                     </ul>
                 </div>
                 <div>
-                    <button onClick={this.handleNext}>Next</button>
+                    <Button onClick={this.handleNext}>Next</Button>
                 </div>
             </Paper>
         )
