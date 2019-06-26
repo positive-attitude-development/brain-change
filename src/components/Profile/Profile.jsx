@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -19,7 +19,6 @@ class Profile extends Component{
 
 	state = {
 		isEditable: false,
-
 	}
 
 	componentDidMount(){
@@ -66,43 +65,87 @@ class Profile extends Component{
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
 
-								<FormControlLabel control={<TextField defaultValue={profile.username}
-									  onChange={this.handleChange('username')}/>}
-        						label="Username:" labelPlacement="start"/>
+								<TextField label="Username:" defaultValue={profile.username}
+									  onChange={this.handleChange('username')}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.first_name}/>}
-        						label="First Name:" labelPlacement="start"/>
+								<TextField label="First Name:" defaultValue={profile.first_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.last_name}/>}
-        						label="Last Name:" labelPlacement="start"/>
+								<TextField label="Last Name:" defaultValue={profile.last_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.title}/>}
-        						label="Title:" labelPlacement="start"/>
+								<TextField label="Title:" defaultValue={profile.title}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.organization}
-									  onChange={this.handleChange('organization')}/>}
-        						label="Organization:" labelPlacement="start"/>
+								<TextField label="Organization:" defaultValue={profile.organization}
+									  onChange={this.handleChange('organization')}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.phone_number}/>}
-        						label="Phone Number:" labelPlacement="start"/>
+								<TextField label="Phone Number:" defaultValue={profile.phone_number}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.email_address}/>}
-        						label="Email Address:" labelPlacement="start"/>
+								<TextField label="Email Address:" defaultValue={profile.email_address}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.street_address}/>}
-        						label="Street Address Line 1:" labelPlacement="start"/>
+								<TextField label="Street Address Line 1:" defaultValue={profile.street_address}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.street_address2}/>}
-        						label="Street Address Line 2:" labelPlacement="start"/>
+								<TextField label="Street Address Line 2:" defaultValue={profile.street_address2}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.city}/>}
-        						label="City:" labelPlacement="start"/>
+								<TextField label="City:" defaultValue={profile.city}/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.state}/>}
-        						label="State:" labelPlacement="start"/>
+								<TextField select margin="normal"
+									label="State:" value={profile.state}>
+									<MenuItem value=""><em>Select State</em></MenuItem>
+									<MenuItem value="AL">Alabama</MenuItem>
+									<MenuItem value="AK">Alaska</MenuItem>
+									<MenuItem value="AZ">Arizona</MenuItem>
+									<MenuItem value="AR">Arkansas</MenuItem>
+									<MenuItem value="CA">California</MenuItem>
+									<MenuItem value="CO">Colorado</MenuItem>
+									<MenuItem value="CT">Connecticut</MenuItem>
+									<MenuItem value="DE">Delaware</MenuItem>
+									<MenuItem value="DC">District of Columbia</MenuItem>
+									<MenuItem value="FL">Florida</MenuItem>
+									<MenuItem value="GA">Georgia</MenuItem>
+									<MenuItem value="HI">Hawaii</MenuItem>
+									<MenuItem value="ID">Idaho</MenuItem>
+									<MenuItem value="IL">Illinois</MenuItem>
+									<MenuItem value="IN">Indiana</MenuItem>
+									<MenuItem value="IA">Iowa</MenuItem>
+									<MenuItem value="KS">Kansas</MenuItem>
+									<MenuItem value="KY">Kentucky</MenuItem>
+									<MenuItem value="LA">Louisiana</MenuItem>
+									<MenuItem value="ME">Maine</MenuItem>
+									<MenuItem value="MD">Maryland</MenuItem>
+									<MenuItem value="MA">Massachusetts</MenuItem>
+									<MenuItem value="MI">Michigan</MenuItem>
+									<MenuItem value="MN">Minnesota</MenuItem>
+									<MenuItem value="MS">Mississippi</MenuItem>
+									<MenuItem value="MO">Missouri</MenuItem>
+									<MenuItem value="MT">Montana</MenuItem>
+									<MenuItem value="NE">Nebraska</MenuItem>
+									<MenuItem value="NV">Nevada</MenuItem>
+									<MenuItem value="NH">New Hampshire</MenuItem>
+									<MenuItem value="NJ">New Jersey</MenuItem>
+									<MenuItem value="NM">New Mexico</MenuItem>
+									<MenuItem value="NY">New York</MenuItem>
+									<MenuItem value="NC">North Carolina</MenuItem>
+									<MenuItem value="ND">North Dakota</MenuItem>
+									<MenuItem value="OH">Ohio</MenuItem>
+									<MenuItem value="OK">Oklahoma</MenuItem>
+									<MenuItem value="OR">Oregon</MenuItem>
+									<MenuItem value="PA">Pennsylvania</MenuItem>
+									<MenuItem value="PR">Puerto Rico</MenuItem>
+									<MenuItem value="RI">Rhode Island</MenuItem>
+									<MenuItem value="SC">South Carolina</MenuItem>
+									<MenuItem value="SD">South Dakota</MenuItem>
+									<MenuItem value="TN">Tennessee</MenuItem>
+									<MenuItem value="TX">Texas</MenuItem>
+									<MenuItem value="UT">Utah</MenuItem>
+									<MenuItem value="VT">Vermont</MenuItem>
+									<MenuItem value="VA">Virginia</MenuItem>
+									<MenuItem value="VI">Virgin Islands</MenuItem>
+									<MenuItem value="WA">Washington</MenuItem>
+									<MenuItem value="WV">West Virginia</MenuItem>
+									<MenuItem value="WI">Wisconsin</MenuItem>
+									<MenuItem value="WY">Wyoming</MenuItem>
+								</TextField>
 
-								<FormControlLabel control={<TextField defaultValue={profile.zipcode}/>}
-        						label="Zipcode:" labelPlacement="start"/>
+								<TextField label="Zipcode:" defaultValue={profile.zipcode}/>
 							</CardContent>
 							<CardActions>
 								<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
@@ -119,41 +162,85 @@ class Profile extends Component{
 						<Card raised key={profile.id} className={classes.card}>
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
-								<FormControlLabel control={<TextField defaultValue={profile.username} disabled/>}
-        						label="Username:" labelPlacement="start"/>
+								<TextField label="Username:" defaultValue={profile.username} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.first_name} disabled/>}
-        						label="First Name:" labelPlacement="start"/>
+								<TextField label="First Name:" defaultValue={profile.first_name} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.last_name} disabled/>}
-        						label="Last Name:" labelPlacement="start"/>
+								<TextField label="Last Name:" defaultValue={profile.last_name} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.title} disabled/>}
-        						label="Title:" labelPlacement="start"/>
+								<TextField label="Title:" defaultValue={profile.title} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.organization} disabled/>}
-        						label="Organization:" labelPlacement="start"/>
+								<TextField label="Organization:" defaultValue={profile.organization} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.phone_number} disabled/>}
-        						label="Phone Number:" labelPlacement="start"/>
+								<TextField label="Phone Number:" defaultValue={profile.phone_number} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.email_address} disabled/>}
-        						label="Email Address:" labelPlacement="start"/>
+								<TextField label="Email Address:" defaultValue={profile.email_address} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.street_address} disabled/>}
-        						label="Street Address Line 1:" labelPlacement="start"/>
+								<TextField label="Street Address Line 1:" defaultValue={profile.street_address} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.street_address2} disabled/>}
-        						label="Street Address Line 2:" labelPlacement="start"/>
+								<TextField label="Street Address Line 2:" defaultValue={profile.street_address2} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.city} disabled/>}
-        						label="City:" labelPlacement="start"/>
+								<TextField label="City:" defaultValue={profile.city} disabled/>
 
-								<FormControlLabel control={<TextField defaultValue={profile.state} disabled/>}
-        						label="State:" labelPlacement="start"/>
+								<TextField select margin="normal" disabled
+									label="State:" value={profile.state}>
+									<MenuItem value=""><em>Select State</em></MenuItem>
+									<MenuItem value="AL">Alabama</MenuItem>
+									<MenuItem value="AK">Alaska</MenuItem>
+									<MenuItem value="AZ">Arizona</MenuItem>
+									<MenuItem value="AR">Arkansas</MenuItem>
+									<MenuItem value="CA">California</MenuItem>
+									<MenuItem value="CO">Colorado</MenuItem>
+									<MenuItem value="CT">Connecticut</MenuItem>
+									<MenuItem value="DE">Delaware</MenuItem>
+									<MenuItem value="DC">District of Columbia</MenuItem>
+									<MenuItem value="FL">Florida</MenuItem>
+									<MenuItem value="GA">Georgia</MenuItem>
+									<MenuItem value="HI">Hawaii</MenuItem>
+									<MenuItem value="ID">Idaho</MenuItem>
+									<MenuItem value="IL">Illinois</MenuItem>
+									<MenuItem value="IN">Indiana</MenuItem>
+									<MenuItem value="IA">Iowa</MenuItem>
+									<MenuItem value="KS">Kansas</MenuItem>
+									<MenuItem value="KY">Kentucky</MenuItem>
+									<MenuItem value="LA">Louisiana</MenuItem>
+									<MenuItem value="ME">Maine</MenuItem>
+									<MenuItem value="MD">Maryland</MenuItem>
+									<MenuItem value="MA">Massachusetts</MenuItem>
+									<MenuItem value="MI">Michigan</MenuItem>
+									<MenuItem value="MN">Minnesota</MenuItem>
+									<MenuItem value="MS">Mississippi</MenuItem>
+									<MenuItem value="MO">Missouri</MenuItem>
+									<MenuItem value="MT">Montana</MenuItem>
+									<MenuItem value="NE">Nebraska</MenuItem>
+									<MenuItem value="NV">Nevada</MenuItem>
+									<MenuItem value="NH">New Hampshire</MenuItem>
+									<MenuItem value="NJ">New Jersey</MenuItem>
+									<MenuItem value="NM">New Mexico</MenuItem>
+									<MenuItem value="NY">New York</MenuItem>
+									<MenuItem value="NC">North Carolina</MenuItem>
+									<MenuItem value="ND">North Dakota</MenuItem>
+									<MenuItem value="OH">Ohio</MenuItem>
+									<MenuItem value="OK">Oklahoma</MenuItem>
+									<MenuItem value="OR">Oregon</MenuItem>
+									<MenuItem value="PA">Pennsylvania</MenuItem>
+									<MenuItem value="PR">Puerto Rico</MenuItem>
+									<MenuItem value="RI">Rhode Island</MenuItem>
+									<MenuItem value="SC">South Carolina</MenuItem>
+									<MenuItem value="SD">South Dakota</MenuItem>
+									<MenuItem value="TN">Tennessee</MenuItem>
+									<MenuItem value="TX">Texas</MenuItem>
+									<MenuItem value="UT">Utah</MenuItem>
+									<MenuItem value="VT">Vermont</MenuItem>
+									<MenuItem value="VA">Virginia</MenuItem>
+									<MenuItem value="VI">Virgin Islands</MenuItem>
+									<MenuItem value="WA">Washington</MenuItem>
+									<MenuItem value="WV">West Virginia</MenuItem>
+									<MenuItem value="WI">Wisconsin</MenuItem>
+									<MenuItem value="WY">Wyoming</MenuItem>
+								</TextField>
 
-								<FormControlLabel control={<TextField defaultValue={profile.zipcode} disabled/>}
-        						label="Zipcode:" labelPlacement="start"/>
+								<TextField label="Zipcode:" defaultValue={profile.zipcode} disabled/>
 							</CardContent>
 							<CardActions>
 								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Profile</Button>
