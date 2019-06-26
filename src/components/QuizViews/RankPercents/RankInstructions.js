@@ -14,8 +14,13 @@ export class RankInstructions extends Component {
     render() {
         return (
             <div>
-                
                 <StatusBar status={this.state.statusBar} />
+                <div className="instructions">
+                On the next screen estimate the percentage of your daily life that you are directed by your core values 
+                    and the percentage that you are directed by your violators. 
+                </div>
+                
+        
 
                 <Link to="/RankPercents">    
                     <Button
