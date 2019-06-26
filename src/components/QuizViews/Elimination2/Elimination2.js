@@ -15,20 +15,18 @@ export class Elimination2 extends Component {
 
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
-        console.log('In didmount',this.props.newValues.round1);
     }
 
     handleNext = () => {
         if (this.state.round2.length === 9) {
-            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2})
+            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2});
             this.props.history.push('/ElimInstructions3')
         } else {
-            return alert('Please select 9 values that are least important to you')
+            return alert('Please select 9 values that are least important to you.')
         }
     }
 
     handleSelect = (event) => {
-
         for (let i = 0; i < this.state.round2.length; i++) {
             if (event.target.value === this.state.round2[i]) {
                 this.setState({
@@ -47,51 +45,27 @@ export class Elimination2 extends Component {
 
     
     render() {
-        console.log('show round2:', this.state.round2);
-        console.log('show newreducer', this.props.newValues.round1)
-        
+    
         let newArray = this.props.values.filter((value) => {
-            let result = true;
             for(let newValue of this.props.newValues.round1) {
                 console.log('in for loop', newValue);
                 console.log('show value in loop', value.id);
                 if(newValue === value.id) {
-                    result = false;
+                    return false;
                 }
             }
-            return result;
+            return true;
         })
-        console.log('in new Array', newArray);
 
         return (
             <div>
                 <StatusBar status={this.state.statusBar} />
-                <Paper>
+                <Paper className="paper">
                     <div className="valuesList">
                         <h2 className="inst">Remove the 9 least important values</h2>
                         <ul className="elim2List">
-                            
                             {newArray.map(value => {
                                     return <li key={value.id} onClick={this.handleSelect} className={this.state.round2.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
-
-                              
-                                // let selectedValues = this.props.newValues.round1;
-                                // let position = this.props.newValues.round1.indexOf(selectedValues);
-                                // if(~position) {
-                                //     value.splice(position, 1)
-                                //     console.log('in splice',value)
-                                // }
-                                // let newArray = [];
-                                // for (let i = 0; i < this.props.newValues.round1.length; i++) {
-                                //     // let newArray = this.props.values[0].splice(this.props.newValues.round1[i], 1);
-                                //     // console.log('show i of newValue', this.props.newValues.round1);
-                                //     // console.log('show value list', value);
-                                //     if(this.props.newValues.round1[i] === value.id) {
-                                //         let newArray = this.props.values.filter((_, j) => j !== i);
-                                //         // newArray.push(value.id);
-                                //         return console.log('show new array', newArray); 
-                                //     }
-                                // }
                             })}
                         </ul>
                     </div>
