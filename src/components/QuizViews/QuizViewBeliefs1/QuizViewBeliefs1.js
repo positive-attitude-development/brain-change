@@ -30,7 +30,7 @@ propertyChange = propertyName => (event) => {
 
 //send beliefs to reducer
 handleClick = (event) => {
-    if ( beief1 !== "" && belief2 !== "" && belief3 !== "") {
+    if ( this.state.beief1 !== "" && this.state.belief2 !== "" && this.state.belief3 !== "") {
     event.preventDefault();
     // this.state.pop()
     console.log(this.state); 
