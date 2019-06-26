@@ -5,6 +5,7 @@ import { TextField, Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs1.css'
+import {conditionalExpression} from '@babel/types';
 
 export class QuizViewBeliefs1 extends Component {
 
@@ -14,21 +15,26 @@ state = {
     belief2: " ",
     belief3: " ",
     statusBar : 21
+
 }
 
 //setting beliefs to state
 propertyChange = propertyName => (event) => {
     event.preventDefault();
     this.setState({
-        [propertyName]: event.target.value
+            [propertyName]: event.target.value
     })
     console.log(this.state);
 }
 
+
 //send beliefs to reducer
-sendBeliefs = (event) => {
+handleClick = (event) => {
     event.preventDefault();
-    this.props.dispatch({ type: "" , payload: this.state })
+    // this.state.pop()
+    console.log(this.state); 
+    this.props.dispatch({ type: "SET_NEW_VALUES" , name:'beliefs', payload: this.state });
+    this.props.history.push('/ElimInstructions3')
 }
 
 
@@ -79,16 +85,13 @@ sendBeliefs = (event) => {
                     </div>
                 </div>
 
-             
-                <Link to="/ElimInstructions3">    
                     <Button
+                        onClick={this.handleClick}
                         color="primary"
                         variant="contained"
-                        // onClick={this.sendBeliefs}
                         >
                         Next
                     </Button> 
-                </Link>
             </div>
         )
     }

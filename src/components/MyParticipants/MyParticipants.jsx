@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, Select, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -21,19 +21,54 @@ const styles = {
 
 class MyParticipants extends Component{
 
+	state = {
+		category: '',
+	}
+
 	componentDidMount(){
 		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
+		this.props.dispatch({type: 'FETCH_CATEGORY'})
 	};//end componentDidMount
 
+	renderInputs = () =>{
+		let input;
+		if(this.state.category === "Offender"){
+			input =
+			<>
+			<h4>Offender Data:</h4>
+			<FormControlLabel control={<TextField />}
+			label="System:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Population:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Felony:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Violent:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="System ID #:" labelPlacement="start"/>
+			</>
+		}
+		return input;
+	};//end renderInputs
+
+	setCategory = (event) =>{
+		this.setState({
+			category: event.target.value
+		})
+	};//end setCategory
+
 	viewParticipant = (id) =>{
-		console.log('viewParticipant id:', id)
+		//console.log('viewParticipant id:', id)
 		this.props.history.push(`/individualparticipant/${id}`)
 
 	};//end viewParticipant
 
 	render(){
 		const {classes} = this.props;
-		let offenderInputs;
 		return(
 			<div>
 				<Card className={classes.card}>
@@ -53,7 +88,14 @@ class MyParticipants extends Component{
 						<FormControlLabel control={<TextField />}
         				label="Gender:" labelPlacement="start"/>
 
-						<FormControlLabel control={<TextField />}
+						<FormControlLabel control={
+							<Select value={this.state.category} onChange={this.setCategory}>
+								{this.props.category.map((category) => {
+									return(
+										<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
+									)
+								})}
+							</Select>}
         				label="Category:" labelPlacement="start"/>
 
 						<FormControlLabel control={<TextField />}
@@ -64,6 +106,8 @@ class MyParticipants extends Component{
 
 						<FormControlLabel control={<TextField />}
         				label="Phone Number:" labelPlacement="start"/>
+
+						{this.renderInputs()}
 					</CardContent>
 					<CardActions>
 						<Button variant="contained" color="primary" disabled>Add Participant</Button>
@@ -112,6 +156,7 @@ const mapStateToProps = state => ({
   admin: state.admin,
   profile: state.profile,
   participant: state.participant,
+  category: state.category,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MyParticipants));
