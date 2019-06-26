@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import {  Button } from '@material-ui/core';
-import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio} from"@material-ui/core";
+import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Paper} from"@material-ui/core";
 import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs2.css'
@@ -16,27 +16,35 @@ componentDidMount() {
 
 
     state = {
-            // belief1 : "",
-            // belief2 : "",
-            // belief3 : " ",
-            statusBar : 47
-    }
+            statusBar : 47,
+            testedBelief : ""
+        }
 
 
-    componentDidMount() {
+    handleRadio = (event) => {
+        event.preventDefault(); 
         this.setState({
-            belief1: "",
-            belief2: "",
-            belief3: ""
+            testedBelief: event.target.value
         })
+        console.log(this.state)
+    }
+ 
+    handleClick = (event) => {
+        event.preventDefault();
+        this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state.testedBelief });
+        this.props.history.push('/ElimInstructions5')
+
     }
 
     render() {
+        
         return (
             <div>
+                
                  <StatusBar status={this.state.statusBar} />
-                 
+
                 <div>
+                    <Paper>
                     <FormControl component="fieldset"
                     //  className={classes.formControl}
                     >
@@ -47,28 +55,27 @@ componentDidMount() {
                             name="Beliefs"
                             // className=
                             // value=
-                            // onChange=
+                            onChange={this.handleRadio}
                             >
 
-                            {JSON.stringify(this.props.reduxState)}
-                            <FormControlLabel value="belief1" control={<Radio />} label="" />
-                            {/* {this.props.beliefs} */}
-                            {/* <FormControlLabel value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
-                            <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3} */}
+                            
+                            <FormControlLabel  value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
+                            <FormControlLabel  value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
+                            <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
                             
                             </RadioGroup>
                     </FormControl>
+                    </Paper>
                 </div>
 
                 <div>
-                    <Link to="/ElimInstructions5">    
                         <Button
+                            onClick={this.handleClick}
                             color="primary"
                             variant="contained"
                             >
                             Next
                         </Button> 
-                    </Link>
                 </div>
             </div>
         )
@@ -78,7 +85,8 @@ componentDidMount() {
 
 const mapState = reduxState => {
     return {
-        beliefs : reduxState.beliefs
+        reduxState,
+        beliefs : reduxState.newValuesReducer.beliefs
         }   
     }
     export default connect(mapState)(QuizViewBeliefs2)
