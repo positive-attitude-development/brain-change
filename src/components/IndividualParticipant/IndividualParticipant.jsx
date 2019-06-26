@@ -93,7 +93,8 @@ class IndividualParticipant extends Component{
 const mapStateToProps = state => ({
   admin: state.admin,
   profile: state.profile,
-  individual: state.individual
+  individual: state.individual,
+  category: state.category,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));

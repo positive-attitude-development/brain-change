@@ -121,6 +121,14 @@ CREATE TABLE "url" (
   "admin_id" INT REFERENCES "admin"
 );
 
+CREATE TABLE "category" (
+"id" SERIAL PRIMARY KEY,
+"category" VARCHAR(50)
+);
+
+INSERT INTO "category" ("category")
+VALUES ('Offender'), ('General Public'), ('Student'), ('Other');
+
 INSERT INTO "value" ("values")
 VALUES ('Accountability'), ('Adventure'), ('Being Right'), ('Communication'), ('Community'), 
 ('Compassion'), ('Confidentiality'), ('Control'), ('Courage'), ('Creativity'), ('Diversity'), 
