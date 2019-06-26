@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel, MenuItem, Select} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -49,7 +49,7 @@ class IndividualParticipant extends Component{
 						label="Phone Number:" labelPlacement="start"/>
 					</>
 				} else {
-					offenderData = <div>NO OFFENDER DATA</div>
+					offenderData = <div></div>
 				}
 				return(
 					<Card raised className={classes.card} key={person.id}>
@@ -80,7 +80,7 @@ class IndividualParticipant extends Component{
 								{offenderData}
 						</CardContent>
 						<CardActions>
-							<Button>Edit Participant</Button>
+							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
 						</CardActions>
 					</Card>
 					)

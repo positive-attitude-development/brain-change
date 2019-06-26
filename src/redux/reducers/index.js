@@ -16,6 +16,7 @@ import adminContactReducer from './adminContactReducer';
 import participant from './participantReducer';
 import individual from './individualParticipantReducer';
 import category from './categoriesReducer';
+import addParticipant from './addParticipantReducer';
 
 
 const rootReducer = combineReducers({
@@ -29,10 +30,10 @@ const rootReducer = combineReducers({
   editProfile,
   allRecordsReducer,
   adminContactReducer,
-
   participant, //this is all participants for MyParticipants view
   individual, //this is a single participant for the IndividualParticipant view
   category,
+  addParticipant,
 
 });
 
