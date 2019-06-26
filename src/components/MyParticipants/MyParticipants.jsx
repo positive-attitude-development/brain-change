@@ -71,7 +71,6 @@ class MyParticipants extends Component{
 	};//end handleSubmit
 
 	handleSubmitOffender = () => {
-		console.log('submit offender')
 		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
@@ -104,21 +103,20 @@ class MyParticipants extends Component{
 	render(){
 		const {classes} = this.props;
 		let submitButton;
-		console.log('this.state:', this.state)
 		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
 		&& this.state.participant.age !== '' && this.state.participant.gender !== '' && this.state.participant.category !== ''
 		&& this.state.participant.category !== "Offender" && this.state.participant.state !== ''){
-			console.log('OK to submit non offender')
+			//console.log('OK to submit non offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		}else if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
 		&& this.state.participant.age !== '' && this.state.participant.gender !== ''
 		&& this.state.participant.category === "Offender" && this.state.participant.state !== 0
 		&& this.state.offender.system_id !== 0 && this.state.offender.offender_system_id !== 0
 		&& this.state.offender.felon !== null && this.state.offender.violent_offender !== null && this.state.offender.population_id !== 0){
-			console.log('OK to submit offender')
+			//console.log('OK to submit offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmitOffender}>Add Participant</Button>
 		}else{
-			console.log('Not OK to submit participant yet')
+			//console.log('Not OK to submit participant yet')
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
 		}
 		return(
