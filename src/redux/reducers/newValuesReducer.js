@@ -1,6 +1,10 @@
 let newValuesState = {
     round1: [],
-    
+    round2: [],
+    round3: [],
+    round4: [],
+    round5: [],
+    belief1: []
 }
 
 

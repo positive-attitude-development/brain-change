@@ -10,9 +10,11 @@ export class QuizViewBeliefs1 extends Component {
 
 
 state = {
-    belief1: " ",
-    belief2: " ",
-    belief3: " ",
+    beliefs : {
+        belief1: " ",
+        belief2: " ",
+        belief3: " "
+    },
     statusBar : 21
 }
 
@@ -20,10 +22,17 @@ state = {
 propertyChange = propertyName => (event) => {
     event.preventDefault();
     this.setState({
+        beliefs: {
         [propertyName]: event.target.value
+        }
     })
     console.log(this.state);
 }
+
+// handleClick = (event) => {
+//     event.preventDefault(); 
+//     this
+// }
 
 //send beliefs to reducer
 sendBeliefs = (event) => {
@@ -82,9 +91,10 @@ sendBeliefs = (event) => {
              
                 <Link to="/ElimInstructions3">    
                     <Button
+                        // onClick={this.handleClick}
                         color="primary"
                         variant="contained"
-                        // onClick={this.sendBeliefs}
+                       
                         >
                         Next
                     </Button> 
