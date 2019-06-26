@@ -1,15 +1,7 @@
-const addParticipant = {
-	first_name: '',
-}
-
-const addOffenderParticipant = {
-	first_name: '',
-}
-
 const addParticipantReducer = (state = [], action) => {
     switch(action.type) {
-        case 'SET_CATEGORIES':
-            return action.payload;
+        case 'ADD_PARTICIPANT_INFO':
+            return state;
         default:
             return state;
     }
