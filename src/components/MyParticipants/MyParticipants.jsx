@@ -12,11 +12,10 @@ const styles = {
 		marginTop: '30px',
 		marginBottom: '40px',
 		width: '75%',
-		height: '800px',
 	},
 	table: {
-		// margin: 'auto',
-		// width: '75%',
+		margin: 'auto',
+		width: '75%',
 	},
 }
 
@@ -89,15 +88,14 @@ class MyParticipants extends Component{
 						<FormControlLabel control={<TextField />}
         				label="Gender:" labelPlacement="start"/>
 
-						<FormControlLabel control={
+						
 							<Select value={this.state.category} onChange={this.setCategory}>
 								{this.props.category.map((category) => {
 									return(
 										<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
 									)
 								})}
-							</Select>}
-        				label="Category:" labelPlacement="start"/>
+							</Select>
 
 						<Select>
 							<MenuItem>OPTION</MenuItem>

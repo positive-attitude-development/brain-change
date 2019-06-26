@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel, MenuItem, Select} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -76,6 +76,12 @@ class IndividualParticipant extends Component{
 
 								<FormControlLabel control={<TextField defaultValue={person.phone_number}/>}
         						label="Phone Number:" labelPlacement="start"/>
+
+								<Select>
+									<MenuItem>ONE</MenuItem>
+									<MenuItem>TWO</MenuItem>
+									<MenuItem>THREE</MenuItem>
+								</Select>
 
 								{offenderData}
 						</CardContent>
