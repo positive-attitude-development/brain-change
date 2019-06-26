@@ -4,7 +4,7 @@ let newValuesState = {
     round3: [],
     round4: [],
     round5: [],
-    belief1: []
+    beliefs: []
 }
 
 
