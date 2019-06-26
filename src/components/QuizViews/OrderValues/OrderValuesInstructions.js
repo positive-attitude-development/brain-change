@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
+import { connect } from 'react-redux';
 
 import './OrderValuesInstructions.css'
 
@@ -39,4 +40,10 @@ export class OrderValuesInstructions extends Component {
     }
 }
 
-export default OrderValuesInstructions
+const mapStateToProps = (reduxState) => {
+    return {
+        reduxState
+    }
+}
+
+export default connect(mapStateToProps)(OrderValuesInstructions);
