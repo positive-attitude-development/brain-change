@@ -7,7 +7,7 @@ let newValuesState = {
 const newValuesReducer = (state = newValuesState, action) => {
     switch(action.type) {
         case 'SET_NEW_VALUES':
-            console.log('In new reducer', action.payload)
+            console.log('In new value reducer', action.payload)
             return {
                 ...state,
                 [action.name]: action.payload

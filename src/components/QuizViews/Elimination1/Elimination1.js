@@ -19,7 +19,6 @@ export class Elimination1 extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_VALUES' });
-        
     }
 
     handleNext = () => {
@@ -58,10 +57,9 @@ export class Elimination1 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </div>
                 <Paper className="paper">
-                        
                     <div className="valuesList">
                         <h2 className="inst">Remove the 9 least important values</h2>
-                        <ul>
+                        <ul className="elim1List">
                             {this.props.values.map(value => {
                                 return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
                             })}
