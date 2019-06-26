@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   searchTermReducer,
   profile,
   editProfile,
-  adminContactReducer
+  adminContactReducer,
   participant, //this is all participants for MyParticipants view
   individual, //this is a single participant for the IndividualParticipant view
   category,
