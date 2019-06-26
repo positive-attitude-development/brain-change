@@ -83,9 +83,9 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
-			<TextField label="System:" onChange={this.handleOffenderInput('offender_system_id')}/>
+			<TextField label="System:" type="number" onChange={this.handleOffenderInput('offender_system_id')}/>
 
-			<TextField label="Population:" onChange={this.handleOffenderInput('population_id')}/>
+			<TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/>
 
 			<TextField label="Felony:" onChange={this.handleOffenderInput('felon')}/>
 
@@ -110,11 +110,11 @@ class MyParticipants extends Component{
 		&& this.state.participant.category !== "Offender" && this.state.participant.state !== ''){
 			console.log('OK to submit non offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
-		}else if(this.state.first_name !== '' && this.state.last_name !== ''
-		&& this.state.age !== '' && this.state.gender !== ''
-		&& this.state.category === "Offender" && this.state.state !== ''
-		&& this.state.system_id !== '' && this.state.offender_system_id !== ''
-		&& this.state.felon !== '' && this.state.violent_offender !== '' && this.state.population_id !== ''){
+		}else if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
+		&& this.state.participant.age !== '' && this.state.participant.gender !== ''
+		&& this.state.participant.category === "Offender" && this.state.participant.state !== 0
+		&& this.state.offender.system_id !== 0 && this.state.offender.offender_system_id !== 0
+		&& this.state.offender.felon !== null && this.state.offender.violent_offender !== null && this.state.offender.population_id !== 0){
 			console.log('OK to submit offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmitOffender}>Add Participant</Button>
 		}else{
@@ -135,7 +135,7 @@ class MyParticipants extends Component{
 
 						<TextField label="Last Name:" onChange={this.handleInputChange('last_name')}/>
 
-						<TextField label="Age:" onChange={this.handleInputChange('age')}/>
+						<TextField label="Age:" type="number" onChange={this.handleInputChange('age')}/>
 
 						<TextField label="Gender:" onChange={this.handleInputChange('gender')}/>
 
