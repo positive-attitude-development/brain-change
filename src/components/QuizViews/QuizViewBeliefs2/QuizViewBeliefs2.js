@@ -9,11 +9,16 @@ import './QuizViewBeliefs2.css'
 
 export class QuizViewBeliefs2 extends Component {
 
+componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_VALUES'})
+    console.log("log")
+}
+
 
     state = {
-            belief1 : "",
-            belief2 : "",
-            belief3 : " ",
+            // belief1 : "",
+            // belief2 : "",
+            // belief3 : " ",
             statusBar : 47
     }
 
@@ -35,6 +40,7 @@ export class QuizViewBeliefs2 extends Component {
                     <FormControl component="fieldset"
                     //  className={classes.formControl}
                     >
+
                         <FormLabel component="legend">Beliefs</FormLabel>
                             <RadioGroup
                             aria-label="Beliefs"
@@ -43,9 +49,12 @@ export class QuizViewBeliefs2 extends Component {
                             // value=
                             // onChange=
                             >
-                            <FormControlLabel value="belief1" control={<Radio />} label="" />{this.state.belief1}
-                            <FormControlLabel value="belief2" control={<Radio />} label="" />{this.state.belief2}
-                            <FormControlLabel value="belief3" control={<Radio />} label="" />{this.state.belief3}
+
+                            {JSON.stringify(this.props.reduxState)}
+                            <FormControlLabel value="belief1" control={<Radio />} label="" />
+                            {/* {this.props.beliefs} */}
+                            {/* <FormControlLabel value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
+                            <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3} */}
                             
                             </RadioGroup>
                     </FormControl>
@@ -69,7 +78,7 @@ export class QuizViewBeliefs2 extends Component {
 
 const mapState = reduxState => {
     return {
-        reduxState
+        beliefs : reduxState.beliefs
         }   
     }
     export default connect(mapState)(QuizViewBeliefs2)
