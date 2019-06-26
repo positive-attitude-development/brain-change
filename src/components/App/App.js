@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import Profile from '../Profile/Profile';
 import QuizRoutes from './QuizRoutes';
 import MyParticipants from '../MyParticipants/MyParticipants';
+import Admin from '../Admin/Admin'; 
 
 import AllRecords from '../AllRecords/AllRecords';
 
@@ -72,6 +73,10 @@ class App extends Component {
             <ProtectedRoute
               exact path="/profile"
               component={Profile}
+            />
+            <ProtectedRoute
+              exact path="/admins"
+              component={Admin}
             />
 
             <ProtectedRoute
