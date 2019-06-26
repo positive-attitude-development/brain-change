@@ -12,10 +12,11 @@ const styles = {
 		marginTop: '30px',
 		marginBottom: '40px',
 		width: '75%',
+		height: '800px',
 	},
 	table: {
-		margin: 'auto',
-		width: '75%',
+		// margin: 'auto',
+		// width: '75%',
 	},
 }
 
@@ -97,6 +98,18 @@ class MyParticipants extends Component{
 								})}
 							</Select>}
         				label="Category:" labelPlacement="start"/>
+
+						<Select>
+							<MenuItem>OPTION</MenuItem>
+							<MenuItem>OPTION</MenuItem>
+							<MenuItem>OPTION</MenuItem>
+						</Select>
+						<br></br>
+						<select>
+							<option>OPTION1</option>
+							<option>OPTION2</option>
+							<option>OPTION3</option>
+						</select>
 
 						<FormControlLabel control={<TextField />}
         				label="State:" labelPlacement="start"/>
