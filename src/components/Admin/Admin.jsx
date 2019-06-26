@@ -19,7 +19,7 @@ componentDidMount() {
             <div>
                 {this.props.contactinfo[0] &&
                 <AdminTable  contactInfo = {this.props.contactinfo}     
-                             search = {this.props.search || ""} />
+                             search = "" />
                 }
             </div>
         )
