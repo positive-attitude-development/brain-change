@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel, MenuItem, Select} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -33,20 +33,16 @@ class IndividualParticipant extends Component{
 				if(person.category === 'Offender'){
 					offenderData = 
 					<>
-						<FormControlLabel control={<TextField defaultValue={person.offender_system_id}/>}
-						label="Age:" labelPlacement="start"/>
+					<br></br>Offender Data:<br></br>
+						<TextField disabled label="System:" defaultValue={person.offender_system_id}/>
 
-						<FormControlLabel control={<TextField defaultValue={person.system_id}/>}
-						label="Gender:" labelPlacement="start"/>
+						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
-						<FormControlLabel control={<TextField defaultValue={person.violent_offender}/>}
-						label="Category:" labelPlacement="start"/>
+						<TextField disabled label="Violent:" defaultValue={person.violent_offender}/>
 
-						<FormControlLabel control={<TextField defaultValue={person.felon}/>}
-						label="Email Address:" labelPlacement="start"/>
+						<TextField disabled label="Felon:" defaultValue={person.felon}/>
 
-						<FormControlLabel control={<TextField defaultValue={person.population_id}/>}
-						label="Phone Number:" labelPlacement="start"/>
+						<TextField disabled label="Population:" defaultValue={person.population_id}/>
 					</>
 				} else {
 					offenderData = <div></div>
@@ -56,28 +52,24 @@ class IndividualParticipant extends Component{
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
-								<FormControlLabel control={<TextField defaultValue={person.first_name}/>}
-        						label="First Name:" labelPlacement="start"/>
+								<TextField disabled label="First Name:" defaultValue={person.first_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.last_name}/>}
-        						label="Last Name:" labelPlacement="start"/>
+								<TextField disabled label="Last Name:" defaultValue={person.last_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.age}/>}
-        						label="Age:" labelPlacement="start"/>
+								<TextField disabled label="Age:" defaultValue={person.age}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.gender}/>}
-        						label="Gender:" labelPlacement="start"/>
+								<TextField disabled label="Gender:" defaultValue={person.gender}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.category}/>}
-        						label="Category:" labelPlacement="start"/>
+								<TextField disabled label="Category:" defaultValue={person.category}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.email}/>}
-        						label="Email Address:" labelPlacement="start"/>
+								<TextField disabled label="Email Address:" defaultValue={person.email}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.phone_number}/>}
-        						label="Phone Number:" labelPlacement="start"/>
+								<TextField disabled label="Phone Number:" defaultValue={person.phone_number}/>
+								<br></br>
 
 								{offenderData}
+								<br></br>
+
 						</CardContent>
 						<CardActions>
 							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
@@ -85,6 +77,19 @@ class IndividualParticipant extends Component{
 					</Card>
 					)
 				})}
+
+				<Paper>
+					URL Stuff:
+						<TextField disabled label="Invite Link:" defaultValue="URL Link"/>
+						<TextField disabled label="Expiration Date:" defaultValue="01/01/2019"/>
+						<Button variant="contained" color="secondary">Generate New Invite Link</Button>
+				</Paper>
+
+				<Card>
+					<CardContent>
+						IMAGINE SNAPSHOT HERE
+					</CardContent>
+				</Card>
 			</Grid>
 		)
 	}
