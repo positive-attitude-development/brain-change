@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -34,15 +34,15 @@ class IndividualParticipant extends Component{
 					offenderData = 
 					<>
 					<br></br>Offender Data:<br></br>
-						<TextField label="System:" defaultValue={person.offender_system_id} disabled/>
+						<TextField disabled label="System:" defaultValue={person.offender_system_id}/>
 
-						<TextField label="System ID#:" defaultValue={person.system_id} disabled/>
+						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
-						<TextField label="Violent:" defaultValue={person.violent_offender} disabled/>
+						<TextField disabled label="Violent:" defaultValue={person.violent_offender}/>
 
-						<TextField label="Felon:" defaultValue={person.felon} disabled/>
+						<TextField disabled label="Felon:" defaultValue={person.felon}/>
 
-						<TextField label="Population:" defaultValue={person.population_id} disabled/>
+						<TextField disabled label="Population:" defaultValue={person.population_id}/>
 					</>
 				} else {
 					offenderData = <div></div>
@@ -52,22 +52,24 @@ class IndividualParticipant extends Component{
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
-								<TextField label="First Name:" disabled defaultValue={person.first_name}/>
+								<TextField disabled label="First Name:" defaultValue={person.first_name}/>
 
-								<TextField label="Last Name:" defaultValue={person.last_name}/>
+								<TextField disabled label="Last Name:" defaultValue={person.last_name}/>
 
-								<TextField label="Age:" defaultValue={person.age}/>
+								<TextField disabled label="Age:" defaultValue={person.age}/>
 
-								<TextField label="Gender:" defaultValue={person.gender}/>
+								<TextField disabled label="Gender:" defaultValue={person.gender}/>
 
-								<TextField label="Category:" defaultValue={person.category}/>
+								<TextField disabled label="Category:" defaultValue={person.category}/>
 
-								<TextField label="Email Address:" defaultValue={person.email}/>
+								<TextField disabled label="Email Address:" defaultValue={person.email}/>
 
-								<TextField label="Phone Number:" defaultValue={person.phone_number}/>
+								<TextField disabled label="Phone Number:" defaultValue={person.phone_number}/>
 								<br></br>
 
 								{offenderData}
+								<br></br>
+
 						</CardContent>
 						<CardActions>
 							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
@@ -75,6 +77,19 @@ class IndividualParticipant extends Component{
 					</Card>
 					)
 				})}
+
+				<Paper>
+					URL Stuff:
+						<TextField disabled label="Invite Link:" defaultValue="URL Link"/>
+						<TextField disabled label="Expiration Date:" defaultValue="01/01/2019"/>
+						<Button variant="contained" color="secondary">Generate New Invite Link</Button>
+				</Paper>
+
+				<Card>
+					<CardContent>
+						IMAGINE SNAPSHOT HERE
+					</CardContent>
+				</Card>
 			</Grid>
 		)
 	}
