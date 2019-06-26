@@ -10,6 +10,7 @@ import editProfile from './editProfileReducer';
 import participant from './participantReducer';
 import individual from './individualParticipantReducer';
 import category from './categoriesReducer';
+import addParticipant from './addParticipantReducer';
 
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   participant, //this is all participants for MyParticipants view
   individual, //this is a single participant for the IndividualParticipant view
   category,
+  addParticipant
 });
 
 export default rootReducer;

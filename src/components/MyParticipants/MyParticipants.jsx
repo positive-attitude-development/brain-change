@@ -62,13 +62,13 @@ class MyParticipants extends Component{
 	};//end setCategory
 
 	viewParticipant = (id) =>{
-		//console.log('viewParticipant id:', id)
 		this.props.history.push(`/individualparticipant/${id}`)
 
 	};//end viewParticipant
 
 	render(){
 		const {classes} = this.props;
+		let submitButton;
 		return(
 			<div>
 				<Card className={classes.card}>
@@ -88,26 +88,15 @@ class MyParticipants extends Component{
 						<FormControlLabel control={<TextField />}
         				label="Gender:" labelPlacement="start"/>
 
-						
-							<Select value={this.state.category} onChange={this.setCategory}>
-								{this.props.category.map((category) => {
-									return(
-										<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
-									)
-								})}
-							</Select>
-
-						<Select>
-							<MenuItem>OPTION</MenuItem>
-							<MenuItem>OPTION</MenuItem>
-							<MenuItem>OPTION</MenuItem>
-						</Select>
-						<br></br>
-						<select>
-							<option>OPTION1</option>
-							<option>OPTION2</option>
-							<option>OPTION3</option>
-						</select>
+						 <FormControlLabel control={
+                            <Select value={this.state.category} onChange={this.setCategory}>
+                                {this.props.category.map((category) => {
+                                    return(
+                                        <MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
+                                    )
+                                })}
+                            </Select>}
+                        label="Category:" labelPlacement="start"/>
 
 						<FormControlLabel control={<TextField />}
         				label="State:" labelPlacement="start"/>

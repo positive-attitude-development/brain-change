@@ -49,7 +49,7 @@ class IndividualParticipant extends Component{
 						label="Phone Number:" labelPlacement="start"/>
 					</>
 				} else {
-					offenderData = <div>NO OFFENDER DATA</div>
+					offenderData = <div></div>
 				}
 				return(
 					<Card raised className={classes.card} key={person.id}>
@@ -77,16 +77,10 @@ class IndividualParticipant extends Component{
 								<FormControlLabel control={<TextField defaultValue={person.phone_number}/>}
         						label="Phone Number:" labelPlacement="start"/>
 
-								<Select>
-									<MenuItem>ONE</MenuItem>
-									<MenuItem>TWO</MenuItem>
-									<MenuItem>THREE</MenuItem>
-								</Select>
-
 								{offenderData}
 						</CardContent>
 						<CardActions>
-							<Button>Edit Participant</Button>
+							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
 						</CardActions>
 					</Card>
 					)
