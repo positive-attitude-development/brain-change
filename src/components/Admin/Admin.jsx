@@ -19,9 +19,9 @@ componentDidMount() {
 
 
             <div>
-                {/* <AdminTable  contactInfo = {this.props.contactinfo}/> */}
-            {JSON.stringify(this.props.contactinfo)}
-
+                {/* {this.props.contactinfo[0] && */}
+                <AdminTable  contactInfo = {this.props.contactinfo} search = {this.props.search || ""} />
+                {/* } */}
             </div>
         )
     }
@@ -30,7 +30,8 @@ componentDidMount() {
 
 const mapRedux = reduxState => {
     return { 
-        contactinfo : reduxState.adminContactReducer 
+        contactinfo : reduxState.adminContactReducer,
+        search: reduxState.searchTermReducer
      }
     }
 
