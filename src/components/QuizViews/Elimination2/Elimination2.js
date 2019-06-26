@@ -23,7 +23,7 @@ export class Elimination2 extends Component {
         if (this.state.round2.length === 9) {
 
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2});
-            this.props.history.push('/ElimInstructions3')
+            this.props.history.push('/BeliefInstruct1')
         } else {
             return alert('Please select 9 values that are least important to you.')
         }
@@ -56,8 +56,6 @@ export class Elimination2 extends Component {
             let result = true;
 
             for(let newValue of this.props.newValues.round1) {
-                console.log('in for loop', newValue);
-                console.log('show value in loop', value.id);
                 if(newValue === value.id) {
                     result = false;
                 }
@@ -82,15 +80,13 @@ export class Elimination2 extends Component {
                         </ul>
                     </div>
                     <div>
-                        <Link to="/BeliefInstruct1"> 
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                onClick={this.handleNext}
-                                >
-                                Next
-                            </Button> 
-                        </Link>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
                     </div>
                 </Paper>
             </div>
