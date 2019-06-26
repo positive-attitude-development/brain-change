@@ -3,7 +3,7 @@ import {put, takeLatest} from 'redux-saga/effects';
 
 function* fetchAllRecords() {
     try {
-        let response = yield axios.get('/api/snapshot/allrecords');
+        let response = yield axios.get('/api/participants/all');
         yield put({type: 'SET_ALL_RECORDS', payload: response.data});
     } catch (error) {
         console.log('Error in fetchAllRecords:', error)
