@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, Select, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -21,13 +21,54 @@ const styles = {
 
 class MyParticipants extends Component{
 
-	componentDidMount(){
-		this.props.dispatch({type: ''})
+	state = {
+		category: '',
 	}
+
+	componentDidMount(){
+		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
+		this.props.dispatch({type: 'FETCH_CATEGORY'})
+	};//end componentDidMount
+
+	renderInputs = () =>{
+		let input;
+		if(this.state.category === "Offender"){
+			input =
+			<>
+			<h4>Offender Data:</h4>
+			<FormControlLabel control={<TextField />}
+			label="System:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Population:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Felony:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="Violent:" labelPlacement="start"/>
+
+			<FormControlLabel control={<TextField />}
+			label="System ID #:" labelPlacement="start"/>
+			</>
+		}
+		return input;
+	};//end renderInputs
+
+	setCategory = (event) =>{
+		this.setState({
+			category: event.target.value
+		})
+	};//end setCategory
+
+	viewParticipant = (id) =>{
+		//console.log('viewParticipant id:', id)
+		this.props.history.push(`/individualparticipant/${id}`)
+
+	};//end viewParticipant
 
 	render(){
 		const {classes} = this.props;
-		let offenderInputs;
 		return(
 			<div>
 				<Card className={classes.card}>
@@ -35,45 +76,38 @@ class MyParticipants extends Component{
 						Add a Participant:
 						<br></br>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="First Name:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="First Name:" labelPlacement="start"/>
+
+						<FormControlLabel control={<TextField />}
+        				label="Last Name:" labelPlacement="start"/>
+
+						<FormControlLabel control={<TextField />}
+        				label="Age:" labelPlacement="start"/>
+
+						<FormControlLabel control={<TextField />}
+        				label="Gender:" labelPlacement="start"/>
 
 						<FormControlLabel control={
-          					<TextField />}
-        				label="Last Name:"
-						labelPlacement="start"/>
+							<Select value={this.state.category} onChange={this.setCategory}>
+								{this.props.category.map((category) => {
+									return(
+										<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
+									)
+								})}
+							</Select>}
+        				label="Category:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Age:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="State:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Gender:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Email Address:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Category:"
-						labelPlacement="start"/>
+						<FormControlLabel control={<TextField />}
+        				label="Phone Number:" labelPlacement="start"/>
 
-						<FormControlLabel control={
-          					<TextField />}
-        				label="State:"
-						labelPlacement="start"/>
-
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Email Address:"
-						labelPlacement="start"/>
-
-						<FormControlLabel control={
-          					<TextField />}
-        				label="Phone Number:"
-						labelPlacement="start"/>
+						{this.renderInputs()}
 					</CardContent>
 					<CardActions>
 						<Button variant="contained" color="primary" disabled>Add Participant</Button>
@@ -84,7 +118,8 @@ class MyParticipants extends Component{
 		<Table className={classes.table}>
 			<TableHead>
 				<TableRow>
-					<TableCell>Name</TableCell>
+					<TableCell>First Name</TableCell>
+					<TableCell>Last Name</TableCell>
 					<TableCell>Age</TableCell>
 					<TableCell>Gender</TableCell>
 					<TableCell>Category</TableCell>
@@ -95,17 +130,18 @@ class MyParticipants extends Component{
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{this.props.participants.map((person) => {
+				{this.props.participant.map((person) => {
 					return(
 						<TableRow key={person.id}>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
-							<TableCell></TableCell>
+							<TableCell>{person.first_name}</TableCell>
+							<TableCell>{person.last_name}</TableCell>
+							<TableCell>{person.age}</TableCell>
+							<TableCell>{person.gender}</TableCell>
+							<TableCell>{person.category}</TableCell>
+							<TableCell>{person.state}</TableCell>
+							<TableCell>{person.email}</TableCell>
+							<TableCell>{person.phone_number}</TableCell>
+							<TableCell><Button variant="contained" color="primary" onClick={()=>this.viewParticipant(`${person.id}`)}>View/Edit</Button></TableCell>
 						</TableRow>
 					)
 				})}
@@ -117,7 +153,10 @@ class MyParticipants extends Component{
 }
 
 const mapStateToProps = state => ({
-  state
+  admin: state.admin,
+  profile: state.profile,
+  participant: state.participant,
+  category: state.category,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MyParticipants));

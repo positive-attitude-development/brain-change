@@ -13,6 +13,9 @@ const adminRouter = require('./routes/admin.router');
 const valueRouter = require('./routes/values.router');
 const snapshotRouter = require('./routes/snapshot.router');
 const adminContactRouter = require('./routes/adminContact.router'); 
+const participantRouter = require('./routes/participant.router');
+
+
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +33,8 @@ app.use('/api/admin', adminRouter);
 app.use('/api/values', valueRouter);
 app.use('/api/snapshot', snapshotRouter);
 app.use('/api/adminContact', adminContactRouter); 
+app.use('/api/participant', participantRouter);
+
 
 // Serve static files
 app.use(express.static('build'));

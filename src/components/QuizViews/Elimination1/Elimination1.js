@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Link} from 'react-router-dom'; 
+import './Elimination1.css';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'
+
 
 
 export class Elimination1 extends Component {
@@ -14,52 +17,65 @@ export class Elimination1 extends Component {
         statusBar: 5
     }
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_VALUES' });
+        
+    }
+
     handleNext = () => {
-        this.props.dispatch({ type: 'SET_NEW_VALUES', payload: this.state})
-        this.props.history.push('/ElimInstructions2')
+        if(this.state.round1.length === 9) {
+            this.props.dispatch({ type: 'SET_NEW_VALUES', name: 'round1', payload: this.state.round1 })
+            this.props.history.push('/ElimInstructions2')
+        } else {
+            return alert('Please select 9 values that are least important to you')
+        }
     }
 
     handleSelect = (event) => {
-        console.log('value is:', event.target.value)
-        // for(let i=0; i<this.props.values.length; i++) {
-        //     console.log('value is:', event.target.value)
 
-        //     console.log('now checking value', this.props.values[i].values)
-        //     if(event.target.value === this.props.values[i].values) {
-        //         this.state.round1.splice(i, 1)
-        //         return;
-        //     }
-        // } 
-        // this.setState({
-        //     round1: [...this.state.round1, event.target.value]
-        // })
+        for(let i=0; i<this.state.round1.length; i++) {
+            if(event.target.value === this.state.round1[i]) {
+                this.setState({
+                    round1: this.state.round1.filter((_, j) => j !== i)
+                })
+                return;
+            } 
+        } 
+        if (this.state.round1.length === 9) {
+            return;
+        }
+        this.setState({
+            round1: [...this.state.round1, event.target.value],
+        })
     }
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_VALUES'});
-    }
 
     render() {
-        console.log(this.state.round1)
+        console.log('checking array', this.state.round1)
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
                 <div>
-                    <ul>
-                        {this.props.values.map(value => {
-                            return <li  onClick={this.handleSelect} value={value.id}>{value.values}</li>
-                        })}
-                    </ul>
+                    <StatusBar status={this.state.statusBar} />
                 </div>
-                {/* <Link to="/ElimInstructions2"> link </Link> */}
-                <div>
-                    <Button onClick={this.handleNext}>Next</Button>
-                </div>
-
+                <Paper className="paper">
+                        
+                    <div className="valuesList">
+                        <h2 className="inst">Remove the 9 least important values</h2>
+                        <ul>
+                            {this.props.values.map(value => {
+                                return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <div>
+                        <button onClick={this.handleNext}>Next</button>
+                    </div>
+                </Paper>
             </div>
         )
     }
 }
+
 
 const mapStateToProps = (reduxState) => {
     return {

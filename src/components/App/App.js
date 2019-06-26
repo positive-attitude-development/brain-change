@@ -20,6 +20,8 @@ import Profile from '../Profile/Profile';
 import QuizRoutes from './QuizRoutes';
 import MyParticipants from '../MyParticipants/MyParticipants';
 import Admin from '../Admin/Admin'; 
+import IndividualParticipant from '../IndividualParticipant/IndividualParticipant';
+
 
 import AllRecords from '../AllRecords/AllRecords';
 
@@ -82,6 +84,11 @@ class App extends Component {
             <ProtectedRoute
               exact path="/myparticipants"
               component={MyParticipants}
+            />
+
+            <ProtectedRoute
+              exact path="/individualparticipant/:id"
+              component={IndividualParticipant}
             />
 
             <ProtectedRoute

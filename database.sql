@@ -34,7 +34,8 @@ CREATE TABLE "admin_contact"(
 
 CREATE TABLE "participant" (
   "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR,
+  "first_name" VARCHAR,
+  "last_name" VARCHAR,
   "admin_id" INT REFERENCES "admin",
   "age" INT,
   "gender" VARCHAR,
@@ -119,6 +120,14 @@ CREATE TABLE "url" (
   "participant_id" INT REFERENCES "participant",
   "admin_id" INT REFERENCES "admin"
 );
+
+CREATE TABLE "category" (
+"id" SERIAL PRIMARY KEY,
+"category" VARCHAR(50)
+);
+
+INSERT INTO "category" ("category")
+VALUES ('Offender'), ('General Public'), ('Student'), ('Other');
 
 INSERT INTO "value" ("values")
 VALUES ('Accountability'), ('Adventure'), ('Being Right'), ('Communication'), ('Community'), 
