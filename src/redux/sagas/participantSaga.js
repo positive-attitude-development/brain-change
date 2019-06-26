@@ -6,7 +6,7 @@ function* addOffender(action){
         console.log('addOffender action.payload:', action.payload)
         let response = yield axios.post('/api/participant/offender', action.payload)
         console.log('addParticipant returns:', response.data)
-        //yield put(action.history.push(`/individualparticipant/`))
+        action.history.push(`/individualparticipant/${response.data}`);
     }catch(error){
         console.log('Error in addOffender:', error)
     }
@@ -17,7 +17,7 @@ function* addParticipant(action){
         console.log('addParticipant action.payload:', action.payload)
         let response = yield axios.post('/api/participant', action.payload)
         console.log('addParticipant returns:', response.data)
-        yield put(action.history.push(`/individualparticipant/${response.data}`))
+        action.history.push(`/individualparticipant/${response.data}`);
     }catch(error){
         console.log('Error in addParticipant:', error)
     }
