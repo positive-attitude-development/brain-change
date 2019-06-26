@@ -18,7 +18,8 @@ export class ViolatorsInstructions extends Component {
                  <StatusBar status={this.state.statusBar} />
 
                 <div className="instructions">
-                
+                On the next screen you will see your 5 core values along with a list of the values you identified as less important to you. 
+                Select the 5 values that are most likely to cause you to violate any of your core values.
                 </div>
 
                 <div className="giph" >

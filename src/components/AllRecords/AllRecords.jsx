@@ -4,11 +4,18 @@ import AllRecordsTable from './AllRecordsTable';
 import './AllRecords.css';
 
 class AllRecords extends Component {
+
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_ALL_RECORDS'});
+    }
+
     render() {
         return (
             <div>
                 <h2>All Records:</h2>
-                <AllRecordsTable search={this.props.searchTerm || ""} />
+                {this.props.data[0] &&
+                <AllRecordsTable data={this.props.data} search={this.props.search || ""} />
+                }
             </div>
         )
     }
@@ -16,7 +23,8 @@ class AllRecords extends Component {
 
 const mapRedux = redux => {
     return {
-        searchTerm : redux.searchTermReducer
+        search : redux.searchTermReducer,
+        data : redux.allRecordsReducer
     }
 }
 

@@ -1,74 +1,42 @@
 import React from 'react';
-// import {useDispatch, useSelector} from 'react-redux'
 import PropTypes from 'prop-types';
-import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment, Paper} from '@material-ui/core';
+import {Button, IconButton, Table, TableBody, TableCell, 
+        TableHead, TablePagination, TableRow, TableSortLabel, TextField, 
+        InputAdornment, Paper} from '@material-ui/core';
+
 import {Pageview, Clear} from '@material-ui/icons'
 import {CSVLink} from 'react-csv';
-import './AllRecords.css';
 
-//redux hooks
-// let dispatch = useDispatch();
-// let search = useSelector(state => state.searchTermReducer);
 
-//dummy data
-// const rows = [
-//     { 
-//         firstname: 'Thomas',
-//         lastname: 'Roselyn',
-//         age: 87,
-//         gender: 'M',
-//         category: 'general public',
-//         state: 'WA',
-//         email: 'tgroselyn@gmail.com',
-//         phone: '425-761-8920',
-//         admin: 'Lyle Wildes'
-//     },
-//     {
-//         firstname: 'Rachel',
-//         lastname: 'Schoenmann',
-//         age: 99,
-//         gender: 'F',
-//         category: 'student',
-//         state: 'MN',
-//         email: 'rachels@gmail.com',
-//         phone: '555-121-2345',
-//         admin: 'Dane Smith'
-//     },
-//     {
-//         firstname: 'Jesse',
-//         lastname: 'Gjerde',
-//         age: 108,
-//         gender: 'M',
-//         category: 'coal miner',
-//         state: 'MN',
-//         email: 'jesseg@gmail.com',
-//         phone: '555-121-3459',
-//         admin: 'Dev Jana'
-//     },
-//     {
-//         firstname: 'Bobby',
-//         lastname: 'Khounphinith',
-//         age: 99,
-//         gender: 'M',
-//         category: 'offender',
-//         state: 'MN',
-//         email: 'bobbyk@gmail.com',
-//         phone: '425-761-8919',
-//         admin: 'Lyle Wildes'
-//     }
-// ];
+
 
 const headRows = [
-    { key: 'participant_name', label: 'Name' },
-    { key: 'age', label: 'Age' },
-    { key: 'gender', label: 'Gender' },
-    { key: 'category', label: 'Category' },
-    { key: 'state', label: 'State' },
-    { key: 'email', label: 'Email' },
-    { key: 'phone', label: 'Phone' },
-    { key: 'admin_name', label: 'Admin Name' },
-    { key: 'viewedit', label: 'View/Edit' },
+    { key: 'first_name', label: 'First Name' },
+    { key: 'last_name', label: 'Last Name' },
+    { key: 'organization', label: 'Organization' },
+    { key: 'title', label: 'Title'},
+    { key: 'phone_number', label: 'Phone Number' },
+    { key: 'email_address', label: 'Email' },
+    { key: 'level', label: 'Access Level' }
 ];
+
+
+// function asignrows(props) {
+//     const adminRows = [props.contactInfo]
+// }
+
+// export default function admintable() {
+
+//     console.log(props.contactInfo)
+//     return (
+//         <>
+//         assignrows();
+//         the table
+//         {JSON.stringify(adminRows)}
+//         </>
+//     )
+// }; 
+
 
 //sorting function
 function desc(a, b, orderBy) {
@@ -129,7 +97,7 @@ function EnhancedTableHead(props) {
 
 //table head props
 EnhancedTableHead.propTypes = {
-    // numSelected: PropTypes.number.isRequired,
+    numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
@@ -139,30 +107,29 @@ EnhancedTableHead.propTypes = {
 //table props
 EnhancedTable.propTypes = {
         search: PropTypes.string.isRequired,
-        data: PropTypes.array.isRequired
+        contactInfo: PropTypes.array.isRequired
     };
 
 //table
 export default function EnhancedTable(props) {
-    const {data, search} = props;
-    const [rows] = React.useState(data);
+    const {contactInfo, search} = props; 
+    const [rows] = React.useState(contactInfo)
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('participant_name');
+    const [orderBy, setOrderBy] = React.useState('firstname');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     //filter by search term
-    // const {search} = props;
+
     const [searchTerm, setSearchTerm] = React.useState(search);
     const filteredRows = rows.filter(x =>
-        x['participant_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['age'].toString().includes(searchTerm) ||
-        x['gender'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['category'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['state'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['email'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['phone'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['admin_name'].toLowerCase().includes(searchTerm.toLowerCase())
+        x['first_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['last_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['organization'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['title'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['email_address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['level'].toString().includes(searchTerm) 
     )
 
     //sorting function
@@ -185,6 +152,7 @@ export default function EnhancedTable(props) {
     //empty row handler
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, filteredRows.length - page * rowsPerPage);
 
+    
     //render table
     return (
         <div className="container">
@@ -238,14 +206,19 @@ export default function EnhancedTable(props) {
                                 .map((row, i) => {
                                     return (
                                         <TableRow key={i}>
-                                            <TableCell>{row.participant_name}</TableCell>
-                                            <TableCell>{row.age}</TableCell>
-                                            <TableCell>{row.gender}</TableCell>
-                                            <TableCell>{row.category}</TableCell>
-                                            <TableCell>{row.state}</TableCell>
-                                            <TableCell>{row.email}</TableCell>
+                                            <TableCell>{row.first_name}</TableCell>
+                                            <TableCell>{row.last_name}</TableCell>
+                                            <TableCell>{row.organization}</TableCell>
+                                            <TableCell>{row.title}</TableCell>
+                                            <TableCell>{row.phone_number}</TableCell>
+                                            <TableCell>{row.email_address}</TableCell>
+                                            <TableCell>{row.level}</TableCell>
                                             <TableCell>{row.phone}</TableCell>
-                                            <TableCell>{row.admin_name}</TableCell>
+                                            <TableCell>
+                                                <Button> 
+                                                    View Admins
+                                                </Button>
+                                            </TableCell>
                                             <TableCell>
                                                 <IconButton>
                                                     <Pageview />

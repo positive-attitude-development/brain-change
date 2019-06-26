@@ -38,6 +38,7 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	});
 })
 
+
 //POST route to add new non-offender participant
 router.post('/', rejectUnauthenticated, async (req, res, next) => {
   console.log('add participant req.body:', req.body)
@@ -91,6 +92,28 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
 // 		connection.release()
 // 	}
 });
+
+
+//GET route for all participants (owner only)
+router.get('/all', rejectUnauthenticated, (req, res) => {
+	console.log('req.user:', req.user.id)
+	//only owners (access level 3 can get results)
+	if (req.user.level === 3) {
+		let queryText = `SELECT "participant"."id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "participant"."age", "participant"."gender", "participant"."category", "participant"."state", "participant"."email", "participant"."phone_number" AS "phone", concat("admin_contact"."first_name", ' ', "admin_contact"."last_name") AS "admin_name" 
+		FROM "participant" FULL JOIN "admin_contact" ON "participant"."admin_id" = "admin_contact".id
+		ORDER BY "participant".id;`;
+		pool.query(queryText)
+			.then((result) => {
+				console.log('all participants GET results:', result.rows);
+				res.send(result.rows)
+			}).catch((error) => {
+				console.log('error in all participants GET:', error)
+			});
+	} else {
+		console.log('unauthorized all participants GET')
+		res.sendStatus(403);
+	}
+})
 
 
 module.exports = router;
