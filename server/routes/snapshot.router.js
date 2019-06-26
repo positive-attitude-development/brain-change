@@ -88,4 +88,57 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET all records
+router.get('/allrecords', (req, res) => {
+
+    const rows = [
+        {
+            firstname: 'Thomas',
+            lastname: 'Roselyn',
+            age: 87,
+            gender: 'M',
+            category: 'general public',
+            state: 'WA',
+            email: 'tgroselyn@gmail.com',
+            phone: '425-761-8920',
+            admin: 'Lyle Wildes'
+        },
+        {
+            firstname: 'Rachel',
+            lastname: 'Schoenmann',
+            age: 99,
+            gender: 'F',
+            category: 'student',
+            state: 'MN',
+            email: 'rachels@gmail.com',
+            phone: '555-121-2345',
+            admin: 'Dane Smith'
+        },
+        {
+            firstname: 'Jesse',
+            lastname: 'Gjerde',
+            age: 108,
+            gender: 'M',
+            category: 'coal miner',
+            state: 'MN',
+            email: 'jesseg@gmail.com',
+            phone: '555-121-3459',
+            admin: 'Dev Jana'
+        },
+        {
+            firstname: 'Bobby',
+            lastname: 'Khounphinith',
+            age: 99,
+            gender: 'M',
+            category: 'offender',
+            state: 'MN',
+            email: 'bobbyk@gmail.com',
+            phone: '425-761-8919',
+            admin: 'Lyle Wildes'
+        }
+    ];
+
+    res.send(rows);
+});
+
 module.exports = router;

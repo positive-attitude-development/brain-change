@@ -106,31 +106,31 @@ EnhancedTableHead.propTypes = {
 
 //table props
 EnhancedTable.propTypes = {
-        search: PropTypes.string.isRequired
+        search: PropTypes.string.isRequired,
+        contactInfo: PropTypes.array.isRequired
     };
 
 //table
 export default function EnhancedTable(props) {
+    const {contactInfo, search} = props; 
+    const [rows] = React.useState(contactInfo)
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('firstname');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     //filter by search term
-    // let adminRows = [{props.contactInfo}]
 
-    // const {search} = props;
-    // const [searchTerm, setSearchTerm] = React.useState(search);
-    // const filteredRows = props.contactInfo.filter(x =>
-    //     x['first_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     x['last_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     // x['age'].toString().includes(searchTerm) ||
-    //     x['organization'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     x['title'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     x['email_address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //     x['level'].toString().includes(searchTerm) ||
-    // )
+    const [searchTerm, setSearchTerm] = React.useState(search);
+    const filteredRows = rows.filter(x =>
+        x['first_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['last_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['organization'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['title'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['email_address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['level'].toString().includes(searchTerm) 
+    )
 
     //sorting function
     function handleRequestSort(event, property) {
@@ -201,9 +201,9 @@ export default function EnhancedTable(props) {
                             rowCount={filteredRows.length}
                         />
                         <TableBody>
-                            {/* {stableSort(filteredRows, getSorting(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
-                                {props.contactInfo.map((row, i) => {
+                            {stableSort(filteredRows, getSorting(order, orderBy))
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row, i) => {
                                     return (
                                         <TableRow key={i}>
                                             <TableCell>{row.first_name}</TableCell>
@@ -216,7 +216,7 @@ export default function EnhancedTable(props) {
                                             <TableCell>{row.phone}</TableCell>
                                             <TableCell>
                                                 <Button> 
-                                                    View Participants
+                                                    View Admins
                                                 </Button>
                                             </TableCell>
                                             <TableCell>

@@ -8,7 +8,10 @@ import searchTermReducer from './searchTermReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
 
+import allRecordsReducer from './allRecordsReducer';
+
 import adminContactReducer from './adminContactReducer'; 
+
 
 import participant from './participantReducer';
 import individual from './individualParticipantReducer';
@@ -24,7 +27,9 @@ const rootReducer = combineReducers({
   searchTermReducer,
   profile,
   editProfile,
+  allRecordsReducer,
   adminContactReducer,
+
   participant, //this is all participants for MyParticipants view
   individual, //this is a single participant for the IndividualParticipant view
   category,
