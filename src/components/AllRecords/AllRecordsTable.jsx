@@ -59,15 +59,14 @@ import './AllRecords.css';
 // ];
 
 const headRows = [
-    { key: 'firstname', label: 'First Name' },
-    { key: 'lastname', label: 'Last Name' },
+    { key: 'participant_name', label: 'Name' },
     { key: 'age', label: 'Age' },
     { key: 'gender', label: 'Gender' },
     { key: 'category', label: 'Category' },
     { key: 'state', label: 'State' },
     { key: 'email', label: 'Email' },
     { key: 'phone', label: 'Phone' },
-    { key: 'admin', label: 'Admin Name' },
+    { key: 'admin_name', label: 'Admin Name' },
     { key: 'viewedit', label: 'View/Edit' },
 ];
 
@@ -130,7 +129,7 @@ function EnhancedTableHead(props) {
 
 //table head props
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
+    // numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
@@ -148,7 +147,7 @@ export default function EnhancedTable(props) {
     const {data, search} = props;
     const [rows] = React.useState(data);
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('firstname');
+    const [orderBy, setOrderBy] = React.useState('participant_name');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -156,15 +155,14 @@ export default function EnhancedTable(props) {
     // const {search} = props;
     const [searchTerm, setSearchTerm] = React.useState(search);
     const filteredRows = rows.filter(x =>
-        x['firstname'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['lastname'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['participant_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['age'].toString().includes(searchTerm) ||
         x['gender'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['category'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['state'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['email'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['phone'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['admin'].toLowerCase().includes(searchTerm.toLowerCase())
+        x['admin_name'].toLowerCase().includes(searchTerm.toLowerCase())
     )
 
     //sorting function
@@ -240,15 +238,14 @@ export default function EnhancedTable(props) {
                                 .map((row, i) => {
                                     return (
                                         <TableRow key={i}>
-                                            <TableCell>{row.firstname}</TableCell>
-                                            <TableCell>{row.lastname}</TableCell>
+                                            <TableCell>{row.participant_name}</TableCell>
                                             <TableCell>{row.age}</TableCell>
                                             <TableCell>{row.gender}</TableCell>
                                             <TableCell>{row.category}</TableCell>
                                             <TableCell>{row.state}</TableCell>
                                             <TableCell>{row.email}</TableCell>
                                             <TableCell>{row.phone}</TableCell>
-                                            <TableCell>{row.admin}</TableCell>
+                                            <TableCell>{row.admin_name}</TableCell>
                                             <TableCell>
                                                 <IconButton>
                                                     <Pageview />
