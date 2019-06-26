@@ -3,6 +3,7 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import adminSaga from './adminSaga';
 import displayValuesSaga from './displayValuesSaga';
+import allRecordsSaga from './allRecordsSaga';
 import participantSaga from './participantSaga';
 import categorySaga from './categorySaga';
 
@@ -11,6 +12,8 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     adminSaga(),
+    displayValuesSaga(),
+    allRecordsSaga(),
     displayValuesSaga(),
     participantSaga(),
     categorySaga(),

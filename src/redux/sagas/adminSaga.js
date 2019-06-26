@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {put, takeLatest} from 'redux-saga/effects';
+import {put, takeLatest, takeEvery} from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_ADMIN" actions
 function* fetchAdmin() {
@@ -21,6 +21,18 @@ function* fetchAdmin() {
   }
 }
 
+function* fetchAdminContact() {
+
+  try {
+    const response = yield axios.get('api/adminContact');
+
+    yield put({type: 'SET_ADMIN_CONTACT', payload: response.data})
+  } catch (error) {
+    console.log('Admin contact failed', error)
+  }
+}
+
+
 function* fetchProfile(action){
   try{
     console.log('admin id:', action.payload)
@@ -37,6 +49,7 @@ function* fetchProfile(action){
 function* adminSaga() {
   yield takeLatest('FETCH_ADMIN', fetchAdmin);
   yield takeLatest('FETCH_PROFILE', fetchProfile);
+  yield takeEvery('FETCH_ADMIN_CONTACT', fetchAdminContact); 
 }
 
 export default adminSaga;

@@ -1,13 +1,19 @@
 let newValuesState = {
     round1: [],
-    
+    round2: [],
+    round3: [],
+    round4: [],
+    round5: [],
+    beliefs: [],
+    testedBelief: [],
+    violators:[]
 }
 
 
 const newValuesReducer = (state = newValuesState, action) => {
     switch(action.type) {
         case 'SET_NEW_VALUES':
-            console.log('In new reducer', action.payload)
+            console.log('In new value reducer', action.payload)
             return {
                 ...state,
                 [action.name]: action.payload
