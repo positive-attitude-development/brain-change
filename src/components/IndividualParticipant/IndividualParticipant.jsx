@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel, MenuItem, Select} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -33,20 +33,16 @@ class IndividualParticipant extends Component{
 				if(person.category === 'Offender'){
 					offenderData = 
 					<>
-						<FormControlLabel control={<TextField defaultValue={person.offender_system_id}/>}
-						label="Age:" labelPlacement="start"/>
+					<br></br>Offender Data:<br></br>
+						<TextField label="System:" defaultValue={person.offender_system_id} disabled/>
 
-						<FormControlLabel control={<TextField defaultValue={person.system_id}/>}
-						label="Gender:" labelPlacement="start"/>
+						<TextField label="System ID#:" defaultValue={person.system_id} disabled/>
 
-						<FormControlLabel control={<TextField defaultValue={person.violent_offender}/>}
-						label="Category:" labelPlacement="start"/>
+						<TextField label="Violent:" defaultValue={person.violent_offender} disabled/>
 
-						<FormControlLabel control={<TextField defaultValue={person.felon}/>}
-						label="Email Address:" labelPlacement="start"/>
+						<TextField label="Felon:" defaultValue={person.felon} disabled/>
 
-						<FormControlLabel control={<TextField defaultValue={person.population_id}/>}
-						label="Phone Number:" labelPlacement="start"/>
+						<TextField label="Population:" defaultValue={person.population_id} disabled/>
 					</>
 				} else {
 					offenderData = <div></div>
@@ -56,26 +52,20 @@ class IndividualParticipant extends Component{
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
-								<FormControlLabel control={<TextField defaultValue={person.first_name}/>}
-        						label="First Name:" labelPlacement="start"/>
+								<TextField label="First Name:" disabled defaultValue={person.first_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.last_name}/>}
-        						label="Last Name:" labelPlacement="start"/>
+								<TextField label="Last Name:" defaultValue={person.last_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.age}/>}
-        						label="Age:" labelPlacement="start"/>
+								<TextField label="Age:" defaultValue={person.age}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.gender}/>}
-        						label="Gender:" labelPlacement="start"/>
+								<TextField label="Gender:" defaultValue={person.gender}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.category}/>}
-        						label="Category:" labelPlacement="start"/>
+								<TextField label="Category:" defaultValue={person.category}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.email}/>}
-        						label="Email Address:" labelPlacement="start"/>
+								<TextField label="Email Address:" defaultValue={person.email}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.phone_number}/>}
-        						label="Phone Number:" labelPlacement="start"/>
+								<TextField label="Phone Number:" defaultValue={person.phone_number}/>
+								<br></br>
 
 								{offenderData}
 						</CardContent>
