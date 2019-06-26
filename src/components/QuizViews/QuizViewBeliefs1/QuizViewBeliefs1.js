@@ -11,9 +11,9 @@ export class QuizViewBeliefs1 extends Component {
 
 
 state = {
-    belief1: " ",
-    belief2: " ",
-    belief3: " ",
+    belief1: "",
+    belief2: "",
+    belief3: "",
     statusBar : 21
 
 }
@@ -30,11 +30,16 @@ propertyChange = propertyName => (event) => {
 
 //send beliefs to reducer
 handleClick = (event) => {
+    if ( beief1 !== "" && belief2 !== "" && belief3 !== "") {
     event.preventDefault();
     // this.state.pop()
     console.log(this.state); 
     this.props.dispatch({ type: "SET_NEW_VALUES" , name:'beliefs', payload: this.state });
     this.props.history.push('/ElimInstructions3')
+    }
+    else {
+        alert("Fill all the beliefs out first before advancing please")
+    }
 }
 
 
