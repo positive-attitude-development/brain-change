@@ -56,7 +56,7 @@ router.post('/', async (req, res, next) => {
     const participantOffenderValues = [participantId, req.body.offender_system_id, req.body.system_id, req.body.violent_offender, req.body.felon, req.body.population_id]
     await connection.query(addParticipantOffender, participantOffenderValues);
     await connection.query('COMMIT');
-    res.sendStatus(200);
+    res.send(participantId);
   }catch(error){
 		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
 		await connection.query('ROLLBACK');

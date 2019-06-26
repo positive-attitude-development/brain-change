@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, Select, MenuItem} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -17,23 +17,30 @@ const styles = {
 		margin: 'auto',
 		width: '75%',
 	},
+	text: {
+		width: '150px',
+	}
 }
 
 class MyParticipants extends Component{
 	state = {
-		first_name: '',
-		last_name: '',
-		age: '',
-		gender: '',
-		category: '',
-		state: '',
-		email_address: '',
-		phone_number: '',
-		system_id: '',
-		offender_system_id: '',
-		felon: '',
-		violent_offender: '',
-		population_id: ''
+		participant: {
+			first_name: '',
+			last_name: '',
+			age: '',
+			gender: '',
+			category: '',
+			state: '',
+			email_address: '',
+			phone_number: '',
+		},
+		offender: {
+			system_id: 0,
+			offender_system_id: 0,
+			felon: null,
+			violent_offender: null,
+			population_id: 0
+		}
 	}
 
 	componentDidMount(){
@@ -43,35 +50,48 @@ class MyParticipants extends Component{
 
 	handleInputChange = propertyName => (event) => {
 	    this.setState({
-	      [propertyName]: event.target.value,
+			participant:{
+				...this.state.participant,
+				[propertyName]: event.target.value,
+			}
 	    });
 	};//end handleInputChange
 
+	handleOffenderInput = propertyName => (event) => {
+	    this.setState({
+			offender:{
+				...this.state.offender,
+				[propertyName]: event.target.value,
+			}
+	    });
+	};//end handleOffenderInput
+
 	handleSubmit = () => {
-		console.log('submitted')
-		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state, history: this.props.history})
+		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history})
+	};//end handleSubmit
+
+	handleSubmitOffender = () => {
+		console.log('submit offender')
+		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
 	renderInputs = () =>{
 		let input;
-		if(this.state.category === "Offender"){
+		if(this.state.participant.category === "Offender"){
 			input =
 			<>
+			<br></br>
 			Offender Data: 
-			<FormControlLabel control={<TextField onChange={this.handleInputChange('offender_system_id')}/>}
-			label="System:" labelPlacement="start"/>
+			<br></br>
+			<TextField label="System:" onChange={this.handleOffenderInput('offender_system_id')}/>
 
-			<FormControlLabel control={<TextField onChange={this.handleInputChange('population_id')}/>}
-			label="Population:" labelPlacement="start"/>
+			<TextField label="Population:" onChange={this.handleOffenderInput('population_id')}/>
 
-			<FormControlLabel control={<TextField onChange={this.handleInputChange('felon')}/>}
-			label="Felony:" labelPlacement="start"/>
+			<TextField label="Felony:" onChange={this.handleOffenderInput('felon')}/>
 
-			<FormControlLabel control={<TextField onChange={this.handleInputChange('violent_offender')}/>}
-			label="Violent:" labelPlacement="start"/>
+			<TextField label="Violent:" onChange={this.handleOffenderInput('violent_offender')}/>
 
-			<FormControlLabel control={<TextField onChange={this.handleInputChange('system_id')}/>}
-			label="System ID #:" labelPlacement="start"/>
+			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
 			</>
 		}
 		return input;
@@ -84,9 +104,10 @@ class MyParticipants extends Component{
 	render(){
 		const {classes} = this.props;
 		let submitButton;
-		if(this.state.first_name !== '' && this.state.last_name !== ''
-		&& this.state.age !== '' && this.state.gender !== '' && this.state.category !== ''
-		&& this.state.category !== "Offender" && this.state.state !== ''){
+		console.log('this.state:', this.state)
+		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
+		&& this.state.participant.age !== '' && this.state.participant.gender !== '' && this.state.participant.category !== ''
+		&& this.state.participant.category !== "Offender" && this.state.participant.state !== ''){
 			console.log('OK to submit non offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		}else if(this.state.first_name !== '' && this.state.last_name !== ''
@@ -95,7 +116,7 @@ class MyParticipants extends Component{
 		&& this.state.system_id !== '' && this.state.offender_system_id !== ''
 		&& this.state.felon !== '' && this.state.violent_offender !== '' && this.state.population_id !== ''){
 			console.log('OK to submit offender')
-			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
+			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmitOffender}>Add Participant</Button>
 		}else{
 			console.log('Not OK to submit participant yet')
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
@@ -110,33 +131,27 @@ class MyParticipants extends Component{
 						<h5>(Unless specified, all fields are required)</h5>
 						<br></br>
 
-						<FormControlLabel control={<TextField onChange={this.handleInputChange('first_name')}/>}
-        				label="First Name:" labelPlacement="start"/>
+						<TextField label="First Name:" onChange={this.handleInputChange('first_name')}/>
 
-						<FormControlLabel control={<TextField onChange={this.handleInputChange('last_name')}/>}
-        				label="Last Name:" labelPlacement="start"/>
+						<TextField label="Last Name:" onChange={this.handleInputChange('last_name')}/>
 
-						<FormControlLabel control={<TextField onChange={this.handleInputChange('age')}/>}
-        				label="Age:" labelPlacement="start"/>
+						<TextField label="Age:" onChange={this.handleInputChange('age')}/>
 
-						<FormControlLabel control={<TextField onChange={this.handleInputChange('gender')}/>}
-        				label="Gender:" labelPlacement="start"/>
+						<TextField label="Gender:" onChange={this.handleInputChange('gender')}/>
 
-
-						<FormControlLabel control={
-                            <Select value={this.state.category}
+                        <TextField required select margin="normal"
+							label="Category:" value={this.state.participant.category} 
 							onChange={this.handleInputChange('category')}>
                                 {this.props.category.map((category) => {
                                     return(
                                         <MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
                                     )
                                 })}
-                            </Select>}
-                    	label="Category:" labelPlacement="start"/>
+                        </TextField>
 
-						<FormControlLabel control={
-							<Select value={this.state.state}
-								onChange={this.handleInputChange('state')}>
+						<TextField required select margin="normal"
+							label="State:" value={this.state.participant.state} 
+							onChange={this.handleInputChange('state')}>
 								<MenuItem value=""><em>Select State</em></MenuItem>
 								<MenuItem value="AL">Alabama</MenuItem>
 								<MenuItem value="AK">Alaska</MenuItem>
@@ -191,17 +206,13 @@ class MyParticipants extends Component{
 								<MenuItem value="WV">West Virginia</MenuItem>
 								<MenuItem value="WI">Wisconsin</MenuItem>
 								<MenuItem value="WY">Wyoming</MenuItem>
-							</Select>}
-				        	label="State:" labelPlacement="start"/>
+						</TextField>
 
+						<TextField label="Email Address:" helperText="*Optional"
+							onChange={this.handleInputChange('email_address')}/>
 
-						<FormControlLabel control={<TextField helperText="*Optional"
-							onChange={this.handleInputChange('email_address')}/>}
-        				label="Email Address:" labelPlacement="start"/>
-
-						<FormControlLabel control={<TextField helperText="*Optional"
-							onChange={this.handleInputChange('phone_number')}/>}
-        				label="Phone Number:" labelPlacement="start"/>
+						<TextField label="Phone Number:" helperText="*Optional"
+							onChange={this.handleInputChange('phone_number')}/>
 
 						{this.renderInputs()}
 					</CardContent>

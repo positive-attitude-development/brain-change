@@ -1,6 +1,14 @@
 import axios from 'axios';
 import {put, takeLatest } from 'redux-saga/effects';
 
+function* addOffender(action){
+    try{
+
+    }catch(error){
+        console.log('Error in addOffender:', error)
+    }
+}
+
 function* addParticipant(action){
     try{
         console.log('addParticipant action.payload:', action.payload)
@@ -35,6 +43,7 @@ function* participantSaga() {
     yield takeLatest('FETCH_PARTICIPANTS', fetchParticipants);
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
+    yield takeLatest('ADD_OFFENDER', addOffender);
 }
 
 export default (participantSaga);
