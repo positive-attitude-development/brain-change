@@ -49,6 +49,7 @@ class MyParticipants extends Component{
 
 	handleSubmit = () => {
 		console.log('submitted')
+		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
 	renderInputs = () =>{
@@ -87,14 +88,14 @@ class MyParticipants extends Component{
 		&& this.state.age !== '' && this.state.gender !== '' && this.state.category !== ''
 		&& this.state.category !== "Offender" && this.state.state !== ''){
 			console.log('OK to submit non offender')
-			submitButton = <Button variant="contained" color="primary">Add Participant</Button>
+			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		}else if(this.state.first_name !== '' && this.state.last_name !== ''
 		&& this.state.age !== '' && this.state.gender !== ''
 		&& this.state.category === "Offender" && this.state.state !== ''
 		&& this.state.system_id !== '' && this.state.offender_system_id !== ''
 		&& this.state.felon !== '' && this.state.violent_offender !== '' && this.state.population_id !== ''){
 			console.log('OK to submit offender')
-			submitButton = <Button variant="contained" color="primary">Add Participant</Button>
+			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		}else{
 			console.log('Not OK to submit participant yet')
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
