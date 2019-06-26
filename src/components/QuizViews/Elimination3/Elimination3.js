@@ -18,10 +18,11 @@ export class Elimination3 extends Component {
     }
 
     handleNext = () => {
-        if(this.state.round3 === 9) {
-            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
+        if(this.state.round3.length !== 5) {
+            return alert('Please select 5 values that are least important to you.');
         } else  {
-            return alert('Please select 5 values that are least important to you.')
+            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
+            this.props.history.push('/ElimInstructions4')
         }
     }
 
@@ -58,7 +59,7 @@ export class Elimination3 extends Component {
         return (
             <div>
                 <StatusBar status={this.state.statusBar} />
-                <Paper>
+                <Paper className="paper">
                     <div className="valuesList">
                         <h2 className="inst">Remove the 5 least important values</h2>
                         <ul className="elim3List">
@@ -68,14 +69,13 @@ export class Elimination3 extends Component {
                         </ul>
                     </div>
                     <div>
-                        <Link to="/ElimInstructions4"> 
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                >
-                                Next
-                            </Button> 
-                        </Link>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
                     </div>
                 </Paper>
             </div>
