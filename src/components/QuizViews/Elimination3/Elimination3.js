@@ -4,6 +4,7 @@ import {  Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 
+
 import './Elimination3.css'
 
 export class Elimination3 extends Component {
