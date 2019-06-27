@@ -3,6 +3,7 @@ import { Link} from 'react-router-dom';
 import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
+import DragDrop from '../OrderValues/DragDrop';
 
 export class OrderValues1 extends Component {
 
@@ -15,7 +16,7 @@ export class OrderValues1 extends Component {
             <div>
                 
                 <StatusBar status={this.state.statusBar} />
-
+                <DragDrop />
                 <Link to="/ViolatorsInstructions">    
                     <Button
                         color="primary"
