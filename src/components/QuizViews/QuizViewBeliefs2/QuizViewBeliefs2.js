@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {  Button } from '@material-ui/core';
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Paper} from"@material-ui/core";
 import StatusBar from '../StatusBar'; 
+import QuizViewSelect from './QuizViewSelect'
 
 import './QuizViewBeliefs2.css'
 
@@ -17,7 +18,8 @@ componentDidMount() {
 
     state = {
             statusBar : 47,
-            testedBelief : ""
+            testedBelief : "",
+            typeOfBelief : ""
         }
 
 
@@ -31,7 +33,7 @@ componentDidMount() {
  
     handleClick = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state.testedBelief });
+        this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state });
         this.props.history.push('/ElimInstructions5')
 
     }
@@ -66,6 +68,7 @@ componentDidMount() {
                             </RadioGroup>
                     </FormControl>
                     </Paper>
+                    <QuizViewSelect />
                 </div>
 
                 <div>
