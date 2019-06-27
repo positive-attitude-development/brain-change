@@ -24,10 +24,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //GET route for an individual participant's info
 router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	console.log('individual query params', req.params.id)
-	let queryText = `SELECT "participant"."id", "first_name", "last_name", "admin_id", "age", "gender", "category", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id FROM "participant"
+	let queryText = `SELECT "participant"."id", "first_name", "last_name", "admin_id", "age", "gender", "category", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id, "offender_population".population, "offender_system"."system" FROM "participant"
 		FULL JOIN "offender" ON "participant".id = "offender".participant_id
+		FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
+		FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
 		WHERE "participant".admin_id = $1
-		AND "participant".id = $2;`;
+		AND "participant".id = $2`;
 		let queryValues = [req.user.id, req.params.id]
 	pool.query(queryText, queryValues)
 	.then((result) => {

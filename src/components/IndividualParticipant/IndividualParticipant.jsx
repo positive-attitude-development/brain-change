@@ -29,6 +29,9 @@ class IndividualParticipant extends Component{
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
+		this.props.dispatch({type: 'FETCH_CATEGORY'})
+		this.props.dispatch({type: 'FETCH_SYSTEM'})
+		this.props.dispatch({type: 'FETCH_POPULATION'})
 		//this.generateLink();
 	};//end componentDidMount
 
@@ -71,18 +74,31 @@ class IndividualParticipant extends Component{
 					<>
 					<br></br>Offender Data:<br></br>
 
-						<TextField select margin="normal" disabled
-						label="System:" value={person.offender_system_id}>
-							<MenuItem></MenuItem>
-						</TextField>
+						<TextField disabled label="System:" select margin="normal" 
+							value={person.system }>
+							{this.props.system.map((system) => {
+								return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
+							})}</TextField>
 
 						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
-						<TextField disabled label="Violent:" defaultValue={person.violent_offender}/>
+						<TextField disabled label="Population:" select margin="normal" 
+							value={person.population }>
+							{this.props.population.map((population) => {
+								return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
+							})}</TextField>
 
-						<TextField disabled label="Felon:" defaultValue={person.felon}/>
+						<TextField disabled select margin="normal" 
+							label="Felony?:" value={person.felon}
+							onChange={this.handleInputChange('felon')} >
+							<MenuItem value={true}>Yes</MenuItem>
+							<MenuItem value={false}>No</MenuItem></TextField>
 
-						<TextField disabled label="Population:" defaultValue={person.population_id}/>
+						<TextField disabled select margin="normal" 
+							label="Violent Crime?:" value={person.violent_offender}
+							onChange={this.handleInputChange('violent_offender')} >
+							<MenuItem value={true}>Yes</MenuItem>
+							<MenuItem value={false}>No</MenuItem></TextField>
 					</>
 				} else {
 					offenderData = <div></div>
@@ -110,6 +126,8 @@ class IndividualParticipant extends Component{
 								{offenderData}
 								<br></br>
 
+						{/* DIALOG EDITABLE FIELDS:*/}
+
 							<Dialog open={this.state.isEditable} onClose={this.handleCancelEdit} disableBackdropClick={true}>
 								<DialogTitle>Editing Participant: {person.first_name} {person.last_name}</DialogTitle>
 								<DialogContent>
@@ -126,8 +144,6 @@ class IndividualParticipant extends Component{
 										<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
 									</TextField>
 
-									{/* <TextField label="Category:" defaultValue={person.category}/> */}
-
 									<TextField label="Category:" select margin="normal"
 										value={person.category} onChange={this.handleInputChange('category')}>
 			                                {this.props.category.map((category) => {
@@ -138,6 +154,37 @@ class IndividualParticipant extends Component{
 									<TextField label="Email Address:" defaultValue={person.email}/>
 
 									<TextField label="Phone Number:" defaultValue={person.phone_number}/>
+									{person.category == "Offender" &&
+                						<>
+										<br></br>Offender Data:<br></br>
+
+											<TextField label="System:" select margin="normal" 
+												value={person.system }>
+												{this.props.system.map((system) => {
+													return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
+												})}</TextField>
+
+											<TextField label="System ID#:" defaultValue={person.system_id}/>
+
+											<TextField label="Population:" select margin="normal" 
+												value={person.population }>
+												{this.props.population.map((population) => {
+													return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
+												})}</TextField>
+
+											<TextField select margin="normal" 
+												label="Felony?:" value={person.felon}
+												onChange={this.handleInputChange('felon')} >
+												<MenuItem value={true}>Yes</MenuItem>
+												<MenuItem value={false}>No</MenuItem></TextField>
+
+											<TextField select margin="normal" 
+												label="Violent Crime?:" value={person.violent_offender}
+												onChange={this.handleInputChange('violent_offender')} >
+												<MenuItem value={true}>Yes</MenuItem>
+												<MenuItem value={false}>No</MenuItem></TextField>
+										</>}
+            
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
