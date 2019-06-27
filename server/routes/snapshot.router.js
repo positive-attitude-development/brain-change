@@ -3,71 +3,59 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 //POST results
-router.post('/result', (req, res) => {
-    let result = req.body;
-    let queryText = `INSERT INTO result ("dates", "participant_id", "percent_core", "percent_violators")
-                    VALUES ($1, $2, $3, $4)
-                    RETURNING "id";`;
-    pool.query(queryText, [result.dates, result.participant_id, result.percent_core, result.percent_violators])
-    .then((result) => {
-        console.log('Result Id:', result.rows[0].id);
-        let belief = req.body
-        let query = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
-                    VALUES ($1, $2, $3, $4)
-                    RETURNING "result_id";`;
-        pool.query(query, [result.rows[0].id, belief.belief, belief.challenged, belief.type])
-        .then((result) => {
-            console.log('Result_id:', result.rows[0].result_id);
-            let core = req.body;
-            let query = `INSERT INTO result_core ("result_id", "value_id", "ranks")
-                        VALUES ($1, $2, $3)
-                        RETURNING "result_id";`;
-            pool.query(query, [result.rows[0].result_id, core.core_value_id, core.ranks])
-            .then((result) => {
-                let elimination = req.body;
-                let query = `INSERT INTO result_elimination ("result_id", "value_id", "order")
-                            VALUES ($1, $2, $3)
-                            RETURNING "result_id";`;
-                pool.query(query, [result.rows[0].result_id, elimination.elim_value_id, elimination.order])
-                .then((result) => {
-                    let round = req.body;
-                    let query = `INSERT INTO result_round ("result_id", "elimination_round", "times")
+router.post('/result', async (req, res) => {
+    console.log('Post result req.body', req.body);
+    const connection = await pool.connect();
+    try {
+        await connection.query('BEGIN');
+        let userResult = req.body;
+        const addResult = `INSERT INTO result ("dates", "participant_id", "percent_core", "percent_violators")
+                            VALUES ($1, $2, $3, $4)
+                            RETURNING "id";`;
+        const addResultValues = [userResult.dates, userResult.participant_id, userResult.percent_core, userResult.percent_violators];
+        const result = await connection.query(addResult, addResultValues);
+
+        //Save result id and post into other tables
+        const resultId = result.rows[0].id;
+
+        const addBelief = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
+                            VALUES ($1, $2, $3, $4)`;
+        const beliefValues = [resultId, userResult.belief, userResult.challenged, userResult.type];
+        await connection.query(addBelief, beliefValues);
+
+        const addCore = `INSERT INTO result_core ("result_id", "value_id", "ranks")
+                         VALUES ($1, $2, $3)
+                         RETURNING "result_id";`;
+        const addCoreValues = [resultId, userResult.value_id, userResult.ranks];
+        await connection.query(addCore, addCoreValues);
+
+        const addElimination = `INSERT INTO result_elimination ("result_id", "value_id", "order")
                                 VALUES ($1, $2, $3)
                                 RETURNING "result_id";`;
-                    pool.query(query, [result.rows[0].result_id, round.elimination_round, round.times])
-                    .then((result) => {
-                        let violators = req.body;
-                        let query = `INSERT INTO result_violators (result_id, value_id)
-                                    VALUES ($1, $2);`;
-                        pool.query(query, [result.rows[0].result_id, violators.violator_value_id])
-                        .then(result => {
-                            res.sendStatus(200);
-                        }).catch(error => {
-                            console.log('Error in violator POST:', error)
-                            res.sendStatus(500);
-                        })
-                    }).catch(error => {
-                        console.log('Error in round POST:', error)
-                        res.sendStatus(500);
-                    })
-                }).catch(error => {
-                    console.log('Error in elimination POST:', error)
-                    res.sendStatus(500);
-                })
-            }).catch(error => {
-                console.log('Error in core POST:', error)
-                res.sendStatus(500);
-            })
-        }).catch(error => {
-            console.log('Error in belief POST:', error)
-            res.sendStatus(500);
-        })
-    }).catch(error => {
-        console.log('Error in result POST:', error)
-        res.sendStatus(500);
-    })
-});
+        const addEliminationValues = [resultId, userResult.elim_value_id, userResult.order];
+        await connection.query(addElimination, addEliminationValues);
 
+        const addRound = `INSERT INTO result_round ("result_id", "elimination_round", "times")
+                            VALUES ($1, $2, $3)
+                            RETURNING "result_id";`;
+        const addRoundValues = [resultId, userResult.elimination_round, userResult.times];
+        await connection.query(addRound, addRoundValues);
+
+        const addViolator = `INSERT INTO result_violators (result_id, value_id)
+                                VALUES ($1, $2);`;
+        const addViolatorValues = [resultId, userResult.value_id];
+        await connection.query(addViolator, addViolatorValues);
+        await connection.query('COMMIT');
+        res.json(resultId);
+    }catch(error) {
+        // If any of the above steps fail, abort the entire transaction
+        await connection.query('ROLLBACK');
+        console.log('Error in result POST', error);
+        res.sendStatus(500);
+    }finally {
+        connection.release();
+    }
+})
 
 // GET all participants belonging to admins
 router.get('/', (req, res) => {

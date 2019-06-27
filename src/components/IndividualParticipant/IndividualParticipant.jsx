@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 
@@ -56,21 +56,14 @@ class IndividualParticipant extends Component{
 		})
 	};//end handleCancelEdit
 
+	handleInputChange = propertyName => (event) => {
+
+	};//end handleInputChange
+
 	render(){
 		const classes = this.props;
 		let offenderData;
 		return(
-			<>
-			{this.state.isEditable ?
-				//EDITABLE
-				<>
-				<p>EDITABLE</p>
-				<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
-				</>//end isEditable
-				:
-				//NOT EDITABLE
-				<>
-				
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
 				if(person.category === 'Offender'){
@@ -80,10 +73,8 @@ class IndividualParticipant extends Component{
 
 						<TextField select margin="normal" disabled
 						label="System:" value={person.offender_system_id}>
-								<MenuItem></MenuItem>
+							<MenuItem></MenuItem>
 						</TextField>
-
-						{/* <TextField disabled label="System:" defaultValue={person.offender_system_id}/> */}
 
 						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
@@ -119,6 +110,41 @@ class IndividualParticipant extends Component{
 								{offenderData}
 								<br></br>
 
+							<Dialog open={this.state.isEditable} onClose={this.handleCancelEdit} disableBackdropClick={true}>
+								<DialogTitle>Editing Participant: {person.first_name} {person.last_name}</DialogTitle>
+								<DialogContent>
+									<TextField label="First Name:" defaultValue={person.first_name}/>
+
+									<TextField label="Last Name:" defaultValue={person.last_name}/>
+
+									<TextField label="Age:" type="number" defaultValue={person.age}/>
+
+									<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={person.gender}>
+										<MenuItem value="M">Male</MenuItem>
+										<MenuItem value="F">Female</MenuItem>
+										<MenuItem value="Other">Other</MenuItem>
+										<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
+									</TextField>
+
+									{/* <TextField label="Category:" defaultValue={person.category}/> */}
+
+									<TextField label="Category:" select margin="normal"
+										value={person.category} onChange={this.handleInputChange('category')}>
+			                                {this.props.category.map((category) => {
+			                                    return(<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>)
+			                                })}
+			                        </TextField>
+
+									<TextField label="Email Address:" defaultValue={person.email}/>
+
+									<TextField label="Phone Number:" defaultValue={person.phone_number}/>
+								</DialogContent>
+									<DialogActions>
+										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
+										<Button onClick={this.handleCancelEdit} color="primary">Save Changes</Button>
+									</DialogActions>
+							</Dialog>
+
 						</CardContent>
 						<CardActions>
 							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
@@ -126,6 +152,7 @@ class IndividualParticipant extends Component{
 					</Card>
 					)
 				})}
+				
 
 				<Paper>
 					URL Stuff:
@@ -139,10 +166,7 @@ class IndividualParticipant extends Component{
 						IMAGINE SNAPSHOT HERE
 					</CardContent>
 				</Card>
-			</Grid>
-			</>//end isNOTeditable
-			}
-			</>
+			</Grid>	
 		)
 	}
 }

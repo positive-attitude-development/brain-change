@@ -111,12 +111,9 @@ class MyParticipants extends Component{
 						return(
 							<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>
 						)
-					})}
-			</TextField>
+					})}</TextField>
 
-			{/* <TextField label="System:" type="number" onChange={this.handleOffenderInput('offender_system_id')}/> */}
-
-			{/* <TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/> */}
+			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
 
 			<TextField select margin="normal"
 				label="Population:" value={this.state.offender.population_id} 
@@ -125,24 +122,19 @@ class MyParticipants extends Component{
 						return(
 							<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>
 						)
-					})}
-			</TextField>
+					})}</TextField>
 
 			<TextField select margin="normal" 
 				label="Felony?:" value={this.state.offender.felon}
 				onChange={this.handleOffenderInput('felon')} >
 				<MenuItem value={true}>Yes</MenuItem>
-				<MenuItem value={false}>No</MenuItem>
-			</TextField>
+				<MenuItem value={false}>No</MenuItem></TextField>
 
 			<TextField select margin="normal" 
 				label="Violent Crime?:" value={this.state.offender.violent_offender}
 				onChange={this.handleOffenderInput('violent_offender')} >
 				<MenuItem value={true}>Yes</MenuItem>
-				<MenuItem value={false}>No</MenuItem>
-			</TextField>
-
-			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
+				<MenuItem value={false}>No</MenuItem></TextField>
 			</>
 		}
 		return input;
@@ -195,9 +187,7 @@ class MyParticipants extends Component{
 							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
 						</TextField>
 
-                        <TextField required select margin="normal"
-							label="Category:" value={this.state.participant.category} 
-							onChange={this.handleInputChange('category')}>
+                        <TextField label="Category:" select margin="normal" onChange={this.handleInputChange('category')} value={this.state.participant.category}>
                                 {this.props.category.map((category) => {
                                     return(
                                         <MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
