@@ -46,6 +46,8 @@ class MyParticipants extends Component{
 	componentDidMount(){
 		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
+		this.props.dispatch({type: 'FETCH_SYSTEM'})
+		this.props.dispatch({type: 'FETCH_POPULATION'})
 	};//end componentDidMount
 
 	handleInputChange = propertyName => (event) => {
@@ -82,6 +84,16 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
+			<TextField required select margin="normal"
+				label="System:" value={this.state.offender.offender_system_id} 
+				onChange={this.handleInputChange('system')}>
+					{this.props.system.map((system) => {
+						return(
+							<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>
+						)
+					})}
+			</TextField>
+			
 			<TextField label="System:" type="number" onChange={this.handleOffenderInput('offender_system_id')}/>
 
 			<TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/>
@@ -263,6 +275,8 @@ const mapStateToProps = state => ({
   participant: state.participant,
   category: state.category,
   addParticipant: state.addParticipant,
+  population: state.population,
+  system: state.system,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MyParticipants));

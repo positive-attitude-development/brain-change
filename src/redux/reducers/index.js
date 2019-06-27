@@ -17,6 +17,8 @@ import participant from './participantReducer';
 import individual from './individualParticipantReducer';
 import category from './categoriesReducer';
 import addParticipant from './addParticipantReducer';
+import population from './populationReducer';
+import system from './systemReducer';
 
 
 const rootReducer = combineReducers({
@@ -34,7 +36,8 @@ const rootReducer = combineReducers({
   individual, //this is a single participant for the IndividualParticipant view
   category,
   addParticipant,
-
+  population,
+  system,
 });
 
 export default rootReducer;
