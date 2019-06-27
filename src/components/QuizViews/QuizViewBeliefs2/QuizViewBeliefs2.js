@@ -58,7 +58,6 @@ componentDidMount() {
                             onChange={this.handleRadio}
                             >
 
-                            
                             <FormControlLabel  value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
                             <FormControlLabel  value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
                             <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
