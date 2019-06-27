@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, FormControlLabel, Table, TableBody, TableHead, TableCell, TableRow, MenuItem} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, Table, TableBody, TableHead, TableCell, TableRow, MenuItem, Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
 	root: {
-
+		display: 'flex',
+		flexWrap: 'wrap',
 	},
 	card: {
 		margin: 'auto',
@@ -19,7 +20,10 @@ const styles = {
 	},
 	text: {
 		width: '150px',
-	}
+	},
+	select: {
+		width: '100%',
+	},
 }
 
 class MyParticipants extends Component{
@@ -37,8 +41,8 @@ class MyParticipants extends Component{
 		offender: {
 			system_id: 0,
 			offender_system_id: 0,
-			felon: null,
-			violent_offender: null,
+			felon: '',
+			violent_offender: '',
 			population_id: 0
 		}
 	}
@@ -46,6 +50,8 @@ class MyParticipants extends Component{
 	componentDidMount(){
 		this.props.dispatch({type:'FETCH_PARTICIPANTS'})
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
+		this.props.dispatch({type: 'FETCH_SYSTEM'})
+		this.props.dispatch({type: 'FETCH_POPULATION'})
 	};//end componentDidMount
 
 	handleInputChange = propertyName => (event) => {
@@ -82,13 +88,29 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
+			<TextField required select margin="normal"
+				label="System:" value={this.state.offender.offender_system_id} 
+				onChange={this.handleInputChange('system')}>
+					{this.props.system.map((system) => {
+						return(
+							<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>
+						)
+					})}
+			</TextField>
+
 			<TextField label="System:" type="number" onChange={this.handleOffenderInput('offender_system_id')}/>
 
 			<TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/>
 
-			<TextField label="Felony:" onChange={this.handleOffenderInput('felon')}/>
+			<TextField label="Felony?:" select margin="normal" fullWidth="true" onChange={this.handleOffenderInput('felon')} value={this.state.offender.felon}>
+				<MenuItem value={true}>Yes</MenuItem>
+				<MenuItem value={false}>No</MenuItem>
+			</TextField>
 
-			<TextField label="Violent:" onChange={this.handleOffenderInput('violent_offender')}/>
+			<TextField label="Violent Crime?:" select margin="normal" onChange={this.handleOffenderInput('violent_offender')} value={this.state.offender.violent_offender}>
+				<MenuItem value={true}>Yes</MenuItem>
+				<MenuItem value={false}>No</MenuItem>
+			</TextField>
 
 			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
 			</>
@@ -101,6 +123,7 @@ class MyParticipants extends Component{
 	};//end viewParticipant
 
 	render(){
+		console.log('this.state.offender', this.state.participant)
 		const {classes} = this.props;
 		let submitButton;
 		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
@@ -112,7 +135,7 @@ class MyParticipants extends Component{
 		&& this.state.participant.age !== '' && this.state.participant.gender !== ''
 		&& this.state.participant.category === "Offender" && this.state.participant.state !== 0
 		&& this.state.offender.system_id !== 0 && this.state.offender.offender_system_id !== 0
-		&& this.state.offender.felon !== null && this.state.offender.violent_offender !== null && this.state.offender.population_id !== 0){
+		&& this.state.offender.felon !== '' && this.state.offender.violent_offender !== '' && this.state.offender.population_id !== 0){
 			//console.log('OK to submit offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmitOffender}>Add Participant</Button>
 		}else{
@@ -120,7 +143,7 @@ class MyParticipants extends Component{
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
 		}
 		return(
-			<div>
+			<div className={classes.root}>
 				<Card className={classes.card}>
 					<CardContent>
 						<h3>Add a Participant:</h3>
@@ -135,7 +158,13 @@ class MyParticipants extends Component{
 
 						<TextField label="Age:" type="number" onChange={this.handleInputChange('age')}/>
 
-						<TextField label="Gender:" onChange={this.handleInputChange('gender')}/>
+						<Grid>
+						<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={this.state.participant.gender}>
+							<MenuItem value="M">Male</MenuItem>
+							<MenuItem value="F">Female</MenuItem>
+							<MenuItem value="Other">Other</MenuItem>
+							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
+						</TextField></Grid>
 
                         <TextField required select margin="normal"
 							label="Category:" value={this.state.participant.category} 
@@ -263,6 +292,8 @@ const mapStateToProps = state => ({
   participant: state.participant,
   category: state.category,
   addParticipant: state.addParticipant,
+  population: state.population,
+  system: state.system,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MyParticipants));

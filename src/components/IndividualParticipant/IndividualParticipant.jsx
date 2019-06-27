@@ -34,7 +34,13 @@ class IndividualParticipant extends Component{
 					offenderData = 
 					<>
 					<br></br>Offender Data:<br></br>
-						<TextField disabled label="System:" defaultValue={person.offender_system_id}/>
+
+						<TextField select margin="normal" disabled
+						label="System:" value={person.offender_system_id}>
+								<MenuItem></MenuItem>
+						</TextField>
+
+						{/* <TextField disabled label="System:" defaultValue={person.offender_system_id}/> */}
 
 						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
@@ -100,6 +106,8 @@ const mapStateToProps = state => ({
   profile: state.profile,
   individual: state.individual,
   category: state.category,
+  population: state.population,
+  system: state.system,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));

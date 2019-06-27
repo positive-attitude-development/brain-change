@@ -70,7 +70,7 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
   const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
-    const addParticipant = `INSERT Igit NTO "participant" ("first_name", "last_name", "admin_id", "age", "gender", "category", "state", "email", "phone_number")
+    const addParticipant = `INSERT INTO "participant" ("first_name", "last_name", "admin_id", "age", "gender", "category", "state", "email", "phone_number")
 		VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
 		RETURNING id;`;
     const addParticipantValues = [req.body.participant.first_name, req.body.participant.last_name, req.user.id, req.body.participant.age, req.body.participant.gender, req.body.participant.category, req.body.participant.state, req.body.participant.email_address, req.body.participant.phone_number];
@@ -79,7 +79,7 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
     const participantId = result.rows[0].id;
     const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
       VALUES ($1, $2, $3, $4, $5, $6);`;
-    const participantOffenderValues = [participantId, req.body.offender_system_id, req.body.offender.system_id, req.body.offender.violent_offender, req.body.offender.felon, req.body.offender.population_id]
+    const participantOffenderValues = [participantId, req.body.offender.offender_system_id, req.body.offender.system_id, req.body.offender.violent_offender, req.body.offender.felon, req.body.offender.population_id]
     await connection.query(addParticipantOffender, participantOffenderValues);
     await connection.query('COMMIT');
     res.json(participantId);
@@ -100,7 +100,7 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 	//only owners (access level 3 can get results)
 	if (req.user.level === 3) {
 		let queryText = `SELECT "participant"."id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "participant"."age", "participant"."gender", "participant"."category", "participant"."state", "participant"."email", "participant"."phone_number" AS "phone", concat("admin_contact"."first_name", ' ', "admin_contact"."last_name") AS "admin_name" 
-		FROM "participant" FULL JOIN "admin_contact" ON "participant"."admin_id" = "admin_contact".id
+		FROM "participant" JOIN "admin_contact" ON "participant"."admin_id" = "admin_contact".id
 		ORDER BY "participant".id;`;
 		pool.query(queryText)
 			.then((result) => {

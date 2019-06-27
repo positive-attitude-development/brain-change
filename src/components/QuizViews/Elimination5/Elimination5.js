@@ -12,10 +12,13 @@ export class Elimination5 extends Component {
         statusBar : 55
     }
 
+    // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
     }
 
+    // Send 5 selected values to reducer and route to OrderValuesInstructions page.
+    // Will alert if 5 values are not selected.
     handleNext = () => {
         if(this.state.round5.length !== 5) {
             return alert('Please select 5 values that are least important to you.')
@@ -25,6 +28,7 @@ export class Elimination5 extends Component {
         }
     }
 
+    // Select and deselect values and store into local state round5
     handleSelect = (event) => {
         for(let i = 0; i < this.state.round5.length; i++) {
             if(event.target.value === this.state.round5[i]) {
@@ -43,13 +47,13 @@ export class Elimination5 extends Component {
     }
 
     render() {
+        // Creating an array of all values minus the previous selected values
         let reducer = this.props.newValues;
         let round1 = reducer.round1;
         let round2 = reducer.round2;
         let round3 = reducer.round3;
         let round4 = reducer.round4;
         let fourArrays = round1.concat(round2, round3, round4);
-        console.log('show 4 arrays', fourArrays);
         let newArray = this.props.values.filter((value) => {
             for(let newValue of fourArrays) {
                 if(newValue === value.id) {
@@ -65,7 +69,7 @@ export class Elimination5 extends Component {
                 <Paper>
                     <div className="valuesList">
                         <h2 className="inst">Remove the 5 least important values</h2>
-                        <ul className="elim4List">
+                        <ul className="elim5List">
                             {newArray.map(value => {
                                 return <li key={value.id} onClick={this.handleSelect} className={this.state.round5.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
                             })}

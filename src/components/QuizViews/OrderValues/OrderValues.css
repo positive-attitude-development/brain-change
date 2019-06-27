@@ -1,0 +1,18 @@
+.instOrder {
+    text-align: center;
+}
+
+.fiveVals {
+    list-style-type: none;
+    padding: 20px;
+}
+
+.paperDrag {
+    width: 400px;
+}
+
+.listVals {
+    list-style-type: none;
+    text-align: center;
+    font-size: 30px;
+}
