@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
+import {Chance} from 'chance';
 
 const styles = {
 	root: {
@@ -20,14 +21,55 @@ const styles = {
 
 class IndividualParticipant extends Component{
 
+	state = {
+		urlLink: '',
+		isEditable: false,
+	}
+
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
+		//this.generateLink();
 	};//end componentDidMount
+
+	generateLink = () => {
+		let chance = new Chance();
+		console.log('generateLink')
+		if(this.state.urlLink === ''){
+			let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+			console.log('urlLink:', urlLink)
+			this.setState({
+				urlLink: urlLink,
+			})
+		}
+	};//end generateLink
+
+	handleEdit = () => {
+		this.setState({
+			isEditable: true
+		})
+	};//end handleEdit
+
+	handleCancelEdit = () => {
+		this.setState({
+			isEditable: false
+		})
+	};//end handleCancelEdit
 
 	render(){
 		const classes = this.props;
 		let offenderData;
 		return(
+			<>
+			{this.state.isEditable ?
+				//EDITABLE
+				<>
+				<p>EDITABLE</p>
+				<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
+				</>//end isEditable
+				:
+				//NOT EDITABLE
+				<>
+				
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
 				if(person.category === 'Offender'){
@@ -97,6 +139,9 @@ class IndividualParticipant extends Component{
 					</CardContent>
 				</Card>
 			</Grid>
+			</>//end isNOTeditable
+			}
+			</>
 		)
 	}
 }

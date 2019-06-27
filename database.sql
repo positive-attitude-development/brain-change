@@ -115,7 +115,7 @@ CREATE TABLE "result_violators"(
 
 CREATE TABLE "url" (
   "id" SERIAL PRIMARY KEY,
-  "url" INT,
+  "url" VARCHAR(20),
   "expiration_date" DATE,
   "participant_id" INT REFERENCES "participant",
   "admin_id" INT REFERENCES "admin"
