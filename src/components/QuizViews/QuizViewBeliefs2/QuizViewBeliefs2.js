@@ -27,7 +27,7 @@ const styles = {
 
     formControl: {
         margin: '200px',
-        minWidth: '300px'
+        minWidth: '300px !important'
         }
    }
 
@@ -85,6 +85,7 @@ componentDidMount() {
                         className={classes.formControl}
                         >
 
+
                             <FormLabel component="legend">Beliefs</FormLabel>
                                 <RadioGroup
                                 aria-label="Beliefs"
@@ -100,6 +101,7 @@ componentDidMount() {
                                 
                                 </RadioGroup>
                         </FormControl>
+
                     </Paper>
 
                     <form autoComplete="off">

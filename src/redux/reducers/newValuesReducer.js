@@ -6,7 +6,9 @@ let newValuesState = {
     round5: [],
     beliefs: [],
     testedBelief: [],
-    violators:[]
+    orderCore: [],
+    violators:[],
+    orderViolators: []
 }
 
 

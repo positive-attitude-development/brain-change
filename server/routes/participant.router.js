@@ -52,6 +52,14 @@ router.post('/', rejectUnauthenticated, async (req, res, next) => {
     const result = await connection.query(addParticipant, addParticipantValues)
     //save the id of the participant we're creating to use in next insert
     const participantId = result.rows[0].id;
+	//query database for today's date + 30 days as "newdate" and assign newdate to const expirationDate
+	const getExpirationDate = await connection.query(`SELECT current_date + integer '30' as newdate;`)
+	const expirationDate = getExpirationDate.rows[0].newdate;
+	console.log('expiration date:', expirationDate)
+	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
+		VALUES ($1, $2, $3, $4);`;
+	const participantURLValues = [req.body.url, expirationDate, participantId, req.user.id ]
+	const urlresult = await connection.query(participantURL, participantURLValues)
     await connection.query('COMMIT');
     res.json(participantId);
   }catch(error){
@@ -77,6 +85,13 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
     const result = await connection.query(addParticipant, addParticipantValues)
     //save the id of the participant we're creating to use in next insert
     const participantId = result.rows[0].id;
+	//query database for today's date + 30 days as "newdate" and assign newdate to const expirationDate
+	const getExpirationDate = await connection.query(`SELECT current_date + integer '30' as newdate;`)
+	const expirationDate = getExpirationDate.rows[0].newdate;
+	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
+		VALUES ($1, $2, $3, $4);`;
+	const participantURLValues = [req.body.participant.url, expirationDate, participantId, req.user.id ]
+	const urlresult = await connection.query(participantURL, participantURLValues)
     const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
       VALUES ($1, $2, $3, $4, $5, $6);`;
     const participantOffenderValues = [participantId, req.body.offender.offender_system_id, req.body.offender.system_id, req.body.offender.violent_offender, req.body.offender.felon, req.body.offender.population_id]
