@@ -52,13 +52,13 @@ export class PickViolators extends Component {
                 {JSON.stringify(this.props.newValues)}
                 <StatusBar status={this.state.statusBar} />
 
-
+{/* 
                 <ul className="elim1List">
                             {this.props.coreValues.map(value => {
                                 return <li key={value.id} </li>
                             })}
                 </ul>
-
+ */}
 
                 <Link to="/OrderViolatorsInstructions">    
                     <Button
