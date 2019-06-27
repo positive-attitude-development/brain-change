@@ -85,6 +85,7 @@ componentDidMount() {
                         className={classes.formControl}
                         >
 
+
                             <FormLabel component="legend">Beliefs</FormLabel>
                                 <RadioGroup
                                 aria-label="Beliefs"
@@ -100,6 +101,7 @@ componentDidMount() {
                                 
                                 </RadioGroup>
                         </FormControl>
+
                     </Paper>
 
                     <form autoComplete="off">
