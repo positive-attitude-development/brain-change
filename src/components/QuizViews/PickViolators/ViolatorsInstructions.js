@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
+import { connect } from 'react-redux';
 
 import './ViolatorsInstructions.css'
 
@@ -9,6 +10,10 @@ export class ViolatorsInstructions extends Component {
 
     state = {
         statusBar : 68
+    }
+
+    componentDidMount(){
+        console.log(this.props.reduxState.newValuesReducer.orderCore);
     }
 
     render() {
@@ -39,4 +44,10 @@ export class ViolatorsInstructions extends Component {
     }
 }
 
-export default ViolatorsInstructions
+const mapStateToProps = (reduxState) => {
+    return {
+        reduxState
+    }
+}
+
+export default connect(mapStateToProps)(ViolatorsInstructions);

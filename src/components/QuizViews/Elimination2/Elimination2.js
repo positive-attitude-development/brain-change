@@ -48,10 +48,7 @@ export class Elimination2 extends Component {
     }
 
     
-    render() {
-        console.log('show round2:', this.state.round2);
-        console.log('show newreducer', this.props.newValues.round1)
-        
+    render() {        
         let newArray = this.props.values.filter((value) => {
             let result = true;
 

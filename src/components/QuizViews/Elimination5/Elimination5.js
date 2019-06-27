@@ -65,7 +65,7 @@ export class Elimination5 extends Component {
                 <Paper>
                     <div className="valuesList">
                         <h2 className="inst">Remove the 5 least important values</h2>
-                        <ul className="elim4List">
+                        <ul className="elim5List">
                             {newArray.map(value => {
                                 return <li key={value.id} onClick={this.handleSelect} className={this.state.round5.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
                             })}
