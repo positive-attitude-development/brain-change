@@ -13,8 +13,8 @@ class AllRecords extends Component {
         return (
             <div>
                 <h2>All Records:</h2>
-                {this.props.data[0] &&
-                <AllRecordsTable data={this.props.data} search={this.props.search || ""} />
+                {this.props.allRecords[0] &&
+                <AllRecordsTable history={this.props.history} />
                 }
             </div>
         )
@@ -22,10 +22,7 @@ class AllRecords extends Component {
 }
 
 const mapRedux = redux => {
-    return {
-        search : redux.searchTermReducer,
-        data : redux.allRecordsReducer
-    }
+    return { allRecords : redux.allRecordsReducer }
 }
 
 export default connect(mapRedux)(AllRecords);

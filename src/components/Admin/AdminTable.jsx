@@ -11,29 +11,11 @@ import './Admin.css';
 const headRows = [
     { key: 'name', label: 'Name' },
     { key: 'organization', label: 'Organization' },
-    { key: 'title', label: 'Title'},
-    {key: 'email_address', label: 'Email'},
+    { key: 'title', label: 'Title' },
+    { key: 'email_address', label: 'Email' },
     { key: 'phone_number', label: 'Phone Number' },
     { key: 'level', label: 'Access Level' }
 ];
-
-
-// function asignrows(props) {
-//     const adminRows = [props.contactInfo]
-// }
-
-// export default function admintable() {
-
-//     console.log(props.contactInfo)
-//     return (
-//         <>
-//         assignrows();
-//         the table
-//         {JSON.stringify(adminRows)}
-//         </>
-//     )
-// }; 
-
 
 //sorting function
 function desc(a, b, orderBy) {
@@ -102,24 +84,18 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table props
-EnhancedTable.propTypes = {
-        contactInfo: PropTypes.array.isRequired
-    };
-
 //table
 export default function EnhancedTable(props) {
-    const {contactInfo} = props; 
-    const [rows] = React.useState(contactInfo)
+    const {history} = props;
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+    //accessing redux store for table information
+    let rows = useSelector(redux => redux.adminContactReducer);
     //dispatch hook
     let dispatch = useDispatch();
-    //accessing redux store
-    let message = useSelector(state => state);
 
     //filter by search term
     const [searchTerm, setSearchTerm] = React.useState('');
@@ -134,7 +110,13 @@ export default function EnhancedTable(props) {
 
     //update access level
     function changeAccessLevel(id, level) {
-        console.log('hello from changeAccessLevel')
+        dispatch({type: 'UPDATE_ADMIN_LEVEL', payload: id, level: level});
+    }
+
+    //view participants
+    function viewParticipants(name) {
+        dispatch({type: 'SET_SEARCH_TERM', payload: name});
+        history.push('/all-records');
     }
 
     //sorting function
@@ -220,7 +202,8 @@ export default function EnhancedTable(props) {
                                                 </TextField>
                                             </TableCell>
                                             <TableCell>
-                                                <IconButton>
+                                                <IconButton
+                                                    onClick={e => {viewParticipants(row.name)}}>
                                                     <Pageview />
                                                 </IconButton>
                                             </TableCell>

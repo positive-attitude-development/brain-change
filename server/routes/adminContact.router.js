@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-    let queryText = `SELECT concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", "level" FROM "admin_contact"
+    let queryText = `SELECT "admin"."id", concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", "level" FROM "admin_contact"
     JOIN "admin" ON "admin_contact"."admin_id" = "admin"."id";`;
     pool.query(queryText)
     .then((results) => {
@@ -16,8 +16,5 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     });
 })
-
-
-
 
 module.exports = router; 
