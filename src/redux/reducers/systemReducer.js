@@ -1,6 +1,6 @@
 const systemReducer = (state = [], action) => {
     switch(action.type) {
-        case 'SET_CATEGORIES':
+        case 'SET_SYSTEM':
             return action.payload;
         default:
             return state;
