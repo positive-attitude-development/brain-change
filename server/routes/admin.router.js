@@ -70,4 +70,18 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/level', (req, res) => {
+  console.log('here is req.body', req.body);
+  let queryText = `UPDATE "admin" SET "level" = $1 WHERE id = $2;`;
+  let queryValues = [req.body.level, req.body.id];
+  pool.query(queryText, queryValues)
+    .then((results) => {
+      console.log('access level updated');
+      res.sendStatus(200);
+    }).catch(error => {
+      console.log('Error in PUT access level:', error);
+      res.sendStatus(500);
+    });
+})
+
 module.exports = router;
