@@ -13,7 +13,7 @@ const SortableContainer = sortableContainer(({children}) => {
     return <ul className="fiveVals">{children}</ul>;
 });
 
-export class OrderValues1 extends Component {
+class OrderValues1 extends Component {
 
     state = {
         items: [],

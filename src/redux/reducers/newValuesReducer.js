@@ -7,7 +7,8 @@ let newValuesState = {
     beliefs: [],
     testedBelief: [],
     orderCore: [],
-    violators:[]
+    violators:[],
+    orderViolators: []
 }
 
 
