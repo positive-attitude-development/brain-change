@@ -49,7 +49,7 @@ router.post('/register', async (req, res, next) => {
   }catch(error){
 		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
 		await connection.query('ROLLBACK');
-		console.log('Transaction error - rolling back review entry:', error);
+		console.log('Transaction error - rolling back admin entry:', error);
 		res.sendStatus(500);
 	}finally{
 		connection.release()
