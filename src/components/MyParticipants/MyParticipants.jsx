@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Card, CardContent, CardActions, TextField, Button, Table, TableBody, TableHead, TableCell, TableRow, MenuItem, Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
+import {Chance} from 'chance';
 
 const styles = {
 	root: {
