@@ -5,14 +5,11 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -21,14 +18,10 @@ import QuizRoutes from './QuizRoutes';
 import MyParticipants from '../MyParticipants/MyParticipants';
 import Admin from '../Admin/Admin'; 
 import IndividualParticipant from '../IndividualParticipant/IndividualParticipant';
-
-
 import AllRecords from '../AllRecords/AllRecords';
-
-
 import './App.css';
 
-import {QuizViewWelcome} from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
+import QuizViewWelcome from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 
 class App extends Component {
   componentDidMount () {
@@ -61,7 +54,7 @@ class App extends Component {
               path="/home"
               component={UserPage}
             />
-            <Route
+            <ProtectedRoute
               exact path="/all-records"
               component={AllRecords}
             />
@@ -91,8 +84,13 @@ class App extends Component {
               component={IndividualParticipant}
             />
 
-            <ProtectedRoute
+            <Route
               exact path="/quiz"
+              component={QuizViewWelcome}
+            />
+
+            <Route
+              exact path="/quiz/:url"
               component={QuizViewWelcome}
             />
 
