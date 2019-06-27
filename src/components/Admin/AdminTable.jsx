@@ -1,42 +1,21 @@
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Button, IconButton, Table, TableBody, TableCell, 
+import {IconButton, MenuItem, Table, TableBody, TableCell, 
         TableHead, TablePagination, TableRow, TableSortLabel, TextField, 
         InputAdornment, Paper} from '@material-ui/core';
 
 import {Pageview, Clear} from '@material-ui/icons'
-import {CSVLink} from 'react-csv';
-
-
-
+import './Admin.css';
 
 const headRows = [
-    { key: 'first_name', label: 'First Name' },
-    { key: 'last_name', label: 'Last Name' },
+    { key: 'name', label: 'Name' },
     { key: 'organization', label: 'Organization' },
-    { key: 'title', label: 'Title'},
-    { key: 'phone_number', label: 'Phone Number' },
+    { key: 'title', label: 'Title' },
     { key: 'email_address', label: 'Email' },
+    { key: 'phone_number', label: 'Phone Number' },
     { key: 'level', label: 'Access Level' }
 ];
-
-
-// function asignrows(props) {
-//     const adminRows = [props.contactInfo]
-// }
-
-// export default function admintable() {
-
-//     console.log(props.contactInfo)
-//     return (
-//         <>
-//         assignrows();
-//         the table
-//         {JSON.stringify(adminRows)}
-//         </>
-//     )
-// }; 
-
 
 //sorting function
 function desc(a, b, orderBy) {
@@ -90,6 +69,7 @@ function EnhancedTableHead(props) {
                         </TableSortLabel>
                     </TableCell>
                 ))}
+                <TableCell>View Participants</TableCell>
             </TableRow>
         </TableHead>
     );
@@ -104,33 +84,40 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table props
-EnhancedTable.propTypes = {
-        search: PropTypes.string.isRequired,
-        contactInfo: PropTypes.array.isRequired
-    };
-
 //table
 export default function EnhancedTable(props) {
-    const {contactInfo, search} = props; 
-    const [rows] = React.useState(contactInfo)
+    const {history} = props;
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('firstname');
+    const [orderBy, setOrderBy] = React.useState('name');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    //filter by search term
+    //accessing redux store for table information
+    let rows = useSelector(redux => redux.adminContactReducer);
+    //dispatch hook
+    let dispatch = useDispatch();
 
-    const [searchTerm, setSearchTerm] = React.useState(search);
+    //filter by search term
+    const [searchTerm, setSearchTerm] = React.useState('');
     const filteredRows = rows.filter(x =>
-        x['first_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['last_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['organization'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['title'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['email_address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['level'].toString().includes(searchTerm) 
     )
+
+    //update access level
+    function changeAccessLevel(id, level) {
+        dispatch({type: 'UPDATE_ADMIN_LEVEL', payload: id, level: level});
+    }
+
+    //view participants
+    function viewParticipants(name) {
+        dispatch({type: 'SET_SEARCH_TERM', payload: name});
+        history.push('/all-records');
+    }
 
     //sorting function
     function handleRequestSort(event, property) {
@@ -158,16 +145,6 @@ export default function EnhancedTable(props) {
         <div className="container">
             <Paper className="paper">
                 <div className="wrapper">
-                    {/* CSV exporter */}
-                    <CSVLink
-                        className="CSVLink"
-                        filename={"brain-change-export.csv"}
-                        data={filteredRows}
-                        headers={headRows}>
-                        <Button variant="contained" color="primary" size="large">
-                            Export to CSV
-                        </Button>
-                    </CSVLink>
                     {/* search input */}
                     <TextField
                         className="searchInput"
@@ -206,21 +183,27 @@ export default function EnhancedTable(props) {
                                 .map((row, i) => {
                                     return (
                                         <TableRow key={i}>
-                                            <TableCell>{row.first_name}</TableCell>
-                                            <TableCell>{row.last_name}</TableCell>
+                                            <TableCell>{row.name}</TableCell>
                                             <TableCell>{row.organization}</TableCell>
                                             <TableCell>{row.title}</TableCell>
-                                            <TableCell>{row.phone_number}</TableCell>
                                             <TableCell>{row.email_address}</TableCell>
-                                            <TableCell>{row.level}</TableCell>
-                                            <TableCell>{row.phone}</TableCell>
+                                            <TableCell>{row.phone_number}</TableCell>
                                             <TableCell>
-                                                <Button> 
-                                                    View Admins
-                                                </Button>
+                                                <TextField
+                                                    select
+                                                    value={row.level}
+                                                    className="levelField"
+                                                    onChange={e => changeAccessLevel(row.id, e.target.value)}
+                                                    >
+                                                    <MenuItem value={0}>{0}</MenuItem>
+                                                    <MenuItem value={1}>{1}</MenuItem>
+                                                    <MenuItem value={2}>{2}</MenuItem>
+                                                    <MenuItem value={3}>{3}</MenuItem>
+                                                </TextField>
                                             </TableCell>
                                             <TableCell>
-                                                <IconButton>
+                                                <IconButton
+                                                    onClick={e => {viewParticipants(row.name)}}>
                                                     <Pageview />
                                                 </IconButton>
                                             </TableCell>

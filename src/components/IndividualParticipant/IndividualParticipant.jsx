@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, FormControlLabel} from '@material-ui/core';
+import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
+import {Chance} from 'chance';
 
 const styles = {
 	root: {
@@ -20,72 +21,128 @@ const styles = {
 
 class IndividualParticipant extends Component{
 
+	state = {
+		urlLink: '',
+		isEditable: false,
+	}
+
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
+		this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
+		//this.generateLink();
 	};//end componentDidMount
+
+	generateLink = () => {
+		let chance = new Chance();
+		console.log('generateLink')
+		if(this.state.urlLink === ''){
+			let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+			console.log('urlLink:', urlLink)
+			this.setState({
+				urlLink: urlLink,
+			})
+		}
+	};//end generateLink
+
+	handleEdit = () => {
+		this.setState({
+			isEditable: true
+		})
+	};//end handleEdit
+
+	handleCancelEdit = () => {
+		this.setState({
+			isEditable: false
+		})
+	};//end handleCancelEdit
 
 	render(){
 		const classes = this.props;
 		let offenderData;
 		return(
+			<>
+			{this.state.isEditable ?
+				//EDITABLE
+				<>
+				<p>EDITABLE</p>
+				<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
+				</>//end isEditable
+				:
+				//NOT EDITABLE
+				<>
+				
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
 				if(person.category === 'Offender'){
 					offenderData = 
 					<>
-						<FormControlLabel control={<TextField defaultValue={person.offender_system_id}/>}
-						label="Age:" labelPlacement="start"/>
+					<br></br>Offender Data:<br></br>
 
-						<FormControlLabel control={<TextField defaultValue={person.system_id}/>}
-						label="Gender:" labelPlacement="start"/>
+						<TextField select margin="normal" disabled
+						label="System:" value={person.offender_system_id}>
+								<MenuItem></MenuItem>
+						</TextField>
 
-						<FormControlLabel control={<TextField defaultValue={person.violent_offender}/>}
-						label="Category:" labelPlacement="start"/>
+						{/* <TextField disabled label="System:" defaultValue={person.offender_system_id}/> */}
 
-						<FormControlLabel control={<TextField defaultValue={person.felon}/>}
-						label="Email Address:" labelPlacement="start"/>
+						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
 
-						<FormControlLabel control={<TextField defaultValue={person.population_id}/>}
-						label="Phone Number:" labelPlacement="start"/>
+						<TextField disabled label="Violent:" defaultValue={person.violent_offender}/>
+
+						<TextField disabled label="Felon:" defaultValue={person.felon}/>
+
+						<TextField disabled label="Population:" defaultValue={person.population_id}/>
 					</>
 				} else {
-					offenderData = <div>NO OFFENDER DATA</div>
+					offenderData = <div></div>
 				}
 				return(
 					<Card raised className={classes.card} key={person.id}>
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
-								<FormControlLabel control={<TextField defaultValue={person.first_name}/>}
-        						label="First Name:" labelPlacement="start"/>
+								<TextField disabled label="First Name:" defaultValue={person.first_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.last_name}/>}
-        						label="Last Name:" labelPlacement="start"/>
+								<TextField disabled label="Last Name:" defaultValue={person.last_name}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.age}/>}
-        						label="Age:" labelPlacement="start"/>
+								<TextField disabled label="Age:" defaultValue={person.age}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.gender}/>}
-        						label="Gender:" labelPlacement="start"/>
+								<TextField disabled label="Gender:" defaultValue={person.gender}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.category}/>}
-        						label="Category:" labelPlacement="start"/>
+								<TextField disabled label="Category:" defaultValue={person.category}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.email}/>}
-        						label="Email Address:" labelPlacement="start"/>
+								<TextField disabled label="Email Address:" defaultValue={person.email}/>
 
-								<FormControlLabel control={<TextField defaultValue={person.phone_number}/>}
-        						label="Phone Number:" labelPlacement="start"/>
+								<TextField disabled label="Phone Number:" defaultValue={person.phone_number}/>
+								<br></br>
 
 								{offenderData}
+								<br></br>
+
 						</CardContent>
 						<CardActions>
-							<Button>Edit Participant</Button>
+							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
 						</CardActions>
 					</Card>
 					)
 				})}
+
+				<Paper>
+					URL Stuff:
+						<TextField disabled label="Invite Link:" defaultValue="URL Link"/>
+						<TextField disabled label="Expiration Date:" defaultValue="01/01/2019"/>
+						<Button variant="contained" color="secondary">Generate New Invite Link</Button>
+				</Paper>
+
+				<Card>
+					<CardContent>
+						IMAGINE SNAPSHOT HERE
+					</CardContent>
+				</Card>
 			</Grid>
+			</>//end isNOTeditable
+			}
+			</>
 		)
 	}
 }
@@ -95,6 +152,8 @@ const mapStateToProps = state => ({
   profile: state.profile,
   individual: state.individual,
   category: state.category,
+  population: state.population,
+  system: state.system,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));

@@ -49,7 +49,7 @@ router.post('/register', async (req, res, next) => {
   }catch(error){
 		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
 		await connection.query('ROLLBACK');
-		console.log('Transaction error - rolling back review entry:', error);
+		console.log('Transaction error - rolling back admin entry:', error);
 		res.sendStatus(500);
 	}finally{
 		connection.release()
@@ -69,5 +69,19 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+router.put('/level', (req, res) => {
+  console.log('here is req.body', req.body);
+  let queryText = `UPDATE "admin" SET "level" = $1 WHERE id = $2;`;
+  let queryValues = [req.body.level, req.body.id];
+  pool.query(queryText, queryValues)
+    .then((results) => {
+      console.log('access level updated');
+      res.sendStatus(200);
+    }).catch(error => {
+      console.log('Error in PUT access level:', error);
+      res.sendStatus(500);
+    });
+})
 
 module.exports = router;

@@ -4,6 +4,7 @@ import {  Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 
+
 import './Elimination3.css'
 
 export class Elimination3 extends Component {
@@ -13,10 +14,13 @@ export class Elimination3 extends Component {
         statusBar: 30
     }
 
+    // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
     }
 
+    // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
+    // Will send alert if 5 values are not selected
     handleNext = () => {
         if(this.state.round3.length !== 5) {
             return alert('Please select 5 values that are least important to you.');
@@ -26,6 +30,7 @@ export class Elimination3 extends Component {
         }
     }
 
+    // Select and deselect by clicking values and store into local state round3
     handleSelect = (event) => {
         for(let i = 0; i < this.state.round3.length; i++) {
             if(event.target.value === this.state.round3[i]) {
@@ -44,6 +49,7 @@ export class Elimination3 extends Component {
     }
     
     render() {
+        // Creating array of all the values minus the previous selected values
         let reducer = this.props.newValues;
         let round1 = reducer.round1;
         let round2 = reducer.round2;
