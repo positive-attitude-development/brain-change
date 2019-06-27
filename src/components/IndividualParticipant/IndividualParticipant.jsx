@@ -28,6 +28,7 @@ class IndividualParticipant extends Component{
 
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
+		this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
 		//this.generateLink();
 	};//end componentDidMount
 
