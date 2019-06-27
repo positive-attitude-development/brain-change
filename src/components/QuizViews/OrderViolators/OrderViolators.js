@@ -15,7 +15,6 @@ const SortableContainer = sortableContainer(({children}) => {
     return <ul className="fiveVals">{children}</ul>;
 
 
-
 class OrderViolators extends Component {
 
 
