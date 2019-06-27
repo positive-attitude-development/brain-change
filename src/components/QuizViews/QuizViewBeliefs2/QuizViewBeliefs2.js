@@ -27,7 +27,7 @@ const styles = {
 
     formControl: {
         margin: '200px',
-        minWidth: '300px'
+        minWidth: '300px !important'
         }
    }
 
