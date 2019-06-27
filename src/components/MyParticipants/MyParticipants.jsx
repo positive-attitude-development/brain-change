@@ -6,8 +6,7 @@ import {Chance} from 'chance';
 
 const styles = {
 	root: {
-		display: 'flex',
-		flexWrap: 'wrap',
+
 	},
 	card: {
 		margin: 'auto',
@@ -24,6 +23,9 @@ const styles = {
 	},
 	select: {
 		width: '100%',
+	},
+	heading: {
+		display: 'inline',
 	},
 }
 
@@ -60,9 +62,7 @@ class MyParticipants extends Component{
 	generateLink = () => {
 		//generate uniqure url invite link and assign to local state on page load
 		let chance = new Chance();
-		console.log('generateLink')
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		console.log('urlLink:', urlLink)
 		this.setState({
 			participant:{
 			...this.state.participant,
@@ -89,17 +89,11 @@ class MyParticipants extends Component{
 	};//end handleOffenderInput
 
 	handleSubmit = () => {
-		let chance = new Chance();
-		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		console.log('urlLink:', urlLink)
-		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history, url: urlLink})
+		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history})
 	};//end handleSubmit
 
 	handleSubmitOffender = () => {
-		let chance = new Chance();
-		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		console.log('urlLink:', urlLink)
-		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history, url: urlLink})
+		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
 	renderInputs = () =>{
@@ -110,31 +104,37 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
-			<TextField required select margin="normal"
+			<TextField select margin="normal"
 				label="System:" value={this.state.offender.offender_system_id} 
 				onChange={this.handleInputChange('system')}>
 					{this.props.system.map((system) => {
 						return(
 							<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>
 						)
-					})}
-			</TextField>
-
-			<TextField label="System:" type="number" onChange={this.handleOffenderInput('offender_system_id')}/>
-
-			<TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/>
-
-			<TextField label="Felony?:" select margin="normal" onChange={this.handleOffenderInput('felon')} value={this.state.offender.felon}>
-				<MenuItem value={true}>Yes</MenuItem>
-				<MenuItem value={false}>No</MenuItem>
-			</TextField>
-
-			<TextField label="Violent Crime?:" select margin="normal" onChange={this.handleOffenderInput('violent_offender')} value={this.state.offender.violent_offender}>
-				<MenuItem value={true}>Yes</MenuItem>
-				<MenuItem value={false}>No</MenuItem>
-			</TextField>
+					})}</TextField>
 
 			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
+
+			<TextField select margin="normal"
+				label="Population:" value={this.state.offender.population_id} 
+				onChange={this.handleInputChange('population')}>
+					{this.props.population.map((population) => {
+						return(
+							<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>
+						)
+					})}</TextField>
+
+			<TextField select margin="normal" 
+				label="Felony?:" value={this.state.offender.felon}
+				onChange={this.handleOffenderInput('felon')} >
+				<MenuItem value={true}>Yes</MenuItem>
+				<MenuItem value={false}>No</MenuItem></TextField>
+
+			<TextField select margin="normal" 
+				label="Violent Crime?:" value={this.state.offender.violent_offender}
+				onChange={this.handleOffenderInput('violent_offender')} >
+				<MenuItem value={true}>Yes</MenuItem>
+				<MenuItem value={false}>No</MenuItem></TextField>
 			</>
 		}
 		return input;
@@ -180,17 +180,14 @@ class MyParticipants extends Component{
 
 						<TextField label="Age:" type="number" onChange={this.handleInputChange('age')}/>
 
-						<Grid>
 						<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={this.state.participant.gender}>
 							<MenuItem value="M">Male</MenuItem>
 							<MenuItem value="F">Female</MenuItem>
 							<MenuItem value="Other">Other</MenuItem>
 							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
-						</TextField></Grid>
+						</TextField>
 
-                        <TextField required select margin="normal"
-							label="Category:" value={this.state.participant.category} 
-							onChange={this.handleInputChange('category')}>
+                        <TextField label="Category:" select margin="normal" onChange={this.handleInputChange('category')} value={this.state.participant.category}>
                                 {this.props.category.map((category) => {
                                     return(
                                         <MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
@@ -269,40 +266,41 @@ class MyParticipants extends Component{
 						{submitButton}
 					</CardActions>
 				</Card>
+				<br></br>
 	
-	<h3>My Participants:</h3>
-		<Table className={classes.table}>
-			<TableHead>
-				<TableRow>
-					<TableCell>First Name</TableCell>
-					<TableCell>Last Name</TableCell>
-					<TableCell>Age</TableCell>
-					<TableCell>Gender</TableCell>
-					<TableCell>Category</TableCell>
-					<TableCell>State</TableCell>
-					<TableCell>Email Address</TableCell>
-					<TableCell>Phone Number</TableCell>
-					<TableCell>View/Edit Participant</TableCell>
-				</TableRow>
-			</TableHead>
-			<TableBody>
-				{this.props.participant.map((person) => {
-					return(
-						<TableRow key={person.id}>
-							<TableCell>{person.first_name}</TableCell>
-							<TableCell>{person.last_name}</TableCell>
-							<TableCell>{person.age}</TableCell>
-							<TableCell>{person.gender}</TableCell>
-							<TableCell>{person.category}</TableCell>
-							<TableCell>{person.state}</TableCell>
-							<TableCell>{person.email}</TableCell>
-							<TableCell>{person.phone_number}</TableCell>
-							<TableCell><Button variant="contained" color="primary" onClick={()=>this.viewParticipant(`${person.id}`)}>View/Edit</Button></TableCell>
+			<h3 className={classes.heading}>My Participants:</h3>
+				<Table className={classes.table}>
+					<TableHead>
+						<TableRow>
+							<TableCell>First Name</TableCell>
+							<TableCell>Last Name</TableCell>
+							<TableCell>Age</TableCell>
+							<TableCell>Gender</TableCell>
+							<TableCell>Category</TableCell>
+							<TableCell>State</TableCell>
+							<TableCell>Email Address</TableCell>
+							<TableCell>Phone Number</TableCell>
+							<TableCell>View/Edit Participant</TableCell>
 						</TableRow>
-					)
-				})}
-			</TableBody>
-		</Table>
+					</TableHead>
+					<TableBody>
+						{this.props.participant.map((person) => {
+							return(
+								<TableRow key={person.id}>
+									<TableCell>{person.first_name}</TableCell>
+									<TableCell>{person.last_name}</TableCell>
+									<TableCell>{person.age}</TableCell>
+									<TableCell>{person.gender}</TableCell>
+									<TableCell>{person.category}</TableCell>
+									<TableCell>{person.state}</TableCell>
+									<TableCell>{person.email}</TableCell>
+									<TableCell>{person.phone_number}</TableCell>
+									<TableCell><Button variant="contained" color="primary" onClick={()=>this.viewParticipant(`${person.id}`)}>View/Edit</Button></TableCell>
+								</TableRow>
+							)
+						})}
+					</TableBody>
+				</Table>
 			</div>
 		)
 	}
