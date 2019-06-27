@@ -7,10 +7,9 @@ import newValuesReducer from './newValuesReducer';
 import searchTermReducer from './searchTermReducer';
 import profile from './profileReducer';
 import editProfile from './editProfileReducer';
-
 import allRecordsReducer from './allRecordsReducer';
-
 import adminContactReducer from './adminContactReducer'; 
+import urlReducer from './urlReducer';
 
 
 import participant from './participantReducer';
@@ -38,6 +37,7 @@ const rootReducer = combineReducers({
   addParticipant,
   population,
   system,
+  urlReducer,
 });
 
 export default rootReducer;
