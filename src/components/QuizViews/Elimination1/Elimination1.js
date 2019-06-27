@@ -17,10 +17,12 @@ export class Elimination1 extends Component {
         statusBar: 5
     }
 
+    // Fetch all the value words
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_VALUES' });
     }
 
+    // Send 9 selected values to reducer and route to Eliminationinstruction2 page
     handleNext = () => {
         if(this.state.round1.length === 9) {
             this.props.dispatch({ type: 'SET_NEW_VALUES', name: 'round1', payload: this.state.round1 })
@@ -30,8 +32,8 @@ export class Elimination1 extends Component {
         }
     }
 
+    // Select and deselect value words and store in local state round 1
     handleSelect = (event) => {
-
         for(let i=0; i<this.state.round1.length; i++) {
             if(event.target.value === this.state.round1[i]) {
                 this.setState({
@@ -50,7 +52,6 @@ export class Elimination1 extends Component {
 
 
     render() {
-        console.log('checking array', this.state.round1)
         return (
             <div>
                 <div>
