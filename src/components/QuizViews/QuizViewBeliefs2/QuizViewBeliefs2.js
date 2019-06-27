@@ -1,82 +1,140 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import {  Button } from '@material-ui/core';
-import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Paper} from"@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import {withStyles} from '@material-ui/core/styles';
+
+import { FormControl, FormControlLabel, FormLabel, 
+        RadioGroup, Button, Radio, Paper, InputLabel, 
+        MenuItem, Select} from"@material-ui/core";
+
 import StatusBar from '../StatusBar'; 
+import QuizViewSelect from './QuizViewSelect'
+
 
 import './QuizViewBeliefs2.css'
+
+
+
+
+const styles = {
+    root : {
+    
+    button: {
+        display: 'block',
+        marginTop: '200px'
+        },
+
+    formControl: {
+        margin: '200px',
+        minWidth: '300px !important'
+        }
+   }
+
+  };
+
 
 export class QuizViewBeliefs2 extends Component {
 
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_VALUES'})
-    console.log("log")
 }
-
 
     state = {
             statusBar : 47,
-            testedBelief : ""
+            testedBelief : "",
+            typeOfBelief : ""
         }
-
 
     handleRadio = (event) => {
         event.preventDefault(); 
         this.setState({
             testedBelief: event.target.value
+            })
+            console.log(this.state)
+        }
+
+    handleChange = (event) => {
+        event.preventDefault();
+        this.setState({
+                typeOfBelief: event.target.value
         })
-        console.log(this.state)
+        console.log(this.state);
     }
+
  
     handleClick = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state.testedBelief });
+        this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state });
         this.props.history.push('/ElimInstructions5')
-
     }
 
+    
+
     render() {
-        
+       const classes = this.props;
+       console.log(this.state)
         return (
-            <div>
+            <div className={classes.root}>
                 
                  <StatusBar status={this.state.statusBar} />
 
                 <div>
                     <Paper>
-                    <FormControl component="fieldset"
-                    //  className={classes.formControl}
-                    >
+                        <FormControl component="fieldset"
+                        className={classes.formControl}
+                        >
 
-                        <FormLabel component="legend">Beliefs</FormLabel>
-                            <RadioGroup
-                            aria-label="Beliefs"
-                            name="Beliefs"
-                            // className=
-                            // value=
-                            onChange={this.handleRadio}
+                            <FormLabel component="legend">Beliefs</FormLabel>
+                                <RadioGroup
+                                aria-label="Beliefs"
+                                name="Beliefs"
+                                // className=
+                                // value=
+                                onChange={this.handleRadio}
+                                >
+
+                                <FormControlLabel  value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
+                                <FormControlLabel  value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
+                                <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
+                                
+                                </RadioGroup>
+                        </FormControl>
+                    </Paper>
+
+                    <form autoComplete="off">
+                        {/* <Button 
+                        className={classes.button} onClick={handleOpen} 
+                        />  */}
+                        <FormControl className={classes.formControl}>
+                            <InputLabel>Type of Belief</InputLabel>
+                            <Select
+                            // open={open}
+                            // onClose={handleClose}
+                            // onOpen={handleOpen}
+                            value={this.state.typeOfBelief}
+                            onChange={this.handleChange}
+                            inputProps={{name: "typeOfBelief"}}
                             >
 
-                            
-                            <FormControlLabel  value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
-                            <FormControlLabel  value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
-                            <FormControlLabel value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
-                            
-                            </RadioGroup>
-                    </FormControl>
-                    </Paper>
-                </div>
+                            <MenuItem value={"religious"}>Religious</MenuItem>
+                            <MenuItem value={"political"}>Political</MenuItem>
+                            <MenuItem value={"personal"}>Personal</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </form> 
+            </div>
 
-                <div>
+                    <div>
                         <Button
+                            className={classes.button}
                             onClick={this.handleClick}
                             color="primary"
                             variant="contained"
                             >
                             Next
                         </Button> 
-                </div>
+                    </div>
             </div>
         )
     }
@@ -89,4 +147,4 @@ const mapState = reduxState => {
         beliefs : reduxState.newValuesReducer.beliefs
         }   
     }
-    export default connect(mapState)(QuizViewBeliefs2)
+    export default withStyles(styles)(connect(mapState)(QuizViewBeliefs2))

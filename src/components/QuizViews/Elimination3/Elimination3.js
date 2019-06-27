@@ -4,6 +4,7 @@ import {  Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 
+
 import './Elimination3.css'
 
 export class Elimination3 extends Component {
@@ -13,18 +14,23 @@ export class Elimination3 extends Component {
         statusBar: 30
     }
 
+    // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
     }
 
+    // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
+    // Will send alert if 5 values are not selected
     handleNext = () => {
-        if(this.state.round3 === 9) {
-            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
+        if(this.state.round3.length !== 5) {
+            return alert('Please select 5 values that are least important to you.');
         } else  {
-            return alert('Please select 5 values that are least important to you.')
+            this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
+            this.props.history.push('/ElimInstructions4')
         }
     }
 
+    // Select and deselect by clicking values and store into local state round3
     handleSelect = (event) => {
         for(let i = 0; i < this.state.round3.length; i++) {
             if(event.target.value === this.state.round3[i]) {
@@ -43,6 +49,7 @@ export class Elimination3 extends Component {
     }
     
     render() {
+        // Creating array of all the values minus the previous selected values
         let reducer = this.props.newValues;
         let round1 = reducer.round1;
         let round2 = reducer.round2;
@@ -58,7 +65,7 @@ export class Elimination3 extends Component {
         return (
             <div>
                 <StatusBar status={this.state.statusBar} />
-                <Paper>
+                <Paper className="paper">
                     <div className="valuesList">
                         <h2 className="inst">Remove the 5 least important values</h2>
                         <ul className="elim3List">
@@ -68,14 +75,13 @@ export class Elimination3 extends Component {
                         </ul>
                     </div>
                     <div>
-                        <Link to="/ElimInstructions4"> 
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                >
-                                Next
-                            </Button> 
-                        </Link>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
                     </div>
                 </Paper>
             </div>

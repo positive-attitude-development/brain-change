@@ -11,6 +11,12 @@ export class PickViolators extends Component {
         violators : ''
     }
 
+
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_VALUES'});
+    }
+
+
     handleNext = () => {
         if(this.state.violators === 5) {
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'violators', payload: this.state.violators});
@@ -38,20 +44,21 @@ export class PickViolators extends Component {
     }
 
     render() {
+        
+       
+
         return (
             <div>
-                
+                {JSON.stringify(this.props.newValues)}
                 <StatusBar status={this.state.statusBar} />
 
-
+{/* 
                 <ul className="elim1List">
-                            {this.props.values.map(value => {
-                                return <li key={value.id} onClick={this.handleSelect} 
-                                // className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} 
-                                value={value.id}>{value.values}</li>
+                            {this.props.coreValues.map(value => {
+                                return <li key={value.id} </li>
                             })}
-                        </ul>
-
+                </ul>
+ */}
 
                 <Link to="/OrderViolatorsInstructions">    
                     <Button
@@ -69,7 +76,8 @@ export class PickViolators extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        values: reduxState.valuesReducer
+        values: reduxState.valuesReducer,
+        coreValues: reduxState.newValuesReducer.coreValues
     }
 }
 export default connect(mapStateToProps)(PickViolators);

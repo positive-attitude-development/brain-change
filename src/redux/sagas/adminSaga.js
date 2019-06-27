@@ -46,10 +46,23 @@ function* fetchProfile(action){
   }
 }
 
+function* updateAdminLevel(action) {
+  try {
+    //send id and new level to server
+    let data = {id: action.payload, level: action.level};
+    yield axios.put('/api/admin/level', data);
+    //then, update the admin contact list
+    yield put({type: 'FETCH_ADMIN_CONTACT'});
+  } catch(error) {
+    console.log('Update access level failed', error);
+  }
+}
+
 function* adminSaga() {
   yield takeLatest('FETCH_ADMIN', fetchAdmin);
   yield takeLatest('FETCH_PROFILE', fetchProfile);
   yield takeEvery('FETCH_ADMIN_CONTACT', fetchAdminContact); 
+  yield takeLatest('UPDATE_ADMIN_LEVEL', updateAdminLevel)
 }
 
 export default adminSaga;

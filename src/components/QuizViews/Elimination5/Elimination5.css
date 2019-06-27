@@ -1,0 +1,33 @@
+.elim5List {
+    list-style-type: none;
+    columns: 2;
+    text-align: center;
+}
+
+li {
+    margin: 18px 0;
+    cursor: pointer;
+}
+
+.striked {
+    text-decoration: line-through;
+    font-weight: bold;
+    color: lightgray;
+} 
+
+.unStriked {
+    text-decoration: none;
+}
+
+.valuesList {
+    padding: 20px;
+}
+
+.paper {
+    margin-top: 60px;
+}
+
+.inst {
+    text-align: center;
+    margin-bottom: 30px;
+}

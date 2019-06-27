@@ -13,24 +13,26 @@ export class Elimination2 extends Component {
         statusBar : 13
     }
 
+    // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
-        console.log('In didmount',this.props.newValues.round1);
-
     }
 
+    // Send 9 selected values to reducer and route to beliefinstruct1 page, will alert if 
+    // 9 values has not been selected
     handleNext = () => {
         if (this.state.round2.length === 9) {
 
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2});
-            this.props.history.push('/ElimInstructions3')
+            this.props.history.push('/BeliefInstruct1')
         } else {
             return alert('Please select 9 values that are least important to you.')
         }
     }
 
-    handleSelect = (event) => {
 
+    // Select and deselect value words and store into local state round2
+    handleSelect = (event) => {
         for (let i = 0; i < this.state.round2.length; i++) {
             if (event.target.value === this.state.round2[i]) {
                 this.setState({
@@ -48,24 +50,17 @@ export class Elimination2 extends Component {
     }
 
     
-    render() {
-        console.log('show round2:', this.state.round2);
-        console.log('show newreducer', this.props.newValues.round1)
-        
+    render() {        
         let newArray = this.props.values.filter((value) => {
             let result = true;
 
             for(let newValue of this.props.newValues.round1) {
-                console.log('in for loop', newValue);
-                console.log('show value in loop', value.id);
                 if(newValue === value.id) {
                     result = false;
                 }
             }
             return result;
         })
-        console.log('in new Array', newArray);
-
 
         return (
             <div>
@@ -82,15 +77,13 @@ export class Elimination2 extends Component {
                         </ul>
                     </div>
                     <div>
-                        <Link to="/BeliefInstruct1"> 
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                onClick={this.handleNext}
-                                >
-                                Next
-                            </Button> 
-                        </Link>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
                     </div>
                 </Paper>
             </div>
