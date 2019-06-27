@@ -38,6 +38,7 @@ class MyParticipants extends Component{
 			state: '',
 			email_address: '',
 			phone_number: '',
+			url: '',
 		},
 		offender: {
 			system_id: 0,
@@ -53,7 +54,21 @@ class MyParticipants extends Component{
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
+		this.generateLink();
 	};//end componentDidMount
+
+	generateLink = () => {
+		//generate uniqure url invite link and assign to local state on page load
+		let chance = new Chance();
+		console.log('generateLink')
+		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log('urlLink:', urlLink)
+		this.setState({
+			participant:{
+			...this.state.participant,
+			url: urlLink}
+		})
+	};//end generateLink
 
 	handleInputChange = propertyName => (event) => {
 	    this.setState({
@@ -74,11 +89,17 @@ class MyParticipants extends Component{
 	};//end handleOffenderInput
 
 	handleSubmit = () => {
-		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history})
+		let chance = new Chance();
+		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log('urlLink:', urlLink)
+		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history, url: urlLink})
 	};//end handleSubmit
 
 	handleSubmitOffender = () => {
-		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
+		let chance = new Chance();
+		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log('urlLink:', urlLink)
+		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history, url: urlLink})
 	};//end handleSubmit
 
 	renderInputs = () =>{
@@ -103,7 +124,7 @@ class MyParticipants extends Component{
 
 			<TextField label="Population:" type="number" onChange={this.handleOffenderInput('population_id')}/>
 
-			<TextField label="Felony?:" select margin="normal" fullWidth="true" onChange={this.handleOffenderInput('felon')} value={this.state.offender.felon}>
+			<TextField label="Felony?:" select margin="normal" onChange={this.handleOffenderInput('felon')} value={this.state.offender.felon}>
 				<MenuItem value={true}>Yes</MenuItem>
 				<MenuItem value={false}>No</MenuItem>
 			</TextField>
@@ -124,15 +145,15 @@ class MyParticipants extends Component{
 	};//end viewParticipant
 
 	render(){
-		console.log('this.state.offender', this.state.participant)
+		//console.log('this.state:', this.state)
 		const {classes} = this.props;
 		let submitButton;
 		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
 		&& this.state.participant.age !== '' && this.state.participant.gender !== '' && this.state.participant.category !== ''
-		&& this.state.participant.category !== "Offender" && this.state.participant.state !== ''){
+		&& this.state.participant.category !== "Offender" && this.state.participant.state !== '' && this.state.participant.url !== ''){
 			//console.log('OK to submit non offender')
 			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
-		}else if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
+		}else if(this.state.participant.first_name !== '' && this.state.participant.last_name !== '' && this.state.participant.url !== ''
 		&& this.state.participant.age !== '' && this.state.participant.gender !== ''
 		&& this.state.participant.category === "Offender" && this.state.participant.state !== 0
 		&& this.state.offender.system_id !== 0 && this.state.offender.offender_system_id !== 0

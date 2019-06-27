@@ -28,7 +28,7 @@ class IndividualParticipant extends Component{
 
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
-		this.generateLink();
+		//this.generateLink();
 	};//end componentDidMount
 
 	generateLink = () => {
@@ -41,7 +41,6 @@ class IndividualParticipant extends Component{
 				urlLink: urlLink,
 			})
 		}
-		
 	};//end generateLink
 
 	handleEdit = () => {
@@ -62,11 +61,13 @@ class IndividualParticipant extends Component{
 		return(
 			<>
 			{this.state.isEditable ?
+				//EDITABLE
 				<>
 				<p>EDITABLE</p>
 				<Button variant="contained" color="primary" onClick={this.handleCancelEdit}>Cancel Edit</Button>
 				</>//end isEditable
 				:
+				//NOT EDITABLE
 				<>
 				
 			<Grid className={classes.grid}>
