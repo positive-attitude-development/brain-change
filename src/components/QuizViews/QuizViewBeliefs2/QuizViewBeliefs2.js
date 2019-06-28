@@ -36,15 +36,28 @@ const styles = {
 
 export class QuizViewBeliefs2 extends Component {
 
+    state = {
+        statusBar : 47,
+        testedBelief : "",
+        typeOfBelief : ""
+    }
+
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_VALUES'})
+
+    let now = new Date();
+    let sec = now.getSeconds();
+    let min = now.getMinutes();
+    let hour = now.getHours(); 
+
+    let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+    this.setState({
+        time: totalTime
+    })
 }
 
-    state = {
-            statusBar : 47,
-            testedBelief : "",
-            typeOfBelief : ""
-        }
+
 
     handleRadio = (event) => {
         event.preventDefault(); 
@@ -65,7 +78,18 @@ componentDidMount() {
  
     handleClick = (event) => {
         event.preventDefault();
+
+        let next = new Date(); 
+        let sec = next.getSeconds();
+        let min = next.getMinutes(); 
+        let hour = next.getHours(); 
+
+        let nextTime = ((min * 60 ) + (hour * 360) + sec)
+        let belief2Time = nextTime - this.state.time 
+
         this.props.dispatch({ type: "SET_NEW_VALUES" , name:'testedBelief', payload: this.state });
+        this.props.dispatch({type: 'SET_NEW_TIME', name: 'belief2Time', payload: belief2Time });
+
         this.props.history.push('/ElimInstructions5')
     }
 

@@ -14,6 +14,17 @@ class Elimination5 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+
+        let now = new Date();
+        let sec = now.getSeconds();
+        let min = now.getMinutes();
+        let hour = now.getHours(); 
+
+        let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+        this.setState({
+            time: totalTime
+        })
     }
 
     // Send 5 selected values to reducer and route to OrderValuesInstructions page.
@@ -22,7 +33,16 @@ class Elimination5 extends Component {
         if(this.state.round5.length !== 5) {
             return alert('Please select 5 values that are least important to you.')
         } else {
+            let next = new Date(); 
+            let sec = next.getSeconds();
+            let min = next.getMinutes(); 
+            let hour = next.getHours(); 
+
+            let nextTime = ((min * 60 ) + (hour * 360) + sec)
+            let totalTime5 = nextTime - this.state.time 
+
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round5', payload: this.state.round5});
+            this.props.dispatch({type: 'SET_NEW_TIME', name: 'round5Time', payload: totalTime5 });
             this.props.history.push('/OrderValuesInstructions')
         }
     }
