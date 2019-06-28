@@ -26,6 +26,24 @@ class IndividualParticipant extends Component{
 
 	state = {
 		isEditable: false,
+		participant: {
+			first_name: '',
+			last_name: '',
+			age: '',
+			gender: '',
+			category: '',
+			state: '',
+			email_address: '',
+			phone_number: '',
+			url: '',
+		},
+		offender: {
+			system_id: 0,
+			offender_system_id: 0,
+			felon: '',
+			violent_offender: '',
+			population_id: 0
+		}
 	}
 
 	componentDidMount(){
@@ -36,36 +54,83 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_POPULATION'})
 	};//end componentDidMount
 
-	checkExpirationDate = () => {
-
-	};//end checkExpirationDate
-
 	generateLink = () => {
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
 		console.log('urlLink:', urlLink)
 		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink}})
-		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 	};//end generateLink
 
 	handleEdit = () => {
 		this.setState({
-			isEditable: true
+			isEditable: true,
+			participant: {
+				first_name: this.props.individual.first_name,
+				last_name: this.props.individual.last_name,
+				age: this.props.individual.age,
+				gender: this.props.individual.gender,
+				category: this.props.individual.category,
+				state: this.props.individual.state,
+				email_address: this.props.individual.email,
+				phone_number: this.props.individual.phone_number,
+				url: this.props.individual.url,
+			},
+			offender: {
+				system_id: this.props.individual.system_id,
+				offender_system_id: this.props.individual.offender_system_id,
+				felon: this.props.individual.felon,
+				violent_offender: this.props.individual.violent_offender,
+				population_id: this.props.individual.population_id
+			}
 		})
 	};//end handleEdit
 
 	handleCancelEdit = () => {
 		this.setState({
-			isEditable: false
+			isEditable: false,
+			participant: {
+				first_name: '',
+				last_name: '',
+				age: '',
+				gender: '',
+				category: '',
+				state: '',
+				email_address: '',
+				phone_number: '',
+				url: '',
+			},
+			offender: {
+				system_id: 0,
+				offender_system_id: 0,
+				felon: '',
+				violent_offender: '',
+				population_id: 0
+			}
 		})
+		
 	};//end handleCancelEdit
 
 	handleInputChange = propertyName => (event) => {
-
+	    this.setState({
+			participant:{
+				...this.state.participant,
+				[propertyName]: event.target.value,
+			}
+	    });
 	};//end handleInputChange
+
+	handleOffenderInput = propertyName => (event) => {
+	    this.setState({
+			offender:{
+				...this.state.offender,
+				[propertyName]: event.target.value,
+			}
+	    });
+	};//end handleOffenderInput
 
 	render(){
 		const classes = this.props;
+		console.log('this.state:', this.state)
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
@@ -139,9 +204,9 @@ class IndividualParticipant extends Component{
 							<Dialog open={this.state.isEditable} onClose={this.handleCancelEdit} disableBackdropClick={true}>
 								<DialogTitle>Editing Participant: {person.first_name} {person.last_name}</DialogTitle>
 								<DialogContent>
-									<TextField label="First Name:" defaultValue={person.first_name}/>
+									<TextField label="First Name:" onChange={this.handleInputChange('first_name')} defaultValue={person.first_name}/>
 
-									<TextField label="Last Name:" defaultValue={person.last_name}/>
+									<TextField label="Last Name:" onChange={this.handleInputChange('last_name')} defaultValue={person.last_name}/>
 
 									<TextField label="Age:" type="number" defaultValue={person.age}/>
 
@@ -209,9 +274,7 @@ class IndividualParticipant extends Component{
 						<TextField disabled label="Invite Link:" defaultValue={`localhost:3000/#/quiz/${person.url}`} className={classes.input}/> <Button variant="outlined" color="primary">Copy URL</Button>
 						<br></br>
 						<TextField disabled label="Expiration Date:" defaultValue={person.expiration_date}/>
-						{/* <Button variant="contained" color="primary">Generate New URL</Button> */}
 						{urlButton}
-						{this.checkExpirationDate()}
 					</Card>
 
 					<Card>
@@ -222,9 +285,6 @@ class IndividualParticipant extends Component{
 				</Grid>
 					)
 				})}
-				
-
-
 			</Grid>	
 		)
 	}
