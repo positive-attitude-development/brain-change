@@ -81,6 +81,7 @@ class RankPercents extends Component {
 
     handleNext = (event) => {
         event.preventDefault(); 
+        this.props.dispatch({type: 'SET_NEW_VALUES', name: 'percents', payload: this.state});
         this.props.history.push('FinalResults'); 
     }
 

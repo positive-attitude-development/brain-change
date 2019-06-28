@@ -8,7 +8,8 @@ let newValuesState = {
     testedBelief: [],
     orderCore: [],
     violators:[],
-    orderViolators: []
+    orderViolators: [],
+    percents: []
 }
 
 
