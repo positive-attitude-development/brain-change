@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
+import {Card, CardContent, CardActions, Tooltip, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 
@@ -16,13 +16,15 @@ const styles = {
 	},
 	grid: {
 
+	},
+	input: {
+		
 	}
 }
 
 class IndividualParticipant extends Component{
 
 	state = {
-		urlLink: '',
 		isEditable: false,
 	}
 
@@ -32,8 +34,6 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
-		//this.generateLink();
-		this.checkExpirationDate();
 	};//end componentDidMount
 
 	checkExpirationDate = () => {
@@ -42,14 +42,10 @@ class IndividualParticipant extends Component{
 
 	generateLink = () => {
 		let chance = new Chance();
-		console.log('generateLink')
-		// if(this.state.urlLink === ''){
-		// 	let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		// 	console.log('urlLink:', urlLink)
-		// 	this.setState({
-		// 		urlLink: urlLink,
-		// 	})
-		// }
+		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log('urlLink:', urlLink)
+		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink}})
+		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 	};//end generateLink
 
 	handleEdit = () => {
@@ -70,16 +66,18 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		let offenderData;
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
 				let today = new Date();
 				let expirationDate = new Date(person.expiration_date)
+				let urlButton;
 				if(expirationDate >= today){
 					console.log('link not expired')
+					urlButton = <Tooltip title="URL Link Current" placement="right"><Button variant="outlined" color="primary">Generate New URL</Button></Tooltip>
 				}else{
 					console.log('link expired')
+					urlButton = <Button variant="contained" color="primary" onClick={this.generateLink}>Generate New URL</Button>
 				}
 				return(
 					<Grid key={person.id}>
@@ -208,10 +206,11 @@ class IndividualParticipant extends Component{
 					<Card className={classes.card} raised>
 					URL Stuff:
 					<br></br>
-						<TextField disabled label="Invite Link:" defaultValue={person.url}/> <Button variant="outlined" color="primary">Copy URL</Button>
+						<TextField disabled label="Invite Link:" defaultValue={`localhost:3000/#/quiz/${person.url}`} className={classes.input}/> <Button variant="outlined" color="primary">Copy URL</Button>
 						<br></br>
 						<TextField disabled label="Expiration Date:" defaultValue={person.expiration_date}/>
-						<Button variant="contained" color="primary">Generate New URL</Button>
+						{/* <Button variant="contained" color="primary">Generate New URL</Button> */}
+						{urlButton}
 						{this.checkExpirationDate()}
 					</Card>
 
