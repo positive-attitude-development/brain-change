@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
 import {  Button, Grid, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
@@ -13,7 +12,7 @@ const SortableContainer = sortableContainer(({children}) => {
     return <ul className="fiveVals">{children}</ul>;
 });
 
-export class OrderValues1 extends Component {
+class OrderValues1 extends Component {
 
     state = {
         items: [],

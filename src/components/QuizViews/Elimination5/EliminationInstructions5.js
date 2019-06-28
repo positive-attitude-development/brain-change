@@ -5,7 +5,7 @@ import StatusBar from '../StatusBar';
 
 import './EliminationInstructions5.css'
 
-export class EliminationInstructions5 extends Component {
+class EliminationInstructions5 extends Component {
 
     state = {
         statusBar : 51

@@ -6,7 +6,7 @@ import StatusBar from '../StatusBar';
 import { Paper } from '@material-ui/core';
 import './Elimination2.css';
 
-export class Elimination2 extends Component {
+class Elimination2 extends Component {
 
     state = {
         round2: [],

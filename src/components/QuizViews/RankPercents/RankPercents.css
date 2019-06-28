@@ -1,0 +1,27 @@
+ .slider {
+    color: '#52af77';
+    height: "8px";
+    width: "100%"; 
+    
+ }
+
+.grid {
+    display: grid;
+
+}
+
+.core {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    align-items: center;
+    justify-self: start; 
+
+}
+
+.violators{
+    grid-column-start: 5;
+    grid-column-end: 8;
+    align-items: center;
+    /* justify-self: end; */
+
+}

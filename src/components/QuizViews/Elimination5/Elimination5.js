@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
 import {  Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import './Elimination5.css';
 
-export class Elimination5 extends Component {
+class Elimination5 extends Component {
 
     state = {
         round5: [],

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Elimination1.css';
-import { Link } from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import {  Button } from '@material-ui/core';
@@ -9,7 +9,7 @@ import StatusBar from '../StatusBar'
 
 
 
-export class Elimination1 extends Component {
+class Elimination1 extends Component {
 
     state = {
         round1: [],
