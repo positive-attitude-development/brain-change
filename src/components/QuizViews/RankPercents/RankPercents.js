@@ -1,45 +1,83 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
+
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {withStyles} from '@material-ui/core/styles';
 
-import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField } from '@material-ui/core'
+import Slider from '@material-ui/lab/Slider';
+import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField, Typography } from '@material-ui/core'
 
 import './RankPercents.css'
 
 const styles = {
-
-    root : {
-        table: {
-            minWidth: 150,
-          },
-
-
-
+        root: {
+            color: '#52af77',
+            height: 8,
+        },
+        thumb: {
+            height: "24px",
+            width: "24px",
+            backgroundColor: '#fff',
+            border: '2px solid currentColor',
+            marginTop: "-8px",
+            marginLeft: "-12px",
+            '&:focus,&:hover,&$active': {
+            boxShadow: 'inherit',
+            },
+        },
+        active: {},
+        valueLabel: {
+            left: 'calc(-50% + 4px)',
+        },
+        track: {
+            height: 8,
+            borderRadius: 4,
+        },
+        rail: {
+            height: 8,
+            borderRadius: 20,
+        }
     }
-}
 
-// const rows = [
-//     {"value", "violater"},
-//     {"value", "violater"},
-//     {"value", "violater"},
-//     {"value", "violater"},
-//     {"value", "violater"},
-//   ];
-
-
-
-
-export class RankPercents extends Component {
+class RankPercents extends Component {
 
     state = {
         statusBar : 95,
-        valuesPercent: "",
-        violatorPercent: ""
+        valuesPercent: 50,
+        violatorPercent: 50,
+        violators: [],
+        core: []
+        
     }
 
+    componentDidMount = () => {
+        const violators = this.props.violators
+        const core = this.props.core
 
+        let violatorsArray = this.props.values.filter((value) =>{
+            for (let newValue of violators) {
+                if(newValue === value.id) {
+                    return true; 
+                }
+            }
+            return false; 
+        })
+
+        let coreArray = this.props.values.filter((value) =>{
+            for (let newValue of core) {
+                if(newValue === value.id) {
+                    return true; 
+                }
+            }
+            return false; 
+        })
+
+        this.setState({
+                violators : violatorsArray,
+                core: coreArray
+        })
+
+    }
 
     handleNext = (event) => {
         event.preventDefault(); 
@@ -47,23 +85,52 @@ export class RankPercents extends Component {
     }
 
 
-    handleChange = propertyName => (event) => {
-        event.preventDefault();
+    handleChange = propertyName => (e, value) => {
+        e.preventDefault();
         this.setState({
-                [propertyName]: event.target.value
+                [propertyName]: value,
+                valuesPercent: (100 - value)
         })
+
         console.log(this.state);
     }
 
 
     render() {
-        const classes = this.props
+        console.log(this.state);
+        const {classes} = this.props;
+        const { violatorPercent } = this.state
+       
+
         return (
-            <div className= {classes.root}>
-
+            <div>
+                
                 <StatusBar status={this.state.statusBar} />
+                
+                <div className = "grid">
 
-                <Paper>
+                <div className = "core">
+                    
+                    <h3> Core Values </h3>
+                    <ul >
+                        {this.state.core.map(value => {
+                            return <li key={value.id}
+                                        value={value.id}>{value.values}</li>
+                        })}
+                    </ul>
+                </div>
+                    
+                <div className = "violators">
+                        <h3> Core Violators </h3>
+                        <ul>
+                        {this.state.violators.map(value => {
+                            return <li key={value.id}
+                                        value={value.id}>{value.values}</li>
+                        })}
+                    </ul>
+                </div>
+                {/* : } */}
+                {/* <Paper>
                     <Table className={classes.table}>
                         <TableHead>
                         <TableRow>
@@ -71,35 +138,43 @@ export class RankPercents extends Component {
                             <TableCell align="center">Violater Values</TableCell>
                         </TableRow>
                         </TableHead>
+                        {this.state.core === true ?
+                        
                         <TableBody>
-                        {/* {rows.map(row => ( */}
-                            <TableRow >
-                            <TableCell align="center">{}</TableCell>
-                            <TableCell align="center">{}</TableCell>
-                            
-                            </TableRow>
-                        {/* ))} */}
+                            {this.state.map(rows => {
+                               return( <TableRow >
+                                <TableCell align="center">{rows.core.values}</TableCell>
+                                <TableCell align="center">{rows.violators.values}</TableCell>
+                                </TableRow>
+                               )
+                            }
+                            )}
                         </TableBody>
+                        : <TableBody>
+                            </TableBody>
+                        }
                     </Table>
-                </Paper>
+                </Paper> */}
+                {/* // className={classes.root} */}
+            </div>
+                <div className= {classes.root}>
+                    <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
+                        <Slider onChange={this.handleChange('violatorPercent')} 
+                                value={violatorPercent}
+                                // valueLabelDisplay="auto" 
+                                // aria-label="Percents" 
+                                defaultValue={50} />
+              
+                </div>
 
-                    <TextField
-                        id="Value"
-                        // className={clsx(classes.margin, classes.textField)}
-                        variant="outlined"
-                        label="Core Percent"
-                        value={this.state.valuesPercent}
-                        onChange={this.handleChange("value")}
-                    />
+            <div className = "percents">
+                <h2>How do you live each day ?</h2>
 
-                    <TextField
-                        id="Value"
-                        // className={clsx(classes.margin, classes.textField)}
-                        variant="outlined"
-                        label="Violator Percent"
-                        value={this.state.violatorPercent}
-                        onChange={this.handleChange("violator")}
-                    />  
+                <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
+               
+                <h3 className="violatorPercents">Violator Values {this.state.violatorPercent} % </h3>
+
+            </div>
 
                 <div>
                     <Button
@@ -118,7 +193,9 @@ export class RankPercents extends Component {
 
 const mapState = reduxState => {
     return {
-        reduxState
+        values: reduxState.valuesReducer,
+        core: reduxState.newValuesReducer.orderCore,
+        violators :reduxState.newValuesReducer.violators
         }   
     }
 export default withStyles(styles)(connect(mapState)(RankPercents))

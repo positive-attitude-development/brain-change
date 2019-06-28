@@ -3,13 +3,24 @@ import { Link} from 'react-router-dom';
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
+
 import './RankInstructions.css'
 
-export class RankInstructions extends Component {
+class RankInstructions extends Component {
 
     state = {
-        statusBar : 90
+        statusBar : 90,
+        corePercent: 0,
+        violatorPercent: 0
     }
+
+
+    handleChange = (event) => {
+        event.preventDefault(); 
+
+
+
+    } 
 
     render() {
         return (
@@ -20,7 +31,6 @@ export class RankInstructions extends Component {
                     and the percentage that you are directed by your violators. 
                 </div>
                 
-        
 
                 <Link to="/RankPercents">    
                     <Button

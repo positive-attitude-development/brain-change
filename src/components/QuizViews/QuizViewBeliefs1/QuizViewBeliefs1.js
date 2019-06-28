@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs1.css'
-import {conditionalExpression} from '@babel/types';
 
-export class QuizViewBeliefs1 extends Component {
+
+class QuizViewBeliefs1 extends Component {
 
 
 state = {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import StatusBar from '../StatusBar'; 
 
-export class FinalResults extends Component {
+class FinalResults extends Component {
 
     state = {
         statusBar : 100

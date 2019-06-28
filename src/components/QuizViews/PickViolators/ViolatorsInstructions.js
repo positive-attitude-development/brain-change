@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import './ViolatorsInstructions.css'
 
-export class ViolatorsInstructions extends Component {
+class ViolatorsInstructions extends Component {
 
     state = {
         statusBar : 68
