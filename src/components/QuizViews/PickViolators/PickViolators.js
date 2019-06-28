@@ -16,12 +16,32 @@ class PickViolators extends Component {
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
 
+        let now = new Date();
+        let sec = now.getSeconds();
+        let min = now.getMinutes();
+        let hour = now.getHours(); 
+
+        let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+        this.setState({
+            time: totalTime
+        })
     }
 
 
     handleNext = () => {
         if(this.state.violators ) {
+
+            let next = new Date(); 
+            let sec = next.getSeconds();
+            let min = next.getMinutes(); 
+            let hour = next.getHours(); 
+
+            let nextTime = ((min * 60 ) + (hour * 360) + sec)
+            let pickViolatorTime = nextTime - this.state.time 
+
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'violators', payload: this.state.violators});
+            this.props.dispatch({type: 'SET_NEW_TIME', name: 'pickViolatorTime', payload: pickViolatorTime });
             this.props.history.push("/OrderViolatorsInstructions")
         } else  {
             return alert('Please select 5 values that are least important to you.')

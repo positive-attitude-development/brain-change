@@ -16,14 +16,33 @@ class Elimination2 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+        let now = new Date();
+        let sec = now.getSeconds();
+        let min = now.getMinutes();
+        let hour = now.getHours(); 
+
+        let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+        this.setState({
+            time: totalTime
+        })
+        console.log(this.state)
     }
 
     // Send 9 selected values to reducer and route to beliefinstruct1 page, will alert if 
     // 9 values has not been selected
     handleNext = () => {
         if (this.state.round2.length === 9) {
+            let next = new Date(); 
+            let sec = next.getSeconds();
+            let min = next.getMinutes(); 
+            let hour = next.getHours(); 
+
+            let nextTime = ((min * 60 ) + (hour * 360) + sec)
+            let totalTime2 = nextTime - this.state.time 
 
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2});
+            this.props.dispatch({type: 'SET_NEW_TIME', name: 'round2Time', payload: totalTime2 });
             this.props.history.push('/BeliefInstruct1')
         } else {
             return alert('Please select 9 values that are least important to you.')

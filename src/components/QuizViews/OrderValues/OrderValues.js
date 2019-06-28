@@ -39,6 +39,17 @@ class OrderValues1 extends Component {
         this.setState({
             items: newArray,
         })
+
+        let now = new Date();
+        let sec = now.getSeconds();
+        let min = now.getMinutes();
+        let hour = now.getHours(); 
+
+        let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+        this.setState({
+            time: totalTime
+        })
     }
 
     // Drag the values in any order
@@ -54,7 +65,17 @@ class OrderValues1 extends Component {
         let idArray = this.state.items.map(value => {
             return value.id
         })
+
+        let next = new Date(); 
+            let sec = next.getSeconds();
+            let min = next.getMinutes(); 
+            let hour = next.getHours(); 
+
+            let nextTime = ((min * 60 ) + (hour * 360) + sec)
+            let orderTime = nextTime - this.state.time 
+
         this.props.dispatch({type: 'SET_NEW_VALUES', name: 'orderCore', payload: idArray})
+        this.props.dispatch({type: 'SET_NEW_TIME', name: 'orderCoreTime', payload: orderTime });
         this.props.history.push('/ViolatorsInstructions')
     }
 
