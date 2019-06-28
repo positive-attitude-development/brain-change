@@ -23,5 +23,17 @@
     grid-column-end: 8;
     align-items: center;
     /* justify-self: end; */
+}
+
+.corePercents {
+    grid-column-start: 5;
+    grid-column-end: 8;
+    align-items: center;
+}
+
+.violatorPercents {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    align-items: center;
 
 }

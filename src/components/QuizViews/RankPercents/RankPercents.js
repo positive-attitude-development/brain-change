@@ -89,7 +89,7 @@ class RankPercents extends Component {
         e.preventDefault();
         this.setState({
                 [propertyName]: value,
-                violatorPercent: (100 - value)
+                valuesPercent: (100 - value)
         })
 
         console.log(this.state);
@@ -99,18 +99,7 @@ class RankPercents extends Component {
     render() {
         console.log(this.state);
         const {classes} = this.props;
-        const { valuesPercent } = this.state
-
-        
-        // const violatorsRow = this.state.violators.map(values => {
-        //     return {values}
-        // })
-
-        // const coreRow = this.state.core.map(values => {
-        //     return {values}
-        // })
-            
-       
+        const { violatorPercent } = this.state
        
 
         return (
@@ -170,13 +159,23 @@ class RankPercents extends Component {
             </div>
                 <div className= {classes.root}>
                     <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
-                        <Slider onChange={this.handleChange('valuesPercent')} 
-                                value={valuesPercent}
-                                valueLabelDisplay="auto" 
-                                aria-label="Percents" 
+                        <Slider onChange={this.handleChange('violatorPercent')} 
+                                value={violatorPercent}
+                                // valueLabelDisplay="auto" 
+                                // aria-label="Percents" 
                                 defaultValue={50} />
               
                 </div>
+
+            <div className = "percents">
+                <h2>How do you live each day ?</h2>
+
+                <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
+               
+                <h3 className="violatorPercents">Violator Values {this.state.violatorPercent} % </h3>
+
+            </div>
+
                 <div>
                     <Button
                         color="primary"
