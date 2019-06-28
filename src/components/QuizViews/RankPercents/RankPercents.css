@@ -25,6 +25,12 @@
     /* justify-self: end; */
 }
 
+
+.percents {
+    
+
+}
+
 .corePercents {
     grid-column-start: 5;
     grid-column-end: 8;
