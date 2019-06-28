@@ -19,14 +19,24 @@ class Profile extends Component{
 
 	state = {
 		isEditable: false,
+		profile: {
+			username: '',
+			first_name: '',
+			last_name: '',
+			organization: '',
+			title: '',
+			phone_number: '',
+			email_address: '',
+			street_address: '',
+			street_address2: '',
+			city: '',
+			state: '',
+			zipcode: ''
+		}
 	}
 
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_PROFILE', payload: this.props.admin.id})
-		this.setState({
-			...this.state,
-			profile: this.props.profile[0],
-		})
 	};//end componentDidMount
 
 	handleChange = propertyName => (event) => {
@@ -35,7 +45,22 @@ class Profile extends Component{
 
 	handleEdit = () => {
 		this.setState({
-			isEditable: true
+			isEditable: true,
+			profile: {
+				username: this.props.profile[0].username,
+				first_name: this.props.profile[0].first_name,
+				last_name: this.props.profile[0].last_name,
+				organization: this.props.profile[0].organization,
+				title: this.props.profile[0].title,
+				phone_number: this.props.profile[0].phone_number,
+				email_address: this.props.profile[0].email_address,
+				street_address: this.props.profile[0].street_address,
+				street_address2: this.props.profile[0].street_address2,
+				city: this.props.profile[0].city,
+				state: this.props.profile[0].state,
+				zipcode: this.props.profile[0].zipcode
+			}
+
 		})
 		//need to set up separate editProfileReducer to handle any edits made to profile, this way
 		//any changes can be made to the editProfileReducer so if Cancel Edit button is clicked, 
@@ -51,9 +76,13 @@ class Profile extends Component{
 		this.props.dispatch({type: 'CANCEL_EDIT'})
 	};//end handleCancelEdit
 
+	saveChanges = () => {
+
+	}
+
 	render(){
 		const {classes} = this.props;
-		console.log('editProfile reducer:', this.props.edit)
+		console.log('this.state:', this.state)
 		return(
 			<div>
 				{this.props.profile.map((profile) =>{
@@ -175,7 +204,7 @@ class Profile extends Component{
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
-										<Button onClick={this.handleCancelEdit} color="primary">Save Changes</Button>
+										<Button onClick={this.saveChanges} color="primary">Save Changes</Button>
 									</DialogActions>
 							</Dialog>
 						</Card>
