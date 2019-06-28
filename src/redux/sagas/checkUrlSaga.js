@@ -1,6 +1,15 @@
 import axios from 'axios';
 import {put, takeLatest} from 'redux-saga/effects';
 
+function* newUrl(action){
+    try{
+        console.log('newUrl action.payload:', action.payload)
+        yield axios.post('/api/url', action.payload)
+    }catch(error){
+        console.log('error in newUrl:', error)
+    }
+}
+
 function* retrieveUrl(action) {
     try {
         let response = yield axios.get(`/api/url/retrieve&id=${action.payload}`);
@@ -26,6 +35,7 @@ function* verifyUrl(action) {
 function* checkUrlSaga() {
     yield takeLatest('FETCH_URL', retrieveUrl);
     yield takeLatest('VERIFY_URL', verifyUrl);
+    yield takeLatest('NEW_URL', newUrl);
 }
 
 export default (checkUrlSaga);

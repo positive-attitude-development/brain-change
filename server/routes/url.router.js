@@ -28,4 +28,30 @@ router.get('/verify', (req, res) => {
         });
 })
 
+//POST route for generating new URL for participant
+router.post('/', rejectUnauthenticated, async (req, res) => {
+    const connection = await pool.connect()
+  try{
+    await connection.query('BEGIN');
+    const getExpirationDate = await connection.query(`SELECT current_date + integer '30' as newdate;`)
+	const expirationDate = getExpirationDate.rows[0].newdate;
+    console.log('post url req.body:', req.body)
+	console.log('expiration date:', expirationDate)
+    const addUrl = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
+        VALUES ($1, $2, $3, $4);`;
+    const urlValues = [req.body.url, expirationDate, req.body.id, req.user.id];
+    const query = await connection.query(addUrl, urlValues)
+    await connection.query('COMMIT');
+    res.sendStatus(201);
+    }catch(error){
+		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
+		await connection.query('ROLLBACK');
+		console.log('Transaction error - rolling back url post:', error);
+		res.sendStatus(500);
+	}finally{
+		connection.release()
+	}
+
+})
+
 module.exports = router;

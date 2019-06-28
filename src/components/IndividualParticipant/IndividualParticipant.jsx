@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
+import {Card, CardContent, CardActions, Tooltip, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 
@@ -15,36 +15,37 @@ const styles = {
 		width: '75%',
 	},
 	grid: {
-		width: '75%',
+
+	},
+	input: {
+		
 	}
 }
 
 class IndividualParticipant extends Component{
 
 	state = {
-		urlLink: '',
 		isEditable: false,
 	}
 
 	componentDidMount(){
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
-		this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
+		//this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
-		//this.generateLink();
 	};//end componentDidMount
+
+	checkExpirationDate = () => {
+
+	};//end checkExpirationDate
 
 	generateLink = () => {
 		let chance = new Chance();
-		console.log('generateLink')
-		if(this.state.urlLink === ''){
-			let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-			console.log('urlLink:', urlLink)
-			this.setState({
-				urlLink: urlLink,
-			})
-		}
+		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log('urlLink:', urlLink)
+		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink}})
+		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 	};//end generateLink
 
 	handleEdit = () => {
@@ -65,46 +66,22 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		let offenderData;
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
-				if(person.category === 'Offender'){
-					offenderData = 
-					<>
-					<br></br>Offender Data:<br></br>
-
-						<TextField disabled label="System:" select margin="normal" 
-							value={person.system }>
-							{this.props.system.map((system) => {
-								return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
-							})}</TextField>
-
-						<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
-
-						<TextField disabled label="Population:" select margin="normal" 
-							value={person.population }>
-							{this.props.population.map((population) => {
-								return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
-							})}</TextField>
-
-						<TextField disabled select margin="normal" 
-							label="Felony?:" value={person.felon}
-							onChange={this.handleInputChange('felon')} >
-							<MenuItem value={true}>Yes</MenuItem>
-							<MenuItem value={false}>No</MenuItem></TextField>
-
-						<TextField disabled select margin="normal" 
-							label="Violent Crime?:" value={person.violent_offender}
-							onChange={this.handleInputChange('violent_offender')} >
-							<MenuItem value={true}>Yes</MenuItem>
-							<MenuItem value={false}>No</MenuItem></TextField>
-					</>
-				} else {
-					offenderData = <div></div>
+				let today = new Date();
+				let expirationDate = new Date(person.expiration_date)
+				let urlButton;
+				if(expirationDate >= today){
+					console.log('link not expired')
+					urlButton = <Tooltip title="URL Link Current" placement="right"><Button variant="outlined" color="primary">Generate New URL</Button></Tooltip>
+				}else{
+					console.log('link expired')
+					urlButton = <Button variant="contained" color="primary" onClick={this.generateLink}>Generate New URL</Button>
 				}
 				return(
-					<Card raised className={classes.card} key={person.id}>
+					<Grid key={person.id}>
+					<Card raised className={classes.card} >
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
@@ -123,8 +100,39 @@ class IndividualParticipant extends Component{
 								<TextField disabled label="Phone Number:" defaultValue={person.phone_number}/>
 								<br></br>
 
-								{offenderData}
+								{person.category === "Offender" &&
+								<>
+								<br></br>Offender Data:<br></br>
+
+								<TextField disabled label="System:" select margin="normal" 
+									value={person.system }>
+									{this.props.system.map((system) => {
+										return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
+									})}</TextField>
+
+								<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
+
+								<TextField disabled label="Population:" select margin="normal" 
+									value={person.population }>
+									{this.props.population.map((population) => {
+										return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
+									})}</TextField>
+
+								<TextField disabled select margin="normal" 
+									label="Felony?:" value={person.felon}
+									onChange={this.handleInputChange('felon')} >
+									<MenuItem value={true}>Yes</MenuItem>
+									<MenuItem value={false}>No</MenuItem></TextField>
+
+								<TextField disabled select margin="normal" 
+									label="Violent Crime?:" value={person.violent_offender}
+									onChange={this.handleInputChange('violent_offender')} >
+									<MenuItem value={true}>Yes</MenuItem>
+									<MenuItem value={false}>No</MenuItem></TextField>
+								</>
+								}								
 								<br></br>
+								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
 
 						{/* DIALOG EDITABLE FIELDS:*/}
 
@@ -193,26 +201,30 @@ class IndividualParticipant extends Component{
 							</Dialog>
 
 						</CardContent>
-						<CardActions>
-							<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
-						</CardActions>
 					</Card>
+
+					<Card className={classes.card} raised>
+					URL Stuff:
+					<br></br>
+						<TextField disabled label="Invite Link:" defaultValue={`localhost:3000/#/quiz/${person.url}`} className={classes.input}/> <Button variant="outlined" color="primary">Copy URL</Button>
+						<br></br>
+						<TextField disabled label="Expiration Date:" defaultValue={person.expiration_date}/>
+						{/* <Button variant="contained" color="primary">Generate New URL</Button> */}
+						{urlButton}
+						{this.checkExpirationDate()}
+					</Card>
+
+					<Card>
+						<CardContent>
+							IMAGINE SNAPSHOT HERE
+						</CardContent>
+					</Card>
+				</Grid>
 					)
 				})}
 				
 
-				<Paper>
-					URL Stuff:
-						<TextField disabled label="Invite Link:" defaultValue="URL Link"/>
-						<TextField disabled label="Expiration Date:" defaultValue="01/01/2019"/>
-						<Button variant="contained" color="secondary">Generate New Invite Link</Button>
-				</Paper>
 
-				<Card>
-					<CardContent>
-						IMAGINE SNAPSHOT HERE
-					</CardContent>
-				</Card>
 			</Grid>	
 		)
 	}
