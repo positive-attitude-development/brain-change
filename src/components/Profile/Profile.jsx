@@ -18,21 +18,7 @@ const styles = {
 class Profile extends Component{
 
 	state = {
-		isEditable: false,
-		profile: {
-			username: '',
-			first_name: '',
-			last_name: '',
-			organization: '',
-			title: '',
-			phone_number: '',
-			email_address: '',
-			street_address: '',
-			street_address2: '',
-			city: '',
-			state: '',
-			zipcode: ''
-		}
+		isEditable: false
 	}
 
 	componentDidMount(){
@@ -46,21 +32,6 @@ class Profile extends Component{
 	handleEdit = () => {
 		this.setState({
 			isEditable: true,
-			profile: {
-				username: this.props.profile[0].username,
-				first_name: this.props.profile[0].first_name,
-				last_name: this.props.profile[0].last_name,
-				organization: this.props.profile[0].organization,
-				title: this.props.profile[0].title,
-				phone_number: this.props.profile[0].phone_number,
-				email_address: this.props.profile[0].email_address,
-				street_address: this.props.profile[0].street_address,
-				street_address2: this.props.profile[0].street_address2,
-				city: this.props.profile[0].city,
-				state: this.props.profile[0].state,
-				zipcode: this.props.profile[0].zipcode
-			}
-
 		})
 		//need to set up separate editProfileReducer to handle any edits made to profile, this way
 		//any changes can be made to the editProfileReducer so if Cancel Edit button is clicked, 
@@ -77,12 +48,16 @@ class Profile extends Component{
 	};//end handleCancelEdit
 
 	saveChanges = () => {
-
+		this.props.dispatch({type: 'UPDATE_PROFILE', payload: this.props.edit})
+		this.setState({
+			isEditable: false
+		})
 	}
 
 	render(){
 		const {classes} = this.props;
-		console.log('this.state:', this.state)
+		console.log('this.props.profile:', this.props.profile)
+		console.log('this.props.admin:', this.props.admin)
 		return(
 			<div>
 				{this.props.profile.map((profile) =>{
@@ -90,29 +65,74 @@ class Profile extends Component{
 						<Card raised key={profile.id} className={classes.card}>
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
-								<TextField label="Username:" defaultValue={profile.username} disabled/>
+								<h3>{profile.username}</h3>
+								<TextField label="Username:" value={profile.username} disabled/>
 
-								<TextField label="First Name:" defaultValue={profile.first_name} disabled/>
+								<TextField label="First Name:" value={profile.first_name} disabled/>
 
-								<TextField label="Last Name:" defaultValue={profile.last_name} disabled/>
+								<TextField label="Last Name:" value={profile.last_name} disabled/>
 
-								<TextField label="Title:" defaultValue={profile.title} disabled/>
+								<TextField label="Title:" value={profile.title} disabled/>
 
-								<TextField label="Organization:" defaultValue={profile.organization} disabled/>
+								<TextField label="Organization:" value={profile.organization} disabled/>
 
-								<TextField label="Phone Number:" defaultValue={profile.phone_number} disabled/>
+								<TextField label="Phone Number:" value={profile.phone_number} disabled/>
 
-								<TextField label="Email Address:" defaultValue={profile.email_address} disabled/>
+								<TextField label="Email Address:" value={profile.email_address} disabled/>
 
-								<TextField label="Street Address Line 1:" defaultValue={profile.street_address} disabled/>
+								<TextField label="Street Address Line 1:" value={profile.street_address} disabled/>
 
-								<TextField label="Street Address Line 2:" defaultValue={profile.street_address2} disabled/>
+								<TextField label="Street Address Line 2:" value={profile.street_address2} disabled/>
 
-								<TextField label="City:" defaultValue={profile.city} disabled/>
+								<TextField label="City:" value={profile.city} disabled/>
 
 								<TextField select margin="normal" disabled
 									label="State:" value={profile.state}>
-									<MenuItem value=""><em>Select State</em></MenuItem>
+									<MenuItem value={profile.state}>{profile.state}</MenuItem>
+								</TextField>
+
+								<TextField label="Zipcode:" value={profile.zipcode} disabled/>
+							</CardContent>
+							<CardActions>
+								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Profile</Button>
+							</CardActions>
+
+							<Dialog open={this.state.isEditable} onClose={this.handleCancelEdit} disableBackdropClick={true}>
+								<DialogTitle>{profile.first_name}'s Profile</DialogTitle>
+								<DialogContent>
+
+								<TextField label="Username:" defaultValue={profile.username}
+									onChange={this.handleChange('username')}/>
+
+								<TextField label="First Name:" defaultValue={profile.first_name}
+									onChange={this.handleChange('first_name')}/>
+
+								<TextField label="Last Name:" defaultValue={profile.last_name}
+									onChange={this.handleChange('last_name')}/>
+
+								<TextField label="Title:" defaultValue={profile.title}
+									onChange={this.handleChange('title')}/>
+
+								<TextField label="Organization:" defaultValue={profile.organization}
+									onChange={this.handleChange('organization')}/>
+
+								<TextField label="Phone Number:" defaultValue={profile.phone_number}
+									onChange={this.handleChange('phone_number')}/>
+
+								<TextField label="Email Address:" defaultValue={profile.email_address}
+									onChange={this.handleChange('email_address')}/>
+
+								<TextField label="Street Address Line 1:" defaultValue={profile.street_address}
+									onChange={this.handleChange('street_address')}/>
+
+								<TextField label="Street Address Line 2:" defaultValue={profile.street_address2}
+									onChange={this.handleChange('street_address2')}/>
+
+								<TextField label="City:" defaultValue={profile.city}
+									onChange={this.handleChange('city')}/>
+
+								<TextField select margin="normal" onChange={this.handleChange('state')}
+									label="State:" value={profile.state}>
 									<MenuItem value="AL">Alabama</MenuItem>
 									<MenuItem value="AK">Alaska</MenuItem>
 									<MenuItem value="AZ">Arizona</MenuItem>
@@ -168,43 +188,12 @@ class Profile extends Component{
 									<MenuItem value="WY">Wyoming</MenuItem>
 								</TextField>
 
-								<TextField label="Zipcode:" defaultValue={profile.zipcode} disabled/>
-							</CardContent>
-							<CardActions>
-								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Profile</Button>
-							</CardActions>
-
-							<Dialog open={this.state.isEditable} onClose={this.handleCancelEdit} disableBackdropClick={true}>
-								<DialogTitle>{profile.first_name}'s Profile</DialogTitle>
-								<DialogContent>
-
-								<TextField label="Username:" defaultValue={profile.username}
-									  onChange={this.handleChange('username')}/>
-
-								<TextField label="First Name:" defaultValue={profile.first_name}
-									onChange={this.handleChange('first_name')}/>
-
-								<TextField label="Last Name:" defaultValue={profile.last_name}/>
-
-								<TextField label="Title:" defaultValue={profile.title}/>
-
-								<TextField label="Organization:" defaultValue={profile.organization}
-									  onChange={this.handleChange('organization')}/>
-
-								<TextField label="Phone Number:" defaultValue={profile.phone_number}/>
-
-								<TextField label="Email Address:" defaultValue={profile.email_address}/>
-
-								<TextField label="Street Address Line 1:" defaultValue={profile.street_address}/>
-
-								<TextField label="Street Address Line 2:" defaultValue={profile.street_address2}/>
-
-								<TextField label="City:" defaultValue={profile.city}/>
+								<TextField label="Zipcode:" defaultValue={profile.zipcode} onChange={this.handleChange('zipcode')}/>
             
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
-										<Button onClick={this.saveChanges} color="primary">Save Changes</Button>
+										<Button onClick={this.saveChanges} variant="contained" color="primary">Save Changes</Button>
 									</DialogActions>
 							</Dialog>
 						</Card>
