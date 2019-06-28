@@ -16,12 +16,11 @@ const profileEdits = {
 const editProfileReducer = (state = profileEdits, action) => {
     switch(action.type) {
         case 'SET_EDIT_PROFILE':
-            return {state: action.payload}
+            return action.payload;
 		case 'EDIT_PROFILE':
-            console.log('edit_profile reducer action.payload:', action.payload.value)
-            return {...state.state, [action.payload.property]: action.payload.value};
+            return {...state, [action.payload.property]: action.payload.value};
 		case 'CANCEL_EDIT':
-            return {state: {}};
+            return state;
         default:
             return state;
     }

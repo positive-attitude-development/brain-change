@@ -58,11 +58,22 @@ function* updateAdminLevel(action) {
   }
 }
 
+function* updateProfile(action){
+  try{
+    console.log('updateProfile action.payload:', action.payload)
+    yield axios.put(`/api/admin/profile/${action.payload.admin_id}`, action.payload)
+    yield put({type: 'FETCH_PROFILE', payload: action.payload.admin_id})
+  }catch(error){
+    console.log('error in updateProfile:', error)
+  }
+}
+
 function* adminSaga() {
   yield takeLatest('FETCH_ADMIN', fetchAdmin);
   yield takeLatest('FETCH_PROFILE', fetchProfile);
   yield takeEvery('FETCH_ADMIN_CONTACT', fetchAdminContact); 
-  yield takeLatest('UPDATE_ADMIN_LEVEL', updateAdminLevel)
+  yield takeLatest('UPDATE_ADMIN_LEVEL', updateAdminLevel);
+  yield takeLatest('UPDATE_PROFILE', updateProfile)
 }
 
 export default adminSaga;
