@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, Tooltip, Grid, TextField, Button, MenuItem, Paper, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
+import {Card, CardContent, Tooltip, Grid, TextField, Button, MenuItem, Dialog, DialogActions, DialogTitle, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 
@@ -227,7 +227,7 @@ class IndividualParticipant extends Component{
 									<TextField label="Email Address:" defaultValue={person.email}/>
 
 									<TextField label="Phone Number:" defaultValue={person.phone_number}/>
-									{person.category == "Offender" &&
+									{person.category === "Offender" &&
                 						<>
 										<br></br>Offender Data:<br></br>
 
