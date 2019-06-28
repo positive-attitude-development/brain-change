@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, MenuItem, Dialog, DialogActions, DialogTitle, DialogContentText, DialogContent} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, MenuItem, Dialog, DialogActions, DialogTitle, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
@@ -30,8 +30,7 @@ class Profile extends Component{
 	};//end componentDidMount
 
 	handleChange = propertyName => (event) => {
-		console.log(event.target.value)
-		this.props.dispatch({type: 'EDIT_PROFILE'})
+		this.props.dispatch({type: 'EDIT_PROFILE', payload: {property: propertyName, value: event.target.value}})
 	};//end handleChange
 
 	handleEdit = () => {
@@ -153,7 +152,8 @@ class Profile extends Component{
 								<TextField label="Username:" defaultValue={profile.username}
 									  onChange={this.handleChange('username')}/>
 
-								<TextField label="First Name:" defaultValue={profile.first_name}/>
+								<TextField label="First Name:" defaultValue={profile.first_name}
+									onChange={this.handleChange('first_name')}/>
 
 								<TextField label="Last Name:" defaultValue={profile.last_name}/>
 
