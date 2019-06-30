@@ -49,6 +49,12 @@ export class Elimination2 extends Component {
         })
     }
 
+    handleClick = () => {
+        this.setState({
+            round2: [4, 8, 9, 10, 13, 14, 15, 16, 18]
+        })
+    }
+
     
     render() {        
         let newArray = this.props.values.filter((value) => {
@@ -68,7 +74,7 @@ export class Elimination2 extends Component {
 
                 <Paper className="paper">
                     <div className="valuesList">
-                        <h2 className="inst">Remove the 9 least important values</h2>
+                        <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
                         <ul className="elim2List">
                             {newArray.map(value => {
                                     return <li key={value.id} onClick={this.handleSelect} className={this.state.round2.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>

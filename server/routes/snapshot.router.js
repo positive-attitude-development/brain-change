@@ -4,7 +4,7 @@ const router = express.Router();
 
 //POST results
 router.post('/result', async (req, res) => {
-    console.log('Post result req.body', req.body);
+    console.log('Post result req.body:', req.body);
     const connection = await pool.connect();
     try {
         await connection.query('BEGIN');
@@ -17,33 +17,45 @@ router.post('/result', async (req, res) => {
 
         //Save result id and post into other tables
         const resultId = result.rows[0].id;
+        let belief1 = req.body.belief[0];
+        let belief2 = req.body.belief[1];
+        let belief3 = req.body.belief[2];
 
-        const addBelief = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
-                            VALUES ($1, $2, $3, $4)`;
-        const beliefValues = [resultId, userResult.belief, userResult.challenged, userResult.type];
-        await connection.query(addBelief, beliefValues);
+        const addBelief1 = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
+                            VALUES ($1, $2, $3, $4);`;
+        const addBelief2 = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
+                            VALUES ($1, $2, $3, $4);`;
+        const addBelief3 = `INSERT INTO result_belief ("result_id", "belief", "challenged", "type")
+                            VALUES ($1, $2, $3, $4);`;
+        const beliefValues1 = [1, belief1, userResult.challenged, null];
+        const beliefValues2 = [1, belief2, false, null];
+        const beliefValues3 = [1, belief3, false, null];
+
+        await connection.query(addBelief1, beliefValues1);
+        await connection.query(addBelief2, beliefValues2);
+        await connection.query(addBelief3, beliefValues3);
+
+        console.log('belief req.body:', req.body.belief[0]);
+        
 
         const addCore = `INSERT INTO result_core ("result_id", "value_id", "ranks")
-                         VALUES ($1, $2, $3)
-                         RETURNING "result_id";`;
-        const addCoreValues = [resultId, userResult.value_id, userResult.ranks];
+                         VALUES ($1, $2, $3);`;
+        const addCoreValues = [resultId, userResult.core_value_id, userResult.ranks];
         await connection.query(addCore, addCoreValues);
 
         const addElimination = `INSERT INTO result_elimination ("result_id", "value_id", "order")
-                                VALUES ($1, $2, $3)
-                                RETURNING "result_id";`;
+                                VALUES ($1, $2, $3);`;
         const addEliminationValues = [resultId, userResult.elim_value_id, userResult.order];
         await connection.query(addElimination, addEliminationValues);
 
         const addRound = `INSERT INTO result_round ("result_id", "elimination_round", "times")
-                            VALUES ($1, $2, $3)
-                            RETURNING "result_id";`;
+                            VALUES ($1, $2, $3);`;
         const addRoundValues = [resultId, userResult.elimination_round, userResult.times];
         await connection.query(addRound, addRoundValues);
 
         const addViolator = `INSERT INTO result_violators (result_id, value_id)
                                 VALUES ($1, $2);`;
-        const addViolatorValues = [resultId, userResult.value_id];
+        const addViolatorValues = [resultId, userResult.violator_value_id];
         await connection.query(addViolator, addViolatorValues);
         await connection.query('COMMIT');
         res.json(resultId);

@@ -46,6 +46,12 @@ export class Elimination4 extends Component {
         })
     }
 
+    handleClick = () => {
+        this.setState({
+            round4: [28, 29, 30, 31, 32]
+        })
+    }
+
     render() {
         // Creating array of all the values minus previous selected values
         let reducer = this.props.newValues;
@@ -67,7 +73,7 @@ export class Elimination4 extends Component {
                 <StatusBar status={this.state.statusBar} />
                 <Paper className="paper">
                     <div className="valuesList">
-                        <h2 className="inst">Remove the 5 least important values</h2>
+                        <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
                         <ul className="elim4List">
                             {newArray.map(value => {
                                 return <li key={value.id} onClick={this.handleSelect} className={this.state.round4.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
