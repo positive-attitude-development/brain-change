@@ -42,11 +42,23 @@ function* fetchIndividual(action){
     }
 }
 
+function* updateParticipant(action){
+  try{
+    console.log('updateParticipant action.payload:', action.payload)
+    yield axios.put(`/api/participant/${action.payload.id}`, action.payload)
+    yield put({type: 'CANCEL_EDIT_PARTICIPANT'})
+    yield put({type: 'FETCH_INDIVIDUAL', payload: action.payload.id})
+  }catch(error){
+    console.log('error in updateParticipant:', error)
+  }
+}
+
 function* participantSaga() {
     yield takeLatest('FETCH_PARTICIPANTS', fetchParticipants);
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
     yield takeLatest('ADD_OFFENDER', addOffender);
+    yield takeLatest('UPDATE_PARTICIPANT', updateParticipant)
 }
 
 export default (participantSaga);

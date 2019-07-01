@@ -133,5 +133,37 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 	}
 })
 
+//updates participant info
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('update participant req.body:', req.body)
+  const isOffender = req.body.category
+  console.log('participant category:', isOffender)
+  const connection = await pool.connect()
+  try{
+    await connection.query('BEGIN');
+    const updateParticipant = `UPDATE "participant" 
+	  SET first_name = $1, last_name = $2, age = $3, gender = $4, category = $5, state = $6, email = $7, phone_number = $8
+      WHERE "participant".id = $9;`;
+    const updateParticipantValues = [req.body.first_name, req.body.last_name, req.body.age, req.body.gender, req.body.category, req.body.state, req.body.email, req.body.phone_number, req.body.id]
+    await connection.query(updateParticipant, updateParticipantValues)
+	if(isOffender === 'Offender'){
+	  const updateOffender = `UPDATE "offender"
+      SET offender_system_id = $1, system_id = $2, violent_offender = $3, felon = $4, population_id = $5
+      WHERE participant_id = $6;`;
+    const updateOffenderValues = [req.body.offender_system_id, req.body. system_id, req.body.violent_offender, req.body.felon, req.body.population_id, req.body.id]
+    await connection.query(updateOffender, updateOffenderValues);
+  	}
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  }catch(error){
+		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
+		await connection.query('ROLLBACK');
+		console.log('Transaction error - rolling back participant update:', error);
+		res.sendStatus(500);
+	}finally{
+		connection.release()
+	}
+});//end participant update PUT
+
 
 module.exports = router;

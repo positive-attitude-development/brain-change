@@ -62,6 +62,7 @@ function* updateProfile(action){
   try{
     console.log('updateProfile action.payload:', action.payload)
     yield axios.put(`/api/admin/profile/${action.payload.admin_id}`, action.payload)
+    yield put({type: 'CANCEL_EDIT'})
     yield put({type: 'FETCH_PROFILE', payload: action.payload.admin_id})
   }catch(error){
     console.log('error in updateProfile:', error)

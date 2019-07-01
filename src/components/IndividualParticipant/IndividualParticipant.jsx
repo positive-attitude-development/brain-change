@@ -47,54 +47,29 @@ class IndividualParticipant extends Component{
 		this.setState({
 			isEditable: true
 		})
-		//need to set up separate editProfileReducer to handle any edits made to profile, this way
-		//any changes can be made to the editProfileReducer so if Cancel Edit button is clicked, 
-		//profile will revert back to profileReducer info and no changes are made to database
+		//need to set up separate editPartipcantReducer to handle any edits made to participant, this way
+		//any changes can be made to the editParticpantReducer so if Cancel Edit button is clicked, 
+		//participant will revert back to individualPartipcantReducer info and no changes are made to database
 		this.props.dispatch({type: 'SET_EDIT_PARTICIPANT', payload: this.props.individual[0]})
 	};//end handleEdit
 
 	handleCancelEdit = () => {
 		this.setState({
-			isEditable: false,
-			participant: {
-				first_name: '',
-				last_name: '',
-				age: '',
-				gender: '',
-				category: '',
-				state: '',
-				email_address: '',
-				phone_number: '',
-				url: '',
-			},
-			offender: {
-				system_id: 0,
-				offender_system_id: 0,
-				felon: '',
-				violent_offender: '',
-				population_id: 0
-			}
+			isEditable: false
 		})
-		
+		this.props.dispatch({type: 'CANCEL_EDIT_PARTICIPANT'})
 	};//end handleCancelEdit
 
 	handleInputChange = propertyName => (event) => {
-	    this.setState({
-			participant:{
-				...this.state.participant,
-				[propertyName]: event.target.value,
-			}
-	    });
+		this.props.dispatch({type: 'EDIT_PARTICIPANT', payload: {property: propertyName, value: event.target.value}})
 	};//end handleInputChange
 
-	handleOffenderInput = propertyName => (event) => {
-	    this.setState({
-			offender:{
-				...this.state.offender,
-				[propertyName]: event.target.value,
-			}
-	    });
-	};//end handleOffenderInput
+	saveChanges = () => {
+		this.props.dispatch({type: 'UPDATE_PARTICIPANT', payload: this.props.editParticipant})
+		this.setState({
+			isEditable: false
+		})
+	};//end handle saveChanges
 
 	render(){
 		const classes = this.props;
@@ -119,48 +94,44 @@ class IndividualParticipant extends Component{
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
-								<TextField disabled label="First Name:" defaultValue={person.first_name}/>
+								<TextField disabled label="First Name:" value={person.first_name}/>
 
-								<TextField disabled label="Last Name:" defaultValue={person.last_name}/>
+								<TextField disabled label="Last Name:" value={person.last_name}/>
 
-								<TextField disabled label="Age:" defaultValue={person.age}/>
+								<TextField disabled label="Age:" value={person.age}/>
 
-								<TextField disabled label="Gender:" defaultValue={person.gender}/>
+								<TextField disabled label="Gender:" value={person.gender}/>
 
-								<TextField disabled label="Category:" defaultValue={person.category}/>
+								<TextField disabled label="Category:" value={person.category}/>
 
-								<TextField disabled label="Email Address:" defaultValue={person.email}/>
+								<TextField disabled label="Email Address:" value={person.email}/>
 
-								<TextField disabled label="Phone Number:" defaultValue={person.phone_number}/>
+								<TextField disabled label="Phone Number:" value={person.phone_number}/>
 								<br></br>
 
 								{person.category === "Offender" &&
 								<>
 								<br></br>Offender Data:<br></br>
 
-								<TextField disabled label="System:" select margin="normal" 
-									value={person.system }>
+								<TextField disabled label="System:" select margin="normal" value={person.system }>
 									{this.props.system.map((system) => {
 										return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
 									})}</TextField>
 
-								<TextField disabled label="System ID#:" defaultValue={person.system_id}/>
+								<TextField disabled label="System ID#:" value={person.system_id}/>
 
-								<TextField disabled label="Population:" select margin="normal" 
-									value={person.population }>
+								<TextField disabled label="Population:" select margin="normal" value={person.population }>
 									{this.props.population.map((population) => {
 										return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
 									})}</TextField>
 
 								<TextField disabled select margin="normal" 
-									label="Felony?:" value={person.felon}
-									onChange={this.handleInputChange('felon')} >
+									label="Felony?:" value={person.felon}>
 									<MenuItem value={true}>Yes</MenuItem>
 									<MenuItem value={false}>No</MenuItem></TextField>
 
 								<TextField disabled select margin="normal" 
-									label="Violent Crime?:" value={person.violent_offender}
-									onChange={this.handleInputChange('violent_offender')} >
+									label="Violent Crime?:" value={person.violent_offender}>
 									<MenuItem value={true}>Yes</MenuItem>
 									<MenuItem value={false}>No</MenuItem></TextField>
 								</>
@@ -177,9 +148,9 @@ class IndividualParticipant extends Component{
 
 									<TextField label="Last Name:" onChange={this.handleInputChange('last_name')} defaultValue={person.last_name}/>
 
-									<TextField label="Age:" type="number" defaultValue={person.age}/>
+									<TextField label="Age:" type="number" onChange={this.handleInputChange('age')} defaultValue={person.age}/>
 
-									<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={person.gender}>
+									<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={this.props.editParticipant.gender}>
 										<MenuItem value="M">Male</MenuItem>
 										<MenuItem value="F">Female</MenuItem>
 										<MenuItem value="Other">Other</MenuItem>
@@ -187,7 +158,7 @@ class IndividualParticipant extends Component{
 									</TextField>
 
 									<TextField label="Category:" select margin="normal"
-										value={person.category} onChange={this.handleInputChange('category')}>
+										value={this.props.editParticipant.category} onChange={this.handleInputChange('category')}>
 			                                {this.props.category.map((category) => {
 			                                    return(<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>)
 			                                })}
@@ -200,28 +171,37 @@ class IndividualParticipant extends Component{
                 						<>
 										<br></br>Offender Data:<br></br>
 
-											<TextField label="System:" select margin="normal" 
-												value={person.system }>
-												{this.props.system.map((system) => {
-													return(<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>)
-												})}</TextField>
+										{/* <TextField label="Category:" select margin="normal"
+										value={this.props.editParticipant.category} onChange={this.handleInputChange('category')}>
+			                                {this.props.category.map((category) => {
+			                                    return(<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>)
+			                                })}
+			                        </TextField> */}
 
-											<TextField label="System ID#:" defaultValue={person.system_id}/>
+											<TextField label="System:" select margin="normal" 
+												value={this.props.editParticipant.offender_system_id} onChange={this.handleInputChange('offender_system_id')}>
+												{this.props.system.map((system) => {
+													return(<MenuItem key={system.id} value={system.id}>{system.system}</MenuItem>)
+												})}
+											</TextField>
+
+											<TextField label="System ID#:" defaultValue={person.system_id} onChange={this.handleInputChange('system_id')}/>
 
 											<TextField label="Population:" select margin="normal" 
-												value={person.population }>
+												value={this.props.editParticipant.population_id} onChange={this.handleInputChange('population_id')}>
 												{this.props.population.map((population) => {
-													return(<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>)
-												})}</TextField>
+													return(<MenuItem key={population.id} value={population.id}>{population.population}</MenuItem>)
+												})}
+											</TextField>
 
 											<TextField select margin="normal" 
-												label="Felony?:" value={person.felon}
+												label="Felony?:" value={this.props.editParticipant.felon}
 												onChange={this.handleInputChange('felon')} >
 												<MenuItem value={true}>Yes</MenuItem>
 												<MenuItem value={false}>No</MenuItem></TextField>
 
 											<TextField select margin="normal" 
-												label="Violent Crime?:" value={person.violent_offender}
+												label="Violent Crime?:" value={this.props.editParticipant.violent_offender}
 												onChange={this.handleInputChange('violent_offender')} >
 												<MenuItem value={true}>Yes</MenuItem>
 												<MenuItem value={false}>No</MenuItem></TextField>
@@ -230,7 +210,7 @@ class IndividualParticipant extends Component{
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
-										<Button onClick={this.handleCancelEdit} color="primary">Save Changes</Button>
+										<Button onClick={this.saveChanges} variant="contained" color="primary">Save Changes</Button>
 									</DialogActions>
 							</Dialog>
 
@@ -266,6 +246,7 @@ const mapStateToProps = state => ({
   category: state.category,
   population: state.population,
   system: state.system,
+  editParticipant: state.editParticipant,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));

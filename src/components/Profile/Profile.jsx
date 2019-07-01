@@ -133,7 +133,7 @@ class Profile extends Component{
 									onChange={this.handleChange('city')}/>
 
 								<TextField select margin="normal" onChange={this.handleChange('state')}
-									label="State:" value={profile.state}>
+									label="State:" value={this.props.edit.state}>
 									<MenuItem value="AL">Alabama</MenuItem>
 									<MenuItem value="AK">Alaska</MenuItem>
 									<MenuItem value="AZ">Arizona</MenuItem>
