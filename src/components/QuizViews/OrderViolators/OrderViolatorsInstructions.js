@@ -5,7 +5,7 @@ import StatusBar from '../StatusBar';
 
 import './OrderViolatorsInstructions.css'
 
-export class OrderViolatorsInstructions extends Component {
+class OrderViolatorsInstructions extends Component {
 
     state = {
         statusBar : 78

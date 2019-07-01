@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
+import React, { Component } from 'react' 
 import {  Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
@@ -7,7 +6,7 @@ import StatusBar from '../StatusBar';
 
 import './Elimination3.css'
 
-export class Elimination3 extends Component {
+class Elimination3 extends Component {
 
     state = {
         round3: [],
@@ -17,6 +16,16 @@ export class Elimination3 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+        let now = new Date();
+        let sec = now.getSeconds();
+        let min = now.getMinutes();
+        let hour = now.getHours(); 
+
+        let totalTime =((min * 60 ) + (hour * 360) + sec)
+
+        this.setState({
+            time: totalTime
+        })
     }
 
     // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
@@ -25,7 +34,16 @@ export class Elimination3 extends Component {
         if(this.state.round3.length !== 5) {
             return alert('Please select 5 values that are least important to you.');
         } else  {
+            let next = new Date(); 
+            let sec = next.getSeconds();
+            let min = next.getMinutes(); 
+            let hour = next.getHours(); 
+
+            let nextTime = ((min * 60 ) + (hour * 360) + sec)
+            let totalTime3 = nextTime - this.state.time 
+
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
+            this.props.dispatch({type: 'SET_NEW_TIME', name: 'round3Time', payload: totalTime3 });
             this.props.history.push('/ElimInstructions4')
         }
     }

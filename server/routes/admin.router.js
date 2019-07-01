@@ -82,6 +82,34 @@ router.put('/level', (req, res) => {
       console.log('Error in PUT access level:', error);
       res.sendStatus(500);
     });
-})
+});
+
+//updates admin/owner profile info
+router.put('/profile/:id', rejectUnauthenticated, async (req, res) => {
+	console.log('req.body:', req.body)
+  const connection = await pool.connect()
+  try{
+    await connection.query('BEGIN');
+    const updateProfile = `UPDATE "admin" SET username = $1
+      WHERE "admin".id = $2;`;
+    const updateProfileValues = [req.body.username, req.user.id]
+    await connection.query(updateProfile, updateProfileValues)
+    const updateProfileContact = `UPDATE "admin_contact"
+      SET first_name = $1, last_name = $2, title = $3, organization = $4, email_address = $5, phone_number = $6,
+      street_address = $7, street_address2 = $8, city = $9, state = $10, zipcode = $11
+      WHERE admin_id = $12;`;
+    const updateContactValues = [req.body.first_name, req.body.last_name, req.body.title, req.body.organization, req.body.email_address, req.body.phone_number, req.body.street_address, req.body.street_address2, req.body.city, req.body.state, req.body.zipcode, req.user.id]
+    await connection.query(updateProfileContact, updateContactValues);
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  }catch(error){
+		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
+		await connection.query('ROLLBACK');
+		console.log('Transaction error - rolling back admin profile update:', error);
+		res.sendStatus(500);
+	}finally{
+		connection.release()
+	}
+});//end profile update PUT
 
 module.exports = router;

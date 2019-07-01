@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import './OrderValuesInstructions.css'
 
-export class OrderValuesInstructions extends Component {
+class OrderValuesInstructions extends Component {
 
     state = {
         statusBar : 59

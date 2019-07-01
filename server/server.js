@@ -14,6 +14,7 @@ const valueRouter = require('./routes/values.router');
 const snapshotRouter = require('./routes/snapshot.router');
 const adminContactRouter = require('./routes/adminContact.router'); 
 const participantRouter = require('./routes/participant.router');
+const urlRouter = require('./routes/url.router');
 
 
 // Body parser middleware
@@ -34,7 +35,7 @@ app.use('/api/values', valueRouter);
 app.use('/api/snapshot', snapshotRouter);
 app.use('/api/adminContact', adminContactRouter); 
 app.use('/api/participant', participantRouter);
-
+app.use('/api/url', urlRouter);
 
 // Serve static files
 app.use(express.static('build'));
