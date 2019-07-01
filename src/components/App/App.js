@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
+import {HashRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -44,13 +39,19 @@ class App extends Component {
               exact path="/about"
               component={AboutPage}/>
 
+            <Route
+              exact path="/quiz"
+              component={QuizViewWelcome}/>
+
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+
             <ProtectedRoute
               exact path="/home"
               component={UserPage}/>
+
             <ProtectedRoute
               exact path="/all-records"
               component={AllRecords}/>
@@ -64,6 +65,7 @@ class App extends Component {
             <ProtectedRoute
               exact path="/profile"
               component={Profile}/>
+
             <ProtectedRoute
               exact path="/admins"
               component={Admin}/>
@@ -76,17 +78,9 @@ class App extends Component {
               exact path="/individualparticipant/:id"
               component={IndividualParticipant}/>
 
-            <Route
-              exact path="/quiz"
-              component={QuizViewWelcome}/>
-
-            <Route
+            <ProtectedRoute
               exact path="/dataview"
               component={DataView}/>
-
-            <Route
-              exact path="/quiz/:url"
-              component={QuizViewWelcome}/>
 
             {/* If none of the other routes matched, we will show a 404. */}
             {/* <Route render={() => <h1>404</h1>} /> */}
@@ -97,5 +91,8 @@ class App extends Component {
       </Router>
   )}
 }
+const mapStateToProps = state => ({
+  admin: state.admin,
+});
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);

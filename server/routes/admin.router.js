@@ -60,7 +60,8 @@ router.post('/register', async (req, res, next) => {
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful or send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-  res.sendStatus(200);
+  console.log('login req.user:', req.user)
+  res.json(req.user);
 });
 
 // clear all server session information about this admin
