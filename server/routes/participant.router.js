@@ -111,6 +111,23 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
 	}
 });
 
+//POST route for self-registering participants
+router.post('/self-register', (req, res) => {
+	console.log('add participant req.body:', req.body);
+	const addParticipant = `INSERT INTO "participant" ("admin_id", "first_name", "last_name", "age", "gender", "category", "state", "email", "phone_number")
+		VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		RETURNING "id";`;
+	const addParticipantValues = [req.body.admin_id, req.body.first_name, req.body.last_name, req.body.age, req.body.gender, req.body.category, req.body.state, req.body.email_address, req.body.phone_number];
+	pool.query(addParticipant, addParticipantValues)
+		.then(result => {
+			console.log('Participant self registered')
+			res.send({participant_id: result.rows[0].id});
+		}).catch(error => {
+			console.log(error);
+			res.sendStatus(500);
+		})
+});
+
 
 //GET route for all participants (owner only)
 router.get('/all', rejectUnauthenticated, (req, res) => {
