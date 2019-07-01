@@ -92,10 +92,6 @@ class MyParticipants extends Component{
 		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
-	// handleSubmitOffender = () => {
-	// 	this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
-	// };//end handleSubmit
-
 	renderInputs = () =>{
 		let input;
 		if(this.state.participant.category === "Offender"){
@@ -145,7 +141,6 @@ class MyParticipants extends Component{
 	};//end viewParticipant
 
 	render(){
-		//console.log('this.state:', this.state)
 		const {classes} = this.props;
 		let submitButton;
 		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
