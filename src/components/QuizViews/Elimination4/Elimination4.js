@@ -85,7 +85,7 @@ class Elimination4 extends Component {
                 }
             }
             return true;
-        })
+        });
 
         return (
             <div>

@@ -15,13 +15,16 @@ class FinalResults extends Component {
             dates: '',
             percent_core: 0,
             percent_violators: 0,
+            // participantId: 0,
             belief1: '',
             belief2: '',
             belief3: '',
             challenged1: false,
-            challenged1: false,
-            challenged1: false,
-            type: '',
+            challenged2: false,
+            challenged3: false,
+            type1: '',
+            type2: '',
+            type3: '',
             coreValue1: 0,
             coreValue2: 0,
             coreValue3: 0,
@@ -143,30 +146,41 @@ class FinalResults extends Component {
         let round4 = reducer.round4;
         let round5 = reducer.round5;
         let allElimValues = round1.concat(round2, round3, round4, round5);
-        console.log('show all eliminated values', allElimValues[0]);
         
         // Get percentage of core values and violator values
         let percents = reducer.percents
-        console.log('show core percent', percents.valuesPercent);
     
         // Get all 3 beliefs
         let beliefs = reducer.beliefs;
-        console.log('show beliefs', beliefs.belief1);
 
         // Get type of belief
         let testedBelief = reducer.testedBelief;
-        console.log('show type of belief:', testedBelief.typeOfBelief)
+
+        // Show which belief is challenged
+        let challenged;
+        if(testedBelief.testedBelief === beliefs.belief1) {
+            challenged = 'challenged1';
+        } else if (testedBelief.testedBelief === beliefs.belief2) {
+            challenged = 'challenged2';
+        } else if (testedBelief.testedBelief === beliefs.belief3) {
+            challenged = 'challenged3';
+        }
+        
+        // Show challenged belief with a type
+        let type;
+        if (testedBelief.testedBelief === beliefs.belief1) {
+            type = 'type1';
+        } else if (testedBelief.testedBelief === beliefs.belief2) {
+            type = 'type2';
+        } else if (testedBelief.testedBelief === beliefs.belief3) {
+            type = 'type3';
+        }
 
         // Get 5 core values
         let coreValues = reducer.orderCore
-        console.log('show core values:',coreValues[0]);
 
         // Get 5 violator values
         let violatorValues = reducer.orderViolators;
-        console.log('Show selected violator:', violatorValues[0]);
-
-
-
 
         // Get today's dates
         let today = new Date();
@@ -190,12 +204,9 @@ class FinalResults extends Component {
                 belief3: beliefs.belief3,
                 percent_core: percents.valuesPercent,
                 percent_violators: percents.violatorPercent,
-                challenged1: true,
-                challenged2: false,
-                challenged3: false,                
-                type1: testedBelief.typeOfBelief,
-                type2: null,
-                type3: null,
+                // participantId: this.props.reduxState.participantReducer.participant_id,
+                [challenged]: true,                
+                [type]: testedBelief.typeOfBelief,
                 coreValue1: coreValues[0],
                 coreValue2: coreValues[1],
                 coreValue3: coreValues[2],

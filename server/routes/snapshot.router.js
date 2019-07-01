@@ -14,11 +14,13 @@ router.post('/result', async (req, res) => {
         const addResult = `INSERT INTO result ("dates", "participant_id", "percent_core", "percent_violators")
                             VALUES ($1, $2, $3, $4)
                             RETURNING "id";`;
-        const addResultValues = [userResult.dates, 1, userResult.percent_core, userResult.percent_violators];
+        const addResultValues = [userResult.dates, userResult.participantId, userResult.percent_core, userResult.percent_violators];
         const result = await connection.query(addResult, addResultValues);
 
         //Save result id and post into other tables
         const resultId = result.rows[0].id;
+
+        // Created variables to assign belief request
         let belief1 = req.body.belief1;
         let belief2 = req.body.belief2;
         let belief3 = req.body.belief3;
@@ -38,7 +40,7 @@ router.post('/result', async (req, res) => {
         await connection.query(addBelief2, beliefValues2);
         await connection.query(addBelief3, beliefValues3);        
 
-        // Post to result_core table
+        // Post core values results to result_core table
         const addCore1 = `INSERT INTO result_core ("result_id", "value_id", "ranks")
                          VALUES ($1, $2, $3);`;
         const addCore2 = `INSERT INTO result_core ("result_id", "value_id", "ranks")
