@@ -57,7 +57,6 @@ function* participantSaga() {
     yield takeLatest('FETCH_PARTICIPANTS', fetchParticipants);
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
-    yield takeLatest('ADD_OFFENDER', addOffender);
     yield takeLatest('SELF_REG_PARTICIPANT', selfRegisterParticipant)
     yield takeLatest('UPDATE_PARTICIPANT', updateParticipant)
 }
