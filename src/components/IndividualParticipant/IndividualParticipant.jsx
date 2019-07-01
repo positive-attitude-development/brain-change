@@ -82,10 +82,8 @@ class IndividualParticipant extends Component{
 				let expirationDate = new Date(person.expiration_date)
 				let urlButton;
 				if(expirationDate >= today){
-					console.log('link not expired')
 					urlButton = <Tooltip title="URL Link Current" placement="right"><Button variant="outlined" color="primary">Generate New URL</Button></Tooltip>
 				}else{
-					console.log('link expired')
 					urlButton = <Button variant="contained" color="primary" onClick={() => this.generateLink(person.urlid)}>Generate New URL</Button>
 				}
 				return(

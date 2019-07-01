@@ -3,9 +3,7 @@ import {put, takeLatest } from 'redux-saga/effects';
 
 function* addParticipant(action){
     try{
-        console.log('addParticipant action.payload:', action.payload)
         let response = yield axios.post('/api/participant', action.payload)
-        console.log('addParticipant returns:', response.data)
         action.history.push(`/individualparticipant/${response.data}`);
     }catch(error){
         console.log('Error in addParticipant:', error)
@@ -24,7 +22,6 @@ function* fetchParticipants() {
 function* fetchIndividual(action){
     try{
         const response = yield axios.get(`/api/participant/individual/${action.payload}`);
-        console.log('individual participant response.data:', response.data)
         yield put({type: 'SET_INDIVIDUAL', payload: response.data});
     }catch(error){
         console.log('Error in fetchIndividual:', error)
@@ -33,7 +30,6 @@ function* fetchIndividual(action){
 
 function* updateParticipant(action){
   try{
-    console.log('updateParticipant action.payload:', action.payload)
     yield axios.put(`/api/participant/${action.payload.id}`, action.payload)
     yield put({type: 'CANCEL_EDIT_PARTICIPANT'})
     yield put({type: 'FETCH_INDIVIDUAL', payload: action.payload.id})
