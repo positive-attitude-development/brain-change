@@ -28,8 +28,8 @@ router.get('/verify', (req, res) => {
         });
 })
 
-//POST route for generating new URL for participant
-router.post('/', rejectUnauthenticated, async (req, res) => {
+//PUT route for updating expired URL links for participant
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
     const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
@@ -37,9 +37,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 	const expirationDate = getExpirationDate.rows[0].newdate;
     console.log('post url req.body:', req.body)
 	console.log('expiration date:', expirationDate)
-    const addUrl = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
-        VALUES ($1, $2, $3, $4);`;
-    const urlValues = [req.body.url, expirationDate, req.body.id, req.user.id];
+    const addUrl = `UPDATE "url" SET url = $1, expiration_date = $2
+        WHERE id = $3;`;
+    const urlValues = [req.body.url, expirationDate, req.body.urlId];
     const query = await connection.query(addUrl, urlValues)
     await connection.query('COMMIT');
     res.sendStatus(201);

@@ -4,7 +4,9 @@ import {put, takeLatest} from 'redux-saga/effects';
 function* newUrl(action){
     try{
         console.log('newUrl action.payload:', action.payload)
-        yield axios.post('/api/url', action.payload)
+        let urlid = action.payload.urlId
+        yield axios.put(`/api/url/${urlid}`, action.payload)
+        yield put({type: 'FETCH_INDIVIDUAL', payload: action.payload.id})
     }catch(error){
         console.log('error in newUrl:', error)
     }
