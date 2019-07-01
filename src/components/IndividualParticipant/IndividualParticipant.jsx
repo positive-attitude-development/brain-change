@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {Card, CardContent, Tooltip, Grid, TextField, Button, MenuItem, Dialog, DialogActions, DialogTitle, DialogContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import moment from 'moment';
 
 const styles = {
 	root: {
@@ -39,7 +41,6 @@ class IndividualParticipant extends Component{
 	generateLink = (urlid) => {
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		console.log('urlLink:', urlLink)
 		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink, urlId: urlid}})
 	};//end generateLink
 
@@ -76,14 +77,13 @@ class IndividualParticipant extends Component{
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
+				let formatExpiration = moment(person.expiration_date).format('YYYY-MM-DD')
 				let today = new Date();
 				let expirationDate = new Date(person.expiration_date)
 				let urlButton;
 				if(expirationDate >= today){
-					console.log('link not expired')
 					urlButton = <Tooltip title="URL Link Current" placement="right"><Button variant="outlined" color="primary">Generate New URL</Button></Tooltip>
 				}else{
-					console.log('link expired')
 					urlButton = <Button variant="contained" color="primary" onClick={() => this.generateLink(person.urlid)}>Generate New URL</Button>
 				}
 				return(
@@ -169,13 +169,6 @@ class IndividualParticipant extends Component{
                 						<>
 										<br></br>Offender Data:<br></br>
 
-										{/* <TextField label="Category:" select margin="normal"
-										value={this.props.editParticipant.category} onChange={this.handleInputChange('category')}>
-			                                {this.props.category.map((category) => {
-			                                    return(<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>)
-			                                })}
-			                        </TextField> */}
-
 											<TextField label="System:" select margin="normal" 
 												value={this.props.editParticipant.offender_system_id} onChange={this.handleInputChange('offender_system_id')}>
 												{this.props.system.map((system) => {
@@ -218,9 +211,13 @@ class IndividualParticipant extends Component{
 					<Card className={classes.card} raised>
 					URL Stuff:
 					<br></br>
-						<TextField disabled label="Invite Link:" value={`localhost:3000/#/quiz/${person.url}`} className={classes.input}/> <Button variant="outlined" color="primary">Copy URL</Button>
+						<TextField disabled label="Invite Link:" value={`localhost:3000/#/quiz/${person.url}`} className={classes.input}/> 
+						<CopyToClipboard text={`localhost:3000/#/quiz/${person.url}`}>
+							<Button variant="outlined" color="primary">Copy URL to Clipboard</Button>
+						</CopyToClipboard>
+						
 						<br></br>
-						<TextField disabled label="Expiration Date:" value={person.expiration_date}/>
+						<TextField disabled label="Expiration Date:" value={formatExpiration}/>
 						{urlButton}
 					</Card>
 
