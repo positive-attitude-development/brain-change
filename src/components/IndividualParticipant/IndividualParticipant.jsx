@@ -73,8 +73,6 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		console.log('this.props.individual:', this.props.individual)
-		console.log('this.props.editParticipant:', this.props.editParticipant)
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {

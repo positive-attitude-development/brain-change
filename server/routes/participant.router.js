@@ -65,7 +65,7 @@ router.post('/', rejectUnauthenticated, async (req, res, next) => {
 	console.log('expiration date:', expirationDate)
 	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
 		VALUES ($1, $2, $3, $4);`;
-	const participantURLValues = [req.body.url, expirationDate, participantId, req.user.id ]
+	const participantURLValues = [req.body.participant.url, expirationDate, participantId, req.user.id ]
 	const urlresult = await connection.query(participantURL, participantURLValues)
 	if(isOffender === 'Offender'){
 	  const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
