@@ -25,25 +25,7 @@ const styles = {
 class IndividualParticipant extends Component{
 
 	state = {
-		isEditable: false,
-		participant: {
-			first_name: '',
-			last_name: '',
-			age: '',
-			gender: '',
-			category: '',
-			state: '',
-			email_address: '',
-			phone_number: '',
-			url: '',
-		},
-		offender: {
-			system_id: 0,
-			offender_system_id: 0,
-			felon: '',
-			violent_offender: '',
-			population_id: 0
-		}
+		isEditable: false
 	}
 
 	componentDidMount(){
@@ -63,26 +45,12 @@ class IndividualParticipant extends Component{
 
 	handleEdit = () => {
 		this.setState({
-			isEditable: true,
-			participant: {
-				first_name: this.props.individual.first_name,
-				last_name: this.props.individual.last_name,
-				age: this.props.individual.age,
-				gender: this.props.individual.gender,
-				category: this.props.individual.category,
-				state: this.props.individual.state,
-				email_address: this.props.individual.email,
-				phone_number: this.props.individual.phone_number,
-				url: this.props.individual.url,
-			},
-			offender: {
-				system_id: this.props.individual.system_id,
-				offender_system_id: this.props.individual.offender_system_id,
-				felon: this.props.individual.felon,
-				violent_offender: this.props.individual.violent_offender,
-				population_id: this.props.individual.population_id
-			}
+			isEditable: true
 		})
+		//need to set up separate editProfileReducer to handle any edits made to profile, this way
+		//any changes can be made to the editProfileReducer so if Cancel Edit button is clicked, 
+		//profile will revert back to profileReducer info and no changes are made to database
+		this.props.dispatch({type: 'SET_EDIT_PARTICIPANT', payload: this.props.individual[0]})
 	};//end handleEdit
 
 	handleCancelEdit = () => {
@@ -130,7 +98,8 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		console.log('this.state:', this.state)
+		console.log('this.props.individual:', this.props.individual)
+		console.log('this.props.editParticipant:', this.props.editParticipant)
 		return(
 			<Grid className={classes.grid}>
 			{this.props.individual.map((person) => {
