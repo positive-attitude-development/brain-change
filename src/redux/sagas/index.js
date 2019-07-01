@@ -15,7 +15,6 @@ export default function* rootSaga() {
     adminSaga(),
     displayValuesSaga(),
     allRecordsSaga(),
-    displayValuesSaga(),
     participantSaga(),
     categorySaga(),
     checkUrlSaga(),

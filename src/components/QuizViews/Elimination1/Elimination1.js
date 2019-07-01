@@ -75,6 +75,12 @@ class Elimination1 extends Component {
         })
     }
 
+    handleClick = () => {
+        this.setState({
+            round1: [25, 3, 5, 24, 12, 11, 2, 1, 7]
+        })
+    }
+
 
     render() {
         console.log(this.state.time)
@@ -85,7 +91,7 @@ class Elimination1 extends Component {
                 </div>
                 <Paper className="paper">
                     <div className="valuesList">
-                        <h2 className="inst">Remove the 9 least important values</h2>
+                        <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
                         <ul className="elim1List">
                             {this.props.values.map(value => {
                                 return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>

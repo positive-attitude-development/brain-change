@@ -12,27 +12,26 @@ class EliminationInstructions1 extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="instructionView1">
                 <StatusBar status={this.state.statusBar} />
-                <div className="instructions">
-                
-                On the next screen there will be a list of values. 
-                Remove the 9 values that are the least important to you.
-                
-                 </div>
+                    <h3 className="textInst">
+                        On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
+                    </h3>
+              
 
                  <div className="giph">
 
                 </div>
                 
-            <Link to="/Elim1"> 
-                <Button
-                    color="primary"
-                    variant="contained"
-                    >
-                    Next
-                </Button> 
-            </Link>
+                <Link to="/Elim1"> 
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        className="nextBtn1"
+                        >
+                        Next
+                    </Button> 
+                </Link>
             </div>
         )
     }
