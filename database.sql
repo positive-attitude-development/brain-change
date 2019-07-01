@@ -110,7 +110,8 @@ CREATE TABLE "result_belief" (
 CREATE TABLE "result_violators"(
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
-  "value_id" INT REFERENCES "value"
+  "value_id" INT REFERENCES "value",
+  "order" INT
 );
 
 CREATE TABLE "url" (
