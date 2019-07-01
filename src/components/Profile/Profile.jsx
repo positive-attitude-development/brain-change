@@ -56,6 +56,7 @@ class Profile extends Component{
 
 	render(){
 		const {classes} = this.props;
+		console.log('this.props.admin:', this.props.admin)
 		return(
 			<div>
 				{this.props.profile.map((profile) =>{
