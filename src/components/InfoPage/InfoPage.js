@@ -1,15 +1,12 @@
 import React from 'react';
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 const InfoPage = () => (
   <div>
-    <p>
-      Info Page
-    </p>
+    <p>Info Page</p>
+
+    <p>Your account has been disabled, please contact somebody about this.</p>
+
   </div>
 );
 

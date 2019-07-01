@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
     let queryText = `SELECT * FROM value ORDER BY RANDOM();`;
     pool.query(queryText)
     .then((results) => {
-        console.log('get values results.row:', results.rows);
         res.send(results.rows)
     }).catch(error => {
         console.log('Error in GET values:', error);
