@@ -103,7 +103,7 @@ CREATE TABLE "result_belief" (
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
   "belief" VARCHAR,
-  "challenged" VARCHAR,
+  "challenged" BOOLEAN,
   "type" VARCHAR
 );
 
