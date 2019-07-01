@@ -28,12 +28,27 @@ function* fetchIndividual(action){
     }
 }
 
-function* updateParticipant(action){
-  try{
+function* selfRegisterParticipant(action) {
+    try {
+        console.log('selfRegisterParticipant action.payload:', action.payload)
+        let response = yield axios.post('/api/participant/self-register', action.payload)
+        console.log('selfRegisterParticipant returns:', response.data)
+        yield put({type: 'SET_URL', payload: {
+            admin_id : action.payload.admin_id,
+            first_name: action.payload.first_name,
+            participant_id: response.data.participant_id
+        }})
+    } catch (error) {
+        console.log('Error in selfRegisterParticipant:', error)
+    }
+}
+
+function* updateParticipant(action) {
+  try {
     yield axios.put(`/api/participant/${action.payload.id}`, action.payload)
     yield put({type: 'CANCEL_EDIT_PARTICIPANT'})
     yield put({type: 'FETCH_INDIVIDUAL', payload: action.payload.id})
-  }catch(error){
+  } catch(error){
     console.log('error in updateParticipant:', error)
   }
 }
@@ -42,7 +57,9 @@ function* participantSaga() {
     yield takeLatest('FETCH_PARTICIPANTS', fetchParticipants);
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
+    yield takeLatest('ADD_OFFENDER', addOffender);
+    yield takeLatest('SELF_REG_PARTICIPANT', selfRegisterParticipant)
     yield takeLatest('UPDATE_PARTICIPANT', updateParticipant)
 }
 
-export default (participantSaga);
+export default participantSaga;
