@@ -25,7 +25,7 @@ class SnapShot extends Component {
             <div className= "table">
 
                 <h2>SnapShot</h2>
-                {JSON.stringify(this.props.reduxState.newValuesReducer.core)}
+                {JSON.stringify(this.props.reduxState.newValuesReducer.orderCore)}
 
 
                 <Paper >
