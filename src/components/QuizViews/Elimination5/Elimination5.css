@@ -2,31 +2,10 @@
     list-style-type: none;
     columns: 2;
     text-align: center;
+    column-gap: 0px;
 }
 
-.striked {
-    text-decoration: line-through;
-    font-weight: bold;
-    color: lightgray;
-    cursor: pointer;
-    margin: 18px 0;
-} 
-
-.unStriked {
-    text-decoration: none;
-    cursor: pointer;
-    margin: 18px 0;
-}
-
-.valuesList {
-    padding: 20px;
-}
-
-.paper {
-    margin-top: 60px;
-}
-
-.inst {
+.paper5 {
     text-align: center;
-    margin-bottom: 30px;
+    margin: 30px 300px 0px 300px;
 }

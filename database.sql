@@ -82,7 +82,8 @@ CREATE TABLE "result_round" (
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
   "elimination_round" INT,
-  "times" VARCHAR,
+  "times" VARCHAR
+
 );
 
 CREATE TABLE "result_elimination" (
