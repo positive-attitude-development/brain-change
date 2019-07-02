@@ -7,6 +7,7 @@ import './QuizViewWelcome.css';
 class QuizViewWelcome extends Component {
 
     componentDidMount() {
+        
         this.props.dispatch({type: 'VERIFY_URL', payload: this.props.match.params.url})
     }
 
@@ -16,6 +17,7 @@ class QuizViewWelcome extends Component {
     }
 
     render() {
+        console.log('this.props.match.params:', this.props.match.params)
         return (      
             <div>
                 <h1>Digital Brain Coach</h1>
