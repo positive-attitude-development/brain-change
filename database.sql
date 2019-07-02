@@ -72,7 +72,7 @@ CREATE TABLE "value" (
 
 CREATE TABLE "result" (
   "id" SERIAL PRIMARY KEY,
-  "dates" DATE,
+  "dates" VARCHAR,
   "participant_id" INT REFERENCES "participant",
   "percent_core" INT,
   "percent_violators" INT
@@ -82,7 +82,7 @@ CREATE TABLE "result_round" (
   "id" SERIAL PRIMARY KEY,
   "result_id" INT REFERENCES "result",
   "elimination_round" INT,
-  "times" TIME
+  "times" VARCHAR
 );
 
 CREATE TABLE "result_elimination" (

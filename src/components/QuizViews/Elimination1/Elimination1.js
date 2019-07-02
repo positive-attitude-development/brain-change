@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import './Elimination1.css';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
-import {  Button } from '@material-ui/core';
-import StatusBar from '../StatusBar'
+import { Paper, Button, Grid } from '@material-ui/core';
+import StatusBar from '../StatusBar';
+import Banner from '../Banner/Banner';
 
 
 
@@ -86,9 +86,12 @@ class Elimination1 extends Component {
         console.log(this.state.time)
         return (
             <div>
-                <div>
-                    <StatusBar status={this.state.statusBar} />
+                <div className="banner">
+                    <Banner />
                 </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <Paper className="paper">
                     <div className="valuesList">
                         <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
@@ -98,8 +101,13 @@ class Elimination1 extends Component {
                             })}
                         </ul>
                     </div>
-                    <div>
-                        <button onClick={this.handleNext}>Next</button>
+                    <div className="nextBtn1">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}>
+                            Next
+                        </Button>
                     </div>
                 </Paper>
             </div>
