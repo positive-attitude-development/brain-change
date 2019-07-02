@@ -22,8 +22,6 @@ function* loginAdmin(action) {
     yield put({type: 'FETCH_ADMIN'});
     if (accessLevel === 1){
     	action.history.push('/info');
-    }else if(accessLevel === 2){
-		action.history.push('/profile');
     }else if(accessLevel === 3){
 		action.history.push('/myparticipants');
     }else if(accessLevel >= 4){
