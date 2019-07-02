@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Card, CardContent, CardActions, TextField, Button, Table, TableBody, TableHead, TableCell, TableRow, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
+import MyParticipantsTable from './MyParticipantsTable';
 
 const styles = {
 	root: {
@@ -264,7 +265,10 @@ class MyParticipants extends Component{
 				<br></br>
 	
 			<h3 className={classes.heading}>My Participants:</h3>
-				<Table className={classes.table}>
+				{this.props.participant[0] &&
+					<MyParticipantsTable history={this.props.history} />
+				}
+				{/* <Table className={classes.table}>
 					<TableHead>
 						<TableRow>
 							<TableCell>First Name</TableCell>
@@ -295,7 +299,7 @@ class MyParticipants extends Component{
 							)
 						})}
 					</TableBody>
-				</Table>
+				</Table> */}
 			</div>
 		)
 	}

@@ -68,6 +68,7 @@ class QuizViewWelcomeForm extends Component {
                         required
                         select
                         style={{width:80}}
+
                         margin="normal"
                         label="State"
                         value={this.state.state}

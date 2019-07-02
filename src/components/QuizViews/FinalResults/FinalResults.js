@@ -331,18 +331,18 @@ class FinalResults extends Component {
             <div>
                 <StatusBar status={this.state.statusBar} />
 
+
                 <SnapShot Values = {this.props.reduxState} /> 
                 
-              <div className = "button">
+  
+                FINISHED !!
                 <Button
-                    align="center"
                     color="primary"
                     variant="contained"
                     onClick={this.handleSubmit}
                     >
                     Submit
                 </Button>
-              </div>
             </div>
         )
     }

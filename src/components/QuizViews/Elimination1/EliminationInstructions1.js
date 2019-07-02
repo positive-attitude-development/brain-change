@@ -17,7 +17,11 @@ class EliminationInstructions1 extends Component {
     }
     render() {
         return (
+
             <Paper>
+
+            <div className="instructionView1">
+
                 <StatusBar status={this.state.statusBar} />
                     <h3 className="textInst">
                         On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
@@ -27,7 +31,6 @@ class EliminationInstructions1 extends Component {
                  <div className="giph">
 
                 </div>
-                
                 
                   <div className="button">
                     <Button  
@@ -39,6 +42,7 @@ class EliminationInstructions1 extends Component {
                     </Button> 
                   </div>
             </Paper>
+
         )
     }
 }

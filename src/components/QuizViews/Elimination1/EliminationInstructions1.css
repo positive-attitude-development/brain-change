@@ -1,7 +1,27 @@
+
 .textInst {
     text-align: center;  
     width: 380px; 
     height: 30px;
     margin: 40px; 
     
+
+.instructions1 {
+    height: 300px;
+    width: 500px; 
+    text-align: center;
+}
+
+.textInst {
+    align-content: center;
+    /* width: 550px;  */
+}
+
+.instructionView1 {
+    text-align: center;
+}
+
+.nextBtn1 {
+    float: right;
+
 }
