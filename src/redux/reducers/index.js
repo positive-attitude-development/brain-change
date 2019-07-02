@@ -19,6 +19,7 @@ import category from './categoriesReducer';
 import addParticipant from './addParticipantReducer';
 import population from './populationReducer';
 import system from './systemReducer';
+import resultData from './resultDataReducer';
 
 
 const rootReducer = combineReducers({
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   system,
   urlReducer,
   editParticipant,
+  resultData,
 });
 
 export default rootReducer;
