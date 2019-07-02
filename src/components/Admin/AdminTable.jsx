@@ -1,10 +1,10 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {IconButton, MenuItem, Table, TableBody, TableCell, 
+import {Button, IconButton, MenuItem, Table, TableBody, TableCell, 
         TableHead, TablePagination, TableRow, TableSortLabel, TextField, 
         InputAdornment, Paper} from '@material-ui/core';
-
+import {CSVLink} from 'react-csv';
 import {Pageview, Clear} from '@material-ui/icons'
 import './Admin.css';
 
@@ -145,6 +145,16 @@ export default function EnhancedTable(props) {
         <div className="container">
             <Paper className="paper">
                 <div className="wrapper">
+                    {/* CSV exporter */}
+                    <CSVLink
+                        className="CSVLink"
+                        filename={"brain-change-export.csv"}
+                        data={filteredRows}
+                        headers={headRows}>
+                        <Button variant="contained" color="primary" size="large">
+                            Export to CSV
+                        </Button>
+                    </CSVLink>
                     {/* search input */}
                     <TextField
                         className="searchInput"
