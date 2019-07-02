@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 
@@ -15,13 +14,6 @@ class RankInstructions extends Component {
     }
 
 
-    handleChange = (event) => {
-        event.preventDefault(); 
-
-
-
-    } 
-
     render() {
         return (
             <div>
@@ -31,15 +23,17 @@ class RankInstructions extends Component {
                     and the percentage that you are directed by your violators. 
                 </div>
                 
-
-                <Link to="/RankPercents">    
-                    <Button
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
+                        onClick={() => this.props.history.push('/RankPercents')}
                         >
                         Next
                     </Button> 
-                </Link>
+                  </div>
+                </Grid>
             </div>
         )
     }

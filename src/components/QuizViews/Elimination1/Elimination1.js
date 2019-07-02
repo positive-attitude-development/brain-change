@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Elimination1.css';
 
-import { withStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import {  Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'
 
@@ -13,7 +12,6 @@ class Elimination1 extends Component {
 
     state = {
         round1: [],
-        time: '',
         statusBar: 5,
         time: 0
     }
@@ -92,9 +90,20 @@ class Elimination1 extends Component {
                             })}
                         </ul>
                     </div>
-                    <div>
-                        <button onClick={this.handleNext}>Next</button>
-                    </div>
+                    
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
+                        color="primary"
+                        variant="contained"
+                        onClick={this.handleNext}
+                        >
+                        Next
+                    </Button> 
+                  </div>
+                </Grid>
+    
+                
                 </Paper>
             </div>
         )

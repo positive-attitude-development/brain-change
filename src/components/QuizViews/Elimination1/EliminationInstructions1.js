@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+
+import { Grid, Button, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './EliminationInstructions1.css'
 
 class EliminationInstructions1 extends Component {
 
+
+// handleNext() {
+   
+// }
+
     state = {
         statusBar : 1
     }
     render() {
         return (
-            <div>
+            <Paper>
                 <StatusBar status={this.state.statusBar} />
                 <div className="instructions">
                 
@@ -25,15 +30,18 @@ class EliminationInstructions1 extends Component {
 
                 </div>
                 
-            <Link to="/Elim1"> 
-                <Button
-                    color="primary"
-                    variant="contained"
-                    >
-                    Next
-                </Button> 
-            </Link>
-            </div>
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.props.history.push('/Elim1')}
+                        >
+                        Next
+                    </Button> 
+                  </div>
+                </Grid>
+            </Paper>
         )
     }
 }

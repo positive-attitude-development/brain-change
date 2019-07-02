@@ -1,1 +1,17 @@
 
+.select {
+    margin: 50px; 
+}
+
+.heading {
+   text-align: center; 
+}
+
+.input {
+    text-align: center; 
+    padding-bottom: 25px; 
+}
+
+.radio {
+    padding: 15px; 
+}

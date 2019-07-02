@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import { Paper } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import './Elimination2.css';
 
 class Elimination2 extends Component {
@@ -95,16 +94,18 @@ class Elimination2 extends Component {
                             })}
                         </ul>
                     </div>
-                    <div>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}
-                            >
-                            Next
-                        </Button> 
-                    </div>
-                </Paper>
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
+                        color="primary"
+                        variant="contained"
+                        onClick={this.handleNext}
+                        >
+                        Next
+                    </Button> 
+                  </div>
+                </Grid>
+              </Paper>
             </div>
             
         )

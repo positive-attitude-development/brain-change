@@ -1,5 +1,5 @@
 import React, { Component } from 'react' 
-import {  Button, Paper } from '@material-ui/core';
+import {  Grid, Button, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 
@@ -92,15 +92,18 @@ class Elimination3 extends Component {
                             })}
                         </ul>
                     </div>
-                    <div>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}
-                            >
-                            Next
-                        </Button> 
-                    </div>
+                    
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
+                        color="primary"
+                        variant="contained"
+                        onClick={this.handleNext}
+                        >
+                        Next
+                    </Button> 
+                  </div>
+                </Grid>
                 </Paper>
             </div>
         )

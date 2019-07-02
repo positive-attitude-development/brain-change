@@ -95,6 +95,7 @@ class OrderValues1 extends Component {
                             </SortableContainer>
                         </Paper>
                 </Grid>   
+                <Grid container justify="center">
                     <Button
                         color="primary"
                         variant="contained"
@@ -102,6 +103,7 @@ class OrderValues1 extends Component {
                         >
                         Next
                     </Button> 
+                </Grid>
             </div>
         )
     }
