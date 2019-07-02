@@ -16,7 +16,8 @@ class RegisterPage extends Component {
 	streetAddressTwo: '',
 	city: '',
 	state: '',
-	zipcode: 0
+	zipcode: 0,
+	level: 2
   };
 
   registerAdmin = (event) => {
@@ -41,7 +42,9 @@ class RegisterPage extends Component {
 			city: this.state.city,
 			state: this.state.state,
 			zipcode: this.state.zipcode,
+			level: this.state.level
         },
+		history: this.props.history
       });
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
@@ -52,11 +55,27 @@ class RegisterPage extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
+  };
+
+  fillData = () =>{
+	  this.setState({
+		username: 'test',
+	    password: 'test',
+		firstName: 'test',
+		lastName: 'test',
+		organization: 'test',
+		title: 'test',
+		phoneNumber: 'test',
+		emailAddress: 'test',
+
+		state: 'MN',
+	  })
   }
 
   render() {
     return (
       <div>
+		  <button onClick={this.fillData}>Fill Data</button>
         {this.props.errors.registrationMessage && (
           <h2 className="alert" role="alert">
             {this.props.errors.registrationMessage}
