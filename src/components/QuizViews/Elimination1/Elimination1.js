@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Elimination1.css';
-
-import { withStyles } from '@material-ui/core/styles';
 import { Paper, Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar';
 import Banner from '../Banner/Banner';

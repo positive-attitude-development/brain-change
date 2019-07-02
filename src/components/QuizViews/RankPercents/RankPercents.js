@@ -7,7 +7,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/lab/Slider';
 // import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField, Typography } from '@material-ui/core'
 
-import { Button, Typography, Paper } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import './RankPercents.css'
 
 const styles = {

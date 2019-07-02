@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Grid, Button, Paper } from '@material-ui/core';
+import {Button, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './EliminationInstructions1.css'
