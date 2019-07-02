@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './OrderViolatorsInstructions.css'
@@ -26,15 +25,18 @@ class OrderViolatorsInstructions extends Component {
                 <div className="giph">
 
                 </div>
-
-                <Link to="/OrderViolators">    
-                    <Button
+  
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
+                        onClick={() => this.props.history.push('/OrderViolators')}
                         >
                         Next
                     </Button> 
-                </Link>
+                  </div>
+                </Grid>
             </div>
         )
     }

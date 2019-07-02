@@ -67,6 +67,8 @@ class QuizViewWelcomeForm extends Component {
                     <TextField
                         required
                         select
+                        style={{width:80}}
+
                         margin="normal"
                         label="State"
                         value={this.state.state}
@@ -129,6 +131,7 @@ class QuizViewWelcomeForm extends Component {
                     <TextField
                         select
                         margin="normal"
+                        style={{width:300}}
                         label="Which best describes you?"
                         value={this.state.category}
                         onChange={this.handleInputChange('category')} >

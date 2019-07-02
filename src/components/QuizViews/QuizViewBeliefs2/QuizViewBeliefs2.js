@@ -1,21 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { makeStyles } from "@material-ui/core/styles";
-import {withStyles} from '@material-ui/core/styles';
+
+import { withStyles } from '@material-ui/core/styles';
 
 import { FormControl, FormControlLabel, FormLabel, 
         RadioGroup, Button, Radio, Paper, InputLabel, 
-        MenuItem, Select} from"@material-ui/core";
+        MenuItem, Select, Grid } from"@material-ui/core";
 
 import StatusBar from '../StatusBar'; 
-import QuizViewSelect from './QuizViewSelect'
-
 
 import './QuizViewBeliefs2.css'
-
-
-
 
 const styles = {
     root : {
@@ -104,40 +98,38 @@ componentDidMount() {
                  <StatusBar status={this.state.statusBar} />
 
                 <div>
-                    <Paper>
+                    <h2 className = "heading" > Choose your strongest belief </h2>
+                    <Paper className = "select">
                         <FormControl component="fieldset"
                         className={classes.formControl}
                         >
-
-
-                            <FormLabel component="legend">Beliefs</FormLabel>
                                 <RadioGroup
                                 aria-label="Beliefs"
                                 name="Beliefs"
-                                // className=
-                                // value=
                                 onChange={this.handleRadio}
                                 >
 
-                                <FormControlLabel value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
+
+                                <FormControlLabel  className = "radio" value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
+                                <FormControlLabel  className = "radio" value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
+                                <FormControlLabel className = "radio" value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
+
+                                {/* <FormControlLabel value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
                                 <FormControlLabel value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
-                                <FormControlLabel value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
+                                <FormControlLabel value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3} */}
+
                                 
                                 </RadioGroup>
                         </FormControl>
 
                     </Paper>
 
+                <div className = "input">
                     <form autoComplete="off">
-                        {/* <Button 
-                        className={classes.button} onClick={handleOpen} 
-                        />  */}
                         <FormControl className={classes.formControl}>
                             <InputLabel>Type of Belief</InputLabel>
                             <Select
-                            // open={open}
-                            // onClose={handleClose}
-                            // onOpen={handleOpen}
+                            style={{width:200}}
                             value={this.state.typeOfBelief}
                             onChange={this.handleChange}
                             inputProps={{name: "typeOfBelief"}}
@@ -149,8 +141,10 @@ componentDidMount() {
                             </Select>
                         </FormControl>
                     </form> 
+                </div>
             </div>
 
+                <Grid container justify="center">   
                     <div>
                         <Button
                             className={classes.button}
@@ -161,6 +155,7 @@ componentDidMount() {
                             Next
                         </Button> 
                     </div>
+                </Grid>
             </div>
         )
     }

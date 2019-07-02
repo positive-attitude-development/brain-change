@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import { connect } from 'react-redux';
 
@@ -27,14 +26,17 @@ class OrderValuesInstructions extends Component {
 
                 </div>
 
-                <Link to="OrderValues">   
-                    <Button
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
+                        onClick={() => this.props.history.push('/OrderValues')}
                         >
                         Next
                     </Button> 
-                </Link>
+                  </div>
+                </Grid>
             </div>
         )
     }

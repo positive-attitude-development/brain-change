@@ -5,8 +5,9 @@ import StatusBar from '../StatusBar';
 import {withStyles} from '@material-ui/core/styles';
 
 import Slider from '@material-ui/lab/Slider';
-import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField, Typography } from '@material-ui/core'
+// import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField, Typography } from '@material-ui/core'
 
+import { Button, Typography, Paper } from '@material-ui/core'
 import './RankPercents.css'
 
 const styles = {
@@ -187,16 +188,15 @@ class RankPercents extends Component {
                                 defaultValue={50} />
               
                 </div>
-
-            <div className = "percents">
-                <h2>How do you live each day ?</h2>
-
-                <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
+        {/* <Paper className = "grid2"> */}
+            <h2 className = "title" >How do you live each day ?</h2>
+            <div className = "grid2">
                
-                <h3 className="violatorPercents">Violator Values {this.state.violatorPercent} % </h3>
+                <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
+                <h3 className="violatorPercents"> Violator Values {this.state.violatorPercent} % </h3>
 
             </div>
-
+        {/* </Paper> */}
                 <div>
                     <Button
                         color="primary"

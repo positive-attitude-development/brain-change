@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Grid, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './QuizViewBeliefs1.css'
@@ -35,6 +35,7 @@ propertyChange = propertyName => (event) => {
         })
 
     console.log(this.state);
+ 
 }
 
 
@@ -68,21 +69,25 @@ handleClick = (event) => {
                 <StatusBar status={this.state.statusBar} />
 
                 <div>
-                    Type out your 3 beliefs below
+                    <h2 className="title">Type out your 3 beliefs below </h2>
 
-                    <ul>Example
+                 <Paper >
+                   <div className="examples" >
+                       <h4 align="center"> Here are some examples: </h4>
+                    <ul> 
                         <li>Climate change is real</li>
                         <li>Attitude is the most important tool for success</li>
                         <li>There is life after death or there is no life after death</li>
                     </ul>
-
+                </div>
+            <div className ="inputs">
                 <div>
                     <TextField
                         type="text"
                         label="First Belief"
                         name="belief1"
+                        style={{width:700}}
                         required
-                        fullWidth
                         value={this.state.belief1}
                         onChange={this.propertyChange("belief1")}
                         />
@@ -90,32 +95,41 @@ handleClick = (event) => {
                           <TextField
                         type="text"
                         label="Second Belief"
+                        style={{width:700}}
+                        inputProps = {{maxLength: 20}}
                         name="belief2"
                         required
-                        fullWidth
                         value={this.state.belief2}
                         onChange={this.propertyChange("belief2")}
                         />
+                    
                 </div><div>
                           <TextField
                         type="text"
                         label="Third Belief"
                         name="belief3"
                         required
-                        fullWidth
+                        style={{width:700}}
                         value={this.state.belief3}
                         onChange={this.propertyChange("belief3")}
                         />
                     </div>
                 </div>
-
+                </Paper>
+                </div>
+                <div className = "button">
+                {/* <Grid container justify="center"> */}
                     <Button
+                        
+                        className= "button"
                         onClick={this.handleClick}
                         color="primary"
                         variant="contained"
                         >
                         Next
                     </Button> 
+                </div>
+                {/* </Grid> */}
             </div>
         )
     }

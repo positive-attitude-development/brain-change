@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import {  Button } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 
-import './PickViolators'
+import './PickViolators.css'
 
 class PickViolators extends Component {
 
@@ -82,17 +82,20 @@ class PickViolators extends Component {
             <div>
                 
                 <StatusBar status={this.state.statusBar} />
-               
+        <Paper>
             <div className="violators">
-                <ul>
+                <h2 className="header">Select five violator values</h2>
+                <ul className= "violist">
                     {newArray.map(value => {
                         return <li key={value.id} 
                                     onClick={this.handleSelect} 
-                                    className={this.state.violators.includes(value.id) ? "striked" : "unStriked"} 
+                                    className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
                                     value={value.id}>{value.values}</li>
                     })}
                 </ul>
             </div>
+        </Paper>
+                <Grid container justify="center">
                     <Button
                         onClick={this.handleNext}
                         color="primary"
@@ -100,6 +103,7 @@ class PickViolators extends Component {
                         >
                         Next
                     </Button> 
+                </Grid>
             </div>
         )
     }

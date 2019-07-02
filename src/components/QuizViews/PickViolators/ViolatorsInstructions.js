@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import { connect } from 'react-redux';
 
@@ -31,14 +30,18 @@ class ViolatorsInstructions extends Component {
 
                 </div>
 
-                <Link to="/PickViolators">   
-                    <Button
+
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
+                        onClick={() => this.props.history.push('/PickViolators')}
                         >
                         Next
                     </Button> 
-                </Link>
+                  </div>
+                </Grid>
             </div>
         )
     }

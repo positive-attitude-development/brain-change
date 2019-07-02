@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Paper } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import './Elimination5.css';
@@ -100,6 +100,7 @@ class Elimination5 extends Component {
                             })}
                         </ul>
                     </div>
+                <Grid container justify="center">
                     <div>
                         <Button
                             color="primary"
@@ -109,6 +110,7 @@ class Elimination5 extends Component {
                             Next
                         </Button>
                     </div> 
+                  </Grid>
                 </Paper>
             </div>
         )

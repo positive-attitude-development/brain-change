@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
+// import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
+import SnapShot from './SnapShot'; 
 import StatusBar from '../StatusBar'; 
+
+// import {thisExpression} from '@babel/types';
 
 
 
@@ -329,7 +332,9 @@ class FinalResults extends Component {
                 <StatusBar status={this.state.statusBar} />
 
 
-
+                <SnapShot Values = {this.props.reduxState} /> 
+                
+  
                 FINISHED !!
                 <Button
                     color="primary"
