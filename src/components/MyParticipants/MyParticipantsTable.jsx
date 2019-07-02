@@ -4,18 +4,17 @@ import PropTypes from 'prop-types';
 import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment, Paper} from '@material-ui/core';
 import {Pageview, Clear} from '@material-ui/icons'
 import {CSVLink} from 'react-csv';
-import './AllRecords.css';
+import './MyParticipants.css';
 
 const headRows = [
-    { key: 'participant_name', label: 'Name' },
-    { key: 'age', label: 'Age' },
-    { key: 'gender', label: 'Gender' },
-    { key: 'category', label: 'Category' },
-    { key: 'state', label: 'State' },
-    { key: 'email', label: 'Email' },
-    { key: 'phone', label: 'Phone' },
-    { key: 'admin_name', label: 'Admin Name' },
-    { key: 'viewedit', label: 'View/Edit' },
+    {key: 'participant_name', label: 'Name'},
+    {key: 'age', label: 'Age'},
+    {key: 'gender', label: 'Gender'},
+    {key: 'category', label: 'Category'},
+    {key: 'state', label: 'State'},
+    {key: 'email', label: 'Email'},
+    {key: 'phone', label: 'Phone'},
+    {key: 'viewedit', label: 'View/Edit'},
 ];
 
 //sorting function
@@ -47,7 +46,7 @@ function getSorting(order, orderBy) {
 
 //table head
 function EnhancedTableHead(props) {
-    const { order, orderBy, onRequestSort } = props;
+    const {order, orderBy, onRequestSort} = props;
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -77,7 +76,6 @@ function EnhancedTableHead(props) {
 
 //table head props
 EnhancedTableHead.propTypes = {
-    // numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
@@ -92,7 +90,7 @@ export default function EnhancedTable(props) {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     //accessing redux store for table and search information
-    let rows = useSelector(redux => redux.allRecordsReducer);
+    let rows = useSelector(redux => redux.participant);
     let search = useSelector(redux => redux.searchTermReducer);
     //dispatch hook
     let dispatch = useDispatch();
@@ -106,8 +104,7 @@ export default function EnhancedTable(props) {
         x['category'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['state'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['email'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['phone'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['admin_name'].toLowerCase().includes(searchTerm.toLowerCase())
+        x['phone'].toLowerCase().includes(searchTerm.toLowerCase())
     )
 
     //sorting function
@@ -190,10 +187,9 @@ export default function EnhancedTable(props) {
                                             <TableCell>{row.state}</TableCell>
                                             <TableCell>{row.email}</TableCell>
                                             <TableCell>{row.phone}</TableCell>
-                                            <TableCell>{row.admin_name}</TableCell>
                                             <TableCell>
                                                 <IconButton
-                                                    onClick={() => props.history.push(`/individualparticipant/${row.participant_id}`)} >
+                                                    onClick={() => props.history.push(`/individualparticipant/${row.participant_id}`)}>
                                                     <Pageview />
                                                 </IconButton>
                                             </TableCell>
@@ -201,7 +197,7 @@ export default function EnhancedTable(props) {
                                     );
                                 })}
                             {emptyRows > 0 && (
-                                <TableRow style={{ height: 49 * emptyRows }}>
+                                <TableRow style={{height: 49 * emptyRows}}>
                                     <TableCell colSpan={6} />
                                 </TableRow>
                             )}

@@ -56,14 +56,19 @@ class Profile extends Component{
 
 	render(){
 		const {classes} = this.props;
+		console.log('this.props.admin:', this.props.admin)
 		return(
 			<div>
 				{this.props.profile.map((profile) =>{
+					let accessLevel;
+					if(profile.level === 2){
+						accessLevel = <p>Account Status: Pending Approval</p>
+					}
 					return(
 						<Card raised key={profile.id} className={classes.card}>
 							<CardContent>
 								<h3>{profile.first_name}'s Profile</h3>
-								<h3>{profile.username}</h3>
+								{accessLevel}
 								<TextField label="Username:" value={profile.username} disabled/>
 
 								<TextField label="First Name:" value={profile.first_name} disabled/>

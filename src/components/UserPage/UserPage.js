@@ -1,23 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ admin }) => (
-// and then instead of `props.admin.username` you could use `admin.username`
-const UserPage = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.admin.username }!
-    </h1>
-    <p>Your ID is: {props.admin.id}</p>
-    <LogOutButton className="log-in" />
-  </div>
-);
+class UserPage extends Component{
+
+  render(){
+	if(this.props.admin.level === 1){
+		this.props.history.push('/info')
+	}else if(this.props.admin.level === 2){
+		this.props.history.push('/profile')
+	}else if(this.props.admin.level === 3){
+		this.props.history.push('/myparticipants')
+	}else if(this.props.admin.level >= 4){
+		this.props.history.push('/all-records')
+	}
+    return(
+      <div>
+
+      </div>
+    )
+  }
+}
 
 const mapStateToProps = state => ({
   admin: state.admin,
 });
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(UserPage);

@@ -34,10 +34,11 @@ router.post('/register', async (req, res, next) => {
   const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
-    const addAdmin = 'INSERT INTO "admin" (username, password) VALUES ($1, $2) RETURNING id'; 
+    const addAdmin = 'INSERT INTO "admin" (username, password, level) VALUES ($1, $2, $3) RETURNING id'; 
     const username = req.body.username;
     const password = encryptLib.encryptPassword(req.body.password);
-    const result = await connection.query(addAdmin, [username, password])
+    const level = req.body.level;
+    const result = await connection.query(addAdmin, [username, password, level])
     //save the id of the admin we're creating to use in next insert
     const adminId = result.rows[0].id;
     const addAdminContact = `INSERT INTO "admin_contact" ("admin_id", "first_name", "last_name", "title", "organization", "phone_number", "email_address", "street_address", "street_address2", "city", "state", "zipcode")
@@ -60,7 +61,8 @@ router.post('/register', async (req, res, next) => {
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful or send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-  res.sendStatus(200);
+  console.log('login req.user:', req.user)
+  res.json(req.user);
 });
 
 // clear all server session information about this admin

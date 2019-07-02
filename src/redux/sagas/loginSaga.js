@@ -15,10 +15,18 @@ function* loginAdmin(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the admin
-    yield axios.post('api/admin/login', action.payload, config);
+    const response = yield axios.post('api/admin/login', action.payload, config);
+    let accessLevel = response.data.level;
     
     // after the admin has logged in get the admin information from the server
     yield put({type: 'FETCH_ADMIN'});
+    if (accessLevel === 1){
+    	action.history.push('/info');
+    }else if(accessLevel === 3){
+		action.history.push('/myparticipants');
+    }else if(accessLevel >= 4){
+		action.history.push('/all-records');
+    }
   } catch (error) {
     console.log('Error with admin login:', error);
     if (error.response.status === 401) {

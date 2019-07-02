@@ -9,11 +9,11 @@ import Banner from '../Banner/Banner';
 
 
 
+
 class Elimination1 extends Component {
 
     state = {
         round1: [],
-        time: '',
         statusBar: 5,
         time: 0
     }

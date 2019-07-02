@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, Table, TableBody, TableHead, TableCell, TableRow, MenuItem} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, MenuItem, InputLabel, FormControl, Select, Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
+import MyParticipantsTable from './MyParticipantsTable';
 
 const styles = {
 	root: {
-
+		flexWrap: 'wrap'
 	},
 	card: {
 		margin: 'auto',
@@ -14,19 +15,14 @@ const styles = {
 		marginBottom: '40px',
 		width: '75%',
 	},
-	table: {
+	menu: {
 		margin: 'auto',
-		width: '75%',
+		marginLeft: '5px',
+		width: '120px',
 	},
 	text: {
-		width: '150px',
-	},
-	select: {
-		width: '100%',
-	},
-	heading: {
-		display: 'inline',
-	},
+		margin: '5px',
+	}
 }
 
 class MyParticipants extends Component{
@@ -93,6 +89,7 @@ class MyParticipants extends Component{
 	};//end handleSubmit
 
 	renderInputs = () =>{
+		const {classes} = this.props
 		let input;
 		if(this.state.participant.category === "Offender"){
 			input =
@@ -100,35 +97,33 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
-			<TextField select margin="normal"
-				label="System:" value={this.state.offender.offender_system_id} 
-				onChange={this.handleOffenderInput('offender_system_id')}>
+			<TextField required select margin="normal" label="System:" 
+				value={this.state.offender.offender_system_id} onChange={this.handleOffenderInput('offender_system_id')}
+				className={classes.menu} >
 					{this.props.system.map((system) => {
 						return(
 							<MenuItem key={system.id} value={system.id}>{system.system}</MenuItem>
 						)
 					})}</TextField>
 
-			<TextField label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
+			<TextField required label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
 
-			<TextField select margin="normal"
-				label="Population:" value={this.state.offender.population_id} 
-				onChange={this.handleOffenderInput('population_id')}>
+			<TextField required select margin="normal" label="Population:" 
+				value={this.state.offender.population_id} onChange={this.handleOffenderInput('population_id')}
+				className={classes.menu} >
 					{this.props.population.map((population) => {
 						return(
 							<MenuItem key={population.id} value={population.id}>{population.population}</MenuItem>
 						)
 					})}</TextField>
 
-			<TextField select margin="normal" 
-				label="Felony?:" value={this.state.offender.felon}
-				onChange={this.handleOffenderInput('felon')} >
+			<TextField required select margin="normal" label="Felony?:" value={this.state.offender.felon}
+				onChange={this.handleOffenderInput('felon')} className={classes.menu} >
 				<MenuItem value={true}>Yes</MenuItem>
 				<MenuItem value={false}>No</MenuItem></TextField>
 
-			<TextField select margin="normal" 
-				label="Violent Crime?:" value={this.state.offender.violent_offender}
-				onChange={this.handleOffenderInput('violent_offender')} >
+			<TextField required select margin="normal" label="Violent Crime?:" value={this.state.offender.violent_offender}
+				onChange={this.handleOffenderInput('violent_offender')} className={classes.menu} >
 				<MenuItem value={true}>Yes</MenuItem>
 				<MenuItem value={false}>No</MenuItem></TextField>
 			</>
@@ -160,39 +155,36 @@ class MyParticipants extends Component{
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
 		}
 		return(
-			<div className={classes.root}>
+			<Grid className={classes.root}>
 				<Card className={classes.card}>
 					<CardContent>
 						<h3>Add a Participant:</h3>
-						{/* I made this h5 disclaimer because you have to use different Material-UI label things on text
-						fields than on selects, and they of course are not styled the same so it looked weird... */}
-						<h5>(Unless specified, all fields are required)</h5>
+						<h5>(*Required fields)</h5>
 						<br></br>
 
-						<TextField label="First Name:" onChange={this.handleInputChange('first_name')}/>
+						<TextField required className={classes.text} label="First Name:" onChange={this.handleInputChange('first_name')}/>
 
-						<TextField label="Last Name:" onChange={this.handleInputChange('last_name')}/>
+						<TextField required className={classes.text} label="Last Name:" onChange={this.handleInputChange('last_name')}/>
 
-						<TextField label="Age:" type="number" onChange={this.handleInputChange('age')}/>
+						<TextField required className={classes.text} label="Age:" type="number" onChange={this.handleInputChange('age')}/>
 
-						<TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} value={this.state.participant.gender}>
+						<TextField required label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} 
+							value={this.state.participant.gender} className={classes.menu}>
 							<MenuItem value="M">Male</MenuItem>
 							<MenuItem value="F">Female</MenuItem>
 							<MenuItem value="Other">Other</MenuItem>
-							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem>
-						</TextField>
-
-                        <TextField label="Category:" select margin="normal" onChange={this.handleInputChange('category')} value={this.state.participant.category}>
+							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem></TextField>
+							
+						<TextField required label="Category:" select margin="normal" onChange={this.handleInputChange('category')} 
+							value={this.state.participant.category} className={classes.menu}>
                                 {this.props.category.map((category) => {
                                     return(
                                         <MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>
                                     )
-                                })}
-                        </TextField>
+                                })}</TextField>
 
-						<TextField required select margin="normal"
-							label="State:" value={this.state.participant.state} 
-							onChange={this.handleInputChange('state')}>
+						<TextField required select margin="normal" label="State:" value={this.state.participant.state} 
+							onChange={this.handleInputChange('state')} className={classes.menu}>
 								<MenuItem value=""><em>Select State</em></MenuItem>
 								<MenuItem value="AL">Alabama</MenuItem>
 								<MenuItem value="AK">Alaska</MenuItem>
@@ -249,10 +241,10 @@ class MyParticipants extends Component{
 								<MenuItem value="WY">Wyoming</MenuItem>
 						</TextField>
 
-						<TextField label="Email Address:" helperText="*Optional"
+						<TextField className={classes.text} label="Email Address:" helperText="Optional"
 							onChange={this.handleInputChange('email_address')}/>
 
-						<TextField label="Phone Number:" helperText="*Optional"
+						<TextField className={classes.text} label="Phone Number:" helperText="Optional"
 							onChange={this.handleInputChange('phone_number')}/>
 
 						{this.renderInputs()}
@@ -263,40 +255,12 @@ class MyParticipants extends Component{
 				</Card>
 				<br></br>
 	
-			<h3 className={classes.heading}>My Participants:</h3>
-				<Table className={classes.table}>
-					<TableHead>
-						<TableRow>
-							<TableCell>First Name</TableCell>
-							<TableCell>Last Name</TableCell>
-							<TableCell>Age</TableCell>
-							<TableCell>Gender</TableCell>
-							<TableCell>Category</TableCell>
-							<TableCell>State</TableCell>
-							<TableCell>Email Address</TableCell>
-							<TableCell>Phone Number</TableCell>
-							<TableCell>View/Edit Participant</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{this.props.participant.map((person) => {
-							return(
-								<TableRow key={person.id}>
-									<TableCell>{person.first_name}</TableCell>
-									<TableCell>{person.last_name}</TableCell>
-									<TableCell>{person.age}</TableCell>
-									<TableCell>{person.gender}</TableCell>
-									<TableCell>{person.category}</TableCell>
-									<TableCell>{person.state}</TableCell>
-									<TableCell>{person.email}</TableCell>
-									<TableCell>{person.phone_number}</TableCell>
-									<TableCell><Button variant="contained" color="primary" onClick={()=>this.viewParticipant(`${person.id}`)}>View/Edit</Button></TableCell>
-								</TableRow>
-							)
-						})}
-					</TableBody>
-				</Table>
-			</div>
+			<h3>My Participants:</h3>
+				{this.props.participant[0] &&
+					<MyParticipantsTable history={this.props.history} />
+				}
+				
+			</Grid>
 		)
 	}
 }

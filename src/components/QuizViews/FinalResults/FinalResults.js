@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
+// import { Link} from 'react-router-dom'; 
 import {  Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
+import SnapShot from './SnapShot'; 
 import StatusBar from '../StatusBar'; 
+
+// import {thisExpression} from '@babel/types';
 
 
 
@@ -15,7 +18,7 @@ class FinalResults extends Component {
             dates: '',
             percent_core: 0,
             percent_violators: 0,
-            // participantId: 0,
+            participantId: 0,
             belief1: '',
             belief2: '',
             belief3: '',
@@ -204,7 +207,7 @@ class FinalResults extends Component {
                 belief3: beliefs.belief3,
                 percent_core: percents.valuesPercent,
                 percent_violators: percents.violatorPercent,
-                // participantId: this.props.reduxState.participantReducer.participant_id,
+                participantId: this.props.url.participant_id,
                 [challenged]: true,                
                 [type]: testedBelief.typeOfBelief,
                 coreValue1: coreValues[0],
@@ -329,7 +332,9 @@ class FinalResults extends Component {
                 <StatusBar status={this.state.statusBar} />
 
 
-
+                <SnapShot Values = {this.props.reduxState} /> 
+                
+  
                 FINISHED !!
                 <Button
                     color="primary"
@@ -346,7 +351,8 @@ class FinalResults extends Component {
 const mapStateToProps = (reduxState) => {
     return {
         values: reduxState.valuesReducer,
-        newValues: reduxState.newValuesReducer
+        newValues: reduxState.newValuesReducer,
+        url: reduxState.urlReducer,
 
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {  Button,Paper, Grid } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar';
 import './Elimination4.css';
@@ -107,7 +107,7 @@ class Elimination4 extends Component {
                         </ul>
                     </div>
                     <div className="nextBtn1">
-                        <Button
+                       <Button
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}

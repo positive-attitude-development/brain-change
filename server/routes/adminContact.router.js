@@ -4,17 +4,20 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-
-    let queryText = `SELECT "admin"."id", concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", "level" FROM "admin_contact"
-    JOIN "admin" ON "admin_contact"."admin_id" = "admin"."id";`;
-    pool.query(queryText)
-    .then((results) => {
-        console.log('results.row:', results.rows);
-        res.send(results.rows)
-    }).catch(error => {
-        console.log('Error in GET values:', error);
-        res.sendStatus(500);
-    });
+    if (req.user.level >= 4) {
+		let queryText = `SELECT "admin"."id", concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", "level" FROM "admin_contact"
+    	JOIN "admin" ON "admin_contact"."admin_id" = "admin"."id";`;
+    	pool.query(queryText)
+    		.then((results) => {
+        	console.log('all admins GET results.row:', results.rows);
+        	res.send(results.rows)
+			}).catch((error) => {
+				console.log('error in all participants GET:', error)
+			});
+	} else {
+		console.log('unauthorized all admins GET')
+		res.sendStatus(403);
+	}
 })
 
 module.exports = router; 

@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
+import {HashRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -19,13 +14,14 @@ import MyParticipants from '../MyParticipants/MyParticipants';
 import Admin from '../Admin/Admin'; 
 import IndividualParticipant from '../IndividualParticipant/IndividualParticipant';
 import AllRecords from '../AllRecords/AllRecords';
+import DataView from '../DataView/DataView';
 import './App.css';
 
 import QuizViewWelcome from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 
 class App extends Component {
   componentDidMount () {
-    this.props.dispatch({type: 'FETCH_ADMIN'})
+    this.props.dispatch({type: 'FETCH_ADMIN', history: this.props.history})
   }
 
   render() {
@@ -40,59 +36,51 @@ class App extends Component {
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route
-              exact
-              path="/about"
-              component={AboutPage}
-            />
+              exact path="/about"
+              component={AboutPage}/>
+
+            <Route
+              exact path="/quiz"
+              component={QuizViewWelcome}/>
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+
             <ProtectedRoute
-              exact
-              path="/home"
-              component={UserPage}
-            />
+              exact path="/home"
+              component={UserPage}/>
+
             <ProtectedRoute
               exact path="/all-records"
-              component={AllRecords}
-            />
+              component={AllRecords}/>
+
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
+              exact path="/info"
+              component={InfoPage}/>
+
             <ProtectedRoute
               exact path="/profile"
-              component={Profile}
-            />
+              component={Profile}/>
+
             <ProtectedRoute
               exact path="/admins"
-              component={Admin}
-            />
+              component={Admin}/>
 
             <ProtectedRoute
               exact path="/myparticipants"
-              component={MyParticipants}
-            />
+              component={MyParticipants}/>
 
             <ProtectedRoute
               exact path="/individualparticipant/:id"
-              component={IndividualParticipant}
-            />
+              component={IndividualParticipant}/>
 
-            <Route
-              exact path="/quiz"
-              component={QuizViewWelcome}
-            />
-
-            <Route
-              exact path="/quiz/:url"
-              component={QuizViewWelcome}
-            />
+            <ProtectedRoute
+              exact path="/dataview"
+              component={DataView}/>
 
             {/* If none of the other routes matched, we will show a 404. */}
             {/* <Route render={() => <h1>404</h1>} /> */}
@@ -103,5 +91,8 @@ class App extends Component {
       </Router>
   )}
 }
+const mapStateToProps = state => ({
+  admin: state.admin,
+});
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);

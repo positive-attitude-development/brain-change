@@ -21,17 +21,16 @@ const BorderLinearProgress = withStyles({
 
 
 export default function CustomizedProgressBars(props) {
-
-  
-  // console.log(props.status)
+// const {classes} = this.props; 
   return (
     <div>
       
       <BorderLinearProgress
-        // className={classes.margin}
+        // className={classes.bar}
         variant="determinate"
         color="secondary"
         value={props.status}
+
       />
       
     </div>

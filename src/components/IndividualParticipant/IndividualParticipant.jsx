@@ -16,12 +16,11 @@ const styles = {
 		marginBottom: '40px',
 		width: '75%',
 	},
-	grid: {
-
+	menu: {
+		margin: 'auto',
+		marginLeft: '5px',
+		width: '120px',
 	},
-	input: {
-		
-	}
 }
 
 class IndividualParticipant extends Component{

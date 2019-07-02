@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 
 import './BeliefInstructions1.css'
@@ -36,14 +35,17 @@ class BeliefInstructions1 extends Component {
 
                 </div>
 
-                <Link to="/Belief1"> 
-                    <Button
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
+                        onClick={() => this.props.history.push('/Belief1')}
                         >
                         Next
                     </Button> 
-                 </Link>
+                  </div>
+                </Grid>
             </div>
         )
     }

@@ -81,14 +81,14 @@ class OrderViolators extends Component {
 
 
     render() {
-        const {items} = this.state.items; 
+        // const {items} = this.state.items; 
         console.log(this.state)
         return (
             <div>
                    
                 <StatusBar status={this.state.statusBar} />
                 <h2 className="violOrder">Rank your 5 violator values in order</h2>
-
+            <Paper justify="center">
                 <Grid container justify="center">
                     {/* <DragDrop values={this.state.items} /> */}
                         <Paper className="paperDrag">
@@ -99,15 +99,18 @@ class OrderViolators extends Component {
                             </SortableContainer>
                         </Paper>
                 </Grid>    
-
-                    <Button
+                <Grid container justify="center">
+                  <div className="button">
+                    <Button  
                         color="primary"
                         variant="contained"
                         onClick={this.handleNext}
                         >
                         Next
                     </Button> 
-            
+                  </div>
+                </Grid>
+              </Paper>
             </div>
         )
     }

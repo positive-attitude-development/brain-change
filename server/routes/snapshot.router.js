@@ -300,4 +300,48 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET all participants belonging to admins
+router.get('/all', (req, res) => {
+
+    let queryText = `SELECT "participant".id, "participant".age, "participant".gender, "participant".state,
+
+--"category".category,
+
+"offender_system".system, "offender_population".population, "offender".felon, "offender".violent_offender,
+
+"result".dates AS "date", "result".percent_core AS "pct_core", "result".percent_violators AS "pct_viol",
+
+"result_belief".belief, "result_belief".challenged, "result_belief".type,
+
+"result_core".value_id, "result_core".ranks AS "core_order",
+
+"result_elimination".value_id, "result_elimination".order AS "elimination_order",
+
+"result_round".elimination_round, "result_round".times AS "seconds",
+
+"result_violators".value_id, "result_violators".order AS "violators_order"
+
+FROM "participant"
+--JOIN "category" ON "category".id = "participant".category
+FULL JOIN "offender" ON "offender".participant_id = "participant".id
+FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
+FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
+FULL JOIN "result" ON "result".participant_id = "participant".id
+FULL JOIN "result_belief" ON "result_belief".result_id = "result".id
+FULL JOIN "result_core" ON "result_core".result_id = "result".id
+FULL JOIN "result_elimination" ON "result_elimination".result_id = "result".id
+FULL JOIN "result_round" ON "result_round".result_id = "result".id
+FULL JOIN "result_violators" ON "result_violators".result_id = "result".id
+;`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('results.rows:', results.rows);
+            res.send(results.rows)
+        }).catch(error => {
+            console.log('Error in GET snapshots:', error);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
