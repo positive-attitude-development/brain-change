@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardContent, CardActions, TextField, Button, MenuItem, InputLabel, FormControl, Select, Grid} from '@material-ui/core';
+import {Card, CardContent, CardActions, TextField, Button, MenuItem, Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 import MyParticipantsTable from './MyParticipantsTable';
@@ -39,7 +39,7 @@ class MyParticipants extends Component{
 			url: '',
 		},
 		offender: {
-			system_id: 0,
+			system_id: '',
 			offender_system_id: 0,
 			felon: '',
 			violent_offender: '',
@@ -59,6 +59,7 @@ class MyParticipants extends Component{
 		//generate uniqure url invite link and assign to local state on page load
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
+		console.log(urlLink)
 		this.setState({
 			participant:{
 			...this.state.participant,
@@ -97,20 +98,18 @@ class MyParticipants extends Component{
 			<br></br>
 			Offender Data: 
 			<br></br>
-			<TextField required select margin="normal" label="System:" 
-				value={this.state.offender.offender_system_id} onChange={this.handleOffenderInput('offender_system_id')}
-				className={classes.menu} >
+			<TextField required select margin="normal" label="System:" className={classes.menu}
+				value={this.state.offender.offender_system_id} onChange={this.handleOffenderInput('offender_system_id')}>
 					{this.props.system.map((system) => {
 						return(
 							<MenuItem key={system.id} value={system.id}>{system.system}</MenuItem>
 						)
 					})}</TextField>
 
-			<TextField required label="System ID #:" onChange={this.handleOffenderInput('system_id')}/>
+			<TextField required label="System ID #:" className={classes.text} onChange={this.handleOffenderInput('system_id')} value={this.state.offender.system_id}/>
 
-			<TextField required select margin="normal" label="Population:" 
-				value={this.state.offender.population_id} onChange={this.handleOffenderInput('population_id')}
-				className={classes.menu} >
+			<TextField required select margin="normal" label="Population:" value={this.state.offender.population_id} 
+				onChange={this.handleOffenderInput('population_id')} className={classes.menu}>
 					{this.props.population.map((population) => {
 						return(
 							<MenuItem key={population.id} value={population.id}>{population.population}</MenuItem>
@@ -134,6 +133,29 @@ class MyParticipants extends Component{
 	viewParticipant = (id) =>{
 		this.props.history.push(`/individualparticipant/${id}`)
 	};//end viewParticipant
+
+	demoButton = () => {
+		this.setState({
+			participant: {
+				first_name: 'Bobby',
+				last_name: 'Lastname',
+				age: 25,
+				gender: 'M',
+				category: 'Offender',
+				state: 'MN',
+				email_address: '',
+				phone_number: '',
+				url: 'PpyT4JosMKRu',
+			},
+			offender: {
+				system_id: 123456,
+				offender_system_id: 2,
+				felon: true,
+				violent_offender: false,
+				population_id: 3
+			}
+		})
+	};//end demoButton
 
 	render(){
 		const {classes} = this.props;
@@ -160,13 +182,14 @@ class MyParticipants extends Component{
 					<CardContent>
 						<h3>Add a Participant:</h3>
 						<h5>(*Required fields)</h5>
+						<Button onClick={this.demoButton} variant="outlined">DEMO</Button>
 						<br></br>
 
-						<TextField required className={classes.text} label="First Name:" onChange={this.handleInputChange('first_name')}/>
+						<TextField required className={classes.text} label="First Name:" onChange={this.handleInputChange('first_name')} value={this.state.participant.first_name}/>
 
-						<TextField required className={classes.text} label="Last Name:" onChange={this.handleInputChange('last_name')}/>
+						<TextField required className={classes.text} label="Last Name:" onChange={this.handleInputChange('last_name')} value={this.state.participant.last_name}/>
 
-						<TextField required className={classes.text} label="Age:" type="number" onChange={this.handleInputChange('age')}/>
+						<TextField required className={classes.text} label="Age:" type="number" onChange={this.handleInputChange('age')} value={this.state.participant.age}/>
 
 						<TextField required label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} 
 							value={this.state.participant.gender} className={classes.menu}>
@@ -242,10 +265,10 @@ class MyParticipants extends Component{
 						</TextField>
 
 						<TextField className={classes.text} label="Email Address:" helperText="Optional"
-							onChange={this.handleInputChange('email_address')}/>
+							onChange={this.handleInputChange('email_address')} value={this.state.participant.email_address}/>
 
 						<TextField className={classes.text} label="Phone Number:" helperText="Optional"
-							onChange={this.handleInputChange('phone_number')}/>
+							onChange={this.handleInputChange('phone_number')} value={this.state.participant.phone_number}/>
 
 						{this.renderInputs()}
 					</CardContent>
