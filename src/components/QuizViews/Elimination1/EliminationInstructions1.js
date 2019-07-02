@@ -41,6 +41,7 @@ class EliminationInstructions1 extends Component {
                         Next
                     </Button> 
                   </div>
+                </div>
             </Paper>
 
         )
