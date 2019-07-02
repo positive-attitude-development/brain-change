@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //GET route for an individual participant's info
 router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	console.log('individual query params', req.params.id)
-	let queryText = `SELECT "participant"."id", "first_name", "last_name", "participant"."admin_id", "age", "gender", "category", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id, "offender_population".population, "offender_system"."system", "url".url, "url".expiration_date FROM "participant"
+	let queryText = `SELECT "participant"."id", "first_name", "last_name", "participant"."admin_id", "age", "gender", "category", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id, "offender_population".population, "offender_system"."system","url".id as urlId, "url".url, "url".expiration_date FROM "participant"
 		FULL JOIN "offender" ON "participant".id = "offender".participant_id
 		FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
 		FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
@@ -42,42 +42,13 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 })
 
 
-//POST route to add new non-offender participant
+//POST route to add new participants
 router.post('/', rejectUnauthenticated, async (req, res, next) => {
   console.log('add participant req.body:', req.body)
-  const connection = await pool.connect()
-  try{
-    await connection.query('BEGIN');
-    const addParticipant = `INSERT INTO "participant" ("first_name", "last_name", "admin_id", "age", "gender", "category", "state", "email", "phone_number")
-		VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
-		RETURNING id;`;
-    const addParticipantValues = [req.body.first_name, req.body.last_name, req.user.id, req.body.age, req.body.gender, req.body.category, req.body.state, req.body.email_address, req.body.phone_number];
-    const result = await connection.query(addParticipant, addParticipantValues)
-    //save the id of the participant we're creating to use in next insert
-    const participantId = result.rows[0].id;
-	//query database for today's date + 30 days as "newdate" and assign newdate to const expirationDate
-	const getExpirationDate = await connection.query(`SELECT current_date + integer '30' as newdate;`)
-	const expirationDate = getExpirationDate.rows[0].newdate;
-	console.log('expiration date:', expirationDate)
-	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
-		VALUES ($1, $2, $3, $4);`;
-	const participantURLValues = [req.body.url, expirationDate, participantId, req.user.id ]
-	const urlresult = await connection.query(participantURL, participantURLValues)
-    await connection.query('COMMIT');
-    res.json(participantId);
-  }catch(error){
-		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
-		await connection.query('ROLLBACK');
-		console.log('Transaction error - rolling back participant entry:', error);
-		res.sendStatus(500);
-	}finally{
-		connection.release()
-	}
-});
-
-//POST route to add new offender participant
-router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
-  console.log('add offender participant req.body:', req.body)
+  console.log('add participant req.body.participant:', req.body.participant)
+  console.log('add participant req.body.offender:', req.body.offender)
+  const isOffender = req.body.participant.category
+  console.log('participant category:', isOffender)
   const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
@@ -91,14 +62,17 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
 	//query database for today's date + 30 days as "newdate" and assign newdate to const expirationDate
 	const getExpirationDate = await connection.query(`SELECT current_date + integer '30' as newdate;`)
 	const expirationDate = getExpirationDate.rows[0].newdate;
+	console.log('expiration date:', expirationDate)
 	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id")
 		VALUES ($1, $2, $3, $4);`;
 	const participantURLValues = [req.body.participant.url, expirationDate, participantId, req.user.id ]
 	const urlresult = await connection.query(participantURL, participantURLValues)
-    const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
-      VALUES ($1, $2, $3, $4, $5, $6);`;
-    const participantOffenderValues = [participantId, req.body.offender.offender_system_id, req.body.offender.system_id, req.body.offender.violent_offender, req.body.offender.felon, req.body.offender.population_id]
-    await connection.query(addParticipantOffender, participantOffenderValues);
+	if(isOffender === 'Offender'){
+	  const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
+        VALUES ($1, $2, $3, $4, $5, $6);`;
+      const participantOffenderValues = [participantId, req.body.offender.offender_system_id, req.body.offender.system_id, req.body.offender.violent_offender, req.body.offender.felon, req.body.offender.population_id]
+      await connection.query(addParticipantOffender, participantOffenderValues);
+	}
     await connection.query('COMMIT');
     res.json(participantId);
   }catch(error){
@@ -111,12 +85,29 @@ router.post('/offender', rejectUnauthenticated, async (req, res, next) => {
 	}
 });
 
+//POST route for self-registering participants
+router.post('/self-register', (req, res) => {
+	console.log('add participant req.body:', req.body);
+	const addParticipant = `INSERT INTO "participant" ("admin_id", "first_name", "last_name", "age", "gender", "category", "state", "email", "phone_number")
+		VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		RETURNING "id";`;
+	const addParticipantValues = [req.body.admin_id, req.body.first_name, req.body.last_name, req.body.age, req.body.gender, req.body.category, req.body.state, req.body.email_address, req.body.phone_number];
+	pool.query(addParticipant, addParticipantValues)
+		.then(result => {
+			console.log('Participant self registered')
+			res.send({participant_id: result.rows[0].id});
+		}).catch(error => {
+			console.log(error);
+			res.sendStatus(500);
+		})
+});
+
 
 //GET route for all participants (owner only)
 router.get('/all', rejectUnauthenticated, (req, res) => {
 	console.log('req.user:', req.user.id)
 	//only owners (access level 3 can get results)
-	if (req.user.level === 3) {
+	if (req.user.level >= 4) {
 		let queryText = `SELECT "participant"."id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "participant"."age", "participant"."gender", "participant"."category", "participant"."state", "participant"."email", "participant"."phone_number" AS "phone", concat("admin_contact"."first_name", ' ', "admin_contact"."last_name") AS "admin_name" 
 		FROM "participant" JOIN "admin_contact" ON "participant"."admin_id" = "admin_contact".id
 		ORDER BY "participant".id;`;
@@ -132,6 +123,38 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 		res.sendStatus(403);
 	}
 })
+
+//updates participant info
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('update participant req.body:', req.body)
+  const isOffender = req.body.category
+  console.log('participant category:', isOffender)
+  const connection = await pool.connect()
+  try{
+    await connection.query('BEGIN');
+    const updateParticipant = `UPDATE "participant" 
+	  SET first_name = $1, last_name = $2, age = $3, gender = $4, category = $5, state = $6, email = $7, phone_number = $8
+      WHERE "participant".id = $9;`;
+    const updateParticipantValues = [req.body.first_name, req.body.last_name, req.body.age, req.body.gender, req.body.category, req.body.state, req.body.email, req.body.phone_number, req.body.id]
+    await connection.query(updateParticipant, updateParticipantValues)
+	if(isOffender === 'Offender'){
+	  const updateOffender = `UPDATE "offender"
+      SET offender_system_id = $1, system_id = $2, violent_offender = $3, felon = $4, population_id = $5
+      WHERE participant_id = $6;`;
+    const updateOffenderValues = [req.body.offender_system_id, req.body. system_id, req.body.violent_offender, req.body.felon, req.body.population_id, req.body.id]
+    await connection.query(updateOffender, updateOffenderValues);
+  	}
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  }catch(error){
+		//if any of the above steps fail, abort the entire transaction so no bad info gets into database
+		await connection.query('ROLLBACK');
+		console.log('Transaction error - rolling back participant update:', error);
+		res.sendStatus(500);
+	}finally{
+		connection.release()
+	}
+});//end participant update PUT
 
 
 module.exports = router;

@@ -4,19 +4,18 @@
     text-align: center;
 }
 
-li {
-    margin: 18px 0;
-    cursor: pointer;
-}
-
 .striked {
     text-decoration: line-through;
     font-weight: bold;
     color: lightgray;
+    cursor: pointer;
+    margin: 18px 0;
 } 
 
 .unStriked {
     text-decoration: none;
+    cursor: pointer;
+    margin: 18px 0;
 }
 
 .valuesList {

@@ -35,9 +35,7 @@ function* fetchAdminContact() {
 
 function* fetchProfile(action){
   try{
-    console.log('admin id:', action.payload)
     const response = yield axios.get('api/admin/profile')
-    console.log('adminSage fetchProfile response.data:', response.data)
     yield put({type: 'SET_PROFILE', payload: response.data})
     //and send this info to the editProfileReducer so it's stored there if admin edits profile info
     yield put({type: 'EDIT_PROFILE', payload: response.data})
@@ -60,8 +58,8 @@ function* updateAdminLevel(action) {
 
 function* updateProfile(action){
   try{
-    console.log('updateProfile action.payload:', action.payload)
     yield axios.put(`/api/admin/profile/${action.payload.admin_id}`, action.payload)
+    yield put({type: 'CANCEL_EDIT'})
     yield put({type: 'FETCH_PROFILE', payload: action.payload.admin_id})
   }catch(error){
     console.log('error in updateProfile:', error)

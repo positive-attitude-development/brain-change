@@ -89,11 +89,7 @@ class MyParticipants extends Component{
 	};//end handleOffenderInput
 
 	handleSubmit = () => {
-		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state.participant, history: this.props.history})
-	};//end handleSubmit
-
-	handleSubmitOffender = () => {
-		this.props.dispatch({type: 'ADD_OFFENDER', payload: this.state, history: this.props.history})
+		this.props.dispatch({type: 'ADD_PARTICIPANT', payload: this.state, history: this.props.history})
 	};//end handleSubmit
 
 	renderInputs = () =>{
@@ -106,10 +102,10 @@ class MyParticipants extends Component{
 			<br></br>
 			<TextField select margin="normal"
 				label="System:" value={this.state.offender.offender_system_id} 
-				onChange={this.handleInputChange('system')}>
+				onChange={this.handleOffenderInput('offender_system_id')}>
 					{this.props.system.map((system) => {
 						return(
-							<MenuItem key={system.id} value={system.system}>{system.system}</MenuItem>
+							<MenuItem key={system.id} value={system.id}>{system.system}</MenuItem>
 						)
 					})}</TextField>
 
@@ -117,10 +113,10 @@ class MyParticipants extends Component{
 
 			<TextField select margin="normal"
 				label="Population:" value={this.state.offender.population_id} 
-				onChange={this.handleInputChange('population')}>
+				onChange={this.handleOffenderInput('population_id')}>
 					{this.props.population.map((population) => {
 						return(
-							<MenuItem key={population.id} value={population.population}>{population.population}</MenuItem>
+							<MenuItem key={population.id} value={population.id}>{population.population}</MenuItem>
 						)
 					})}</TextField>
 
@@ -145,7 +141,6 @@ class MyParticipants extends Component{
 	};//end viewParticipant
 
 	render(){
-		//console.log('this.state:', this.state)
 		const {classes} = this.props;
 		let submitButton;
 		if(this.state.participant.first_name !== '' && this.state.participant.last_name !== ''
@@ -159,7 +154,7 @@ class MyParticipants extends Component{
 		&& this.state.offender.system_id !== 0 && this.state.offender.offender_system_id !== 0
 		&& this.state.offender.felon !== '' && this.state.offender.violent_offender !== '' && this.state.offender.population_id !== 0){
 			//console.log('OK to submit offender')
-			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmitOffender}>Add Participant</Button>
+			submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		}else{
 			//console.log('Not OK to submit participant yet')
 			submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>

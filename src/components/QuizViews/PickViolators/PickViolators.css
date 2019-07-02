@@ -1,10 +1,15 @@
 
-.violist{
+.violist {
     list-style-type: none;
     columns: 4;
     text-align: center;
     cursor: pointer;
     margin: 18px ;
+    padding: 25px; 
+}
+
+li {
+    padding: 5px; 
 }
 
 .paper {

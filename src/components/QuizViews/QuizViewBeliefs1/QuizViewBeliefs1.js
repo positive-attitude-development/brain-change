@@ -72,11 +72,14 @@ handleClick = (event) => {
                     <h2 className="title">Type out your 3 beliefs below </h2>
 
                  <Paper >
-                    <ol>Examples
+                   <div className="examples" >
+                       <h4 align="center"> Here are some examples: </h4>
+                    <ul> 
                         <li>Climate change is real</li>
                         <li>Attitude is the most important tool for success</li>
                         <li>There is life after death or there is no life after death</li>
-                    </ol>
+                    </ul>
+                </div>
             <div className ="inputs">
                 <div>
                     <TextField
