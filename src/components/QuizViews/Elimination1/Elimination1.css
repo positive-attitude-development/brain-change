@@ -10,13 +10,13 @@
 .striked {
     text-decoration: line-through;
     font-weight: bold;
-    color: lightgray;
+    color: rgb(162, 161, 161);
     transition: color 1s ease-out;
     cursor: pointer;
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: -1px;
-    margin: 20px 0px 20px 0px;
+    margin: 0px 0px 20px 0px;
 } 
 
 .unStriked {
@@ -26,7 +26,7 @@
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: -1px;
-    margin: 20px 0px 20px 0px;
+    margin: 0px 0px 20px 0px;
 }
 
 .valuesList {
