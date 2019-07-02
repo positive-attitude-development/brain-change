@@ -151,33 +151,7 @@ class RankPercents extends Component {
                         })}
                     </ul>
                 </div>
-                {/* : } */}
-                {/* <Paper>
-                    <Table className={classes.table}>
-                        <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Core Values </TableCell>
-                            <TableCell align="center">Violater Values</TableCell>
-                        </TableRow>
-                        </TableHead>
-                        {this.state.core === true ?
-                        
-                        <TableBody>
-                            {this.state.map(rows => {
-                               return( <TableRow >
-                                <TableCell align="center">{rows.core.values}</TableCell>
-                                <TableCell align="center">{rows.violators.values}</TableCell>
-                                </TableRow>
-                               )
-                            }
-                            )}
-                        </TableBody>
-                        : <TableBody>
-                            </TableBody>
-                        }
-                    </Table>
-                </Paper> */}
-                {/* // className={classes.root} */}
+             
             </div>
                 <div className= {classes.root}>
                     <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
