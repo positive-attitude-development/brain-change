@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-import {  Button,Paper, Grid } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar';
 import './Elimination4.css';
+import Banner from '../Banner/Banner';
+
 
 class Elimination4 extends Component {
 
@@ -89,8 +91,13 @@ class Elimination4 extends Component {
 
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-                <Paper className="paper">
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
+                <Paper className="paper4">
                     <div className="valuesList">
                         <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
                         <ul className="elim4List">
@@ -99,16 +106,15 @@ class Elimination4 extends Component {
                             })}
                         </ul>
                     </div>
-
-                     <Grid container justify="center">
-                        <Button
+                    <div className="nextBtn1">
+                       <Button
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}
                             >
                             Next
                         </Button> 
-                    </Grid>
+                    </div>
                 </Paper>
             </div>
         )

@@ -2,31 +2,59 @@
     list-style-type: none;
     columns: 4;
     text-align: center;
+    column-gap: 0px;
 }
+
+
 
 .striked {
     text-decoration: line-through;
     font-weight: bold;
-    color: lightgray;
+    color: rgb(162, 161, 161);
+    transition: color 1s ease-out;
     cursor: pointer;
-    margin: 18px 0;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -1px;
+    margin: 0px 0px 20px 0px;
 } 
 
 .unStriked {
     text-decoration: none;
     cursor: pointer;
-    margin: 18px 0;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -1px;
+    margin: 0px 0px 20px 0px;
 }
 
 .valuesList {
-    padding: 20px;
+    padding: 6px;
+    background-image: url("/braintree.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center; 
+    background-blend-mode: lighten;
+    object-fit: cover;
 }
 
 .paper {
-    margin-top: 60px;
+    margin: 30px 150px 0px 150px;
 }
 
 .inst {
     text-align: center;
     margin-bottom: 30px;
+    font-size: 26px;
 }
+
+.statusBar {
+    text-align: center;
+}
+
+.nextBtn1 {
+    float: right;
+    padding-top: 10px;
+}
+

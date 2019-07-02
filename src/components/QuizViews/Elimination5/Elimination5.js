@@ -3,6 +3,8 @@ import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import './Elimination5.css';
+import Banner from '../Banner/Banner';
+
 
 class Elimination5 extends Component {
 
@@ -90,8 +92,13 @@ class Elimination5 extends Component {
 
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-                <Paper>
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
+                <Paper className="paper5">
                     <div className="valuesList">
                         <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
                         <ul className="elim5List">
@@ -100,8 +107,7 @@ class Elimination5 extends Component {
                             })}
                         </ul>
                     </div>
-                <Grid container justify="center">
-                    <div>
+                    <div className="nextBtn1">
                         <Button
                             color="primary"
                             variant="contained"
@@ -110,7 +116,6 @@ class Elimination5 extends Component {
                             Next
                         </Button>
                     </div> 
-                  </Grid>
                 </Paper>
             </div>
         )
