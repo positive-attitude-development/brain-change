@@ -6,28 +6,21 @@ import './SnapShot.css'
 
 class SnapShot extends Component {
 
-
-  
-    componentDidMount() {
-        let reducer = this.props.newValues;
-
-        // let coreValues = reducer.orderCore
-        // let vioValues = reducer.violator
-    }
-
     render() {
+     
+        let violatorVal = this.props.values.violators.map( row => {
+            return row.values
+        })
 
-        // let core = (this.props.core.map(coreValues=> {
-        //                   return (coreValues)
-        // }))
-
+        let coreVal = this.props.values.core.map( row => {
+            return row.values
+        })
+       
         return (
             <div className= "table">
 
                 <h2>SnapShot</h2>
-                {JSON.stringify(this.props.reduxState.newValuesReducer.orderCore)}
-
-
+               
                 <Paper >
                     <Table>
                         <TableHead>
@@ -37,9 +30,29 @@ class SnapShot extends Component {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          <TableRow>
-                            <TableCell align="center" ></TableCell>
-                            <TableCell align="center" ></TableCell>
+                          <TableRow> 
+                              <TableCell >{coreVal[0]}</TableCell>
+                              <TableCell >{violatorVal[0]}</TableCell>
+                          </TableRow>
+                          <TableRow> 
+                              <TableCell >{coreVal[1]}</TableCell>
+                              <TableCell >{violatorVal[1]}</TableCell>
+                          </TableRow>
+                          <TableRow> 
+                              <TableCell >{coreVal[2]}</TableCell>
+                              <TableCell >{violatorVal[2]}</TableCell>
+                          </TableRow>
+                          <TableRow> 
+                              <TableCell >{coreVal[3]}</TableCell>
+                              <TableCell >{violatorVal[3]}</TableCell>
+                          </TableRow>
+                          <TableRow> 
+                              <TableCell >{coreVal[4]}</TableCell>
+                              <TableCell >{violatorVal[4]}</TableCell>
+                          </TableRow>
+                          <TableRow> 
+                              <TableCell >{coreVal[5]}</TableCell>
+                              <TableCell >{violatorVal[5]}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableCell align="center" >{this.props.corePercents}</TableCell>
@@ -65,16 +78,6 @@ class SnapShot extends Component {
 
                     </Table>
                 </Paper>
-                {/* <h2>{this.props.beliefs.belief1}</h2>
-                <h2>{this.props.beliefs.belief2}</h2>
-                <h2>{this.props.beliefs.belief3}</h2>
-                <h3>{this.props.corePercents}</h3>
-                <h3>{this.props.violatorPercents}</h3> */}
-
-                <h2>{this.props.core}</h2>
-
-    
-               
             </div>
         )
     }
@@ -84,7 +87,8 @@ class SnapShot extends Component {
 const mapStateToProps = (reduxState) => {
     return {
         reduxState,
-        core : reduxState.newValuesReducer.core,
+        values : reduxState.newValuesReducer.percents,
+        core: reduxState.newValuesReducer.orderCore,
         violators :reduxState.newValuesReducer.violators,
         corePercents : reduxState.newValuesReducer.percents.valuesPercent,
         violatorPercents : reduxState.newValuesReducer.percents.violatorPercent,
