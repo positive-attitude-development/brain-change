@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {  Button, Grid, Paper } from '@material-ui/core';
-
+import Banner from '../Banner/Banner';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
@@ -82,13 +82,15 @@ class OrderViolators extends Component {
 
     render() {
         // const {items} = this.state.items; 
-        console.log(this.state)
         return (
             <div>
-                   
-                <StatusBar status={this.state.statusBar} />
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                
                 <h2 className="violOrder">Rank your 5 violator values in order</h2>
-            <Paper justify="center">
                 <Grid container justify="center">
                     {/* <DragDrop values={this.state.items} /> */}
                         <Paper className="paperDrag">
@@ -110,7 +112,6 @@ class OrderViolators extends Component {
                     </Button> 
                   </div>
                 </Grid>
-              </Paper>
             </div>
         )
     }

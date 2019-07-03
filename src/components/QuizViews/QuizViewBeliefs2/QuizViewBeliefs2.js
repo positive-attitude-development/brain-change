@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles';
 
-import { FormControl, FormControlLabel, FormLabel, 
+import { FormControl, FormControlLabel,
         RadioGroup, Button, Radio, Paper, InputLabel, 
         MenuItem, Select, Grid } from"@material-ui/core";
 
@@ -110,18 +110,11 @@ componentDidMount() {
                                 >
 
 
-                                <FormControlLabel  className = "radio" value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
-                                <FormControlLabel  className = "radio" value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
-                                <FormControlLabel className = "radio" value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
-
-                                {/* <FormControlLabel value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
-                                <FormControlLabel value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
-                                <FormControlLabel value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3} */}
-
-                                
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
                                 </RadioGroup>
                         </FormControl>
-
                     </Paper>
 
                 <div className = "input">

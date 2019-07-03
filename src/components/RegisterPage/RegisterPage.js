@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {FormGroup, FormControlLabel, TextField, Select, MenuItem, OutlinedInput} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = {
+	root: {
+
+	},
+	menu: {
+		margin: 'auto',
+		marginLeft: '5px',
+		width: '120px',
+	},
+    text: {
+		margin: '10px',
+		width: '120px',
+	},
+}
 
 class RegisterPage extends Component {
   state = {
@@ -73,6 +89,7 @@ class RegisterPage extends Component {
   }
 
   render() {
+	const classes = this.props;
     return (
       <div>
 		  <button onClick={this.fillData}>Fill Data</button>
@@ -85,21 +102,18 @@ class RegisterPage extends Component {
         <FormGroup>
           <h2>Register Owner/Admin</h2>
           <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.username} onChange={this.handleInputChangeFor('username')}/>}
-        	label="Username:" labelPlacement="start"/>
+			<TextField required label="Username:" className={classes.text}
+				value={this.state.username} onChange={this.handleInputChangeFor('username')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.password} onChange={this.handleInputChangeFor('password')}/>}
-        	label="Password:" labelPlacement="start"/>
+			<TextField required label="Password:" className={classes.text}
+				value={this.state.password} onChange={this.handleInputChangeFor('password')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.firstName} onChange={this.handleInputChangeFor('firstName')}/>}
-        	label="First Name:" labelPlacement="start"/>
+			<TextField required label="First Name:" className={classes.text}
+				value={this.state.firstName} onChange={this.handleInputChangeFor('firstName')}/>
           </div>
 
 		  <div>
@@ -109,115 +123,103 @@ class RegisterPage extends Component {
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.organization} onChange={this.handleInputChangeFor('organization')}/>}
-        	label="Organization:" labelPlacement="start"/>
+			<TextField required label="Organization:" className={classes.text}
+				value={this.state.organization} onChange={this.handleInputChangeFor('organization')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.title} onChange={this.handleInputChangeFor('title')}/>}
-        	label="Title:" labelPlacement="start"/>
+			<TextField required label="Title:" className={classes.text}
+				value={this.state.title} onChange={this.handleInputChangeFor('title')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.phoneNumber} onChange={this.handleInputChangeFor('phoneNumber')}/>}
-        	label="Phone Number:" labelPlacement="start"/>
+			<TextField required label="Phone Number:" className={classes.text}
+				value={this.state.phoneNumber} onChange={this.handleInputChangeFor('phoneNumber')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField required label="Required"
-				value={this.state.emailAddress} onChange={this.handleInputChangeFor('emailAddress')}/>}
-        	label="Email Address:" labelPlacement="start"/>
+			<TextField required label="Email Address:" className={classes.text}
+				value={this.state.emailAddress} onChange={this.handleInputChangeFor('emailAddress')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField value={this.state.streetAddress}
-                onChange={this.handleInputChangeFor('streetAddress')}/>}
-        	label="Street Address:" labelPlacement="start"/>
+			<TextField value={this.state.streetAddress} label="Street Address:" className={classes.text}
+                onChange={this.handleInputChangeFor('streetAddress')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField value={this.state.streetAddressTwo}
-                onChange={this.handleInputChangeFor('streetAddressTwo')}/>}
-        	label="Street Address Line 2:" labelPlacement="start"/>
+			<TextField value={this.state.streetAddressTwo} label="Street Address Line 2:" className={classes.text}
+                onChange={this.handleInputChangeFor('streetAddressTwo')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField value={this.state.city}
-                onChange={this.handleInputChangeFor('city')}/>}
-        	label="City:" labelPlacement="start"/>
+			<TextField value={this.state.city} label="City:" className={classes.text}
+                onChange={this.handleInputChangeFor('city')}/>
           </div>
 
 		  <div>
-			<FormControlLabel control={
-				<Select required value={this.state.state}
-				onChange={this.handleInputChangeFor('state')} label="Required"
-				input={<OutlinedInput name="state" labelWidth={100} id="outlined-age-native-simple"/>}>
-					<MenuItem value=""><em>Select State</em></MenuItem>
-					<MenuItem value="AL">Alabama</MenuItem>
-					<MenuItem value="AK">Alaska</MenuItem>
-					<MenuItem value="AZ">Arizona</MenuItem>
-					<MenuItem value="AR">Arkansas</MenuItem>
-					<MenuItem value="CA">California</MenuItem>
-					<MenuItem value="CO">Colorado</MenuItem>
-					<MenuItem value="CT">Connecticut</MenuItem>
-					<MenuItem value="DE">Delaware</MenuItem>
-					<MenuItem value="DC">District of Columbia</MenuItem>
-					<MenuItem value="FL">Florida</MenuItem>
-					<MenuItem value="GA">Georgia</MenuItem>
-					<MenuItem value="HI">Hawaii</MenuItem>
-					<MenuItem value="ID">Idaho</MenuItem>
-					<MenuItem value="IL">Illinois</MenuItem>
-					<MenuItem value="IN">Indiana</MenuItem>
-					<MenuItem value="IA">Iowa</MenuItem>
-					<MenuItem value="KS">Kansas</MenuItem>
-					<MenuItem value="KY">Kentucky</MenuItem>
-					<MenuItem value="LA">Louisiana</MenuItem>
-					<MenuItem value="ME">Maine</MenuItem>
-					<MenuItem value="MD">Maryland</MenuItem>
-					<MenuItem value="MA">Massachusetts</MenuItem>
-					<MenuItem value="MI">Michigan</MenuItem>
-					<MenuItem value="MN">Minnesota</MenuItem>
-					<MenuItem value="MS">Mississippi</MenuItem>
-					<MenuItem value="MO">Missouri</MenuItem>
-					<MenuItem value="MT">Montana</MenuItem>
-					<MenuItem value="NE">Nebraska</MenuItem>
-					<MenuItem value="NV">Nevada</MenuItem>
-					<MenuItem value="NH">New Hampshire</MenuItem>
-					<MenuItem value="NJ">New Jersey</MenuItem>
-					<MenuItem value="NM">New Mexico</MenuItem>
-					<MenuItem value="NY">New York</MenuItem>
-					<MenuItem value="NC">North Carolina</MenuItem>
-					<MenuItem value="ND">North Dakota</MenuItem>
-					<MenuItem value="OH">Ohio</MenuItem>
-					<MenuItem value="OK">Oklahoma</MenuItem>
-					<MenuItem value="OR">Oregon</MenuItem>
-					<MenuItem value="PA">Pennsylvania</MenuItem>
-					<MenuItem value="PR">Puerto Rico</MenuItem>
-					<MenuItem value="RI">Rhode Island</MenuItem>
-					<MenuItem value="SC">South Carolina</MenuItem>
-					<MenuItem value="SD">South Dakota</MenuItem>
-					<MenuItem value="TN">Tennessee</MenuItem>
-					<MenuItem value="TX">Texas</MenuItem>
-					<MenuItem value="UT">Utah</MenuItem>
-					<MenuItem value="VT">Vermont</MenuItem>
-					<MenuItem value="VA">Virginia</MenuItem>
-					<MenuItem value="VI">Virgin Islands</MenuItem>
-					<MenuItem value="WA">Washington</MenuItem>
-					<MenuItem value="WV">West Virginia</MenuItem>
-					<MenuItem value="WI">Wisconsin</MenuItem>
-					<MenuItem value="WY">Wyoming</MenuItem>
-				</Select>}
-        	label="State:"
-			labelPlacement="start"/>
+			<TextField select required value={this.state.state} margin="normal" className={classes.menu}
+				onChange={this.handleInputChangeFor('state')} label="State:">
+				<MenuItem value=""><em>Select State</em></MenuItem>
+				<MenuItem value="AL">Alabama</MenuItem>
+				<MenuItem value="AK">Alaska</MenuItem>
+				<MenuItem value="AZ">Arizona</MenuItem>
+				<MenuItem value="AR">Arkansas</MenuItem>
+				<MenuItem value="CA">California</MenuItem>
+				<MenuItem value="CO">Colorado</MenuItem>
+				<MenuItem value="CT">Connecticut</MenuItem>
+				<MenuItem value="DE">Delaware</MenuItem>
+				<MenuItem value="DC">District of Columbia</MenuItem>
+				<MenuItem value="FL">Florida</MenuItem>
+				<MenuItem value="GA">Georgia</MenuItem>
+				<MenuItem value="HI">Hawaii</MenuItem>
+				<MenuItem value="ID">Idaho</MenuItem>
+				<MenuItem value="IL">Illinois</MenuItem>
+				<MenuItem value="IN">Indiana</MenuItem>
+				<MenuItem value="IA">Iowa</MenuItem>
+				<MenuItem value="KS">Kansas</MenuItem>
+				<MenuItem value="KY">Kentucky</MenuItem>
+				<MenuItem value="LA">Louisiana</MenuItem>
+				<MenuItem value="ME">Maine</MenuItem>
+				<MenuItem value="MD">Maryland</MenuItem>
+				<MenuItem value="MA">Massachusetts</MenuItem>
+				<MenuItem value="MI">Michigan</MenuItem>
+				<MenuItem value="MN">Minnesota</MenuItem>
+				<MenuItem value="MS">Mississippi</MenuItem>
+				<MenuItem value="MO">Missouri</MenuItem>
+				<MenuItem value="MT">Montana</MenuItem>
+				<MenuItem value="NE">Nebraska</MenuItem>
+				<MenuItem value="NV">Nevada</MenuItem>
+				<MenuItem value="NH">New Hampshire</MenuItem>
+				<MenuItem value="NJ">New Jersey</MenuItem>
+				<MenuItem value="NM">New Mexico</MenuItem>
+				<MenuItem value="NY">New York</MenuItem>
+				<MenuItem value="NC">North Carolina</MenuItem>
+				<MenuItem value="ND">North Dakota</MenuItem>
+				<MenuItem value="OH">Ohio</MenuItem>
+				<MenuItem value="OK">Oklahoma</MenuItem>
+				<MenuItem value="OR">Oregon</MenuItem>
+				<MenuItem value="PA">Pennsylvania</MenuItem>
+				<MenuItem value="PR">Puerto Rico</MenuItem>
+				<MenuItem value="RI">Rhode Island</MenuItem>
+				<MenuItem value="SC">South Carolina</MenuItem>
+				<MenuItem value="SD">South Dakota</MenuItem>
+				<MenuItem value="TN">Tennessee</MenuItem>
+				<MenuItem value="TX">Texas</MenuItem>
+				<MenuItem value="UT">Utah</MenuItem>
+				<MenuItem value="VT">Vermont</MenuItem>
+				<MenuItem value="VA">Virginia</MenuItem>
+				<MenuItem value="VI">Virgin Islands</MenuItem>
+				<MenuItem value="WA">Washington</MenuItem>
+				<MenuItem value="WV">West Virginia</MenuItem>
+				<MenuItem value="WI">Wisconsin</MenuItem>
+				<MenuItem value="WY">Wyoming</MenuItem>
+			</TextField>
           </div>
 
 		  <div>
-			<FormControlLabel control={<TextField value={this.state.zipcode}
-                onChange={this.handleInputChangeFor('zipcode')}/>}
-        	label="Zipcode:" labelPlacement="start"/>
+			<TextField value={this.state.zipcode} label="Zipcode:" className={classes.text}
+                onChange={this.handleInputChangeFor('zipcode')}/>
           </div>
 
           <div>
@@ -244,5 +246,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
-
+export default withStyles(styles)(connect(mapStateToProps)(RegisterPage));

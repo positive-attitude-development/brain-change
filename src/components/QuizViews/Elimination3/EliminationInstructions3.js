@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {  Grid, Button } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './EliminationInstructions3.css'
 
 class EliminationInstructions3 extends Component {
@@ -13,8 +13,12 @@ class EliminationInstructions3 extends Component {
     render() {
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <div className="instructions">
                 On the next screen you will see the updated list of values. 
                 This time, remove 5 values that are the least important to you.  

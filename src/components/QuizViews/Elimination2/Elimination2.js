@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {  Button } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import { Paper, Grid } from '@material-ui/core';
+import Banner from '../Banner/Banner';
 import './Elimination2.css';
 
 class Elimination2 extends Component {
@@ -88,9 +88,13 @@ class Elimination2 extends Component {
 
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-
-                <Paper className="paper">
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
+                <Paper className="paper2">
                     <div className="valuesList">
                         <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
                         <ul className="elim2List">
@@ -100,18 +104,15 @@ class Elimination2 extends Component {
                             })}
                         </ul>
                     </div>
-                <Grid container justify="center">
-                  <div className="button">
-                    <Button  
-                        color="primary"
-                        variant="contained"
-                        onClick={this.handleNext}
-                        >
-                        Next
-                    </Button> 
-                  </div>
-                </Grid>
-              </Paper>
+                    <div className="nextBtn1">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}>
+                            Next
+                        </Button>
+                    </div>
+                </Paper>
             </div>
             
         )
