@@ -303,36 +303,29 @@ router.get('/', (req, res) => {
 // GET all participants belonging to admins
 router.get('/all', (req, res) => {
 
-    let queryText = `SELECT "participant".id, "participant".age, "participant".gender, "participant".state,
+    let queryText = `SELECT
+    "participant".id, "participant".age, "participant".gender, "participant".state,
+    (select "category".category AS "category" FROM "category" WHERE "category".id = "participant".category_id),
+    (select "offender_system".system AS "system" FROM "offender_system" WHERE "offender_system".id = "offender".offender_system_id),
+    (select "offender_population".population AS "population" FROM "offender_population" WHERE "offender_population".id = "offender".population_id),
+    "offender".felon, "offender".violent_offender,
+    "result".id AS "result_id", "result".dates AS "date", "result".percent_core AS "%_core", "result".percent_violators AS "%_violators",
 
---"category".category,
+    (select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
 
-"offender_system".system, "offender_population".population, "offender".felon, "offender".violent_offender,
+    (select array_agg("result_belief".challenged) AS "challenged" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+    (select array_agg("result_belief".type) AS "belief_type" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+    (select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
+    (select array_agg("value".values ORDER BY "result_violators".order) AS "violators" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id),
+    (select array_agg("value".values ORDER BY "result_elimination".order) AS "elimination_order" FROM "result_elimination" JOIN "value" ON "result_elimination".value_id = "value".id WHERE "result_elimination".result_id = "result".id),
+    (select array_agg("result_round".times) AS "seconds_per_round" FROM "result_round" WHERE "result_round".result_id = "result".id)
 
-"result".dates AS "date", "result".percent_core AS "pct_core", "result".percent_violators AS "pct_viol",
+    FROM "participant"
+    FULL JOIN "offender" ON "offender".participant_id = "participant".id
+    JOIN "result" ON "result".participant_id = "participant".id
 
-"result_belief".belief, "result_belief".challenged, "result_belief".type,
-
-"result_core".value_id, "result_core".ranks AS "core_order",
-
-"result_elimination".value_id, "result_elimination".order AS "elimination_order",
-
-"result_round".elimination_round, "result_round".times AS "seconds",
-
-"result_violators".value_id, "result_violators".order AS "violators_order"
-
-FROM "participant"
---JOIN "category" ON "category".id = "participant".category
-FULL JOIN "offender" ON "offender".participant_id = "participant".id
-FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
-FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
-FULL JOIN "result" ON "result".participant_id = "participant".id
-FULL JOIN "result_belief" ON "result_belief".result_id = "result".id
-FULL JOIN "result_core" ON "result_core".result_id = "result".id
-FULL JOIN "result_elimination" ON "result_elimination".result_id = "result".id
-FULL JOIN "result_round" ON "result_round".result_id = "result".id
-FULL JOIN "result_violators" ON "result_violators".result_id = "result".id
-;`;
+    GROUP BY "participant".id, "offender".id, "result".id
+    ORDER BY "result_id" ASC;`;
 
     pool.query(queryText)
         .then((results) => {
