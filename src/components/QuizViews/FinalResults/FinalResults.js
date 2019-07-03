@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import SnapShot from './SnapShot'; 
 import StatusBar from '../StatusBar'; 
+import Banner from '../Banner/Banner';
 
 // import {thisExpression} from '@babel/types';
 
@@ -328,6 +329,9 @@ class FinalResults extends Component {
     render() {
         return (
             <div>
+
+                <Banner />
+                 
                 <StatusBar status={this.state.statusBar} />
 
 
