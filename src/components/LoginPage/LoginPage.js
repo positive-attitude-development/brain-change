@@ -7,6 +7,13 @@ class LoginPage extends Component {
     password: '',
   };
 
+  demoClick = () => {
+    this.setState({
+      username: 'bobsmith2',
+      password: 'password'
+    })
+  }
+
   login = (event) => {
     event.preventDefault();
 
@@ -42,7 +49,7 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <h1 onClick={this.demoClick}>Login</h1>
           <div>
             <label htmlFor="username">
               Username:
