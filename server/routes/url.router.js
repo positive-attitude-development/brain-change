@@ -18,6 +18,7 @@ router.get('/retrieve', rejectUnauthenticated, (req, res) => {
 
 //GET route for checking whether token is valid
 router.get('/verify', (req, res) => {
+        console.log('verify url', req.query.token)
     let queryText = `SELECT "url"."id", "url"."url", "url"."expiration_date", "url"."participant_id", "url"."admin_id", "participant"."first_name" FROM "url" JOIN "participant" ON "participant"."id" = "url"."participant_id" WHERE "url" = $1 ORDER BY "expiration_date" DESC;`;
     pool.query(queryText, [req.query.token])
         .then((result) => {
@@ -30,6 +31,7 @@ router.get('/verify', (req, res) => {
 
 //PUT route for updating expired URL links for participant
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
+        console.log('verify url', req.body)
     const connection = await pool.connect()
   try{
     await connection.query('BEGIN');

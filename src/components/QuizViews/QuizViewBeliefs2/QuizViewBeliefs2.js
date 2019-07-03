@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles';
 
-import { FormControl, FormControlLabel, FormLabel, 
+import { FormControl, FormControlLabel,
         RadioGroup, Button, Radio, Paper, InputLabel, 
         MenuItem, Select, Grid } from"@material-ui/core";
 
