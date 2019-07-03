@@ -5,6 +5,7 @@ import StatusBar from '../StatusBar';
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import './OrderValues.css';
+import Banner from '../Banner/Banner';
 
 const SortableItem = sortableElement(({value}) => <li className="listVals">{value.values}</li>);
 
@@ -83,7 +84,12 @@ class OrderValues1 extends Component {
         const {items} = this.state;
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                
                 <h2 className="instOrder">Rank your 5 core values in order of importance</h2>
                 <Grid container justify="center">
                     {/* <DragDrop values={this.state.items} /> */}
