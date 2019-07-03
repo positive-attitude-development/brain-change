@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
-
+import Banner from '../Banner/Banner';
 import './RankInstructions.css'
 
 class RankInstructions extends Component {
@@ -17,9 +16,14 @@ class RankInstructions extends Component {
     render() {
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-                <div className="instructions">
-                On the next screen estimate the percentage of your daily life that you are directed by your core values 
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>               
+                 <div className="instructions">
+                    On the next screen estimate the percentage of your daily life that you are directed by your core values 
                     and the percentage that you are directed by your violators. 
                 </div>
                 

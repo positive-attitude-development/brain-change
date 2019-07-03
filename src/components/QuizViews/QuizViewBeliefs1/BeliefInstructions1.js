@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './BeliefInstructions1.css'
 
 class BeliefInstructions1 extends Component {
@@ -13,11 +13,22 @@ class BeliefInstructions1 extends Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
                 <div className="statusBar">
                  <StatusBar status={this.state.statusBar} />
                 </div>
              
                     <div className="examples">
+=======
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                 
+                <div className ="instructions">
+                    <div>
+>>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
                 On the next screen please write 3 of your beliefs that you would not want to give up. 
                 Beliefs can be personal, political, or religious. Here is a short tutorial. 
                     </div> 
