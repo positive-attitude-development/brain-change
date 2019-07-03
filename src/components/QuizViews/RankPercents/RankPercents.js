@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {withStyles} from '@material-ui/core/styles';
-
+import Banner from '../Banner/Banner';
 import Slider from '@material-ui/lab/Slider';
-// import { Paper, Button, Table, TableCell, TableHead, TableRow, TableBody, TextField, Typography } from '@material-ui/core'
-
-import { Button, Typography, Paper } from '@material-ui/core'
+import { Button, Typography, Paper, Grid } from '@material-ui/core'
 import './RankPercents.css'
 
 const styles = {
@@ -126,9 +123,12 @@ class RankPercents extends Component {
 
         return (
             <div>
-                
-                <StatusBar status={this.state.statusBar} />
-                
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                
                 <div className = "grid">
 
                 <div className = "core">

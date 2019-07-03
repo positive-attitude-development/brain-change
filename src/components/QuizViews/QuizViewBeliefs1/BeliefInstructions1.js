@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './BeliefInstructions1.css'
 
 class BeliefInstructions1 extends Component {
@@ -13,8 +13,12 @@ class BeliefInstructions1 extends Component {
     render() {
         return (
             <div>
-                 <StatusBar status={this.state.statusBar} />
-                 
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                 
                 <div className ="instructions">
                     <div>
                 On the next screen please write 3 of your beliefs that you would not want to give up. 

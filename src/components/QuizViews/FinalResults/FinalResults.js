@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-// import { Link} from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
+import {  Button, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
-
+import Banner from '../Banner/Banner';
 import SnapShot from './SnapShot'; 
 import StatusBar from '../StatusBar'; 
 
-// import {thisExpression} from '@babel/types';
 
 
 
@@ -329,8 +327,12 @@ class FinalResults extends Component {
     render() {
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
 
                 <SnapShot Values = {this.props.reduxState} /> 
                 

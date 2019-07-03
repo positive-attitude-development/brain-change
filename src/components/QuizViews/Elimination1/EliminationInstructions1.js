@@ -1,49 +1,50 @@
 import React, { Component } from 'react'
-
 import { Grid, Button, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
+import './EliminationInstructions1.css';
+import Banner from '../Banner/Banner';
 
-import './EliminationInstructions1.css'
 
 class EliminationInstructions1 extends Component {
 
 
-// handleNext() {
-   
-// }
+
 
     state = {
         statusBar : 1
     }
     render() {
         return (
-
-            <Paper>
-
-            <div className="instructionView1">
-
-                <StatusBar status={this.state.statusBar} />
-                    <h3 className="textInst">
-                        On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
-                    </h3>
-              
-
-                 <div className="giph">
-
+            <div>
+                <div className="banner">
+                    <Banner />
                 </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
+                <Paper>
+                <div className="instructionView1">
+                        <h3 className="textInst">
+                            On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
+                        </h3>
                 
-                  <div className="button">
-                    <Button  
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.props.history.push('/Elim1')}
-                        >
-                        Next
-                    </Button> 
-                  </div>
-                </div>
-            </Paper>
 
+                    <div className="giph">
+
+                    </div>
+                    
+                    <div className="button">
+                        <Button  
+                            color="primary"
+                            variant="contained"
+                            onClick={() => this.props.history.push('/Elim1')}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                    </div>
+                </Paper>
+            </div>
         )
     }
 }
