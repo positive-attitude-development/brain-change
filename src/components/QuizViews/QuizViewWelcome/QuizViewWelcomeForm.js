@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, MenuItem, TextField} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = {
+	root: {
+
+	},
+	menu: {
+		margin: 'auto',
+		marginLeft: '5px',
+		width: '120px',
+	},
+    text: {
+		margin: '10px',
+		width: '120px',
+	},
+}
 
 class QuizViewWelcomeForm extends Component {
 
@@ -33,42 +49,50 @@ class QuizViewWelcomeForm extends Component {
     }
 
     render() {
+        const classes = this.props;
         console.log(this.state);
         return (
             <div>
                 <div id="registrationForm">
                     <TextField
-                        required
+                        required className={classes.text}
                         margin="normal"
                         label="First Name"
                         value={this.state.first_name}
                         onChange={this.handleInputChange('first_name')} >
                     </TextField>
                     <TextField
-                        required
+                        required className={classes.text}
                         margin="normal"
                         label="Last Name"
                         value={this.state.last_name}
                         onChange={this.handleInputChange('last_name')} >
                     </TextField>
                     <TextField
-                        type="number"
+                        type="number" className={classes.text}
                         margin="normal"
                         label="Age"
                         value={this.state.age}
                         onChange={this.handleInputChange('age')} >
                     </TextField>
-                    <TextField
+                    {/* <TextField
                         margin="normal"
                         label="Gender"
                         value={this.state.gender}
                         onChange={this.handleInputChange('gender')} >
-                    </TextField>
+                    </TextField> */}
+
+                    <TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} 
+							value={this.state.gender} className={classes.menu}>
+							<MenuItem value="M">Male</MenuItem>
+							<MenuItem value="F">Female</MenuItem>
+							<MenuItem value="Other">Other</MenuItem>
+							<MenuItem value="Prefer Not to Say">Prefer Not to Say</MenuItem></TextField>
                     <TextField
                         required
                         select
                         style={{width:80}}
-
+                        className={classes.menu}
                         margin="normal"
                         label="State"
                         value={this.state.state}
@@ -129,7 +153,7 @@ class QuizViewWelcomeForm extends Component {
                         <MenuItem value="WY">Wyoming</MenuItem>
                     </TextField>
                     <TextField
-                        select
+                        select className={classes.text}
                         margin="normal"
                         style={{width:300}}
                         label="Which best describes you?"
@@ -141,13 +165,13 @@ class QuizViewWelcomeForm extends Component {
                         <MenuItem value="Other">Other</MenuItem>
                     </TextField>
                     <TextField
-                        margin="normal"
+                        margin="normal" className={classes.text}
                         label="Email Address"
                         value={this.state.email_address}
                         onChange={this.handleInputChange('email_address')} >
                     </TextField>
                     <TextField
-                        margin="normal"
+                        margin="normal" className={classes.text}
                         label="Phone Number"
                         value={this.state.phone_number}
                         onChange={this.handleInputChange('phone_number')} >
@@ -165,4 +189,4 @@ class QuizViewWelcomeForm extends Component {
     }
 }
 
-export default connect()(QuizViewWelcomeForm);
+export default withStyles(styles)(connect()(QuizViewWelcomeForm));

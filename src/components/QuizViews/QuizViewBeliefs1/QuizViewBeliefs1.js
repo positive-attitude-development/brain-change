@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { TextField, Button, Paper } from '@material-ui/core';
+import { TextField, Button, Paper, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './QuizViewBeliefs1.css'
 
 
@@ -62,22 +62,34 @@ handleClick = (event) => {
     }
 }
 
+    demoBelief = () => {
+        this.setState({
+            belief1: 'I believe global warming is real',
+            belief2: 'I believe the Loch Ness monster is real',
+            belief3: 'I believe in Santa Claus',
+        })
+    }
+
 
     render() {
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <div>
-                    <h2 className="title">Type out your 3 beliefs below </h2>
+                    <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper >
                    <div className="examples" >
                        <h4 align="center"> Here are some examples: </h4>
                     <ul> 
-                        <li>Climate change is real</li>
-                        <li>Attitude is the most important tool for success</li>
-                        <li>There is life after death or there is no life after death</li>
+                        <li>I believe people can change for the better</li>
+                        <li>I believe taxes should be lowered</li>
+                        <li>I believe in a higher power</li>
                     </ul>
                 </div>
             <div className ="inputs">
@@ -96,7 +108,6 @@ handleClick = (event) => {
                         type="text"
                         label="Second Belief"
                         style={{width:700}}
-                        inputProps = {{maxLength: 20}}
                         name="belief2"
                         required
                         value={this.state.belief2}

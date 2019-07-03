@@ -107,13 +107,19 @@ componentDidMount() {
                                 onChange={this.handleRadio}
                                 >
 
+<<<<<<< HEAD
                                 <FormControlLabel  className = "radio" value="belief1" control={<Radio />} label="" />{this.props.beliefs.belief1}
                                 <FormControlLabel  className = "radio" value="belief2" control={<Radio />} label="" />{this.props.beliefs.belief2}
                                 <FormControlLabel className = "radio" value="belief3" control={<Radio />} label="" />{this.props.beliefs.belief3}
  
+=======
+
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
+>>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
                                 </RadioGroup>
                         </FormControl>
-
                     </Paper>
 
                 <div className = "input">

@@ -18,7 +18,7 @@ const styles = {
 	menu: {
 		margin: 'auto',
 		marginLeft: '5px',
-		width: '120px',
+		width: '140px',
 	},
 	text: {
 		margin: '5px',
@@ -138,15 +138,20 @@ class MyParticipants extends Component{
 		this.setState({
 			participant: {
 				first_name: 'Bobby',
-				last_name: 'Lastname',
+				last_name: 'Smith',
 				age: 25,
 				gender: 'M',
-				category: 'Offender',
 				state: 'MN',
-				email_address: '',
-				phone_number: '',
+				email_address: 'bobby@email.com',
+				phone_number: '612-123-4567',
 				url: 'PpyT4JosMKRu',
-			},
+			}
+		})
+	};//end demoButton
+
+	demo2Button = () => {
+		this.setState({
+			...this.state,
 			offender: {
 				system_id: 123456,
 				offender_system_id: 2,
@@ -182,7 +187,8 @@ class MyParticipants extends Component{
 					<CardContent>
 						<h3>Add a Participant:</h3>
 						<h5>(*Required fields)</h5>
-						<Button onClick={this.demoButton} variant="outlined">DEMO</Button>
+						<Button onClick={this.demoButton}>DEMO</Button>
+						<Button onClick={this.demo2Button}>DEMO 2</Button>
 						<br></br>
 
 						<TextField required className={classes.text} label="First Name:" onChange={this.handleInputChange('first_name')} value={this.state.participant.first_name}/>

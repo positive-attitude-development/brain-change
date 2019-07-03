@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './BeliefInstructions2.css'
 
 class BeliefInstructions2 extends Component {
@@ -13,8 +13,12 @@ class BeliefInstructions2 extends Component {
     render() {
         return (
             <div>
-                 <StatusBar status={this.state.statusBar} />
-                 
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>                 
                 <div className = "instructions">
                     Choose the belief that causes the most internal or external conflict in your life 
                     and categorize it as personal, religious, or political
