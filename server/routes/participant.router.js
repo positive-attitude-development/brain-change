@@ -41,6 +41,23 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	});
 })
 
+router.get('/snapshot/:id', rejectUnauthenticated, (req, res) => {
+	let queryText = `SELECT "participant"."id", "result_core"."value_id", "result_violators"."value_id", "result_belief"."belief", "result"."percent_core", "result"."percent_violators" FROM "participant"
+	JOIN "result" ON "participant"."id" = "result"."participant_id"
+	JOIN "result_violators" ON "result"."id" = "result_violators"."result_id" 
+	JOIN "result_belief" ON "result_violators"."result_id" = "result_belief"."result_id"
+	JOIN "result_core" ON "result_core"."result_id" = "result"."id" 
+	WHERE "participant"."id" = $1;`
+	
+		let queryValues = [req.params.id]
+	pool.query(queryText, queryValues)
+	.then((result) => {
+		console.log('individual snapshot results:', result.rows);
+	}).catch((error) => {
+		console.log('error in get snapshot route:', error)
+	}); 
+})
+
 
 //POST route to add new participants
 router.post('/', rejectUnauthenticated, async (req, res, next) => {
@@ -157,6 +174,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 		connection.release()
 	}
 });//end participant update PUT
+
 
 
 module.exports = router;

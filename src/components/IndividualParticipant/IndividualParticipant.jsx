@@ -42,6 +42,9 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
+		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
+		this.props.dispatch({type: 'SET_SNAPSHOT'})
+		console.log(this.props.match.params.id)
 	};//end componentDidMount
 
 	generateLink = (urlid) => {
@@ -77,6 +80,7 @@ class IndividualParticipant extends Component{
 			isEditable: false
 		})
 	};//end handle saveChanges
+
 
 	render(){
 		const classes = this.props;
@@ -268,7 +272,7 @@ class IndividualParticipant extends Component{
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
-										<Button onClick={this.saveChanges} variant="contained" color="primary">Save Changes</Button>
+										<Button onClick={this.saveChanges} variant="contained" color="primary" >Save Changes</Button>
 									</DialogActions>
 							</Dialog>
 
@@ -289,9 +293,10 @@ class IndividualParticipant extends Component{
 					</Card>
 
 					<Card>
-						<CardContent>
-							IMAGINE SNAPSHOT HERE
-						</CardContent>
+						{/* <DialogContent>
+							<Button onClick={this.handleSnapshot} varient="contained" color="primary"> View SnapShot</Button>
+						</DialogContent> */}
+
 					</Card>
 				</Grid>
 					)

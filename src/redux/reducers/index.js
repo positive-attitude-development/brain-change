@@ -11,6 +11,7 @@ import editParticipant from './editParticipantReducer';
 import allRecordsReducer from './allRecordsReducer';
 import adminContactReducer from './adminContactReducer'; 
 import urlReducer from './urlReducer';
+import snapshotReducer from './snapshotReducer'; 
 
 
 import participant from './participantReducer';
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   urlReducer,
   editParticipant,
   resultData,
+  snapshotReducer
 });
 
 export default rootReducer;

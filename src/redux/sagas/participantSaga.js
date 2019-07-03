@@ -28,6 +28,16 @@ function* fetchIndividual(action){
     }
 }
 
+function* fetchSnapshot(action) {
+    try {
+        const response = yield axios.get(`/api/participant/snapshot/${action.payload}`); 
+        yield put({type: 'SET_SNAPSHOT', payload: response.data});
+        console.log(response.data); 
+    }catch(error){
+        console.log('Error in fetchSnapshot:' , error)
+    }
+}
+
 function* selfRegisterParticipant(action) {
     try {
         console.log('selfRegisterParticipant action.payload:', action.payload)
@@ -55,6 +65,7 @@ function* updateParticipant(action) {
 
 function* participantSaga() {
     yield takeLatest('FETCH_PARTICIPANTS', fetchParticipants);
+    yield takeLatest('FETCH_SNAPSHOT', fetchSnapshot)
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
     yield takeLatest('SELF_REG_PARTICIPANT', selfRegisterParticipant)
