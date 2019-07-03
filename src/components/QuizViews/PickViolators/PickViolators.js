@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './PickViolators.css'
 
 class PickViolators extends Component {
@@ -80,21 +80,25 @@ class PickViolators extends Component {
         
         return (
             <div>
-                
-                <StatusBar status={this.state.statusBar} />
-        <Paper>
-            <div className="violators">
-                <h2 className="header">Select five violator values</h2>
-                <ul className= "violist">
-                    {newArray.map(value => {
-                        return <li key={value.id} 
-                                    onClick={this.handleSelect} 
-                                    className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
-                                    value={value.id}>{value.values}</li>
-                    })}
-                </ul>
-            </div>
-        </Paper>
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>        
+                <Paper>
+                    <div className="violators">
+                        <h2 className="header">Select five violator values</h2>
+                        <ul className= "violist">
+                            {newArray.map(value => {
+                            return <li key={value.id} 
+                                        onClick={this.handleSelect} 
+                                        className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
+                                        value={value.id}>{value.values}</li>
+                            })}
+                        </ul>
+                    </div>
+                </Paper>
                 <Grid container justify="center">
                     <Button
                         onClick={this.handleNext}

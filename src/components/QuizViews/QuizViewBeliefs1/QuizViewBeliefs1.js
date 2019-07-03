@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { TextField, Button, Paper } from '@material-ui/core';
+import { TextField, Button, Paper, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-
+import Banner from '../Banner/Banner';
 import './QuizViewBeliefs1.css'
 
 
@@ -74,8 +74,12 @@ handleClick = (event) => {
     render() {
         return (
             <div>
-                <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <div>
                     <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>
 
@@ -104,7 +108,6 @@ handleClick = (event) => {
                         type="text"
                         label="Second Belief"
                         style={{width:700}}
-                        inputProps = {{maxLength: 20}}
                         name="belief2"
                         required
                         value={this.state.belief2}

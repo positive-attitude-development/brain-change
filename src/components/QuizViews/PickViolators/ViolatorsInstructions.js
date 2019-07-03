@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {  Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import { connect } from 'react-redux';
-
+import Banner from '../Banner/Banner';
 import './ViolatorsInstructions.css'
 
 class ViolatorsInstructions extends Component {
@@ -18,9 +18,12 @@ class ViolatorsInstructions extends Component {
     render() {
         return (
             <div>
-
-                 <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <div className="instructions">
                 On the next screen you will see your 5 core values along with a list of the values you identified as less important to you. 
                 Select the 5 values that are most likely to cause you to violate any of your core values.
