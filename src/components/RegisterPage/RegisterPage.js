@@ -32,7 +32,7 @@ class RegisterPage extends Component {
 	streetAddressTwo: '',
 	city: '',
 	state: '',
-	zipcode: 0,
+	zipcode: '',
 	level: 2
   };
 

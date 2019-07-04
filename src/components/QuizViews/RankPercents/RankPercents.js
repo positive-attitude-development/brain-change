@@ -49,6 +49,7 @@ class RankPercents extends Component {
     }
 
     componentDidMount = () => {
+        this.props.dispatch({type: 'SET_NEW_VALUES', name: 'participantId', payload: this.props.url.participant_id});
         const violators = this.props.violators
         const core = this.props.core
 
@@ -98,11 +99,9 @@ class RankPercents extends Component {
             let nextTime = ((min * 60 ) + (hour * 360) + sec)
             let percentTime = nextTime - this.state.time 
 
-        this.props.dispatch({type: 'SET_NEW_VALUES', name: 'percents', payload: this.state});
-        this.props.dispatch({type: 'SET_NEW_TIME', name: 'percentTime', payload: percentTime });
+        this.props.dispatch({type: 'ADD_RESULTS', payload: {result: this.props.newValuesReducer, percentTime: percentTime}});
         this.props.history.push('FinalResults'); 
     }
-
 
     handleChange = propertyName => (e, value) => {
         e.preventDefault();
@@ -111,16 +110,13 @@ class RankPercents extends Component {
                 valuesPercent: (100 - value)
         })
 
-        console.log(this.state);
+        this.props.dispatch({type: 'SET_NEW_VALUES', name: 'percents', payload: this.state});
     }
 
 
     render() {
-        console.log(this.state);
         const {classes} = this.props;
-        const { violatorPercent } = this.state
-       
-
+        const { violatorPercent } = this.state;
         return (
             <div>
                 <div className="banner">
@@ -190,7 +186,9 @@ const mapState = reduxState => {
     return {
         values: reduxState.valuesReducer,
         core: reduxState.newValuesReducer.orderCore,
-        violators :reduxState.newValuesReducer.violators
+        violators :reduxState.newValuesReducer.violators,
+        newValuesReducer: reduxState.newValuesReducer,
+        url: reduxState.urlReducer,
         }   
     }
 export default withStyles(styles)(connect(mapState)(RankPercents))

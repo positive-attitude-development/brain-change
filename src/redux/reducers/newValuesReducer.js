@@ -1,4 +1,8 @@
-let newValuesState = {
+let today = new Date();
+
+const newValuesState = {
+    date: today,
+    participantId: '',
     round1: [],
     round2: [],
     round3: [],
