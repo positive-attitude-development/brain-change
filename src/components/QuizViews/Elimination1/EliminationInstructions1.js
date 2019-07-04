@@ -1,23 +1,14 @@
 import React, { Component } from 'react'
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'; 
-import {  Button } from '@material-ui/core';
-=======
 import { Grid, Button, Paper } from '@material-ui/core';
->>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
 import StatusBar from '../StatusBar'; 
 import './EliminationInstructions1.css';
 import Banner from '../Banner/Banner';
 
 
-<<<<<<< HEAD
-export class EliminationInstructions1 extends Component {
-=======
 class EliminationInstructions1 extends Component {
 
 
 
->>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
 
     state = {
         statusBar : 1
@@ -25,7 +16,7 @@ class EliminationInstructions1 extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
+                
                 <StatusBar status={this.state.statusBar} />
                 <div className="textInst">
                 
@@ -34,12 +25,9 @@ class EliminationInstructions1 extends Component {
                 
                  </div>
 
-                 <div className="giph">
-
-=======
                 <div className="banner">
                     <Banner />
->>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
+
                 </div>
                 <Grid container justify="center">
                     <StatusBar status={this.state.statusBar} />
@@ -50,16 +38,6 @@ class EliminationInstructions1 extends Component {
                             On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
                         </h3>
                 
-<<<<<<< HEAD
-            <Link to="/Elim1"> 
-                <Button
-                    color="primary"
-                    variant="contained"
-                    >
-                    Next
-                </Button> 
-            </Link>
-=======
 
                     <div className="giph">
 
@@ -76,7 +54,6 @@ class EliminationInstructions1 extends Component {
                     </div>
                     </div>
                 </Paper>
->>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
             </div>
         )
     }

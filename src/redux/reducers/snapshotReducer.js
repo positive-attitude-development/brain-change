@@ -1,4 +1,4 @@
-const snapshotReducer = (state = [], action) => {
+const snapshotReducer = (state = {}, action) => {
     switch(action.type) {
         case 'SET_SNAPSHOT':
             return action.payload; 

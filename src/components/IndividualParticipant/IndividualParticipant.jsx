@@ -33,7 +33,12 @@ const styles = {
 class IndividualParticipant extends Component{
 
 	state = {
-		isEditable: false
+		beliefs: [],
+		coreValues: [],
+		coreViolators: [],
+		corePercent: '',
+		violatorPercent: '',
+		isEditable: false,
 	}
 
 	componentDidMount(){
@@ -43,8 +48,19 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
-		this.props.dispatch({type: 'SET_SNAPSHOT'})
-		console.log(this.props.match.params.id)
+		this.props.dispatch({type: 'FETCH_VALUES'})
+
+
+		// console.log(corevalues)
+		this.setState({
+			coreValues : this.props.snapshot.core_values,
+  			coreViolators : this.props.snapshot.violator_values,
+  			beliefs : this.props.snapshot.beliefs,
+  			corePercent: this.props.snapshot.percent_core,
+  			violatorPercent : this.props.snapshot.percent_violators
+		})
+
+
 	};//end componentDidMount
 
 	generateLink = (urlid) => {
@@ -84,6 +100,24 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
+		console.log(this.props.snapshot[0])
+
+		// let corevalues = this.props.snapshot[0].map(core => {
+		// 	return core.core_values
+		// })
+
+		// console.log(corevalues); 
+		// let snapshot = this.props.snapshot[0].coreValues; 
+		// let coreValues = snapshot.coreValues
+		// let coreValues = this.props.snapshot.coreValues.map(value => {
+		// 					return value
+		// })
+
+		// let violatorValues = snapshot.coreViolators
+		// let violatorValues = this.props.coreViolators.map(value => {
+		// 					return value
+		// })
+		
 		return(
 			<>
 			{this.props.individual.map((person) => {
@@ -292,12 +326,14 @@ class IndividualParticipant extends Component{
 						{urlButton}
 					</Card>
 
-					<Card>
-						{/* <DialogContent>
-							<Button onClick={this.handleSnapshot} varient="contained" color="primary"> View SnapShot</Button>
-						</DialogContent> */}
+					<h2>Snapshot Results</h2>
 
-					</Card>
+					{ this.props.snapshot[0].id   ?
+						(JSON.stringify(this.props.snapshot))	
+
+				
+					: <></> }
+					
 				</Grid>
 					)
 				})}
@@ -314,6 +350,17 @@ const mapStateToProps = state => ({
   population: state.population,
   system: state.system,
   editParticipant: state.editParticipant,
+
+  snapshot: state.snapshotReducer,
+
+  coreValues : state.snapshotReducer.core_values,
+  coreViolators : state.snapshotReducer.violator_values,
+  beliefs : state.snapshotReducer.beliefs,
+  corePercent: state.snapshotReducer.percent_core,
+  violatorPercent : state.snapshotReducer.percent_violators
+
+
+
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));
