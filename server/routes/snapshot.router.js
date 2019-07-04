@@ -1,11 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const moment = require('moment');
 
 //POST results
 router.post('/result', async (req, res) => {
     console.log('Post result req.body:', req.body);
     const connection = await pool.connect();
+    let currentDate = moment().format('MM-DD-YYYY');
     try {
         await connection.query('BEGIN');
 
@@ -13,7 +15,7 @@ router.post('/result', async (req, res) => {
         const addResult = `INSERT INTO result ("dates", "participant_id", "percent_core", "percent_violators")
                             VALUES ($1, $2, $3, $4)
                             RETURNING "id";`;
-        const addResultValues = [req.body.date, req.body.participantId, req.body.percents.valuesPercent, req.body.percents.violatorPercent];
+        const addResultValues = [currentDate, req.body.participantId, req.body.percents.valuesPercent, req.body.percents.violatorPercent];
         const result = await connection.query(addResult, addResultValues);
 
         //Save result id and post into other tables

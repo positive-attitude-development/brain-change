@@ -1,7 +1,5 @@
-let today = new Date();
 
 const newValuesState = {
-    date: today,
     participantId: '',
     round1: [],
     round2: [],
