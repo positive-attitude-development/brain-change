@@ -24,7 +24,7 @@ function* loginAdmin(action) {
 
     let levelCheck;
 
-    if( accessLevel != undefined ){
+    if( accessLevel !== undefined ){
       levelCheck = accessLevel;
     }else{
       levelCheck = action.payload.level;

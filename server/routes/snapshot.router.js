@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
+const {rejectUnauthenticated} = require('../modules/authentication-middleware');
 
 //POST results
 router.post('/result', async (req, res) => {
@@ -112,58 +113,43 @@ router.post('/result', async (req, res) => {
     }
 })
 
-// GET all participants belonging to admins
-router.get('/', (req, res) => {
-
-    let queryText = `SELECT participant, result, result_belief, result_core, result_violators FROM participant
-    JOIN result ON participant.id = result.participant_id
-    JOIN result_belief ON result.id = result_belief.result_id
-    JOIN result_core ON result_core.result_id = result.id
-    JOIN result_violators ON result_violators.result_id = result.id;`;
-
-    pool.query(queryText)
-    .then((results) => {
-        console.log('results.rows:', results.rows);
-        res.send(results.rows)
-    }).catch(error => {
-        console.log('Error in GET snapshots:', error);
-        res.sendStatus(500);
-    });
-});
-
 // GET all results
-router.get('/all', (req, res) => {
+router.get('/all', rejectUnauthenticated, (req, res) => {
+    if (req.user.level >= 4) {
+        let queryText = `SELECT
+        "participant".id, "participant".age, "participant".gender, "participant".state,
+        (select "category".category AS "category" FROM "category" WHERE "category".id = "participant".category_id),
+        (select "offender_system".system AS "system" FROM "offender_system" WHERE "offender_system".id = "offender".offender_system_id),
+        (select "offender_population".population AS "population" FROM "offender_population" WHERE "offender_population".id = "offender".population_id),
+        "offender".felon, "offender".violent_offender,
+        "result".id AS "result_id", "result".dates AS "date", "result".percent_core AS "%_core", "result".percent_violators AS "%_violators",
+        (select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+        (select array_agg("result_belief".challenged) AS "challenged" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+        (select array_agg("result_belief".type) AS "belief_type" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+        (select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
+        (select array_agg("value".values ORDER BY "result_violators".order) AS "violators" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id),
+        (select array_agg("value".values ORDER BY "result_elimination".order) AS "elimination_order" FROM "result_elimination" JOIN "value" ON "result_elimination".value_id = "value".id WHERE "result_elimination".result_id = "result".id),
+        (select array_agg("result_round".times) AS "seconds_per_round" FROM "result_round" WHERE "result_round".result_id = "result".id)
 
-    let queryText = `SELECT
-    "participant".id, "participant".age, "participant".gender, "participant".state,
-    (select "category".category AS "category" FROM "category" WHERE "category".id = "participant".category_id),
-    (select "offender_system".system AS "system" FROM "offender_system" WHERE "offender_system".id = "offender".offender_system_id),
-    (select "offender_population".population AS "population" FROM "offender_population" WHERE "offender_population".id = "offender".population_id),
-    "offender".felon, "offender".violent_offender,
-    "result".id AS "result_id", "result".dates AS "date", "result".percent_core AS "%_core", "result".percent_violators AS "%_violators",
-    (select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
-    (select array_agg("result_belief".challenged) AS "challenged" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
-    (select array_agg("result_belief".type) AS "belief_type" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
-    (select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
-    (select array_agg("value".values ORDER BY "result_violators".order) AS "violators" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id),
-    (select array_agg("value".values ORDER BY "result_elimination".order) AS "elimination_order" FROM "result_elimination" JOIN "value" ON "result_elimination".value_id = "value".id WHERE "result_elimination".result_id = "result".id),
-    (select array_agg("result_round".times) AS "seconds_per_round" FROM "result_round" WHERE "result_round".result_id = "result".id)
+        FROM "participant"
+        FULL JOIN "offender" ON "offender".participant_id = "participant".id
+        JOIN "result" ON "result".participant_id = "participant".id
 
-    FROM "participant"
-    FULL JOIN "offender" ON "offender".participant_id = "participant".id
-    JOIN "result" ON "result".participant_id = "participant".id
+        GROUP BY "participant".id, "offender".id, "result".id
+        ORDER BY "result_id" ASC;`;
 
-    GROUP BY "participant".id, "offender".id, "result".id
-    ORDER BY "result_id" ASC;`;
-
-    pool.query(queryText)
-        .then((results) => {
-            console.log('results.rows:', results.rows);
-            res.send(results.rows)
-        }).catch(error => {
-            console.log('Error in GET snapshots:', error);
-            res.sendStatus(500);
-        });
+        pool.query(queryText)
+            .then((results) => {
+                console.log('results.rows:', results.rows);
+                res.send(results.rows)
+            }).catch(error => {
+                console.log('Error in GET snapshots:', error);
+                res.sendStatus(500);
+            });
+    }else{
+        console.log('unauthorized all data GET')
+		res.sendStatus(403);
+    }
 });
 
 module.exports = router;
