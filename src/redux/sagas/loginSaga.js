@@ -39,7 +39,7 @@ function* loginAdmin(action) {
     }else if(levelCheck === 3){
 		  yield action.history.push('/myparticipants');
     }else if(levelCheck >= 4){
-		  yield action.history.push('/all-records');
+		  yield action.history.push('/allparticipants');
     }
   } catch (error) {
     console.log('Error with admin login:', error);
