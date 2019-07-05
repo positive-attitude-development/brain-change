@@ -84,10 +84,7 @@ class OrderViolators extends Component {
         // const {items} = this.state.items; 
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>                
                 <h2 className="violOrder">Rank your 5 violator values in order</h2>

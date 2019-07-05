@@ -5,17 +5,13 @@
 
 .textInst {
     text-align: center;  
-    width: 380px; 
-    height: 30px;
-    margin: 40px; 
-    padding: 40px; 
+    margin: 0px; 
+    padding: 0px; 
 }
 
-.textInst {
-    align-content: center;
-    /* width: 550px;  */
-}
 
-.nextBtn1 {
+.button {
     float: right;
+    padding-top: 10px;
+    padding-bottom: 0px;
 }

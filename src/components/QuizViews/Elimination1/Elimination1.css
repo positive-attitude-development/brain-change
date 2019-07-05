@@ -53,16 +53,13 @@
 
 .statusBar {
     text-align: center;
+    padding: 10px 0px 0px 0px;
 }
 
 .nextBtn1 {
     float: right;
     padding-top: 10px;
     padding-bottom: 0px;
-}
-
-.statusBar {
-    padding: 10px 0px 0px 0px;
 }
 
 .valueCount {
