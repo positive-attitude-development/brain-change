@@ -10,6 +10,14 @@ function* addParticipant(action){
     }
 }
 
+function* deleteParticipant(action) {
+    try {
+        yield axios.put(`/api/participant/delete/${action.payload.id}`);
+    } catch(error) {
+        console.log('Error in deleteParticipant', error);
+    }
+}
+
 function* fetchParticipants() {
     try{
         let response = yield axios.get('/api/participant');
@@ -68,8 +76,9 @@ function* participantSaga() {
     yield takeLatest('FETCH_SNAPSHOT', fetchSnapshot)
     yield takeLatest('FETCH_INDIVIDUAL', fetchIndividual);
     yield takeLatest('ADD_PARTICIPANT', addParticipant);
-    yield takeLatest('SELF_REG_PARTICIPANT', selfRegisterParticipant)
-    yield takeLatest('UPDATE_PARTICIPANT', updateParticipant)
+    yield takeLatest('SELF_REG_PARTICIPANT', selfRegisterParticipant);
+    yield takeLatest('UPDATE_PARTICIPANT', updateParticipant);
+    yield takeLatest('DELETE_PARTICIPANT', deleteParticipant);
 }
 
 export default participantSaga;
