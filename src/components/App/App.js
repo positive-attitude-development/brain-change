@@ -49,7 +49,7 @@ class App extends Component {
               component={UserPage}/>
 
             <ProtectedRoute
-              exact path="/all-records"
+              exact path="/allparticipants"
               component={AllRecords}/>
 
             {/* This works the same as the other protected route, except that if the user is logged in,

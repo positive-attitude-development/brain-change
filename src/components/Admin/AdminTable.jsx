@@ -132,7 +132,7 @@ export default function EnhancedTable(props) {
     //view participants
     function viewParticipants(name) {
         dispatch({type: 'SET_SEARCH_TERM', payload: name});
-        history.push('/all-records');
+        history.push('/allparticipants');
     }
 
     //sorting function
