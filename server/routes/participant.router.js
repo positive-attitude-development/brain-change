@@ -160,7 +160,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 });//end participant update PUT
 
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
-	let query = `UPDATE "participant" SET "admin_id" = 0 WHERE "participant".id = $1 AND "admin_id" = $2`;
+	let query = `UPDATE "participant" SET "admin_id" = 1 WHERE "participant".id = $1 AND "admin_id" = $2`;
 	let values = [req.params.id, req.user.id];
 	pool.query(query, values).then(result => {
 		console.log('result of participant delete', result);

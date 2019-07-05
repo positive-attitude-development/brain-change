@@ -21,7 +21,7 @@ const styles = {
 class QuizViewWelcomeForm extends Component {
 
     state = {
-        admin_id: 0,
+        admin_id: 1,
         first_name: '',
         last_name: '',
         category_id: '',
