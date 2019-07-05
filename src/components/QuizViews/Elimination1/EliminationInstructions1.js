@@ -16,6 +16,7 @@ class EliminationInstructions1 extends Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
                 
                 <StatusBar status={this.state.statusBar} />
                 <div className="textInst">
@@ -28,6 +29,10 @@ class EliminationInstructions1 extends Component {
                 <div className="banner">
                     <Banner />
 
+=======
+                <div className="banner">
+                    <Banner />
+>>>>>>> master
                 </div>
                 <Grid container justify="center">
                     <StatusBar status={this.state.statusBar} />

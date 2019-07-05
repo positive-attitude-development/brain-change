@@ -11,9 +11,12 @@ import editParticipant from './editParticipantReducer';
 import allRecordsReducer from './allRecordsReducer';
 import adminContactReducer from './adminContactReducer'; 
 import urlReducer from './urlReducer';
+<<<<<<< HEAD
 import snapshotReducer from './snapshotReducer'; 
 
 
+=======
+>>>>>>> master
 import participant from './participantReducer';
 import individual from './individualParticipantReducer';
 import category from './categoriesReducer';
@@ -21,6 +24,7 @@ import addParticipant from './addParticipantReducer';
 import population from './populationReducer';
 import system from './systemReducer';
 import resultData from './resultDataReducer';
+import stateNames from './stateNameReducer';
 
 
 const rootReducer = combineReducers({
@@ -43,7 +47,11 @@ const rootReducer = combineReducers({
   urlReducer,
   editParticipant,
   resultData,
+<<<<<<< HEAD
   snapshotReducer
+=======
+  stateNames,
+>>>>>>> master
 });
 
 export default rootReducer;

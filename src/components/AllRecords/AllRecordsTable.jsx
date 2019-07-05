@@ -77,7 +77,6 @@ function EnhancedTableHead(props) {
 
 //table head props
 EnhancedTableHead.propTypes = {
-    // numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
@@ -94,8 +93,6 @@ export default function EnhancedTable(props) {
     //accessing redux store for table and search information
     let rows = useSelector(redux => redux.allRecordsReducer);
     let search = useSelector(redux => redux.searchTermReducer);
-    //dispatch hook
-    let dispatch = useDispatch();
 
     //filter by search term
     const [searchTerm, setSearchTerm] = React.useState(search);
@@ -133,97 +130,95 @@ export default function EnhancedTable(props) {
     //render table
     return (
         <div className="container">
-            <Paper className="paper">
-                <div className="wrapper">
-                    {/* CSV exporter */}
-                    <CSVLink
-                        className="CSVLink"
-                        filename={"brain-change-export.csv"}
-                        data={filteredRows}
-                        headers={headRows}>
-                        <Button variant="contained" color="primary" size="large">
-                            Export to CSV
-                        </Button>
-                    </CSVLink>
-                    {/* search input */}
-                    <TextField
-                        className="searchInput"
-                        variant="outlined"
-                        autoFocus
-                        label="Search"
-                        value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        disabled={!searchTerm}
-                                        onClick={e => setSearchTerm("")}
-                                    >
-                                        <Clear color="inherit" fontSize="small" />
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
+            {/* CSV exporter */}
+            <CSVLink
+                className="CSVLink"
+                filename={"brain-change-export.csv"}
+                data={filteredRows}
+                headers={headRows}>
+                <Button variant="contained" color="primary" size="large">
+                    Export to CSV
+                </Button>
+            </CSVLink>
+            {/* search input */}
+            <TextField
+                className="searchInput"
+                variant="outlined"
+                autoFocus
+                label="Search"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton
+                                disabled={!searchTerm}
+                                onClick={e => setSearchTerm("")}
+                            >
+                                <Clear color="inherit" fontSize="small" />
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
+            />
+            <div className="wrapper">
+                {/* table */}
+                <Table
+                    className="table"
+                    aria-labelledby="tableTitle"
+                >
+                    <EnhancedTableHead
+                        order={order}
+                        orderBy={orderBy}
+                        onRequestSort={handleRequestSort}
+                        rowCount={filteredRows.length}
                     />
-                    {/* table */}
-                    <Table
-                        className="table"
-                        aria-labelledby="tableTitle"
-                    >
-                        <EnhancedTableHead
-                            order={order}
-                            orderBy={orderBy}
-                            onRequestSort={handleRequestSort}
-                            rowCount={filteredRows.length}
-                        />
-                        <TableBody>
-                            {stableSort(filteredRows, getSorting(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, i) => {
-                                    return (
-                                        <TableRow key={i}>
-                                            <TableCell>{row.participant_name}</TableCell>
-                                            <TableCell>{row.age}</TableCell>
-                                            <TableCell>{row.gender}</TableCell>
-                                            <TableCell>{row.category}</TableCell>
-                                            <TableCell>{row.state}</TableCell>
-                                            <TableCell>{row.email}</TableCell>
-                                            <TableCell>{row.phone}</TableCell>
-                                            <TableCell>{row.admin_name}</TableCell>
-                                            <TableCell>
-                                                <IconButton
-                                                    onClick={() => props.history.push(`/individualparticipant/${row.participant_id}`)} >
-                                                    <Pageview />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-                <TablePagination
-                    rowsPerPageOptions={[10, 20]}
-                    component="div"
-                    count={filteredRows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
-            </Paper>
+                    <TableBody>
+                        {stableSort(filteredRows, getSorting(order, orderBy))
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row, i) => {
+                                return (
+                                    <TableRow key={i}>
+                                        <TableCell>{row.participant_name}</TableCell>
+                                        <TableCell>{row.age}</TableCell>
+                                        <TableCell>{row.gender}</TableCell>
+                                        <TableCell>{row.category}</TableCell>
+                                        <TableCell>{row.state}</TableCell>
+                                        <TableCell>{row.email}</TableCell>
+                                        <TableCell>{row.phone}</TableCell>
+                                        <TableCell>{row.admin_name}</TableCell>
+                                        <TableCell>
+                                            <IconButton
+                                                onClick={() => props.history.push(`/individualparticipant/${row.participant_id}`)} >
+                                                <Pageview />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 49 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+            <TablePagination
+                rowsPerPageOptions={[10, 20]}
+                component="div"
+                count={filteredRows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                backIconButtonProps={{
+                    'aria-label': 'Previous Page',
+                }}
+                nextIconButtonProps={{
+                    'aria-label': 'Next Page',
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
         </div>
     );
 }
