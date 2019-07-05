@@ -29,7 +29,12 @@ CREATE TABLE "admin_contact"(
   "street_address2" VARCHAR,
   "city" VARCHAR,
   "state" VARCHAR,
-  "zipcode" INT
+  "zipcode" VARCHAR
+);
+
+CREATE TABLE "category" (
+"id" SERIAL PRIMARY KEY,
+"category" VARCHAR(50)
 );
 
 CREATE TABLE "participant" (
@@ -39,7 +44,7 @@ CREATE TABLE "participant" (
   "admin_id" INT REFERENCES "admin",
   "age" INT,
   "gender" VARCHAR,
-  "category" VARCHAR,
+  "category_id" INT REFERENCES "category",
   "state" VARCHAR,
   "email" VARCHAR,
   "phone_number" VARCHAR
@@ -121,11 +126,6 @@ CREATE TABLE "url" (
   "expiration_date" DATE,
   "participant_id" INT REFERENCES "participant",
   "admin_id" INT REFERENCES "admin"
-);
-
-CREATE TABLE "category" (
-"id" SERIAL PRIMARY KEY,
-"category" VARCHAR(50)
 );
 
 INSERT INTO "category" ("category")

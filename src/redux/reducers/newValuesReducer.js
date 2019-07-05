@@ -1,4 +1,6 @@
-let newValuesState = {
+
+const newValuesState = {
+    participantId: '',
     round1: [],
     round2: [],
     round3: [],

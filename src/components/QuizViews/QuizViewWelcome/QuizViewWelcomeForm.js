@@ -24,7 +24,7 @@ class QuizViewWelcomeForm extends Component {
         admin_id: 1,
         first_name: '',
         last_name: '',
-        category: '',
+        category_id: '',
         age: '',
         gender: '',
         state: '',
@@ -97,72 +97,23 @@ class QuizViewWelcomeForm extends Component {
                         label="State"
                         value={this.state.state}
                         onChange={this.handleInputChange('state')} >
-                        <MenuItem value=""><em>Select State</em></MenuItem>
-                        <MenuItem value="AL">Alabama</MenuItem>
-                        <MenuItem value="AK">Alaska</MenuItem>
-                        <MenuItem value="AZ">Arizona</MenuItem>
-                        <MenuItem value="AR">Arkansas</MenuItem>
-                        <MenuItem value="CA">California</MenuItem>
-                        <MenuItem value="CO">Colorado</MenuItem>
-                        <MenuItem value="CT">Connecticut</MenuItem>
-                        <MenuItem value="DE">Delaware</MenuItem>
-                        <MenuItem value="DC">District of Columbia</MenuItem>
-                        <MenuItem value="FL">Florida</MenuItem>
-                        <MenuItem value="GA">Georgia</MenuItem>
-                        <MenuItem value="HI">Hawaii</MenuItem>
-                        <MenuItem value="ID">Idaho</MenuItem>
-                        <MenuItem value="IL">Illinois</MenuItem>
-                        <MenuItem value="IN">Indiana</MenuItem>
-                        <MenuItem value="IA">Iowa</MenuItem>
-                        <MenuItem value="KS">Kansas</MenuItem>
-                        <MenuItem value="KY">Kentucky</MenuItem>
-                        <MenuItem value="LA">Louisiana</MenuItem>
-                        <MenuItem value="ME">Maine</MenuItem>
-                        <MenuItem value="MD">Maryland</MenuItem>
-                        <MenuItem value="MA">Massachusetts</MenuItem>
-                        <MenuItem value="MI">Michigan</MenuItem>
-                        <MenuItem value="MN">Minnesota</MenuItem>
-                        <MenuItem value="MS">Mississippi</MenuItem>
-                        <MenuItem value="MO">Missouri</MenuItem>
-                        <MenuItem value="MT">Montana</MenuItem>
-                        <MenuItem value="NE">Nebraska</MenuItem>
-                        <MenuItem value="NV">Nevada</MenuItem>
-                        <MenuItem value="NH">New Hampshire</MenuItem>
-                        <MenuItem value="NJ">New Jersey</MenuItem>
-                        <MenuItem value="NM">New Mexico</MenuItem>
-                        <MenuItem value="NY">New York</MenuItem>
-                        <MenuItem value="NC">North Carolina</MenuItem>
-                        <MenuItem value="ND">North Dakota</MenuItem>
-                        <MenuItem value="OH">Ohio</MenuItem>
-                        <MenuItem value="OK">Oklahoma</MenuItem>
-                        <MenuItem value="OR">Oregon</MenuItem>
-                        <MenuItem value="PA">Pennsylvania</MenuItem>
-                        <MenuItem value="PR">Puerto Rico</MenuItem>
-                        <MenuItem value="RI">Rhode Island</MenuItem>
-                        <MenuItem value="SC">South Carolina</MenuItem>
-                        <MenuItem value="SD">South Dakota</MenuItem>
-                        <MenuItem value="TN">Tennessee</MenuItem>
-                        <MenuItem value="TX">Texas</MenuItem>
-                        <MenuItem value="UT">Utah</MenuItem>
-                        <MenuItem value="VT">Vermont</MenuItem>
-                        <MenuItem value="VA">Virginia</MenuItem>
-                        <MenuItem value="VI">Virgin Islands</MenuItem>
-                        <MenuItem value="WA">Washington</MenuItem>
-                        <MenuItem value="WV">West Virginia</MenuItem>
-                        <MenuItem value="WI">Wisconsin</MenuItem>
-                        <MenuItem value="WY">Wyoming</MenuItem>
+                        {this.props.stateNames.map((stateName, i) => {
+                            return (
+                                <MenuItem key={i} value={stateName.abbr}>{stateName.full}</MenuItem>
+                            )
+                        })}
                     </TextField>
                     <TextField
                         select className={classes.text}
                         margin="normal"
                         style={{width:300}}
                         label="Which best describes you?"
-                        value={this.state.category}
-                        onChange={this.handleInputChange('category')} >
+                        value={this.state.category_id}
+                        onChange={this.handleInputChange('category_id')} >
                         <MenuItem value=""><em>Select Category</em></MenuItem>
-                        <MenuItem value="General Public">General Public</MenuItem>
-                        <MenuItem value="Student">Student</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
+                        <MenuItem value={2}>General Public</MenuItem>
+                        <MenuItem value={3}>Student</MenuItem>
+                        <MenuItem value={4}>Other</MenuItem>
                     </TextField>
                     <TextField
                         margin="normal" className={classes.text}
@@ -189,4 +140,8 @@ class QuizViewWelcomeForm extends Component {
     }
 }
 
-export default withStyles(styles)(connect()(QuizViewWelcomeForm));
+const mapRedux = redux => {
+    return {stateNames: redux.stateNames}
+}
+
+export default withStyles(styles)(connect(mapRedux)(QuizViewWelcomeForm));

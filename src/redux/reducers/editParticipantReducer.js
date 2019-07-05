@@ -3,7 +3,7 @@ const participantEdits = {
 	last_name: '',
 	age: '',
 	gender: '',
-	category: '',
+	category_id: '',
 	state: '',
 	email_address: '',
 	phone_number: '',
