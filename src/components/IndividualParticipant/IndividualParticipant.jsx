@@ -4,6 +4,7 @@ import {Card, CardContent, Tooltip, Grid, TextField, Button, MenuItem, Dialog, D
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const styles = {
@@ -42,6 +43,7 @@ class IndividualParticipant extends Component{
 	}
 
 	componentDidMount(){
+		console.log('this.props.individual', this.props)
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 		//this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
@@ -81,6 +83,26 @@ class IndividualParticipant extends Component{
 		})
 		this.props.dispatch({type: 'CANCEL_EDIT_PARTICIPANT'})
 	};//end handleCancelEdit
+
+	handleDelete = () => {
+		Swal.fire({
+			title: `Delete ${this.props.individual[0].first_name}?`,
+			text: 'This action cannot be undone.',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, Delete'
+		}).then((result) => {
+			if (result.value) {
+				this.props.dispatch({type: 'DELETE_PARTICIPANT', payload: this.props.individual[0]});
+				this.props.history.push('/myparticipants');
+				Swal.fire(
+					'Deleted!',
+					'',
+					'success'
+				)
+			}
+		})
+	}
 
 	handleInputChange = propertyName => event => {
 		this.props.dispatch({type: 'EDIT_PARTICIPANT', payload: {property: propertyName, value: event.target.value}})
@@ -195,6 +217,11 @@ class IndividualParticipant extends Component{
 								}								
 								<br></br>
 								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
+								
+								{/* remove button only available to assigned admin */}
+								{this.props.admin.id === this.props.individual[0].admin_id &&
+									<Button variant="contained" color="secondary" onClick={this.handleDelete}>Remove Participant</Button>
+								}
 
 						{/* DIALOG EDITABLE FIELDS:*/}
 

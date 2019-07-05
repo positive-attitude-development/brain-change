@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {FormGroup, FormControlLabel, TextField, Select, MenuItem, OutlinedInput} from '@material-ui/core';
+import {FormGroup, FormControlLabel, TextField, MenuItem} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {

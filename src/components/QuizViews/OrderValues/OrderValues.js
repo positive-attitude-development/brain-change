@@ -84,10 +84,7 @@ class OrderValues1 extends Component {
         const {items} = this.state;
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>                
                 <h2 className="instOrder">Rank your 5 core values in order of importance</h2>

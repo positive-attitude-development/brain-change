@@ -32,9 +32,6 @@ class Elimination5 extends Component {
     // Send 5 selected values to reducer and route to OrderValuesInstructions page.
     // Will alert if 5 values are not selected.
     handleNext = () => {
-        if(this.state.round5.length !== 5) {
-            return alert('Please select 5 values that are least important to you.')
-        } else {
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -46,7 +43,6 @@ class Elimination5 extends Component {
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round5', payload: this.state.round5});
             this.props.dispatch({type: 'SET_NEW_TIME', name: 'round5Time', payload: totalTime5 });
             this.props.history.push('/OrderValuesInstructions')
-        }
     }
 
     // Select and deselect values and store into local state round5
@@ -92,10 +88,7 @@ class Elimination5 extends Component {
 
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <Paper className="paper5">
@@ -109,6 +102,7 @@ class Elimination5 extends Component {
                     </div>
                     <div className="nextBtn1">
                         <Button
+                            disabled={this.state.round5.length !== 5}
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}
@@ -116,6 +110,7 @@ class Elimination5 extends Component {
                             Next
                         </Button>
                     </div> 
+                    <p className="valueCount">{this.state.round5.length} / 5 values selected</p>
                 </Paper>
             </div>
         )

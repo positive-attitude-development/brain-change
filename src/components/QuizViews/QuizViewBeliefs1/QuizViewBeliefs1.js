@@ -76,10 +76,7 @@ handleClick = (event) => {
     render() {
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                     <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>

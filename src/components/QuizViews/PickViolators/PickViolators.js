@@ -80,10 +80,7 @@ class PickViolators extends Component {
         
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>        
                 <Paper>
@@ -101,6 +98,7 @@ class PickViolators extends Component {
                 </Paper>
                 <Grid container justify="center">
                     <Button
+                        disabled={this.state.violators.length !== 5}
                         onClick={this.handleNext}
                         color="primary"
                         variant="contained"
@@ -108,6 +106,7 @@ class PickViolators extends Component {
                         Next
                     </Button> 
                 </Grid>
+                <p className="valueCount">{this.state.violators.length} / 5 values selected</p>
             </div>
         )
     }

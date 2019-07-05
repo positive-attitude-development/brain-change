@@ -1,9 +1,6 @@
 
 
 .textInst {
-    
-    /* height: 360x;
-    padding: 40px;  */
     padding: 300px 100px 300px 100px; 
     text-align: center; 
 }
@@ -12,8 +9,3 @@
     float: right; 
     padding-top: 10px; 
 }
-
-/* .instructionView1 {
-    /* margin: 50px;
-    width: 600px;  */
-    

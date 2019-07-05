@@ -1,7 +1,8 @@
 .elim1List {
     list-style-type: none;
     columns: 4;
-    /* column-gap: 0px; */
+    text-align: center;
+    column-gap: 0px;
 }
 
 
@@ -36,12 +37,12 @@
     background-position: center; 
     background-blend-mode: lighten;
     object-fit: cover;
-    text-align: center;
     margin: 0px;
 }
 
 .paper {
     margin: 30px 150px 0px 150px;
+    padding: 0px;
 }
 
 .inst {
@@ -52,17 +53,17 @@
 
 .statusBar {
     text-align: center;
+    padding: 10px 0px 0px 0px;
 }
 
 .nextBtn1 {
     float: right;
     padding-top: 10px;
+    padding-bottom: 0px;
 }
 
-/* 
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : landscape) { 
-
-} */
+.valueCount {
+    font-size: 15px;
+    padding-right: 10px;
+    float: right;
+}
