@@ -175,14 +175,14 @@ class MyParticipants extends Component{
 	demoButton = () => {
 		this.setState({
 			participant: {
+				...this.state.participant,
 				first_name: 'Bobby',
 				last_name: 'Smith',
 				age: 25,
 				gender: 'M',
 				state: 'MN',
 				email_address: 'bobby@email.com',
-				phone_number: '612-123-4567',
-				url: 'PpyT4JosMKRu',
+				phone_number: '612-123-4567'
 			}
 		});
 	};//end demoButton

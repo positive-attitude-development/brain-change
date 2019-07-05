@@ -17,15 +17,29 @@ function* loginAdmin(action) {
     // allow the server session to recognize the admin
     const response = yield axios.post('api/admin/login', action.payload, config);
     let accessLevel = response.data.level;
+    console.log('login saga action:', action)
     
+    console.log('action.payload.level:', action.payload.level );
+    console.log('accessLevel:', accessLevel );
+
+    let levelCheck;
+
+    if( accessLevel != undefined ){
+      levelCheck = accessLevel;
+    }else{
+      levelCheck = action.payload.level;
+    }
+    console.log( 'levelCheck:', levelCheck );
     // after the admin has logged in get the admin information from the server
     yield put({type: 'FETCH_ADMIN'});
-    if (accessLevel === 1){
-    	action.history.push('/info');
-    }else if(accessLevel === 3){
-		action.history.push('/myparticipants');
-    }else if(accessLevel >= 4){
-		action.history.push('/all-records');
+    if (levelCheck === 1){
+    	yield action.history.push('/info');
+    }else if(levelCheck === 2){
+      yield action.history.push('/profile');
+    }else if(levelCheck === 3){
+		  yield action.history.push('/myparticipants');
+    }else if(levelCheck >= 4){
+		  yield action.history.push('/all-records');
     }
   } catch (error) {
     console.log('Error with admin login:', error);

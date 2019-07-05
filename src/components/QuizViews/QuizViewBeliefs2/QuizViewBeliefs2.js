@@ -87,8 +87,6 @@ componentDidMount() {
         this.props.history.push('/ElimInstructions5')
     }
 
-    
-
     render() {
        const classes = this.props;
        console.log(this.state)
@@ -101,7 +99,7 @@ componentDidMount() {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div>
-                    <h2 className = "heading" > Choose your strongest belief </h2>
+                    <h2 className = "heading" > Choose your most conflicting belief </h2>
                     <Paper className = "select">
                         <FormControl component="fieldset"
                         className={classes.formControl}
@@ -113,9 +111,11 @@ componentDidMount() {
                                 >
 
 
+
                                     <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
                                     <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
                                     <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
+
                                 </RadioGroup>
                         </FormControl>
                     </Paper>

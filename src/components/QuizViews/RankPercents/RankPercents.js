@@ -41,8 +41,8 @@ class RankPercents extends Component {
 
     state = {
         statusBar : 95,
-        valuesPercent: 50,
-        violatorPercent: 50,
+        valuesPercent: 0,
+        violatorPercent: 0,
         violators: [],
         core: []
         
@@ -99,7 +99,7 @@ class RankPercents extends Component {
             let nextTime = ((min * 60 ) + (hour * 360) + sec)
             let percentTime = nextTime - this.state.time 
 
-        this.props.dispatch({type: 'ADD_RESULTS', payload: {result: this.props.newValuesReducer, percentTime: percentTime}});
+        this.props.dispatch({type: 'ADD_RESULTS', payload: {percentTime: percentTime, percents: {valuesPercent: this.state.valuesPercent, violatorPercent: this.state.violatorPercent}}});
         this.props.history.push('FinalResults'); 
     }
 
@@ -110,7 +110,7 @@ class RankPercents extends Component {
                 valuesPercent: (100 - value)
         })
 
-        this.props.dispatch({type: 'SET_NEW_VALUES', name: 'percents', payload: this.state});
+        
     }
 
 
