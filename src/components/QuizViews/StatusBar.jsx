@@ -16,6 +16,7 @@ const BorderLinearProgress = withStyles({
   bar: {
     borderRadius: 30,
     backgroundColor: '#2196f3',
+    align:'center'
   },
 })(LinearProgress);
 
@@ -30,6 +31,7 @@ export default function CustomizedProgressBars(props) {
         variant="determinate"
         color="secondary"
         value={props.status}
+
 
       />
       
