@@ -14,7 +14,7 @@ const styles = {
 		margin: 'auto',
 		marginTop: '30px',
 		marginBottom: '40px',
-		width: '80%',
+		width: '90%',
 	},
 	menu: {
 		margin: 'auto',
@@ -67,7 +67,7 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'CANCEL_EDIT_PARTICIPANT'})
 	};//end handleCancelEdit
 
-	handleInputChange = propertyName => (event) => {
+	handleInputChange = propertyName => event => {
 		this.props.dispatch({type: 'EDIT_PARTICIPANT', payload: {property: propertyName, value: event.target.value}})
 	};//end handleInputChange
 
@@ -82,19 +82,20 @@ class IndividualParticipant extends Component{
 		const classes = this.props;
 		return(
 			<>
-			{this.props.individual.map((person) => {
+			{this.props.individual.map(person => {
 				let formatExpiration = moment(person.expiration_date).format('YYYY-MM-DD')
 				let today = new Date();
 				let expirationDate = new Date(person.expiration_date)
 				let urlButton;
-				if(expirationDate >= today){
+				if (expirationDate >= today) {
 					urlButton = <Tooltip title="Invite Link Isn't Expired!" placement="right"><Button variant="outlined" color="primary">Generate New URL</Button></Tooltip>
-				}else{
+				} else {
 					urlButton = <Button variant="contained" color="primary" onClick={() => this.generateLink(person.urlid)}>Generate New URL</Button>
 				}
+				
 				return(
 					<Grid key={person.id} className={classes.root}>
-					<Card raised className={classes.card} >
+					<Card className={classes.card} >
 						<CardContent>
 							<h3>Participant: {person.first_name} {person.last_name}</h3>
 
@@ -106,7 +107,13 @@ class IndividualParticipant extends Component{
 
 								<TextField disabled label="Gender:" value={person.gender} className={classes.text}/>
 
-								<TextField disabled label="Category:" value={person.category} className={classes.text}/>
+								<TextField disabled select label="Category:" value={person.category_id} className={classes.text} >
+									{this.props.category.map(category => {
+										return (
+											<MenuItem key={category.id} value={category.id}>{category.category}</MenuItem>
+										)
+									})}
+								</TextField>
 
 								<TextField disabled label="State:" value={person.state} className={classes.text}/>
 
@@ -115,7 +122,7 @@ class IndividualParticipant extends Component{
 								<TextField disabled label="Phone Number:" value={person.phone_number} className={classes.text}/>
 								<br></br>
 
-								{person.category === "Offender" &&
+								{person.category_id === 1 &&
 								<>
 								<br></br>Offender Data:<br></br>
 
@@ -165,74 +172,27 @@ class IndividualParticipant extends Component{
 									</TextField>
 
 									<TextField label="Category:" select margin="normal" className={classes.menu}
-										value={this.props.editParticipant.category} onChange={this.handleInputChange('category')} >
+										value={this.props.editParticipant.category_id} onChange={this.handleInputChange('category_id')} >
 			                                {this.props.category.map((category) => {
-			                                    return(<MenuItem key={category.id} value={category.category}>{category.category}</MenuItem>)
+			                                    return(
+													<MenuItem key={category.id} value={category.id}>{category.category}</MenuItem>
+												)
 			                                })}
 			                        </TextField>
 
 									<TextField select margin="normal" label="State:" value={this.props.editParticipant.state} 
 										onChange={this.handleInputChange('state')} className={classes.menu}>
-										<MenuItem value=""><em>Select State</em></MenuItem>
-										<MenuItem value="AL">Alabama</MenuItem>
-										<MenuItem value="AK">Alaska</MenuItem>
-										<MenuItem value="AZ">Arizona</MenuItem>
-										<MenuItem value="AR">Arkansas</MenuItem>
-										<MenuItem value="CA">California</MenuItem>
-										<MenuItem value="CO">Colorado</MenuItem>
-										<MenuItem value="CT">Connecticut</MenuItem>
-										<MenuItem value="DE">Delaware</MenuItem>
-										<MenuItem value="DC">District of Columbia</MenuItem>
-										<MenuItem value="FL">Florida</MenuItem>
-										<MenuItem value="GA">Georgia</MenuItem>
-										<MenuItem value="HI">Hawaii</MenuItem>
-										<MenuItem value="ID">Idaho</MenuItem>
-										<MenuItem value="IL">Illinois</MenuItem>
-										<MenuItem value="IN">Indiana</MenuItem>
-										<MenuItem value="IA">Iowa</MenuItem>
-										<MenuItem value="KS">Kansas</MenuItem>
-										<MenuItem value="KY">Kentucky</MenuItem>
-										<MenuItem value="LA">Louisiana</MenuItem>
-										<MenuItem value="ME">Maine</MenuItem>
-										<MenuItem value="MD">Maryland</MenuItem>
-										<MenuItem value="MA">Massachusetts</MenuItem>
-										<MenuItem value="MI">Michigan</MenuItem>
-										<MenuItem value="MN">Minnesota</MenuItem>
-										<MenuItem value="MS">Mississippi</MenuItem>
-										<MenuItem value="MO">Missouri</MenuItem>
-										<MenuItem value="MT">Montana</MenuItem>
-										<MenuItem value="NE">Nebraska</MenuItem>
-										<MenuItem value="NV">Nevada</MenuItem>
-										<MenuItem value="NH">New Hampshire</MenuItem>
-										<MenuItem value="NJ">New Jersey</MenuItem>
-										<MenuItem value="NM">New Mexico</MenuItem>
-										<MenuItem value="NY">New York</MenuItem>
-										<MenuItem value="NC">North Carolina</MenuItem>
-										<MenuItem value="ND">North Dakota</MenuItem>
-										<MenuItem value="OH">Ohio</MenuItem>
-										<MenuItem value="OK">Oklahoma</MenuItem>
-										<MenuItem value="OR">Oregon</MenuItem>
-										<MenuItem value="PA">Pennsylvania</MenuItem>
-										<MenuItem value="PR">Puerto Rico</MenuItem>
-										<MenuItem value="RI">Rhode Island</MenuItem>
-										<MenuItem value="SC">South Carolina</MenuItem>
-										<MenuItem value="SD">South Dakota</MenuItem>
-										<MenuItem value="TN">Tennessee</MenuItem>
-										<MenuItem value="TX">Texas</MenuItem>
-										<MenuItem value="UT">Utah</MenuItem>
-										<MenuItem value="VT">Vermont</MenuItem>
-										<MenuItem value="VA">Virginia</MenuItem>
-										<MenuItem value="VI">Virgin Islands</MenuItem>
-										<MenuItem value="WA">Washington</MenuItem>
-										<MenuItem value="WV">West Virginia</MenuItem>
-										<MenuItem value="WI">Wisconsin</MenuItem>
-										<MenuItem value="WY">Wyoming</MenuItem>
-								</TextField>
+										{this.props.stateNames.map((stateName, i) => {
+											return (
+												<MenuItem key={i} value={stateName.abbr}>{stateName.full}</MenuItem>
+											)
+										})}
+									</TextField>
 
 								<TextField label="Email Address:" className={classes.text} defaultValue={person.email}/>
 
 								<TextField label="Phone Number:" className={classes.text} defaultValue={person.phone_number}/>
-								{person.category === "Offender" &&
+								{person.category_id === 1 &&
             						<>
 									<br></br>Offender Data:<br></br>
 
@@ -275,7 +235,7 @@ class IndividualParticipant extends Component{
 						</CardContent>
 					</Card>
 
-					<Card className={classes.card} raised>
+					<Card className={classes.card}>
 					URL Stuff:
 					<br></br>
 						<TextField disabled label="Invite Link:" value={`localhost:3000/#/quiz/${person.url}`} className={classes.urlText}/> 
@@ -288,7 +248,7 @@ class IndividualParticipant extends Component{
 						{urlButton}
 					</Card>
 
-					<Card>
+					<Card className={classes.card}>
 						<CardContent>
 							IMAGINE SNAPSHOT HERE
 						</CardContent>
@@ -306,6 +266,7 @@ const mapStateToProps = state => ({
   profile: state.profile,
   individual: state.individual,
   category: state.category,
+  stateNames: state.stateNames,
   population: state.population,
   system: state.system,
   editParticipant: state.editParticipant,

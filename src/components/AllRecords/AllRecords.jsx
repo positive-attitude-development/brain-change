@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Card, CardContent} from '@material-ui/core';
 import AllRecordsTable from './AllRecordsTable';
 import './AllRecords.css';
 
@@ -12,10 +13,15 @@ class AllRecords extends Component {
     render() {
         return (
             <div>
-                <h2>All Records:</h2>
-                {this.props.allRecords[0] &&
-                <AllRecordsTable history={this.props.history} />
-                }
+                <Card className="card">
+                    <CardContent>
+                        <h3>All Participants:</h3>
+                        {this.props.allRecords[0] &&
+                            <AllRecordsTable history={this.props.history} />
+                        }
+                    </CardContent>
+                </Card>
+                
             </div>
         )
     }
