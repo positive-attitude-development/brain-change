@@ -9,7 +9,10 @@ class Nav extends Component{
 	render(){
 		let homeLink;
 		let titleLink;
-	    if (this.props.admin.level === 1){
+		if (!this.props.admin.level){
+			homeLink = <Link className="nav-link" to="/quiz">Take Assessment</Link>
+			titleLink = <Link to="/quiz"><img className="logo" src="/headtree1.jpg" /><h2 className="nav-title">Brain Change</h2></Link>
+		}else if (this.props.admin.level === 1){
 	    	homeLink = <Link className="nav-link" to="/info">{this.props.admin.id ? 'Info' : 'Login / Register'}</Link>
 			titleLink = <Link to="/info"><h2 className="nav-title">Brain Change</h2></Link>
 	    }else if(this.props.admin.level === 2){
@@ -40,10 +43,8 @@ class Nav extends Component{
 			      )}
 
 					{this.props.admin.id && this.props.admin.level >= 3 && (
-			        <>
 			          <Link className="nav-link" to="/profile">
 			            Profile</Link>
-			        </>
 			      )}
 
 				  {this.props.admin.id && this.props.admin.level >= 1 &&(
@@ -56,13 +57,8 @@ class Nav extends Component{
 			      )}
 
 				  {!this.props.admin.id &&(
-			        <>
-					  <Link className="nav-link" to="/quiz">
-			        	Take Assessment</Link>
-
 				  	  <Link className="nav-link" to="/home">
 			        	Admin Login / Register</Link>
-			        </>
 			      )}
 
 			    </div>
