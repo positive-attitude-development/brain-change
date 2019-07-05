@@ -13,7 +13,7 @@ class AllRecords extends Component {
     render() {
         return (
             <div>
-                <Card className="card">
+                <Card raised className="card">
                     <CardContent>
                         <h3>All Participants:</h3>
                         {this.props.allRecords[0] &&
