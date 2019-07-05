@@ -4,11 +4,11 @@ import './Banner.css';
 class Banner extends Component {
     render() {
         return(
-            <div>
+          
                 <header className="header1">
-                    <h1>Brain Change</h1>
+                    <h1 className="titleBanner">Brain Change</h1>
                 </header>
-            </div>
+       
         )
     }
 }

@@ -34,7 +34,6 @@ class Elimination1 extends Component {
 
     // Send 9 selected values to reducer and route to Eliminationinstruction2 page
     handleNext = () => {
-        if(this.state.round1.length === 9) {
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -47,12 +46,7 @@ class Elimination1 extends Component {
             console.log(this.state.time)
             this.props.dispatch({ type: 'SET_NEW_VALUES', name: 'round1', payload: this.state.round1})
             this.props.dispatch({ type: 'SET_NEW_TIME', name: 'round1Time', payload: totalTime1})
-            this.props.history.push('/ElimInstructions2')
-        } else {
-            
-            return alert('Please select 9 values that are least important to you')
-        }
-        
+            this.props.history.push('/ElimInstructions2')        
     }
 
     // Select and deselect value words and store in local state round 1
@@ -87,7 +81,7 @@ class Elimination1 extends Component {
                 <div className="banner">
                     <Banner />
                 </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <Paper className="paper">
@@ -101,12 +95,14 @@ class Elimination1 extends Component {
                     </div>
                     <div className="nextBtn1">
                         <Button
+                            disabled={this.state.round1.length !== 9}
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}>
                             Next
                         </Button>
                     </div>
+                    <p className="valueCount">{this.state.round1.length} / 9 values selected</p>
                 </Paper>
             </div>
         )
