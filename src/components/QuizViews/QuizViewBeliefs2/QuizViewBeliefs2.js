@@ -97,7 +97,13 @@ componentDidMount() {
                 </Grid>
                 <div>
                     <h2 className = "heading" > Choose your most conflicting belief </h2>
+
+                    <Grid container justify="center">
+                        <StatusBar status={this.state.statusBar} />
+                    </Grid>
+
                     <Paper className = "select">
+                        <div className = "background">
                         <FormControl component="fieldset"
                         className={classes.formControl}
                         >
@@ -109,12 +115,13 @@ componentDidMount() {
 
 
 
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label= {this.props.beliefs.belief1}  />
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label= {this.props.beliefs.belief2} />
+                                    <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label= {this.props.beliefs.belief3} />
 
                                 </RadioGroup>
                         </FormControl>
+                      </div>
                     </Paper>
 
                 <div className = "input">

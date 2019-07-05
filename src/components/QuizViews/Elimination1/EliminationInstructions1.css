@@ -1,17 +1,11 @@
 
-.grid {
-    display: grid; 
-}
 
 .textInst {
-    text-align: center;  
-    margin: 0px; 
-    padding: 0px; 
+    padding: 300px 100px 300px 100px; 
+    text-align: center; 
 }
 
-
 .button {
-    float: right;
-    padding-top: 10px;
-    padding-bottom: 0px;
+    float: right; 
+    padding-top: 10px; 
 }

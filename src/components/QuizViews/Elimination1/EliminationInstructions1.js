@@ -19,15 +19,18 @@ class EliminationInstructions1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Grid container justify="center" className="textInst">
-                    <h3>
-                        On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
-                    </h3>
-                </Grid>
-                <Paper className="paperInst">
+
                 <div className="instructionView1">
+                <Paper container>
+                        <div className="textInst">
+                            On the next screen there will be a list of values. 
+                            Remove the 9 values that are the least important to you.
+                </div>
+                </Paper>
                     <div className="giph">
                     </div>
+
+                </div>
                         <div className="button">
                             <Button  
                                 color="primary"
@@ -39,6 +42,7 @@ class EliminationInstructions1 extends Component {
                         </div>
                     </div>
                 </Paper>
+
             </div>
         )
     }

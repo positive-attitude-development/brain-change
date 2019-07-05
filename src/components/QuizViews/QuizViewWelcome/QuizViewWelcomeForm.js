@@ -54,6 +54,7 @@ class QuizViewWelcomeForm extends Component {
         return (
             <div>
                 <div id="registrationForm">
+                    <div>
                     <TextField
                         required className={classes.text}
                         margin="normal"
@@ -72,18 +73,24 @@ class QuizViewWelcomeForm extends Component {
                         type="number" className={classes.text}
                         margin="normal"
                         label="Age"
+                        style={{width:100}}
                         value={this.state.age}
                         onChange={this.handleInputChange('age')} >
                     </TextField>
+                </div>
                     {/* <TextField
                         margin="normal"
                         label="Gender"
                         value={this.state.gender}
                         onChange={this.handleInputChange('gender')} >
                     </TextField> */}
-
-                    <TextField label="Gender:" select margin="normal" onChange={this.handleInputChange('gender')} 
-							value={this.state.gender} className={classes.menu}>
+                <div>
+                    <TextField label="Gender:" 
+                               select margin="normal" 
+                               onChange={this.handleInputChange('gender')} 
+                               value={this.state.gender} 
+                               className={classes.menu}
+                               style={{width:170}}>
 							<MenuItem value="M">Male</MenuItem>
 							<MenuItem value="F">Female</MenuItem>
 							<MenuItem value="Other">Other</MenuItem>
@@ -91,7 +98,7 @@ class QuizViewWelcomeForm extends Component {
                     <TextField
                         required
                         select
-                        style={{width:80}}
+                        style={{width:100}}
                         className={classes.menu}
                         margin="normal"
                         label="State"
@@ -115,6 +122,7 @@ class QuizViewWelcomeForm extends Component {
                         <MenuItem value={3}>Student</MenuItem>
                         <MenuItem value={4}>Other</MenuItem>
                     </TextField>
+                </div>
                     <TextField
                         margin="normal" className={classes.text}
                         label="Email Address"
