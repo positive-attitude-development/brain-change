@@ -16,23 +16,8 @@ class EliminationInstructions1 extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
-                
-                <StatusBar status={this.state.statusBar} />
-                <div className="textInst">
-                
-                On the next screen there will be a list of values. 
-                Remove the 9 values that are the least important to you.
-                
-                 </div>
-
                 <div className="banner">
                     <Banner />
-
-=======
-                <div className="banner">
-                    <Banner />
->>>>>>> master
                 </div>
                 <Grid container justify="center">
                     <StatusBar status={this.state.statusBar} />

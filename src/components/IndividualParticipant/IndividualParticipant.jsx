@@ -51,13 +51,9 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
 
-		// console.log(corevalues)
+		
 		this.setState({
-			coreValues : this.props.snapshot.core_values,
-  			coreViolators : this.props.snapshot.violator_values,
-  			beliefs : this.props.snapshot.beliefs,
-  			corePercent: this.props.snapshot.percent_core,
-  			violatorPercent : this.props.snapshot.percent_violators
+			snapshot: this.props.snapshotReducer
 		})
 
 
@@ -100,10 +96,18 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		console.log(this.props.snapshot[0])
+		console.log(this.props.snapshot[0]);
 
-		// let corevalues = this.props.snapshot[0].map(core => {
-		// 	return core.core_values
+		let snap = this.props.snapshot[0];
+		
+		
+
+		if (snap == true) {
+		const keys = Object.keys(snap)
+		console.log(keys)
+		}
+		// let id = this.props.snapshot[].map(id => {
+		// 	return id
 		// })
 
 		// console.log(corevalues); 
@@ -117,6 +121,8 @@ class IndividualParticipant extends Component{
 		// let violatorValues = this.props.coreViolators.map(value => {
 		// 					return value
 		// })
+
+		
 		
 		return(
 			<>
@@ -286,22 +292,27 @@ class IndividualParticipant extends Component{
 						{urlButton}
 					</Card>
 
-<<<<<<< HEAD
 					<h2>Snapshot Results</h2>
-
-					{ this.props.snapshot[0].id   ?
-						(JSON.stringify(this.props.snapshot))	
-
 				
-					: <></> }
-					
-=======
-					<Card className={classes.card}>
-						<CardContent>
-							IMAGINE SNAPSHOT HERE
-						</CardContent>
-					</Card>
->>>>>>> master
+					{snap ?
+					<>
+						<h3>Three true beliefs : {snap.beliefs[0] + ' ' +
+												  snap.beliefs[1] + ' ' +
+												  snap.beliefs[2] }</h3>
+						<h3>Percentile lived in core values : {snap.percent_core}</h3>
+						<h3>Percentile lived in violator values :{snap.percent_violators}</h3>
+						<h3>Core Values : {snap.core_values[0] + ' ' + 
+							 snap.core_values[1] + ' ' + 
+							 snap.core_values[2] + ' ' +
+							 snap.core_values[3] + ' ' +
+							 snap.core_values[4] }</h3>
+						<h3>Violator Values : {snap.violator_values[0] + ' ' + 
+							 snap.violator_values[1] + ' ' + 
+							 snap.violator_values[2] + ' ' +
+							 snap.violator_values[3] + ' ' +
+							 snap.violator_values[4] }</h3>
+					</>
+						: <> </>}
 				</Grid>
 					)
 				})}
@@ -321,12 +332,6 @@ const mapStateToProps = state => ({
   editParticipant: state.editParticipant,
 
   snapshot: state.snapshotReducer,
-
-  coreValues : state.snapshotReducer.core_values,
-  coreViolators : state.snapshotReducer.violator_values,
-  beliefs : state.snapshotReducer.beliefs,
-  corePercent: state.snapshotReducer.percent_core,
-  violatorPercent : state.snapshotReducer.percent_violators
 
 
 

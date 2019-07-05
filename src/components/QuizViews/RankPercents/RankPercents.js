@@ -41,8 +41,8 @@ class RankPercents extends Component {
 
     state = {
         statusBar : 95,
-        valuesPercent: 50,
-        violatorPercent: 50,
+        valuesPercent: 0,
+        violatorPercent: 0,
         violators: [],
         core: []
         

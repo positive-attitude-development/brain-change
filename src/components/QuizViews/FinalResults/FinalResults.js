@@ -3,6 +3,8 @@ import {  Button, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import SnapShot from './SnapShot'; 
 import StatusBar from '../StatusBar'; 
+import Banner from '../Banner/Banner'
+
 
 class FinalResults extends Component {
 

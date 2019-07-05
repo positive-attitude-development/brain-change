@@ -11,12 +11,10 @@ import editParticipant from './editParticipantReducer';
 import allRecordsReducer from './allRecordsReducer';
 import adminContactReducer from './adminContactReducer'; 
 import urlReducer from './urlReducer';
-<<<<<<< HEAD
 import snapshotReducer from './snapshotReducer'; 
 
 
-=======
->>>>>>> master
+
 import participant from './participantReducer';
 import individual from './individualParticipantReducer';
 import category from './categoriesReducer';
@@ -47,11 +45,8 @@ const rootReducer = combineReducers({
   urlReducer,
   editParticipant,
   resultData,
-<<<<<<< HEAD
-  snapshotReducer
-=======
-  stateNames,
->>>>>>> master
-});
+  snapshotReducer,
+  stateNames
+})
 
 export default rootReducer;
