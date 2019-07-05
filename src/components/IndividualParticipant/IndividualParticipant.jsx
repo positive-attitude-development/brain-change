@@ -4,6 +4,7 @@ import {Card, CardContent, Tooltip, Grid, TextField, Button, MenuItem, Dialog, D
 import {withStyles} from '@material-ui/core/styles';
 import {Chance} from 'chance';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const styles = {
@@ -42,6 +43,7 @@ class IndividualParticipant extends Component{
 	}
 
 	componentDidMount(){
+		console.log('this.props.individual', this.props)
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id})
 		//this.props.dispatch({type: 'FETCH_URL', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
@@ -83,8 +85,23 @@ class IndividualParticipant extends Component{
 	};//end handleCancelEdit
 
 	handleDelete = () => {
-		this.props.dispatch({type: 'DELETE_PARTICIPANT', payload: this.props.individual[0]});
-		this.props.history.push('/myparticipants');
+		Swal.fire({
+			title: `Delete ${this.props.individual[0].first_name}?`,
+			text: 'This action cannot be undone.',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, Delete'
+		}).then((result) => {
+			if (result.value) {
+				this.props.dispatch({type: 'DELETE_PARTICIPANT', payload: this.props.individual[0]});
+				this.props.history.push('/myparticipants');
+				Swal.fire(
+					'Deleted!',
+					'',
+					'success'
+				)
+			}
+		})
 	}
 
 	handleInputChange = propertyName => event => {

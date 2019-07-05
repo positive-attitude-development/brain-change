@@ -31,7 +31,6 @@ class Elimination2 extends Component {
     // Send 9 selected values to reducer and route to beliefinstruct1 page, will alert if 
     // 9 values has not been selected
     handleNext = () => {
-        if (this.state.round2.length === 9) {
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -43,9 +42,6 @@ class Elimination2 extends Component {
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round2', payload: this.state.round2});
             this.props.dispatch({type: 'SET_NEW_TIME', name: 'round2Time', payload: totalTime2 });
             this.props.history.push('/BeliefInstruct1')
-        } else {
-            return alert('Please select 9 values that are least important to you.')
-        }
     }
 
 
@@ -106,12 +102,14 @@ class Elimination2 extends Component {
                     </div>
                     <div className="nextBtn1">
                         <Button
+                            disabled={this.state.round2.length !== 9}
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}>
                             Next
                         </Button>
                     </div>
+                    <p className="valueCount">{this.state.round2.length} / 9 values selected</p>
                 </Paper>
             </div>
             

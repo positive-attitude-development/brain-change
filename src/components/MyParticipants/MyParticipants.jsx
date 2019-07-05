@@ -201,6 +201,7 @@ class MyParticipants extends Component{
 	};//end demo2Button
 
 	render(){
+		console.log(this.state);
 		const {classes} = this.props;
 
 		//conditionally render submit button

@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Button, IconButton, MenuItem, Table, TableBody, TableCell, 
         TableHead, TablePagination, TableRow, TableSortLabel, TextField, 
-        InputAdornment, Paper} from '@material-ui/core';
+    InputAdornment, Paper, Dialog, DialogActions, DialogTitle, DialogContent} from '@material-ui/core';
 import {CSVLink} from 'react-csv';
 import {Pageview, Clear} from '@material-ui/icons'
+import Swal from 'sweetalert2';
 import './Admin.css';
 
 const headRows = [
@@ -111,8 +112,22 @@ export default function EnhancedTable(props) {
 
     //update access level
     function changeAccessLevel(id, level) {
-        dispatch({type: 'UPDATE_ADMIN_LEVEL', payload: id, level: level});
-    }
+        Swal.fire({
+            title: 'Update access level?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.value) {
+                dispatch({type: 'UPDATE_ADMIN_LEVEL', payload: id, level: level});
+                Swal.fire(
+                    'Updated!',
+                    '',
+                    'success'
+                )
+            }
+        })
+    } //end changeAccessLevel
 
     //view participants
     function viewParticipants(name) {
