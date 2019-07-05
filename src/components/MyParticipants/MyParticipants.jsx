@@ -18,7 +18,7 @@ const styles = {
 	menu: {
 		marginTop: '5px',
 		marginLeft: '5px',
-		width: '140px',
+		width: '150px',
 	}
 }
 
@@ -201,6 +201,7 @@ class MyParticipants extends Component{
 	};//end demo2Button
 
 	render(){
+		console.log(this.state);
 		const {classes} = this.props;
 
 		//conditionally render submit button
@@ -210,7 +211,7 @@ class MyParticipants extends Component{
 			&& this.state.participant.category_id > 1 && this.state.participant.state
 			&& this.state.participant.url) {
 			//console.log('OK to submit non offender')
-				submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
+			submitButton = <Button size="large" variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 			
 		} else if (this.state.participant.first_name && this.state.participant.last_name
 			&& this.state.participant.url && this.state.participant.age
@@ -219,15 +220,15 @@ class MyParticipants extends Component{
 			&& this.state.offender.offender_system_id && this.state.offender.felon !== ''
 			&& this.state.offender.violent_offender !== '' && this.state.offender.population_id) {
 			//console.log('OK to submit offender')
-				submitButton = <Button variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
+				submitButton = <Button size="large" variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		} else {
 			//console.log('Not OK to submit participant yet')
-				submitButton = <Button variant="contained" color="primary" disabled>Add Participant</Button>
+				submitButton = <Button size="large" variant="contained" color="primary" disabled>Add Participant</Button>
 		} //end submitButton conditionals
 
 		return(
 			<Grid className={classes.root}>
-				<Card className={classes.card}>
+				<Card raised className={classes.card}>
 					<CardContent>
 
 						<h3 onClick={this.demoButton}>Add a Participant:</h3>
@@ -340,7 +341,7 @@ class MyParticipants extends Component{
 
 				</Card>
 	
-				<Card className={classes.card}>
+				<Card raised className={classes.card}>
 					<CardContent>
 						<h3>My Participants:</h3>
 						{this.props.participant[0] &&

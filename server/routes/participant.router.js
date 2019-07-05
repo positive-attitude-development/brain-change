@@ -7,37 +7,57 @@ const router = express.Router();
 //GET route for all of an owner/admin's participants
 router.get('/', rejectUnauthenticated, (req, res) => {
 	//console.log('profile req.user:', req.user.id)
-	let queryText = `SELECT "participant"."id" as "participant_id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "admin_id", "age", "gender", (select "category"."category" FROM "category" WHERE "category".id = "participant"."category_id"), "state", "email", "phone_number" AS "phone", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id FROM "participant"
-		FULL JOIN "offender" ON "participant".id = "offender".participant_id
-		WHERE "participant".admin_id = $1
-		ORDER BY "participant".id;`;
+	if (req.user.level >= 3) {
+		let queryText = `SELECT "participant"."id" as "participant_id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "admin_id", "age", "gender", (select "category"."category" FROM "category" WHERE "category".id = "participant"."category_id"), "state", "email", "phone_number" AS "phone", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id FROM "participant"
+			FULL JOIN "offender" ON "participant".id = "offender".participant_id
+			WHERE "participant".admin_id = $1
+			ORDER BY "participant".id;`;
 		let queryValue = req.user.id
-	pool.query(queryText, [queryValue])
-	.then((result) => {
-		console.log('participant get results:', result.rows);
-		res.send(result.rows)
-	}).catch((error) => {
-		console.log('error in participant GET:', error)
-	});
+		pool.query(queryText, [queryValue])
+		.then((result) => {
+			console.log('participant get results:', result.rows);
+			res.send(result.rows)
+		}).catch((error) => {
+			console.log('error in participant GET:', error)
+		});
+	} else {
+		console.log('unauthorized participants GET')
+		res.sendStatus(403);
+	}
+
 })
 
 //GET route for an individual participant's info
 router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	console.log('individual query params', req.params.id)
-	let queryText = `SELECT "participant"."id", "first_name", "last_name", "participant"."admin_id", "age", "gender", "category_id", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id, "offender_population".population, "offender_system"."system","url".id as urlId, "url".url, "url".expiration_date FROM "participant"
-		FULL JOIN "offender" ON "participant".id = "offender".participant_id
-		FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
-		FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
-		FULL JOIN "url" ON "url".participant_id = "participant".id
-		WHERE "participant".admin_id = $1
-		AND "participant".id = $2`;
-		let queryValues = [req.user.id, req.params.id]
-	pool.query(queryText, queryValues)
-	.then((result) => {
-		console.log('individual participant get results:', result.rows);
-		res.send(result.rows)
-	}).catch((error) => {
-		console.log('error in individual participant GET:', error)
+	let queryParticipant = `SELECT * FROM "participant" WHERE id = $1`;
+	pool.query(queryParticipant, [req.params.id])
+		.then((result) => {
+		console.log('individual get result:', result.rows[0].admin_id)
+		let adminId = result.rows[0].admin_id;
+		if (req.user.level >= 4 || req.user.id === adminId) {
+			let queryText = `SELECT "participant"."id", "first_name", "last_name", "participant"."admin_id", "age", "gender", "category_id", "state", "email", "phone_number", "offender".id AS offenderid, "offender".system_id, "offender".offender_system_id, "offender".felon, "offender".violent_offender, "offender".population_id, "offender_population".population, "offender_system"."system","url".id as urlId, "url".url, "url".expiration_date FROM "participant"
+				FULL JOIN "offender" ON "participant".id = "offender".participant_id
+				FULL JOIN "offender_population" ON "offender_population".id = "offender".population_id
+				FULL JOIN "offender_system" ON "offender_system".id = "offender".offender_system_id
+				FULL JOIN "url" ON "url".participant_id = "participant".id
+				WHERE "participant".id = $1`;
+			pool.query(queryText, [req.params.id])
+				.then((result) => {
+					console.log('individual participant get results:', result.rows);
+					res.send(result.rows)
+						}).catch((error) => {
+						console.log('error in individual participant GET:', error)
+						res.sendStatus(500);
+					})
+			}else{
+				console.log('unauthorized individual participant GET')
+				res.sendStatus(403);
+			}
+			
+			}).catch((error) => {
+				console.log('error in individual participant GET:', error)
+				res.sendStatus(500);
 	});
 })
 
