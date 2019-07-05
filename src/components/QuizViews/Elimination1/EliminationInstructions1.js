@@ -16,32 +16,27 @@ class EliminationInstructions1 extends Component {
     render() {
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Paper>
+                <Grid container justify="center" className="textInst">
+                    <h3>
+                        On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
+                    </h3>
+                </Grid>
+                <Paper className="paperInst">
                 <div className="instructionView1">
-                        <h3 className="textInst">
-                            On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
-                        </h3>
-                
-
                     <div className="giph">
-
                     </div>
-                    
-                    <div className="button">
-                        <Button  
-                            color="primary"
-                            variant="contained"
-                            onClick={() => this.props.history.push('/Elim1')}
-                            >
-                            Next
-                        </Button> 
-                    </div>
+                        <div className="button">
+                            <Button  
+                                color="primary"
+                                variant="contained"
+                                onClick={() => this.props.history.push('/Elim1')}
+                                >
+                                Next
+                            </Button> 
+                        </div>
                     </div>
                 </Paper>
             </div>

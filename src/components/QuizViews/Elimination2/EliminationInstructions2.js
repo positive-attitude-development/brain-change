@@ -12,10 +12,7 @@ class EliminationInstructions2 extends Component {
     render() {
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="instructions">

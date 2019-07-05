@@ -12,35 +12,15 @@ class FinalResults extends Component {
         statusBar : 100,
     }
 
-    componentDidMount() {
-
-    }
-
-    handleSubmit = () => {
-        //this.props.dispatch({type: 'ADD_RESULTS', payload: this.state.results })
-    }
-
     render() {
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
                 <SnapShot Values = {this.props.reduxState} /> 
                 
-  
-                FINISHED !!
-                <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={this.handleSubmit}
-                    >
-                    Submit
-                </Button>
             </div>
         )
     }

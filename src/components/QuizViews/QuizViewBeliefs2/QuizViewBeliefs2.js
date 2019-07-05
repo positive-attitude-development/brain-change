@@ -92,9 +92,6 @@ componentDidMount() {
        console.log(this.state)
         return (
             <div className={classes.root}>
-                <div className="banner">
-                    <Banner />
-                </div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>

@@ -88,10 +88,7 @@ class Elimination5 extends Component {
 
         return (
             <div>
-                <div className="banner">
-                    <Banner />
-                </div>
-                <Grid container justify="center">
+                <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <Paper className="paper5">
