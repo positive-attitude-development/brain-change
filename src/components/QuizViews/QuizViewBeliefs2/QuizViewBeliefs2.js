@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import Banner from '../Banner/Banner';
 import { withStyles } from '@material-ui/core/styles';
 
 import { FormControl, FormControlLabel,
@@ -94,9 +94,12 @@ componentDidMount() {
        console.log(this.state)
         return (
             <div className={classes.root}>
-                
-                 <StatusBar status={this.state.statusBar} />
-
+                <div className="banner">
+                    <Banner />
+                </div>
+                <Grid container justify="center" className="statusBar">
+                    <StatusBar status={this.state.statusBar} />
+                </Grid>
                 <div>
                     <h2 className = "heading" > Choose your strongest belief </h2>
                     <Paper className = "select">

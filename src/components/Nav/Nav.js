@@ -26,7 +26,9 @@ class Nav extends Component{
 	    }else if(this.props.admin.level === 3){
 			titleLink = <Link to="/myparticipants"><h2 className="nav-title">Brain Change</h2></Link>
 	    }else if(this.props.admin.level >= 4){
-			titleLink = <Link to="/all-records"><h2 className="nav-title">Brain Change</h2></Link>
+			// titleLink = <Link to="/all-records"><h2 className="nav-title">Brain Change</h2></Link>
+			titleLink = <Link to="/all-records"><img className="logo" src="/headtree1.jpg" /><h2 className="nav-title">Brain Change</h2></Link>
+
 	    }
 		return(
 			<div className="nav">

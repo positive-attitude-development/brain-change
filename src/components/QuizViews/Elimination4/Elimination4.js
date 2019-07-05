@@ -32,9 +32,6 @@ class Elimination4 extends Component {
     // Send 5 selected values to reducer and route to BeliefInstruct2 page.
     // Will alert if 5 values are not selected.
     handleNext = () => {
-        if(this.state.round4.length !== 5) {
-            return alert('Please select 5 values that are least important to you.')
-        } else {
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -46,7 +43,6 @@ class Elimination4 extends Component {
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round4', payload: this.state.round4});
             this.props.dispatch({type: 'SET_NEW_TIME', name: 'round4Time', payload: totalTime4 });
             this.props.history.push('/BeliefInstruct2');
-        }
     }
 
     // Select and deselect values and store into local state round 4
@@ -108,6 +104,7 @@ class Elimination4 extends Component {
                     </div>
                     <div className="nextBtn1">
                        <Button
+                            disabled={this.state.round4.length !== 5}
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}
@@ -115,6 +112,7 @@ class Elimination4 extends Component {
                             Next
                         </Button> 
                     </div>
+                    <p className="valueCount">{this.state.round4.length} / 5 values selected</p>
                 </Paper>
             </div>
         )

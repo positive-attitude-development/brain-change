@@ -31,9 +31,6 @@ class Elimination3 extends Component {
     // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
     // Will send alert if 5 values are not selected
     handleNext = () => {
-        if(this.state.round3.length !== 5) {
-            return alert('Please select 5 values that are least important to you.');
-        } else  {
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -45,7 +42,6 @@ class Elimination3 extends Component {
             this.props.dispatch({type: 'SET_NEW_VALUES', name: 'round3', payload: this.state.round3});
             this.props.dispatch({type: 'SET_NEW_TIME', name: 'round3Time', payload: totalTime3 });
             this.props.history.push('/ElimInstructions4')
-        }
     }
 
     // Select and deselect by clicking values and store into local state round3
@@ -105,6 +101,7 @@ class Elimination3 extends Component {
                     </div>
                     <div className="nextBtn1">
                         <Button
+                            disabled={this.state.round3.length !== 5}
                             color="primary"
                             variant="contained"
                             onClick={this.handleNext}
@@ -112,6 +109,7 @@ class Elimination3 extends Component {
                             Next
                         </Button> 
                     </div>
+                    <p className="valueCount">{this.state.round3.length} / 5 values selected</p>
                 </Paper>
             </div>
         )
