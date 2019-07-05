@@ -64,7 +64,13 @@ class Nav extends Component{
 			      )}
 
 				  <Link className="nav-link" to="/quiz">
-			        Quiz</Link>
+			        Take Assessment</Link>
+
+				  <Link className="nav-link" to="/home">
+			        {this.props.admin.id ? 'Home' : 'Admin Login / Register'}
+			      </Link>
+
+				  
 
 			    </div>
 			  </div>
