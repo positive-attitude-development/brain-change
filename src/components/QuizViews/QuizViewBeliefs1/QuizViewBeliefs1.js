@@ -17,25 +17,27 @@ state = {
 
 }
 
+componentDidMount() {
+    this.props.dispatch({type: 'FETCH_VALUES'})
+
+    let now = new Date();
+    let sec = now.getSeconds();
+    let min = now.getMinutes();
+    let hour = now.getHours();
+
+    let totalTime = ((min * 60) + (hour * 360) + sec)
+
+    this.setState({
+        time: totalTime
+    })
+}
 //setting beliefs to state
 propertyChange = propertyName => (event) => {
     event.preventDefault();
     this.setState({
             [propertyName]: event.target.value
     })
-        let now = new Date();
-        let sec = now.getSeconds();
-        let min = now.getMinutes();
-        let hour = now.getHours(); 
-
-        let totalTime =((min * 60 ) + (hour * 360) + sec)
-
-        this.setState({
-            time: totalTime
-        })
-
     console.log(this.state);
- 
 }
 
 

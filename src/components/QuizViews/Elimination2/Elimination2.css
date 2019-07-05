@@ -2,8 +2,8 @@
 .elim2List {
     list-style-type: none;
     columns: 4;
-    text-align: center;
-    column-gap: 0px;
+    /* text-align: center; */
+    /* column-gap: 0px; */
 }
 
 .paper2 {
