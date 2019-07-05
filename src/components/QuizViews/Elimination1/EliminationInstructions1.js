@@ -25,7 +25,7 @@ class EliminationInstructions1 extends Component {
                         <div className="textInst">
                             On the next screen there will be a list of values. 
                             Remove the 9 values that are the least important to you.
-                </div>
+                        </div>
                 </Paper>
                     <div className="giph">
                     </div>
@@ -40,9 +40,6 @@ class EliminationInstructions1 extends Component {
                                 Next
                             </Button> 
                         </div>
-                    </div>
-                </Paper>
-
             </div>
         )
     }
