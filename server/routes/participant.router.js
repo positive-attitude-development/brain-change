@@ -41,6 +41,25 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	});
 })
 
+router.get('/snapshot/:id', rejectUnauthenticated, (req, res) => {
+	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators",
+	(select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
+	(select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
+	(select array_agg("value".values ORDER BY "result_violators".order) AS "violator_values" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id)
+	FROM "participant"
+	JOIN "result" ON "participant"."id" = "result"."participant_id"
+	WHERE "participant"."id" = $1;`
+	
+	let queryValues = [req.params.id]
+	pool.query(queryText, queryValues)
+	.then((result) => {
+		console.log('individual snapshot results:', result.rows);
+		res.send(result.rows); 
+	}).catch((error) => {
+		console.log('error in get snapshot route:', error)
+	}); 
+})
+
 
 //POST route to add new participants
 router.post('/', rejectUnauthenticated, async (req, res, next) => {
@@ -158,6 +177,19 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 		connection.release()
 	}
 });//end participant update PUT
+
+router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
+	let query = `UPDATE "participant" SET "admin_id" = 1 WHERE "participant".id = $1 AND "admin_id" = $2`;
+	let values = [req.params.id, req.user.id];
+	pool.query(query, values).then(result => {
+		console.log('result of participant delete', result);
+		res.sendStatus(200);
+	}).catch(error => {
+		console.log('error in delete participant', error);
+		res.sendStatus(500);
+	})
+})
+
 
 
 module.exports = router;

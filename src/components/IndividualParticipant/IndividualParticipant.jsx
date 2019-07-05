@@ -33,7 +33,12 @@ const styles = {
 class IndividualParticipant extends Component{
 
 	state = {
-		isEditable: false
+		beliefs: [],
+		coreValues: [],
+		coreViolators: [],
+		corePercent: '',
+		violatorPercent: '',
+		isEditable: false,
 	}
 
 	componentDidMount(){
@@ -42,6 +47,16 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_CATEGORY'})
 		this.props.dispatch({type: 'FETCH_SYSTEM'})
 		this.props.dispatch({type: 'FETCH_POPULATION'})
+		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
+		this.props.dispatch({type: 'FETCH_VALUES'})
+
+
+		
+		this.setState({
+			snapshot: this.props.snapshotReducer
+		})
+
+
 	};//end componentDidMount
 
 	generateLink = (urlid) => {
@@ -67,6 +82,11 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'CANCEL_EDIT_PARTICIPANT'})
 	};//end handleCancelEdit
 
+	handleDelete = () => {
+		this.props.dispatch({type: 'DELETE_PARTICIPANT', payload: this.props.individual[0]});
+		this.props.history.push('/myparticipants');
+	}
+
 	handleInputChange = propertyName => event => {
 		this.props.dispatch({type: 'EDIT_PARTICIPANT', payload: {property: propertyName, value: event.target.value}})
 	};//end handleInputChange
@@ -78,8 +98,37 @@ class IndividualParticipant extends Component{
 		})
 	};//end handle saveChanges
 
+
 	render(){
 		const classes = this.props;
+		console.log(this.props.snapshot[0]);
+
+		let snap = this.props.snapshot[0];
+		
+		
+
+		if (snap == true) {
+		const keys = Object.keys(snap)
+		console.log(keys)
+		}
+		// let id = this.props.snapshot[].map(id => {
+		// 	return id
+		// })
+
+		// console.log(corevalues); 
+		// let snapshot = this.props.snapshot[0].coreValues; 
+		// let coreValues = snapshot.coreValues
+		// let coreValues = this.props.snapshot.coreValues.map(value => {
+		// 					return value
+		// })
+
+		// let violatorValues = snapshot.coreViolators
+		// let violatorValues = this.props.coreViolators.map(value => {
+		// 					return value
+		// })
+
+		
+		
 		return(
 			<>
 			{this.props.individual.map(person => {
@@ -151,6 +200,11 @@ class IndividualParticipant extends Component{
 								}								
 								<br></br>
 								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
+								
+								{/* remove button only available to assigned admin */}
+								{this.props.admin.id === this.props.individual[0].admin_id &&
+									<Button variant="contained" color="secondary" onClick={this.handleDelete}>Remove Participant</Button>
+								}
 
 						{/* DIALOG EDITABLE FIELDS:*/}
 
@@ -228,7 +282,7 @@ class IndividualParticipant extends Component{
 								</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleCancelEdit} color="primary">Cancel Edit</Button>
-										<Button onClick={this.saveChanges} variant="contained" color="primary">Save Changes</Button>
+										<Button onClick={this.saveChanges} variant="contained" color="primary" >Save Changes</Button>
 									</DialogActions>
 							</Dialog>
 
@@ -248,11 +302,27 @@ class IndividualParticipant extends Component{
 						{urlButton}
 					</Card>
 
-					<Card className={classes.card}>
-						<CardContent>
-							IMAGINE SNAPSHOT HERE
-						</CardContent>
-					</Card>
+					<h2>Snapshot Results</h2>
+				
+					{snap ?
+					<>
+						<h3>Three true beliefs : {snap.beliefs[0] + ' ' +
+												  snap.beliefs[1] + ' ' +
+												  snap.beliefs[2] }</h3>
+						<h3>Percentile lived in core values : {snap.percent_core}</h3>
+						<h3>Percentile lived in violator values :{snap.percent_violators}</h3>
+						<h3>Core Values : {snap.core_values[0] + ' ' + 
+							 snap.core_values[1] + ' ' + 
+							 snap.core_values[2] + ' ' +
+							 snap.core_values[3] + ' ' +
+							 snap.core_values[4] }</h3>
+						<h3>Violator Values : {snap.violator_values[0] + ' ' + 
+							 snap.violator_values[1] + ' ' + 
+							 snap.violator_values[2] + ' ' +
+							 snap.violator_values[3] + ' ' +
+							 snap.violator_values[4] }</h3>
+					</>
+						: <> </>}
 				</Grid>
 					)
 				})}
@@ -270,6 +340,11 @@ const mapStateToProps = state => ({
   population: state.population,
   system: state.system,
   editParticipant: state.editParticipant,
+
+  snapshot: state.snapshotReducer,
+
+
+
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(IndividualParticipant));

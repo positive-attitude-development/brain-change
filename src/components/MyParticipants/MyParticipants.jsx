@@ -182,7 +182,7 @@ class MyParticipants extends Component{
 				gender: 'M',
 				state: 'MN',
 				email_address: 'bobby@email.com',
-				phone_number: '612-123-4567',
+				phone_number: '612-123-4567'
 			}
 		});
 	};//end demoButton
