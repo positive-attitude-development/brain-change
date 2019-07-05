@@ -5,7 +5,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET list of all the values
-
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM value ORDER BY RANDOM();`;
     pool.query(queryText)
