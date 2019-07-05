@@ -144,111 +144,109 @@ export default function EnhancedTable(props) {
     //render table
     return (
         <div className="container">
-            <Paper className="paper">
-                <div className="wrapper">
-                    {/* CSV exporter */}
-                    <CSVLink
-                        className="CSVLink"
-                        filename={"brain-change-export.csv"}
-                        data={filteredRows}
-                        headers={headRows}>
-                        <Button variant="contained" color="primary" size="large">
-                            Export to CSV
-                        </Button>
-                    </CSVLink>
-                    {/* search input */}
-                    <TextField
-                        className="searchInput"
-                        variant="outlined"
-                        autoFocus
-                        label="Search"
-                        value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        disabled={!searchTerm}
-                                        onClick={e => setSearchTerm("")}
-                                    >
-                                        <Clear color="inherit" fontSize="small" />
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
-                    {/* table */}
-                    <Table
-                        className="table"
-                        aria-labelledby="tableTitle"
-                    >
-                        <EnhancedTableHead
-                            order={order}
-                            orderBy={orderBy}
-                            onRequestSort={handleRequestSort}
-                            rowCount={filteredRows.length}
-                        />
-                        <TableBody>
-                            {stableSort(filteredRows, getSorting(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, i) => {
-                                    return (
-                                        <TableRow key={i}>
-                                            <TableCell>{row.name}</TableCell>
-                                            <TableCell>{row.organization}</TableCell>
-                                            <TableCell>{row.title}</TableCell>
-                                            <TableCell>{row.email_address}</TableCell>
-                                            <TableCell>{row.phone_number}</TableCell>
-                                            <TableCell>{row.address}</TableCell>
-                                            <TableCell>{row.state}</TableCell>
-                                            <TableCell>
-                                                <TextField
-                                                    disabled={row.level === 5}
-                                                    select
-                                                    value={row.level}
-                                                    className="levelField"
-                                                    onChange={e => changeAccessLevel(row.id, e.target.value)}
-                                                    >
-                                                    <MenuItem value={1}>Deactivated</MenuItem>
-                                                    <MenuItem value={2}>Pending</MenuItem>
-                                                    <MenuItem value={3}>Admin</MenuItem>
-                                                    <MenuItem value={4}>Owner</MenuItem>
-                                                    <MenuItem disabled value={5}>Owner (Locked)</MenuItem>
-                                                </TextField>
-                                            </TableCell>
-                                            <TableCell>
-                                                <IconButton
-                                                    onClick={e => {viewParticipants(row.name)}}>
-                                                    <Pageview />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-                <TablePagination
-                    rowsPerPageOptions={[10, 20]}
-                    component="div"
-                    count={filteredRows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
+            <div className="wrapper">
+                {/* CSV exporter */}
+                <CSVLink
+                    className="CSVLink"
+                    filename={"brain-change-export.csv"}
+                    data={filteredRows}
+                    headers={headRows}>
+                    <Button variant="contained" color="primary" size="large">
+                        Export to CSV
+                    </Button>
+                </CSVLink>
+                {/* search input */}
+                <TextField
+                    className="searchInput"
+                    variant="outlined"
+                    autoFocus
+                    label="Search"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    disabled={!searchTerm}
+                                    onClick={e => setSearchTerm("")}
+                                >
+                                    <Clear color="inherit" fontSize="small" />
+                                </IconButton>
+                            </InputAdornment>
+                        )
                     }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
-            </Paper>
+                {/* table */}
+                <Table
+                    className="table"
+                    aria-labelledby="tableTitle"
+                >
+                    <EnhancedTableHead
+                        order={order}
+                        orderBy={orderBy}
+                        onRequestSort={handleRequestSort}
+                        rowCount={filteredRows.length}
+                    />
+                    <TableBody>
+                        {stableSort(filteredRows, getSorting(order, orderBy))
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row, i) => {
+                                return (
+                                    <TableRow key={i}>
+                                        <TableCell>{row.name}</TableCell>
+                                        <TableCell>{row.organization}</TableCell>
+                                        <TableCell>{row.title}</TableCell>
+                                        <TableCell>{row.email_address}</TableCell>
+                                        <TableCell>{row.phone_number}</TableCell>
+                                        <TableCell>{row.address}</TableCell>
+                                        <TableCell>{row.state}</TableCell>
+                                        <TableCell>
+                                            <TextField
+                                                disabled={row.level === 5}
+                                                select
+                                                value={row.level}
+                                                className="levelField"
+                                                onChange={e => changeAccessLevel(row.id, e.target.value)}
+                                                >
+                                                <MenuItem value={1}>Deactivated</MenuItem>
+                                                <MenuItem value={2}>Pending</MenuItem>
+                                                <MenuItem value={3}>Admin</MenuItem>
+                                                <MenuItem value={4}>Owner</MenuItem>
+                                                <MenuItem disabled value={5}>Owner (Locked)</MenuItem>
+                                            </TextField>
+                                        </TableCell>
+                                        <TableCell>
+                                            <IconButton
+                                                onClick={e => {viewParticipants(row.name)}}>
+                                                <Pageview />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 49 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+            <TablePagination
+                rowsPerPageOptions={[10, 20]}
+                component="div"
+                count={filteredRows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                backIconButtonProps={{
+                    'aria-label': 'Previous Page',
+                }}
+                nextIconButtonProps={{
+                    'aria-label': 'Next Page',
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
         </div>
     );
 }
