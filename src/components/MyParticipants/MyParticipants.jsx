@@ -175,6 +175,7 @@ class MyParticipants extends Component{
 	demoButton = () => {
 		this.setState({
 			participant: {
+				...this.state.participant,
 				first_name: 'Bobby',
 				last_name: 'Smith',
 				age: 25,
@@ -200,6 +201,7 @@ class MyParticipants extends Component{
 	};//end demo2Button
 
 	render(){
+		console.log(this.state);
 		const {classes} = this.props;
 
 		//conditionally render submit button
