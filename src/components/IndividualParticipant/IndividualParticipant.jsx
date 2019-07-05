@@ -67,6 +67,11 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'CANCEL_EDIT_PARTICIPANT'})
 	};//end handleCancelEdit
 
+	handleDelete = () => {
+		this.props.dispatch({type: 'DELETE_PARTICIPANT', payload: this.props.individual[0]});
+		this.props.history.push('/myparticipants');
+	}
+
 	handleInputChange = propertyName => event => {
 		this.props.dispatch({type: 'EDIT_PARTICIPANT', payload: {property: propertyName, value: event.target.value}})
 	};//end handleInputChange
@@ -151,6 +156,11 @@ class IndividualParticipant extends Component{
 								}								
 								<br></br>
 								<Button variant="contained" color="primary" onClick={this.handleEdit}>Edit Participant</Button>
+								
+								{/* remove button only available to assigned admin */}
+								{this.props.admin.id === this.props.individual[0].admin_id &&
+									<Button variant="contained" color="secondary" onClick={this.handleDelete}>Remove Participant</Button>
+								}
 
 						{/* DIALOG EDITABLE FIELDS:*/}
 
