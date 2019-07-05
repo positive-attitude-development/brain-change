@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import {  Button, Grid, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './EliminationInstructions2.css'
@@ -19,17 +19,22 @@ class EliminationInstructions2 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="instructions">
+                    <Paper containter justify="center">
+                        <h3 className="textInst" >
                 On the next screen you will see the updated list of values. 
                 Remove another 9 values that are the least important to you. 
+                        </h3>
+                    </Paper>
                 </div>
                 
                 <div className="giph">
 
                 </div>
 
-                <Grid container justify="center">
+                
                   <div className="button">
                     <Button  
+                        justify="right"
                         color="primary"
                         variant="contained"
                         onClick={() => this.props.history.push('/Elim2')}
@@ -37,7 +42,6 @@ class EliminationInstructions2 extends Component {
                         Next
                     </Button> 
                   </div>
-                </Grid>
             </div>
         )
     }

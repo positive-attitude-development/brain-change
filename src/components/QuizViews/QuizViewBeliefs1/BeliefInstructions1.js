@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import {  Button, Grid, Paper } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './BeliefInstructions1.css'
@@ -18,25 +18,23 @@ class BeliefInstructions1 extends Component {
                 </div>
                 <Grid container justify="center">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                 
-                <div className ="instructions">
-                    <div>
+                {/* </Grid>    */}
+            <Paper contained>             
+                
+                <div className ="text">
                 On the next screen please write 3 of your beliefs that you would not want to give up. 
                 Beliefs can be personal, political, or religious. Here is a short tutorial. 
-                    </div> 
-                    <div className="examples">
+                  <div className = "space"> 
+
+                  </div>
                 (Examples for tutorial: 
                 I believe people can change for the better. 
                 I believe taxes should be lowered. I believe in a higher power.)
                     </div>
               
-                 
-                
-                <div className="giph">
 
-                </div>
-
-                <Grid container justify="center">
+                </Paper> 
+                </Grid>   
                   <div className="button">
                     <Button  
                         color="primary"
@@ -46,9 +44,7 @@ class BeliefInstructions1 extends Component {
                         Next
                     </Button> 
                   </div>
-                </Grid>
             </div>
-        </div>
         )
     }
 }

@@ -16,9 +16,6 @@ class FinalResults extends Component {
 
     }
 
-    handleSubmit = () => {
-        //this.props.dispatch({type: 'ADD_RESULTS', payload: this.state.results })
-    }
 
     render() {
         return (
@@ -34,13 +31,13 @@ class FinalResults extends Component {
                 
   
                 FINISHED !!
-                <Button
+                {/* <Button
                     color="primary"
                     variant="contained"
                     onClick={this.handleSubmit}
                     >
                     Submit
-                </Button>
+                </Button> */}
             </div>
         )
     }

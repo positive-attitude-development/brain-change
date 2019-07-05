@@ -82,10 +82,10 @@ handleClick = (event) => {
                 <Grid container justify="center">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div>
                     <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>
 
-                 <Paper >
+                 <Paper className = "paper">
+                     <div className = "background" >
                    <div className="examples" >
                        <h4 align="center"> Here are some examples: </h4>
                     <ul> 
@@ -128,12 +128,10 @@ handleClick = (event) => {
                         />
                     </div>
                 </div>
-                </Paper>
                 </div>
+            </Paper>
                 <div className = "button">
-                {/* <Grid container justify="center"> */}
                     <Button
-                        
                         className= "button"
                         onClick={this.handleClick}
                         color="primary"
@@ -142,7 +140,6 @@ handleClick = (event) => {
                         Next
                     </Button> 
                 </div>
-                {/* </Grid> */}
             </div>
         )
     }

@@ -3,7 +3,17 @@
     align-content: center;
 }
 
-.examples {
+.space {
+    padding: 50px; 
+}
+
+.text{
+    padding: 40px 100px 40px 100px; 
     text-align: center; 
-    padding: 80px; 
+
+}
+
+.button {
+    float: right; 
+    padding-top: 10px; 
 }
