@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.user.level >= 4) {
-		let queryText = `SELECT "admin"."id", concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", "level" FROM "admin_contact"
+		let queryText = `SELECT "admin"."id", concat("first_name", ' ', "last_name") AS "name", "organization", "title", "email_address", "phone_number", concat("street_address", ' ', "street_address2", ' ', "city", ' ', "state", ' ', "zipcode") as "address", "state", "level" FROM "admin_contact"
     	JOIN "admin" ON "admin_contact"."admin_id" = "admin"."id";`;
     	pool.query(queryText)
     		.then((results) => {

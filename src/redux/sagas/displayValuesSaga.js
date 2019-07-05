@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
+import {getValues} from './selectors';
 
 function* fetchValues() {
     try{
@@ -12,8 +13,9 @@ function* fetchValues() {
 
 function* addResults(action) {
     try{
-        console.log('addResults action.payload', action.payload);
-        yield axios.post('/api/snapshot/result', action.payload);
+        yield put({type: 'SET_NEW_TIME', name: 'percentTime', payload: action.payload.percentTime})
+        const newValues = yield select(getValues);
+        yield axios.post('/api/snapshot/result', newValues);
     }catch(error) {
         console.log('Error in addResults', error)
     }

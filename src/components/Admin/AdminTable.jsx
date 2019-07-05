@@ -14,6 +14,8 @@ const headRows = [
     { key: 'title', label: 'Title' },
     { key: 'email_address', label: 'Email' },
     { key: 'phone_number', label: 'Phone Number' },
+    { key: 'address', label: 'Mailing Address' },
+    { key: 'state', label: 'State' },
     { key: 'level', label: 'Access Level' }
 ];
 
@@ -77,7 +79,6 @@ function EnhancedTableHead(props) {
 
 //table head props
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
@@ -198,17 +199,21 @@ export default function EnhancedTable(props) {
                                             <TableCell>{row.title}</TableCell>
                                             <TableCell>{row.email_address}</TableCell>
                                             <TableCell>{row.phone_number}</TableCell>
+                                            <TableCell>{row.address}</TableCell>
+                                            <TableCell>{row.state}</TableCell>
                                             <TableCell>
                                                 <TextField
+                                                    disabled={row.level === 5}
                                                     select
                                                     value={row.level}
                                                     className="levelField"
                                                     onChange={e => changeAccessLevel(row.id, e.target.value)}
                                                     >
-                                                    <MenuItem value={0}>{0}</MenuItem>
-                                                    <MenuItem value={1}>{1}</MenuItem>
-                                                    <MenuItem value={2}>{2}</MenuItem>
-                                                    <MenuItem value={3}>{3}</MenuItem>
+                                                    <MenuItem value={1}>Deactivated</MenuItem>
+                                                    <MenuItem value={2}>Pending</MenuItem>
+                                                    <MenuItem value={3}>Admin</MenuItem>
+                                                    <MenuItem value={4}>Owner</MenuItem>
+                                                    <MenuItem disabled value={5}>Owner (Locked)</MenuItem>
                                                 </TextField>
                                             </TableCell>
                                             <TableCell>
