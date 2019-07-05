@@ -13,13 +13,6 @@ class BeliefInstructions1 extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
-                <div className="statusBar">
-                 <StatusBar status={this.state.statusBar} />
-                </div>
-             
-                    <div className="examples">
-=======
                 <div className="banner">
                     <Banner />
                 </div>
@@ -28,7 +21,6 @@ class BeliefInstructions1 extends Component {
                 </Grid>                 
                 <div className ="instructions">
                     <div>
->>>>>>> 7b1f7d1fd4f0166fe7cbf0567518aaaed9bfe52f
                 On the next screen please write 3 of your beliefs that you would not want to give up. 
                 Beliefs can be personal, political, or religious. Here is a short tutorial. 
                     </div> 
@@ -56,6 +48,7 @@ class BeliefInstructions1 extends Component {
                   </div>
                 </Grid>
             </div>
+        </div>
         )
     }
 }
