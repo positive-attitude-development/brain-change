@@ -52,11 +52,9 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
-
-		
-		this.setState({
-			snapshot: this.props.snapshotReducer
-		})
+		// this.setState({
+		// 	snapshot: this.props.snapshotReducer
+		// })
 
 
 	};//end componentDidMount
@@ -118,34 +116,9 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		console.log(this.props.snapshot[0]);
 
 		let snap = this.props.snapshot[0];
-		
-		
-
-		if (snap == true) {
-		const keys = Object.keys(snap)
-		console.log(keys)
-		}
-		// let id = this.props.snapshot[].map(id => {
-		// 	return id
-		// })
-
-		// console.log(corevalues); 
-		// let snapshot = this.props.snapshot[0].coreValues; 
-		// let coreValues = snapshot.coreValues
-		// let coreValues = this.props.snapshot.coreValues.map(value => {
-		// 					return value
-		// })
-
-		// let violatorValues = snapshot.coreViolators
-		// let violatorValues = this.props.coreViolators.map(value => {
-		// 					return value
-		// })
-
-		
-		
+				
 		return(
 			<>
 			{this.props.individual.map(person => {

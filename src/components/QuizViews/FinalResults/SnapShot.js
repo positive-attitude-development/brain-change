@@ -6,6 +6,12 @@ import './SnapShot.css'
 
 class SnapShot extends Component {
 
+componentDidMount() {
+    // this.props.dispatch({type:'FETCH_PARTICIPANTS'})
+    // this.props.dispatch({type:'FETCH_SNAPSHOT', payload: this.props.urlReducer.participant_id})
+    console.log(this.props.id)
+}
+
     
     render() {
 
@@ -97,7 +103,9 @@ const mapStateToProps = (reduxState) => {
         violators :reduxState.newValuesReducer.violators,
         corePercents : reduxState.newValuesReducer.percents.valuesPercent,
         violatorPercents : reduxState.newValuesReducer.percents.violatorPercent,
-        beliefs : reduxState.newValuesReducer.beliefs
+        beliefs : reduxState.newValuesReducer.beliefs,
+
+        id : reduxState.urlReducer.participant_id
     }
 }
 export default connect(mapStateToProps)(SnapShot);
