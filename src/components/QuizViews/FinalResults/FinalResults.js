@@ -30,7 +30,7 @@ class FinalResults extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
-                <SnapShot Values = {this.props.reduxState} /> 
+                {/* <SnapShot values = {this.props.reduxState} />  */}
                 
   
                 FINISHED !!

@@ -6,22 +6,26 @@ import './SnapShot.css'
 
 class SnapShot extends Component {
 
+    
     render() {
-     
-        let violatorVal = this.props.values.violators.map( row => {
-            return row.values
-        })
 
-        let coreVal = this.props.values.core.map( row => {
-            return row.values
-        })
-       
+        // {this.props.beliefs.belief1 == true ?
+        // let violatorVal = this.props.values.violators.map( row => {
+        //     return row.values
+        // })
+
+        // let coreVal = this.props.values.core.map( row => {
+        //     return row.values
+        // })
+    
         return (
             <div className= "table">
 
                 <h2>SnapShot</h2>
-               
-                <Paper >
+                
+                {this.props.beliefs == true ?
+
+                 <Paper >
                     <Table>
                         <TableHead>
                           <TableRow className="header">
@@ -31,28 +35,28 @@ class SnapShot extends Component {
                         </TableHead>
                         <TableBody>
                           <TableRow> 
-                              <TableCell >{coreVal[0]}</TableCell>
-                              <TableCell >{violatorVal[0]}</TableCell>
+                              <TableCell >{this.props.values.core.values[0]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[0]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[1]}</TableCell>
-                              <TableCell >{violatorVal[1]}</TableCell>
+                              <TableCell >{this.props.values.core.values[1]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[1]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[2]}</TableCell>
-                              <TableCell >{violatorVal[2]}</TableCell>
+                              <TableCell >{this.props.values.core.values[2]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[2]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[3]}</TableCell>
-                              <TableCell >{violatorVal[3]}</TableCell>
+                              <TableCell >{this.props.values.core.values[3]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[3]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[4]}</TableCell>
-                              <TableCell >{violatorVal[4]}</TableCell>
+                              <TableCell >{this.props.values.core.values[4]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[4]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[5]}</TableCell>
-                              <TableCell >{violatorVal[5]}</TableCell>
+                              <TableCell >{this.props.values.core.values[5]}</TableCell>
+                              <TableCell >{this.props.values.violators.values[5]}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableCell align="center" >{this.props.corePercents}</TableCell>
@@ -74,15 +78,16 @@ class SnapShot extends Component {
                           </TableRow>
 
                         </TableBody>
-
-
                     </Table>
-                </Paper>
+                </Paper> 
+              
+              : <> </> }
+                
+                {JSON.stringify(this.props.newValuesReducer)}
             </div>
         )
+      }
     }
-}
-
 
 const mapStateToProps = (reduxState) => {
     return {
