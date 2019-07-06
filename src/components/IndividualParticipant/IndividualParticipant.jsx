@@ -6,7 +6,6 @@ import {Chance} from 'chance';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-
 import SnapShot from '../QuizViews/FinalResults/SnapShot'
 
 const styles = {
@@ -36,11 +35,11 @@ const styles = {
 class IndividualParticipant extends Component{
 
 	state = {
-		beliefs: [],
-		coreValues: [],
-		coreViolators: [],
-		corePercent: '',
-		violatorPercent: '',
+		// beliefs: [],
+		// coreValues: [],
+		// coreViolators: [],
+		// corePercent: '',
+		// violatorPercent: '',
 		isEditable: false,
 	}
 
@@ -54,9 +53,9 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
-		this.setState({
-			snapshot: this.props.snapshotReducer
-		})
+		// this.setState({
+		// 	snapshot: this.props.snapshotReducer
+		// })
 
 
 	};//end componentDidMount
@@ -295,27 +294,8 @@ class IndividualParticipant extends Component{
 					</Card>
 
 					<h2>Snapshot Results</h2>
-				
-					{snap ?
-					<>
-					{/* <SnapShot /> */}
-						<h3>Three true beliefs : {snap.beliefs[0] + ' ' +
-												  snap.beliefs[1] + ' ' +
-												  snap.beliefs[2] }</h3>
-						<h3>Percentile lived in core values : {snap.percent_core}</h3>
-						<h3>Percentile lived in violator values :{snap.percent_violators}</h3>
-						<h3>Core Values : {snap.core_values[0] + ' ' + 
-							 snap.core_values[1] + ' ' + 
-							 snap.core_values[2] + ' ' +
-							 snap.core_values[3] + ' ' +
-							 snap.core_values[4] }</h3>
-						<h3>Violator Values : {snap.violator_values[0] + ' ' + 
-							 snap.violator_values[1] + ' ' + 
-							 snap.violator_values[2] + ' ' +
-							 snap.violator_values[3] + ' ' +
-							 snap.violator_values[4] }</h3>
-					</>
-						: <> </>}
+					{this.props.snapshot[0] && <SnapShot />}
+					
 				</Grid>
 					)
 				})}
