@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import React, { Component } from 'react';
+import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import SnapShot from './SnapShot'; 
-import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner'
-
+import StatusBar from '../StatusBar';
 
 class FinalResults extends Component {
 
@@ -15,12 +13,15 @@ class FinalResults extends Component {
     render() {
         return (
             <div>
+
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
-                <SnapShot values = {this.props.reduxState} /> 
-                
+                <h3>Final Result</h3>
+
+                {this.props.snapshot[0] && <SnapShot /> }
+
             </div>
         )
     }
@@ -28,10 +29,7 @@ class FinalResults extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        values: reduxState.valuesReducer,
-        newValues: reduxState.newValuesReducer,
-        url: reduxState.urlReducer,
-
+        snapshot: reduxState.snapshotReducer
     }
 }
 

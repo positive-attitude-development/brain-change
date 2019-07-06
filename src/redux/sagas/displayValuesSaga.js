@@ -18,8 +18,10 @@ function* addResults(action) {
         yield put({type: 'SET_NEW_VALUES', name: 'percents', payload: action.payload.percents})
         const newValues = yield select(getValues);
         yield axios.post('/api/snapshot/result', newValues);
+        const snapshot = yield axios.get(`/api/participant/snapshot/${newValues.participantId}`);
+        yield put({type: 'SET_SNAPSHOT', payload: snapshot.data});
     }catch(error) {
-        console.log('Error in addResults', error)
+        console.log('Error in addResults', error);
     }
 }
 
