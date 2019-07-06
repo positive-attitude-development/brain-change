@@ -7,6 +7,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 
+import SnapShot from '../QuizViews/FinalResults/SnapShot'
+
 const styles = {
 	root: {
 
@@ -52,9 +54,9 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
-		// this.setState({
-		// 	snapshot: this.props.snapshotReducer
-		// })
+		this.setState({
+			snapshot: this.props.snapshotReducer
+		})
 
 
 	};//end componentDidMount
@@ -296,6 +298,7 @@ class IndividualParticipant extends Component{
 				
 					{snap ?
 					<>
+					{/* <SnapShot /> */}
 						<h3>Three true beliefs : {snap.beliefs[0] + ' ' +
 												  snap.beliefs[1] + ' ' +
 												  snap.beliefs[2] }</h3>
@@ -331,9 +334,7 @@ const mapStateToProps = state => ({
   system: state.system,
   editParticipant: state.editParticipant,
 
-  snapshot: state.snapshotReducer,
-
-
+  snapshot: state.snapshotReducer
 
 });
 

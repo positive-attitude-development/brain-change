@@ -6,30 +6,34 @@ import './SnapShot.css'
 
 class SnapShot extends Component {
 
+
+    state = {
+        snapshot: ""
+    }
+
 componentDidMount() {
     // this.props.dispatch({type:'FETCH_PARTICIPANTS'})
-    // this.props.dispatch({type:'FETCH_SNAPSHOT', payload: this.props.urlReducer.participant_id})
+    this.props.dispatch({type:'FETCH_SNAPSHOT', payload: this.props.id})
     console.log(this.props.id)
+
+    // this.setState({
+    //     snapshot: this.props.snapshotReducer
+    // })
 }
 
     
     render() {
-
-        // {this.props.beliefs.belief1 == true ?
-        // let violatorVal = this.props.values.violators.map( row => {
-        //     return row.values
-        // })
-
-        // let coreVal = this.props.values.core.map( row => {
-        //     return row.values
-        // })
-    
+        // let snapshot = this.state.snapshotReducer;
+        let snap = this.props.snapshot[0];
+        console.log(snap)
+        console.log(this.props.snapshotReducer)
+     
         return (
             <div className= "table">
 
                 <h2>SnapShot</h2>
                 
-                {this.props.beliefs == true ?
+                {snap ?
 
                  <Paper >
                     <Table>
@@ -41,32 +45,32 @@ componentDidMount() {
                         </TableHead>
                         <TableBody>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[0]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[0]}</TableCell>
+                              <TableCell align="center" >{snap.core_values[0]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[0]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[1]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[1]}</TableCell>
+                             <TableCell align="center">{snap.core_values[1]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[1]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[2]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[2]}</TableCell>
+                              <TableCell align="center">{snap.core_values[2]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[2]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[3]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[3]}</TableCell>
+                              <TableCell align="center">{snap.core_values[3]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[3]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[4]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[4]}</TableCell>
+                              <TableCell align="center">{snap.core_values[4]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[4]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{this.props.values.core.values[5]}</TableCell>
-                              <TableCell >{this.props.values.violators.values[5]}</TableCell>
+                              <TableCell align="center">{snap.core_values[5]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[5]}</TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.corePercents}</TableCell>
-                              <TableCell align="center" >{this.props.violatorPercents}</TableCell>
+                              <TableCell align="center" >{snap.percent_core}</TableCell>
+                              <TableCell align="center" >{snap.percent_violators}</TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
@@ -74,13 +78,13 @@ componentDidMount() {
                     <Table>
                         <TableBody>
                           <TableRow> 
-                              <TableCell align="center" >{this.props.beliefs.belief1} </TableCell>
+                              <TableCell align="center" >{snap.beliefs[0]} </TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.beliefs.belief2}</TableCell>
+                              <TableCell align="center" >{snap.beliefs[1]}</TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.beliefs.belief3} </TableCell>
+                              <TableCell align="center" >{snap.beliefs[2]} </TableCell>
                           </TableRow>
 
                         </TableBody>
@@ -89,7 +93,7 @@ componentDidMount() {
               
               : <> </> }
                 
-                {JSON.stringify(this.props.newValuesReducer)}
+                {JSON.stringify(this.props.snapshotReducer)}
             </div>
         )
       }
@@ -105,7 +109,8 @@ const mapStateToProps = (reduxState) => {
         violatorPercents : reduxState.newValuesReducer.percents.violatorPercent,
         beliefs : reduxState.newValuesReducer.beliefs,
 
-        id : reduxState.urlReducer.participant_id
+        id : reduxState.urlReducer.participant_id,
+        snapshot: reduxState.snapshotReducer
     }
 }
 export default connect(mapStateToProps)(SnapShot);
