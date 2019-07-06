@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './EliminationInstructions2.css'
 
 class EliminationInstructions2 extends Component {
+
     state = {
         statusBar : 9
     }
@@ -15,14 +16,17 @@ class EliminationInstructions2 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div className="instructions">
-                    <Paper containter justify="center">
-                        <h3 className="textInst" >
+               
+                <Paper containter className ="paper">
+                    <div className="instructions">
+                    <Typography variant="h5" 
+                            component="h2" 
+                            // className="instructions" 
+                            >
                 On the next screen you will see the updated list of values. 
                 Remove another 9 values that are the least important to you. 
-                        </h3>
-                    </Paper>
-                </div>
+                    </Typography>
+                    </div>
                 
                 <div className="giph">
 
@@ -39,6 +43,7 @@ class EliminationInstructions2 extends Component {
                         Next
                     </Button> 
                   </div>
+              </Paper>
             </div>
         )
     }
