@@ -7,6 +7,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 
+import SnapShot from '../QuizViews/FinalResults/SnapShot'
+
 const styles = {
 	root: {
 
@@ -52,8 +54,6 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
-
-		
 		this.setState({
 			snapshot: this.props.snapshotReducer
 		})
@@ -118,34 +118,9 @@ class IndividualParticipant extends Component{
 
 	render(){
 		const classes = this.props;
-		console.log(this.props.snapshot[0]);
 
 		let snap = this.props.snapshot[0];
-		
-		
-
-		if (snap == true) {
-		const keys = Object.keys(snap)
-		console.log(keys)
-		}
-		// let id = this.props.snapshot[].map(id => {
-		// 	return id
-		// })
-
-		// console.log(corevalues); 
-		// let snapshot = this.props.snapshot[0].coreValues; 
-		// let coreValues = snapshot.coreValues
-		// let coreValues = this.props.snapshot.coreValues.map(value => {
-		// 					return value
-		// })
-
-		// let violatorValues = snapshot.coreViolators
-		// let violatorValues = this.props.coreViolators.map(value => {
-		// 					return value
-		// })
-
-		
-		
+				
 		return(
 			<>
 			{this.props.individual.map(person => {
@@ -323,6 +298,7 @@ class IndividualParticipant extends Component{
 				
 					{snap ?
 					<>
+					{/* <SnapShot /> */}
 						<h3>Three true beliefs : {snap.beliefs[0] + ' ' +
 												  snap.beliefs[1] + ' ' +
 												  snap.beliefs[2] }</h3>
@@ -358,9 +334,7 @@ const mapStateToProps = state => ({
   system: state.system,
   editParticipant: state.editParticipant,
 
-  snapshot: state.snapshotReducer,
-
-
+  snapshot: state.snapshotReducer
 
 });
 
