@@ -1,16 +1,31 @@
+.introCard {
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
 
+#introPar {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 60px;
+}
 
-.grid {
+.registrationCard {
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
 
+#registrationForm {
+    width: 60%;
+    margin: auto;
+}
 
+#buttonArea {
+    margin-top: 30px;
 }
 
 .table {
     align-items: center;
-}
-
-.welcome-div {
-
-    height: 400px;
-    width: 400px;
 }
