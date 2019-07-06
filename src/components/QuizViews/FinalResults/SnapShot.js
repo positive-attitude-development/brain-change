@@ -1,40 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'; 
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core'
-
 import './SnapShot.css'
 
 class SnapShot extends Component {
-
-
-    state = {
-        snapshot: ""
-    }
-
-componentDidMount() {
-    // this.props.dispatch({type:'FETCH_PARTICIPANTS'})
-    this.props.dispatch({type:'FETCH_SNAPSHOT', payload: this.props.id})
-    console.log(this.props.id)
-
-    // this.setState({
-    //     snapshot: this.props.snapshotReducer
-    // })
-}
-
     
     render() {
-        // let snapshot = this.state.snapshotReducer;
+
         let snap = this.props.snapshot[0];
-        console.log(snap)
-        console.log(this.props.snapshotReducer)
-     
+
         return (
-            <div className= "table">
-
-                <h2>SnapShot</h2>
-                
-                {snap ?
-
+            <div>
                  <Paper >
                     <Table>
                         <TableHead>
@@ -89,11 +65,7 @@ componentDidMount() {
 
                         </TableBody>
                     </Table>
-                </Paper> 
-              
-              : <> </> }
-                
-                {JSON.stringify(this.props.snapshotReducer)}
+                </Paper>
             </div>
         )
       }
@@ -101,15 +73,6 @@ componentDidMount() {
 
 const mapStateToProps = (reduxState) => {
     return {
-        reduxState,
-        values : reduxState.newValuesReducer.percents,
-        core: reduxState.newValuesReducer.orderCore,
-        violators :reduxState.newValuesReducer.violators,
-        corePercents : reduxState.newValuesReducer.percents.valuesPercent,
-        violatorPercents : reduxState.newValuesReducer.percents.violatorPercent,
-        beliefs : reduxState.newValuesReducer.beliefs,
-
-        id : reduxState.urlReducer.participant_id,
         snapshot: reduxState.snapshotReducer
     }
 }

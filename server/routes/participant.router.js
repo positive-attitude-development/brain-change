@@ -61,7 +61,7 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	});
 })
 
-router.get('/snapshot/:id', rejectUnauthenticated, (req, res) => {
+router.get('/snapshot/:id', (req, res) => {
 	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators",
 	(select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
 	(select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
@@ -69,14 +69,14 @@ router.get('/snapshot/:id', rejectUnauthenticated, (req, res) => {
 	FROM "participant"
 	JOIN "result" ON "participant"."id" = "result"."participant_id"
 	WHERE "participant"."id" = $1;`
-	
-	let queryValues = [req.params.id]
-	pool.query(queryText, queryValues)
-	.then((result) => {
+
+	pool.query(queryText, [req.params.id])
+	.then(result => {
 		console.log('individual snapshot results:', result.rows);
 		res.send(result.rows); 
-	}).catch((error) => {
-		console.log('error in get snapshot route:', error)
+	}).catch(error => {
+		console.log('error in get snapshot route:', error);
+		res.sendStatus(500);
 	}); 
 })
 
