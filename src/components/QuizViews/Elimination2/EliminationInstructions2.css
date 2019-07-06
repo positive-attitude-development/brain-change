@@ -1,13 +1,15 @@
 .instructions {
-
-    height: 300px;
-    width: 800px; 
+    padding: 50px 100px 50px 100px; 
+    text-align: center; 
 }
 
-.textInst {
+.paper {
+    margin: 30px 150px 0px 150px;
+    padding: 0px;
+}
+
+.gigh {
     
-    height: 360x;
-    padding: 40px; 
 }
 
 .button {
