@@ -10,10 +10,6 @@ class FinalResults extends Component {
         statusBar : 100,
     }
 
-    // componentDidMount() {
-    //     this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.id});
-    // }
-
     render() {
         return (
             <div>
@@ -33,7 +29,6 @@ class FinalResults extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        // id: reduxState.urlReducer.participant_id,
         snapshot: reduxState.snapshotReducer
     }
 }
