@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {withStyles} from '@material-ui/core/styles';
-import Banner from '../Banner/Banner';
 import Slider from '@material-ui/lab/Slider';
 import { Button, Typography, Paper, Grid } from '@material-ui/core'
 import './RankPercents.css'

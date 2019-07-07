@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner';
 import './RankInstructions.css'
 
 class RankInstructions extends Component {

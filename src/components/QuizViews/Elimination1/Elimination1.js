@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import './Elimination1.css';
 import { Paper, Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar';
-import Banner from '../Banner/Banner';
 
 
 
@@ -81,26 +80,28 @@ class Elimination1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Paper className="paper">
-                    <div className="valuesList">
-                        <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
-                        <ul className="elim1List">
-                            {this.props.values.map(value => {
-                                return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
-                            })}
-                        </ul>
-                    </div>
-                    <div className="nextBtn1">
-                        <Button
-                            disabled={this.state.round1.length !== 9}
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}>
-                            Next
-                        </Button>
-                    </div>
-                    <p className="valueCount">{this.state.round1.length} / 9 values selected</p>
-                </Paper>
+                <div className="paperContainer">
+                    <h2 className="inst" onClick={this.handleClick}>Remove 9 least important values</h2>
+                    <Paper className="paper">
+                        <div className="valuesList">
+                            <ul className="elim1List">
+                                {this.props.values.map(value => {
+                                    return <li key={value.id} onClick={this.handleSelect} className={this.state.round1.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+                                })}
+                            </ul>
+                        </div>
+                        <div className="nextBtn1">
+                            <Button
+                                disabled={this.state.round1.length !== 9}
+                                color="primary"
+                                variant="contained"
+                                onClick={this.handleNext}>
+                                Next
+                            </Button>
+                        </div>
+                        <p className="valueCount">{this.state.round1.length} / 9 values selected</p>
+                    </Paper>
+                </div>
             </div>
         )
     }
