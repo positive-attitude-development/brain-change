@@ -92,12 +92,12 @@ class RankPercents extends Component {
         event.preventDefault(); 
 
         let next = new Date(); 
-            let sec = next.getSeconds();
-            let min = next.getMinutes(); 
-            let hour = next.getHours(); 
+        let sec = next.getSeconds();
+        let min = next.getMinutes(); 
+        let hour = next.getHours(); 
 
-            let nextTime = ((min * 60 ) + (hour * 360) + sec)
-            let percentTime = nextTime - this.state.time 
+        let nextTime = ((min * 60 ) + (hour * 360) + sec)
+        let percentTime = nextTime - this.state.time 
 
         this.props.dispatch({type: 'ADD_RESULTS', payload: {percentTime: percentTime, percents: {valuesPercent: this.state.valuesPercent, violatorPercent: this.state.violatorPercent}}});
         this.props.history.push('FinalResults'); 
@@ -109,8 +109,6 @@ class RankPercents extends Component {
                 [propertyName]: value,
                 valuesPercent: (100 - value)
         })
-
-        
     }
 
 
@@ -121,59 +119,59 @@ class RankPercents extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                
-                <div className = "grid">
+                </Grid>   
 
-                <div className = "core">
+                <div className ="background" >          
+                    <div className = "grid">
+                        <div className = "core">
                     
-                    <h3> Core Values </h3>
-                    <ul >
-                        {this.state.core.map(value => {
-                            return <li key={value.id}
-                                        value={value.id}>{value.values}</li>
-                        })}
-                    </ul>
-                </div>
+                            <h3> Core Values </h3>
+                            <ul >
+                                {this.state.core.map(value => {
+                                    return <li key={value.id}
+                                                value={value.id}>{value.values}</li>
+                                })}
+                            </ul>
+                        </div>
                     
-                <div className = "violators">
-                        <h3> Core Violators </h3>
-                        <ul>
-                        {this.state.violators.map(value => {
-                            return <li key={value.id}
-                                        value={value.id}>{value.values}</li>
-                        })}
-                    </ul>
-                </div>
+                        <div className = "violators">
+                                <h3> Core Violators </h3>
+                                <ul>
+                                {this.state.violators.map(value => {
+                                    return <li key={value.id}
+                                                value={value.id}>{value.values}</li>
+                                })}
+                            </ul>
+                        </div>
              
-            </div>
-                <div className= {classes.root}>
-                    <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
-                        <Slider onChange={this.handleChange('violatorPercent')} 
-                                value={violatorPercent}
-                                // valueLabelDisplay="auto" 
-                                // aria-label="Percents" 
-                                defaultValue={50} />
-              
-                </div>
-        {/* <Paper className = "grid2"> */}
-            <h2 className = "title" >How do you live each day ?</h2>
-            <div className = "grid2">
-               
-                <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
-                <h3 className="violatorPercents"> Violator Values {this.state.violatorPercent} % </h3>
-
-            </div>
-        {/* </Paper> */}
-                <div className="button">
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        onClick= {this.handleNext}
-                        >
-                        Next
-                    </Button> 
-                </div>
+                    </div>
+                    <div className= {classes.root}>
+                        <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
+                            <Slider onChange={this.handleChange('violatorPercent')} 
+                                    value={violatorPercent}
+                                    // valueLabelDisplay="auto" 
+                                    // aria-label="Percents" 
+                                    defaultValue={50} />
                 
+                    </div>
+                    <h2 className = "title" >How do you live each day ?</h2>
+                    <div className = "grid2">
+                    
+                        <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
+                        <h3 className="violatorPercents"> Violator Values {this.state.violatorPercent} % </h3>
+
+                    </div>
+
+                    <div className="button">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick= {this.handleNext}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                </div> 
             </div>
         )
     }
