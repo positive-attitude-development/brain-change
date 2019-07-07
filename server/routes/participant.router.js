@@ -62,7 +62,7 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 })
 
 router.get('/snapshot/:id', (req, res) => {
-	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators",
+	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators", "result"."dates",
 	(select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
 	(select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
 	(select array_agg("value".values ORDER BY "result_violators".order) AS "violator_values" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id)
