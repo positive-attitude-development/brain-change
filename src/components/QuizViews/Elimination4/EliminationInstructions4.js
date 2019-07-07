@@ -19,7 +19,7 @@ class EliminationInstructions4 extends Component {
 
                 <Paper justify="center"  className="paper">
                     <div className="instructions">
-                    <Typography variant="h5" component="h2">
+                    <Typography variant="h5">
                     On the next screen you will see the updated list of values. 
                     Remove 5 more values that are the least important to you.
                     </Typography> 

@@ -126,10 +126,9 @@ handleClick = (event) => {
                     </div>
                 </div>
                 </div>
-            </Paper>
+            
                 <div className = "button">
                     <Button
-                        className= "button"
                         onClick={this.handleClick}
                         color="primary"
                         variant="contained"
@@ -137,7 +136,8 @@ handleClick = (event) => {
                         Next
                     </Button> 
                 </div>
-            </div>
+            </Paper>
+        </div>
         )
     }
 }

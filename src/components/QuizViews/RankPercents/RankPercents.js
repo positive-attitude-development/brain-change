@@ -164,7 +164,7 @@ class RankPercents extends Component {
 
             </div>
         {/* </Paper> */}
-                <div>
+                <div className="button">
                     <Button
                         color="primary"
                         variant="contained"

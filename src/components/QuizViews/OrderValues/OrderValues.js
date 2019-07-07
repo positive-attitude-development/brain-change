@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
@@ -30,6 +30,7 @@ class OrderValues1 extends Component {
         let round5 = reducer.round5;
         let fiveArrays = round1.concat(round2, round3, round4, round5);
         let newArray = this.props.values.filter((value) => {
+            
             for (let newValue of fiveArrays) {
                 if (newValue === value.id) {
                     return false;
@@ -86,27 +87,26 @@ class OrderValues1 extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                
-                <h2 className="instOrder">Rank your 5 core values in order of importance</h2>
-                <Grid container justify="center">
-                    {/* <DragDrop values={this.state.items} /> */}
-                        <Paper className="paperDrag">
-                            <SortableContainer onSortEnd={this.onSortEnd}>
-                                {items.map((value, index) => (
-                                    <SortableItem key={`item-${index}`} index={index} value={value} />
-                                ))}
-                            </SortableContainer>
-                        </Paper>
-                </Grid>   
-                <Grid container justify="center">
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={this.handleNext}
-                        >
-                        Next
-                    </Button> 
-                </Grid>
+                </Grid>      
+
+                <Paper className="paper">
+                    <Typography variant="h5">Rank your 5 core values in order of importance</Typography>
+                        <SortableContainer onSortEnd={this.onSortEnd}>
+                            {items.map((value, index) => (
+                                <SortableItem key={`item-${index}`} index={index} value={value} />
+                            ))}
+                        </SortableContainer>
+                    
+                    <div className="button">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                </Paper>
             </div>
         )
     }

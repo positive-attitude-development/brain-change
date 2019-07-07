@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './BeliefInstructions2.css'
@@ -15,16 +15,18 @@ class BeliefInstructions2 extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                 
+                </Grid>           
+            <Paper contained className="paper">        
                 <div className = "instructions">
+                    <Typography variant="h5">
                     Choose the belief that causes the most internal or external conflict in your life 
                     and categorize it as personal, religious, or political
+                    </Typography>
                 </div>
 
 
                 <div className="giph"> </div>
 
-                <Grid container justify="center">
                   <div className="button">
                     <Button  
                         color="primary"
@@ -34,7 +36,7 @@ class BeliefInstructions2 extends Component {
                         Next
                     </Button> 
                   </div>
-                </Grid>
+               </Paper>
             </div>
         )
     }

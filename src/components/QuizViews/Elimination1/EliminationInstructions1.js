@@ -22,14 +22,12 @@ class EliminationInstructions1 extends Component {
 
                 <Paper justify="center"  className="paper">
                     <div className="instructions">
-                    <Typography variant="h5" 
-                            component="h2" 
-        
-                            >
-                        On the next screen there will be a list of values. 
-                        Remove the 9 values that are the least important to you.
-                    </Typography> 
+                        <Typography variant="h5">
+                            On the next screen there will be a list of values. 
+                            Remove the 9 values that are the least important to you.
+                        </Typography> 
                     </div>
+                    
                     <div className="giph">
 
                     </div>

@@ -90,7 +90,7 @@ class Elimination4 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Paper className="paper4">
+                <Paper className="paper">
                     <div className="valuesList">
                         <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
                         <ul className="elim4List">

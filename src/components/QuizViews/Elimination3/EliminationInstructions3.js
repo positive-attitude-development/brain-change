@@ -18,10 +18,7 @@ class EliminationInstructions3 extends Component {
                 </Grid>
                     <Paper justify="center" className ="paper">
                         <div className="instructions">
-                        <Typography variant="h5" 
-                            component="h2" 
-                            // className="instructions" 
-                            >
+                        <Typography variant="h5">
                             On the next screen you will see the updated list of values. 
                             This time, remove 5 values that are the least important to you.  
                         </Typography>
@@ -30,7 +27,6 @@ class EliminationInstructions3 extends Component {
 
                     </div>
 
-                    
                     <div className="button">
                         <Button  
                             color="primary"

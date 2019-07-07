@@ -35,11 +35,6 @@ const styles = {
 class IndividualParticipant extends Component{
 
 	state = {
-		// beliefs: [],
-		// coreValues: [],
-		// coreViolators: [],
-		// corePercent: '',
-		// violatorPercent: '',
 		isEditable: false,
 	}
 
@@ -53,9 +48,6 @@ class IndividualParticipant extends Component{
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id})
 		this.props.dispatch({type: 'FETCH_VALUES'})
 
-		// this.setState({
-		// 	snapshot: this.props.snapshotReducer
-		// })
 
 
 	};//end componentDidMount
