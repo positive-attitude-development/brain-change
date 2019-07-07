@@ -45,6 +45,18 @@ ul li {
     align-items: center;
 }
 
+.background {
+    padding: 10px;
+    background-image: url("/braintree.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center; 
+    background-blend-mode: lighten;
+    object-fit: cover;
+    text-align: center;
+    margin: 0px;
+}
+
 .button {
     float: right; 
     padding-top: 10px; 
