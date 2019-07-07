@@ -13,7 +13,7 @@ function* registerAdmin(action) {
     yield axios.post('api/admin/register', action.payload);
 
     // automatically log an admin in after registration
-    yield put({type: 'LOGIN', payload: action.payload});
+    yield put({type: 'LOGIN', payload: action.payload, history: action.history});
     
     // set to 'login' mode so they see the login screen
     // after registration or after they log out

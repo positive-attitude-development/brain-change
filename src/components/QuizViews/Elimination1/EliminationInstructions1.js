@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Button, Paper } from '@material-ui/core';
+import { Grid, Button, Paper, Typography} from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import './EliminationInstructions1.css';
 import Banner from '../Banner/Banner';
@@ -19,17 +19,22 @@ class EliminationInstructions1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Grid container justify="center" className="textInst">
-                    <h3>
-                        On the next screen there will be a list of values. Remove the 9 values that are the least important to you.
-                    </h3>
-                </Grid>
-                <Paper className="paperInst">
-                <div className="instructionView1">
-                    <div className="giph">
+
+                <Paper justify="center"  className="paper">
+                    <div className="instructions">
+                        <Typography variant="h5">
+                            On the next screen there will be a list of values. 
+                            Remove the 9 values that are the least important to you.
+                        </Typography> 
                     </div>
+                    
+                    <div className="giph">
+
+                    </div>
+
                         <div className="button">
                             <Button  
+                                justify="right"
                                 color="primary"
                                 variant="contained"
                                 onClick={() => this.props.history.push('/Elim1')}
@@ -37,8 +42,7 @@ class EliminationInstructions1 extends Component {
                                 Next
                             </Button> 
                         </div>
-                    </div>
-                </Paper>
+                    </Paper>
             </div>
         )
     }

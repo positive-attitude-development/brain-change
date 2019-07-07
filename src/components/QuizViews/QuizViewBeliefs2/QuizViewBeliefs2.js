@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { FormControl, FormControlLabel,
         RadioGroup, Button, Radio, Paper, InputLabel, 
-        MenuItem, Select, Grid } from"@material-ui/core";
+        MenuItem, Select, Grid, Typography } from"@material-ui/core";
 
 import StatusBar from '../StatusBar'; 
 
@@ -24,9 +24,7 @@ const styles = {
         minWidth: '300px !important'
         }
    }
-
   };
-
 
 export class QuizViewBeliefs2 extends Component {
 
@@ -51,14 +49,11 @@ componentDidMount() {
     })
 }
 
-
-
     handleRadio = (event) => {
         event.preventDefault(); 
         this.setState({
             testedBelief: event.target.value
             })
-            console.log(this.state)
         }
 
     handleChange = (event) => {
@@ -66,7 +61,6 @@ componentDidMount() {
         this.setState({
                 typeOfBelief: event.target.value
         })
-        console.log(this.state);
     }
 
  
@@ -95,27 +89,35 @@ componentDidMount() {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div>
-                    <h2 className = "heading" > Choose your most conflicting belief </h2>
-                    <Paper className = "select">
-                        <FormControl component="fieldset"
-                        className={classes.formControl}
-                        >
-                                <RadioGroup
-                                aria-label="Beliefs"
-                                name="Beliefs"
-                                onChange={this.handleRadio}
-                                >
 
+                    <Paper className = "paper">
+                        <Typography variant="h5"> Choose your most conflicting belief.</Typography>
+                        <div className = "background">
+                            <FormControl component="fieldset"
+                            className={classes.formControl} >
+                                    <RadioGroup
+                                    aria-label="Beliefs"
+                                    name="Beliefs"
+                                    onChange={this.handleRadio} >
 
-
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief1} control={<Radio />} label="" />{this.props.beliefs.belief1}
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief2} control={<Radio />} label="" />{this.props.beliefs.belief2}
-                                    <FormControlLabel className="radio" value={this.props.beliefs.belief3} control={<Radio />} label="" />{this.props.beliefs.belief3}
-
-                                </RadioGroup>
-                        </FormControl>
-                    </Paper>
+                                        <FormControlLabel 
+                                            className="radio" 
+                                            value={this.props.beliefs.belief1} 
+                                            control={<Radio />} 
+                                            label= {this.props.beliefs.belief1}  />
+                                        <FormControlLabel 
+                                            className="radio" 
+                                            value={this.props.beliefs.belief2} 
+                                            control={<Radio />} 
+                                            label= {this.props.beliefs.belief2} />
+                                        <FormControlLabel 
+                                            className="radio" 
+                                            value={this.props.beliefs.belief3} 
+                                            control={<Radio />} 
+                                            label= {this.props.beliefs.belief3} />
+                                    </RadioGroup>
+                            </FormControl>
+                        </div>
 
                 <div className = "input">
                     <form autoComplete="off">
@@ -135,10 +137,7 @@ componentDidMount() {
                         </FormControl>
                     </form> 
                 </div>
-            </div>
-
-                <Grid container justify="center">   
-                    <div>
+                    <div className="button">
                         <Button
                             className={classes.button}
                             onClick={this.handleClick}
@@ -148,7 +147,7 @@ componentDidMount() {
                             Next
                         </Button> 
                     </div>
-                </Grid>
+                </Paper>
             </div>
         )
     }
@@ -156,9 +155,6 @@ componentDidMount() {
 
 
 const mapState = reduxState => {
-    return {
-        reduxState,
-        beliefs : reduxState.newValuesReducer.beliefs
-        }   
+    return { beliefs : reduxState.newValuesReducer.beliefs }   
     }
     export default withStyles(styles)(connect(mapState)(QuizViewBeliefs2))

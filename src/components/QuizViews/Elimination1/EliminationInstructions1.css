@@ -1,17 +1,19 @@
-
-.grid {
-    display: grid; 
+.instructions {
+    padding: 50px 100px 50px 100px; 
+    text-align: center; 
 }
 
-.textInst {
-    text-align: center;  
-    margin: 0px; 
-    padding: 0px; 
+.paper {
+    margin: 30px 150px 0px 150px;
+    padding: 0px;
+  
 }
 
+.gigh {
+    
+}
 
 .button {
-    float: right;
-    padding-top: 10px;
-    padding-bottom: 0px;
+    float: right; 
+    padding-top: 10px; 
 }

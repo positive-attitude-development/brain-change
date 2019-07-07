@@ -1,27 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'; 
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core'
-
 import './SnapShot.css'
 
 class SnapShot extends Component {
-
+    
     render() {
-     
-        let violatorVal = this.props.values.violators.map( row => {
-            return row.values
-        })
 
-        let coreVal = this.props.values.core.map( row => {
-            return row.values
-        })
-       
+        let snap = this.props.snapshot[0];
+
         return (
-            <div className= "table">
-
-                <h2>SnapShot</h2>
-               
-                <Paper >
+            <div>
+                 <Paper >
                     <Table>
                         <TableHead>
                           <TableRow className="header">
@@ -31,32 +21,32 @@ class SnapShot extends Component {
                         </TableHead>
                         <TableBody>
                           <TableRow> 
-                              <TableCell >{coreVal[0]}</TableCell>
-                              <TableCell >{violatorVal[0]}</TableCell>
+                              <TableCell align="center" >{snap.core_values[0]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[0]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[1]}</TableCell>
-                              <TableCell >{violatorVal[1]}</TableCell>
+                             <TableCell align="center">{snap.core_values[1]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[1]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[2]}</TableCell>
-                              <TableCell >{violatorVal[2]}</TableCell>
+                              <TableCell align="center">{snap.core_values[2]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[2]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[3]}</TableCell>
-                              <TableCell >{violatorVal[3]}</TableCell>
+                              <TableCell align="center">{snap.core_values[3]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[3]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[4]}</TableCell>
-                              <TableCell >{violatorVal[4]}</TableCell>
+                              <TableCell align="center">{snap.core_values[4]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[4]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell >{coreVal[5]}</TableCell>
-                              <TableCell >{violatorVal[5]}</TableCell>
+                              <TableCell align="center">{snap.core_values[5]}</TableCell>
+                              <TableCell align="center">{snap.violator_values[5]}</TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.corePercents}</TableCell>
-                              <TableCell align="center" >{this.props.violatorPercents}</TableCell>
+                              <TableCell align="center" >{snap.percent_core}</TableCell>
+                              <TableCell align="center" >{snap.percent_violators}</TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
@@ -64,35 +54,26 @@ class SnapShot extends Component {
                     <Table>
                         <TableBody>
                           <TableRow> 
-                              <TableCell align="center" >{this.props.beliefs.belief1} </TableCell>
+                              <TableCell align="center" >{snap.beliefs[0]} </TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.beliefs.belief2}</TableCell>
+                              <TableCell align="center" >{snap.beliefs[1]}</TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{this.props.beliefs.belief3} </TableCell>
+                              <TableCell align="center" >{snap.beliefs[2]} </TableCell>
                           </TableRow>
 
                         </TableBody>
-
-
                     </Table>
                 </Paper>
             </div>
         )
+      }
     }
-}
-
 
 const mapStateToProps = (reduxState) => {
     return {
-        reduxState,
-        values : reduxState.newValuesReducer.percents,
-        core: reduxState.newValuesReducer.orderCore,
-        violators :reduxState.newValuesReducer.violators,
-        corePercents : reduxState.newValuesReducer.percents.valuesPercent,
-        violatorPercents : reduxState.newValuesReducer.percents.violatorPercent,
-        beliefs : reduxState.newValuesReducer.beliefs
+        snapshot: reduxState.snapshotReducer
     }
 }
 export default connect(mapStateToProps)(SnapShot);

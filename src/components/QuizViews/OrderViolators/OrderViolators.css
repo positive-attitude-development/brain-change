@@ -3,6 +3,6 @@
 }
 
 .button {
-
-    justify-content: center; 
+    float: right; 
+    padding-top: 10px; 
 }

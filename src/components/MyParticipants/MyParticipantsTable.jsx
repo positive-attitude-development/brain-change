@@ -14,7 +14,6 @@ const headRows = [
     {key: 'state', label: 'State'},
     {key: 'email', label: 'Email'},
     {key: 'phone', label: 'Phone'},
-    {key: 'viewedit', label: 'View/Edit'},
 ];
 
 //sorting function
@@ -69,6 +68,7 @@ function EnhancedTableHead(props) {
                         </TableSortLabel>
                     </TableCell>
                 ))}
+                <TableCell>View/Edit</TableCell>
             </TableRow>
         </TableHead>
     );

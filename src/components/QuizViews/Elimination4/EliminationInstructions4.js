@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import { Paper, Button, Grid, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './EliminationInstructions4.css'
@@ -16,18 +16,21 @@ class EliminationInstructions4 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div className="instructions">
+
+                <Paper justify="center"  className="paper">
+                    <div className="instructions">
+                    <Typography variant="h5">
                     On the next screen you will see the updated list of values. 
                     Remove 5 more values that are the least important to you.
-                </div>
+                    </Typography> 
+                    </div>
+                    <div className="giph">
 
-                <div className="giph">
-
-                </div>
+                    </div>
                 
-                <Grid container justify="center">
                   <div className="button">
                     <Button  
+                        justify="right"
                         color="primary"
                         variant="contained"
                         onClick={() => this.props.history.push('/Elim4')}
@@ -35,7 +38,7 @@ class EliminationInstructions4 extends Component {
                         Next
                     </Button> 
                   </div>
-                </Grid>
+                </Paper>
             </div>
         )
     }

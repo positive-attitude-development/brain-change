@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import Banner from '../Banner/Banner';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
@@ -86,29 +86,28 @@ class OrderViolators extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                
-                <h2 className="violOrder">Rank your 5 violator values in order</h2>
-                <Grid container justify="center">
-                    {/* <DragDrop values={this.state.items} /> */}
-                        <Paper className="paperDrag">
-                            <SortableContainer onSortEnd={this.onSortEnd}>
-                                {this.state.items.map((value, index) => (
-                                    <SortableItem key={`item-${index}`} index={index} value={value} />
-                                ))}
-                            </SortableContainer>
-                        </Paper>
-                </Grid>    
-                <Grid container justify="center">
-                  <div className="button">
-                    <Button  
-                        color="primary"
-                        variant="contained"
-                        onClick={this.handleNext}
-                        >
-                        Next
-                    </Button> 
-                  </div>
-                </Grid>
+                </Grid>      
+                <Paper className = "paper">    
+                    <div className="violOrder">
+                        <Typography variant="h5">   
+                            Rank your 5 violator values in order
+                        </Typography>
+                        <SortableContainer onSortEnd={this.onSortEnd}>
+                            {this.state.items.map((value, index) => (
+                                <SortableItem key={`item-${index}`} index={index} value={value} />
+                            ))}
+                        </SortableContainer>
+                    </div>    
+                    <div className="button">
+                        <Button  
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                </Paper>   
             </div>
         )
     }

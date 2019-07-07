@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import { connect } from 'react-redux';
 import Banner from '../Banner/Banner';
@@ -21,27 +21,28 @@ class ViolatorsInstructions extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div className="instructions">
-                On the next screen you will see your 5 core values along with a list of the values you identified as less important to you. 
-                Select the 5 values that are most likely to cause you to violate any of your core values.
-                </div>
+                <Paper className="paper">
+                    <div className="instructions">
+                        <Typography variant="h5">
+                            On the next screen you will see your 5 core values along with a list of the values you identified as less important to you. 
+                            Select the 5 values that are most likely to cause you to violate any of your core values.
+                        </Typography>
+                    </div>
 
-                <div className="giph" >
+                    <div className="giph" >
 
-                </div>
+                    </div>
 
-
-                <Grid container justify="center">
-                  <div className="button">
-                    <Button  
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.props.history.push('/PickViolators')}
-                        >
-                        Next
-                    </Button> 
-                  </div>
-                </Grid>
+                    <div className="button">
+                        <Button  
+                            color="primary"
+                            variant="contained"
+                            onClick={() => this.props.history.push('/PickViolators')}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                </Paper>
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid } from '@material-ui/core';
+import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
 import './BeliefInstructions1.css'
@@ -15,25 +15,28 @@ class BeliefInstructions1 extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>                 
-                <div className ="instructions">
-                    <div>
-                On the next screen please write 3 of your beliefs that you would not want to give up. 
-                Beliefs can be personal, political, or religious. Here is a short tutorial. 
-                    </div> 
-                    <div className="examples">
-                (Examples for tutorial: 
-                I believe people can change for the better. 
-                I believe taxes should be lowered. I believe in a higher power.)
-                    </div>
-              
-                 
+                </Grid>   
+            <Paper contained className="paper">             
                 
-                <div className="giph">
-
+                <div className ="instructions">
+                    <Typography variant="h5">
+                        On the next screen please write 3 of your beliefs that you would not want to give up. 
+                        <div>Beliefs can be personal, political, or religious.</div>
+                        <div className = "space"> </div>
+                    </Typography>
                 </div>
+{/*             
+                <div> Here is a short tutorial </div>
+                    </Typography> */}
 
-                <Grid container justify="center">
+                  {/* <Typography variant="h5">
+                Examples Being: 
+                <div>I believe people can change for the better. </div>
+                <div>I believe taxes should be lowered. </div>
+                <div>I believe in a higher power.</div>
+                    </Typography> */}
+                {/* </div> */}
+              
                   <div className="button">
                     <Button  
                         color="primary"
@@ -43,8 +46,7 @@ class BeliefInstructions1 extends Component {
                         Next
                     </Button> 
                   </div>
-                </Grid>
-            </div>
+            </Paper> 
         </div>
         )
     }

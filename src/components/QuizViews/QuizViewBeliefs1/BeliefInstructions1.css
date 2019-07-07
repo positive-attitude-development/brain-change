@@ -3,7 +3,21 @@
     align-content: center;
 }
 
-.examples {
+.space {
+    padding: 50px; 
+}
+
+.paper {
+    margin: 30px 150px 0px 150px;
+    padding: 0px;
+}
+
+.button {
+    float: right; 
+    padding-top: 10px; 
+}
+
+.instructions {
+    padding: 50px 100px 50px 100px; 
     text-align: center; 
-    padding: 80px; 
 }
