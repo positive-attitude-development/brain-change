@@ -5,7 +5,6 @@ import StatusBar from '../StatusBar';
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import './OrderValues.css';
-import Banner from '../Banner/Banner';
 
 const SortableItem = sortableElement(({value}) => <li className="listVals">{value.values}</li>);
 

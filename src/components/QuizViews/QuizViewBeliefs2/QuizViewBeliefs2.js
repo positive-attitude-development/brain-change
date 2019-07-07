@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Banner from '../Banner/Banner';
 import { withStyles } from '@material-ui/core/styles';
 
 import { FormControl, FormControlLabel,

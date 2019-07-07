@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { TextField, Button, Paper, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner';
 import './QuizViewBeliefs1.css'
 
 

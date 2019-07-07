@@ -3,6 +3,7 @@
     columns: 4;
     text-align: center;
     column-gap: 0px;
+    padding: 10px;
 }
 
 
@@ -16,7 +17,8 @@
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: -1px;
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 5px 0px;
+    padding: 15px;
 } 
 
 .unStriked {
@@ -26,34 +28,31 @@
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: -1px;
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 5px 0px;
+    padding: 15px;
 }
 
 .valuesList {
-    padding: 10px;
+    padding: 0px 0px 5px 0px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; 
     background-blend-mode: lighten;
     object-fit: cover;
-    margin: 0px;
-}
-
-.paper {
-    margin: 30px 150px 0px 150px;
-    padding: 0px;
+    margin: auto;
+    height: 580px;
 }
 
 .inst {
     text-align: center;
-    margin-bottom: 30px;
+    margin: 0px;
     font-size: 26px;
 }
 
 .statusBar {
     text-align: center;
-    padding: 10px 0px 0px 0px;
+    padding: 10px;
 }
 
 .nextBtn1 {
@@ -67,3 +66,9 @@
     padding-right: 10px;
     float: right;
 }
+
+.paperContainer {
+    width: 1100px;
+    margin: auto;
+}
+

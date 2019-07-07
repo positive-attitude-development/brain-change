@@ -62,7 +62,6 @@ class SnapShot extends Component {
                           <TableRow>
                               <TableCell align="center" >{snap.beliefs[2]} </TableCell>
                           </TableRow>
-
                         </TableBody>
                     </Table>
                 </Paper>

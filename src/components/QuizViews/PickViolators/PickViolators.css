@@ -1,15 +1,16 @@
 
 .violist {
-    list-style-type: none;
+    /* list-style-type: none;
     columns: 4;
     text-align: center;
     cursor: pointer;
     margin: 18px ;
-    padding: 25px; 
-}
-
-li {
-    padding: 15px; 
+    padding: 25px;  */
+    list-style-type: none;
+    columns: 4;
+    text-align: center;
+    column-gap: 0px;
+    padding: 10px;
 }
 
 .header {
@@ -18,18 +19,32 @@ li {
 }
 
 .highlight {
-    background-color: yellow; 
-    font-weight: bold; 
+    font-weight: bold;
+    color: rgb(162, 161, 161);
+    transition: color 1s ease-out;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -1px;
+    margin: 0px 0px 5px 0px;
+    padding: 15px;
 }
 
 .unhighlight {
-    text-decoration: none
+    font-weight: bold;
+    transition: color 1s ease-out;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -1px;
+    margin: 0px 0px 5px 0px;
+    padding: 15px;
 }
 
-.paper {
+/* .paper {
     text-align: center; 
     margin: 30px 250px 0px 250px;
-}
+} */
 
 .button {
     float: right; 

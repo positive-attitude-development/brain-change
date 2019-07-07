@@ -4,8 +4,9 @@
     columns: 3;
     text-align: center;
     column-gap: 0px;
+    padding: 150px;
 }
 
-.paper {
+/* .paper {
     margin: 30px 250px 0px 250px;
-}
+} */

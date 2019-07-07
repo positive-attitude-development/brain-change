@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {  Button, Paper, Grid, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner';
 import './PickViolators.css'
 
 class PickViolators extends Component {
@@ -82,38 +81,34 @@ class PickViolators extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>  
-
-                <Paper className ="paper">
-                  <div className="background" >
-                    <div className="violators">
-                        <Typography variant="h5">
-                            Select five violator values
-                        </Typography>
-                            <ul className= "violist">
-                                {newArray.map(value => {
-                                return <li key={value.id} 
-                                            onClick={this.handleSelect} 
-                                            className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
-                                            value={value.id}>{value.values}</li>
-                                })}
-                            </ul>
-                    </div>
-            
-                    <div className="button">
-                        <Button
-                            disabled={this.state.violators.length !== 5}
-                            className="button"
-                            onClick={this.handleNext}
-                            color="primary"
-                            variant="contained"
-                            >
-                            Next
-                        </Button> 
-                    </div>
-                  </div>
-                </Paper>
-                <p className="valueCount">{this.state.violators.length} / 5 values selected</p>
+                </Grid> 
+                <div className="paperContainer">
+                    <h2 className="inst">Select five violator values</h2>
+                    <Paper className ="paper">
+                        <div className="valuesList">
+                                <ul className= "violist">
+                                    {newArray.map(value => {
+                                    return <li key={value.id} 
+                                                onClick={this.handleSelect} 
+                                                className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
+                                                value={value.id}>{value.values}</li>
+                                    })}
+                                </ul>
+                        </div>
+                        <div className="button">
+                            <Button
+                                disabled={this.state.violators.length !== 5}
+                                className="button"
+                                onClick={this.handleNext}
+                                color="primary"
+                                variant="contained"
+                                >
+                                Next
+                            </Button> 
+                        </div>
+                        <p className="valueCount">{this.state.violators.length} / 5 values selected</p>
+                    </Paper>
+                </div> 
             </div>
         )
     }

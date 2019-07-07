@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner';
-
 import './Elimination3.css'
 
 class Elimination3 extends Component {
@@ -87,27 +85,29 @@ class Elimination3 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Paper className="paper3">
-                    <div className="valuesList">
-                        <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
-                        <ul className="elim3List">
-                            {newArray.map(value => {
-                                return <li key={value.id} onClick={this.handleSelect} className={this.state.round3.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
-                            })}
-                        </ul>
-                    </div>
-                    <div className="nextBtn1">
-                        <Button
-                            disabled={this.state.round3.length !== 5}
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}
-                            >
-                            Next
-                        </Button> 
-                    </div>
-                    <p className="valueCount">{this.state.round3.length} / 5 values selected</p>
-                </Paper>
+                <div className="paperContainer">
+                    <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
+                    <Paper className="paper3">
+                        <div className="valuesList">
+                            <ul className="elim3List">
+                                {newArray.map(value => {
+                                    return <li key={value.id} onClick={this.handleSelect} className={this.state.round3.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+                                })}
+                            </ul>
+                        </div>
+                        <div className="nextBtn1">
+                            <Button
+                                disabled={this.state.round3.length !== 5}
+                                color="primary"
+                                variant="contained"
+                                onClick={this.handleNext}
+                                >
+                                Next
+                            </Button> 
+                        </div>
+                        <p className="valueCount">{this.state.round3.length} / 5 values selected</p>
+                    </Paper>
+                </div>
             </div>
         )
     }

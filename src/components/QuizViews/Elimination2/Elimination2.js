@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import Banner from '../Banner/Banner';
 import './Elimination2.css';
 
 class Elimination2 extends Component {
@@ -87,27 +86,29 @@ class Elimination2 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <Paper className="paper2">
-                    <div className="valuesList">
-                        <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
-                        <ul className="elim2List">
-                            {newArray.map(value => {
-                                    return <li key={value.id} onClick={this.handleSelect} className={this.state.round2.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
+                <div className="paperContainer">
+                    <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
+                    <Paper className="paper2">
+                        <div className="valuesList">
+                            <ul className="elim2List">
+                                {newArray.map(value => {
+                                        return <li key={value.id} onClick={this.handleSelect} className={this.state.round2.includes(value.id) ? "striked" : "unStriked"} value={value.id}>{value.values}</li>
 
-                            })}
-                        </ul>
-                    </div>
-                    <div className="nextBtn1">
-                        <Button
-                            disabled={this.state.round2.length !== 9}
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}>
-                            Next
-                        </Button>
-                    </div>
-                    <p className="valueCount">{this.state.round2.length} / 9 values selected</p>
-                </Paper>
+                                })}
+                            </ul>
+                        </div>
+                        <div className="nextBtn1">
+                            <Button
+                                disabled={this.state.round2.length !== 9}
+                                color="primary"
+                                variant="contained"
+                                onClick={this.handleNext}>
+                                Next
+                            </Button>
+                        </div>
+                        <p className="valueCount">{this.state.round2.length} / 9 values selected</p>
+                    </Paper>
+                </div>
             </div>
             
         )
