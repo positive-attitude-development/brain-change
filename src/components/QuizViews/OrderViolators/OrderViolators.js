@@ -87,6 +87,7 @@ class OrderViolators extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>      
                 <Paper className = "paper">    
+                  <div className="background">
                     <div className="violOrder">
                         <Typography variant="h5">   
                             Rank your 5 violator values in order
@@ -106,6 +107,7 @@ class OrderViolators extends Component {
                             Next
                         </Button> 
                     </div>
+                  </div>    
                 </Paper>   
             </div>
         )
