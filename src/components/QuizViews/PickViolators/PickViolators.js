@@ -85,6 +85,7 @@ class PickViolators extends Component {
                 </Grid>  
 
                 <Paper className ="paper">
+                  <div className="background" >
                     <div className="violators">
                         <Typography variant="h5">
                             Select five violator values
@@ -110,6 +111,7 @@ class PickViolators extends Component {
                             Next
                         </Button> 
                     </div>
+                  </div>
                 </Paper>
                 <p className="valueCount">{this.state.violators.length} / 5 values selected</p>
             </div>

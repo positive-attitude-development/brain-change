@@ -90,6 +90,7 @@ class OrderValues1 extends Component {
                 </Grid>      
 
                 <Paper className="paper">
+                    <div className="background">
                     <Typography variant="h5">Rank your 5 core values in order of importance</Typography>
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {items.map((value, index) => (
@@ -97,14 +98,15 @@ class OrderValues1 extends Component {
                             ))}
                         </SortableContainer>
                     
-                    <div className="button">
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.handleNext}
-                            >
-                            Next
-                        </Button> 
+                        <div className="button">
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={this.handleNext}
+                                >
+                                Next
+                            </Button> 
+                        </div>
                     </div>
                 </Paper>
             </div>
