@@ -44,14 +44,17 @@ class IndividualParticipant extends Component{
 	}
 
 	componentDidMount(){
+
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id});
 		this.props.dispatch({type: 'FETCH_CATEGORY'});
 		this.props.dispatch({type: 'FETCH_SYSTEM'});
 		this.props.dispatch({type: 'FETCH_POPULATION'});
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id});
+    this.props.dispatch({type: 'FETCH_VALUES'})
 	}; //end componentDidMount
 
 	generateLink = urlid => {
+    
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
 		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink, urlId: urlid}})

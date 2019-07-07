@@ -71,6 +71,7 @@ class QuizViewWelcomeForm extends Component {
                 <TextField
                     type="number"
                     className={classes.menu}
+                    // style={{width:150}}
                     label="Age"
                     value={this.state.age}
                     onChange={this.handleInputChange('age')} >
@@ -103,12 +104,14 @@ class QuizViewWelcomeForm extends Component {
                 <TextField
                     label="Email Address"
                     className={classes.menu}
+                    style={{width:200}}
                     value={this.state.email_address}
                     onChange={this.handleInputChange('email_address')} >
                 </TextField>
                 <TextField
                     label="Phone Number"
                     className={classes.menu}
+                    style={{width:200}}
                     value={this.state.phone_number}
                     onChange={this.handleInputChange('phone_number')} >
                 </TextField>
@@ -116,6 +119,7 @@ class QuizViewWelcomeForm extends Component {
                     select
                     required
                     className={classes.menuXL}
+                    style={{width:320}}
                     label="Which best describes you?"
                     value={this.state.category_id}
                     onChange={this.handleInputChange('category_id')} >

@@ -16,3 +16,8 @@
     text-align: center;
     font-size: 30px;
 }
+
+.button {
+    float: right; 
+    padding-top: 10px; 
+}

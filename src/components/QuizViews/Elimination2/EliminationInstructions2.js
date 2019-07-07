@@ -19,10 +19,7 @@ class EliminationInstructions2 extends Component {
                
                 <Paper containter className ="paper">
                     <div className="instructions">
-                    <Typography variant="h5" 
-                            component="h2" 
-                            // className="instructions" 
-                            >
+                    <Typography variant="h5">
                 On the next screen you will see the updated list of values. 
                 Remove another 9 values that are the least important to you. 
                     </Typography>
@@ -32,7 +29,6 @@ class EliminationInstructions2 extends Component {
 
                 </div>
 
-                
                   <div className="button">
                     <Button  
                         justify="right"

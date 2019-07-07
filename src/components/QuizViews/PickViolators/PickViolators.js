@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Paper, Grid } from '@material-ui/core';
+import {  Button, Paper, Grid, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import Banner from '../Banner/Banner';
@@ -82,30 +82,35 @@ class PickViolators extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>        
-                <Paper>
+                </Grid>  
+
+                <Paper className ="paper">
                     <div className="violators">
-                        <h2 className="header">Select five violator values</h2>
-                        <ul className= "violist">
-                            {newArray.map(value => {
-                            return <li key={value.id} 
-                                        onClick={this.handleSelect} 
-                                        className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
-                                        value={value.id}>{value.values}</li>
-                            })}
-                        </ul>
+                        <Typography variant="h5">
+                            Select five violator values
+                        </Typography>
+                            <ul className= "violist">
+                                {newArray.map(value => {
+                                return <li key={value.id} 
+                                            onClick={this.handleSelect} 
+                                            className={this.state.violators.includes(value.id) ? "highlight" : "unhighlight"} 
+                                            value={value.id}>{value.values}</li>
+                                })}
+                            </ul>
+                    </div>
+            
+                    <div className="button">
+                        <Button
+                            disabled={this.state.violators.length !== 5}
+                            className="button"
+                            onClick={this.handleNext}
+                            color="primary"
+                            variant="contained"
+                            >
+                            Next
+                        </Button> 
                     </div>
                 </Paper>
-                <Grid container justify="center">
-                    <Button
-                        disabled={this.state.violators.length !== 5}
-                        onClick={this.handleNext}
-                        color="primary"
-                        variant="contained"
-                        >
-                        Next
-                    </Button> 
-                </Grid>
                 <p className="valueCount">{this.state.violators.length} / 5 values selected</p>
             </div>
         )

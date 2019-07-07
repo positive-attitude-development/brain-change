@@ -19,26 +19,26 @@ class EliminationInstructions5 extends Component {
 
                 <Paper justify="center"  className="paper">
                     <div className="instructions">
-                    <Typography variant="h5" component="h2">
-                    On the next screen you will see a list of the 10 remaining values. 
-                    Remove 5 values that are less important to you.
-                </Typography>
-                </div>
+                        <Typography variant="h5">
+                            On the next screen you will see a list of the 10 remaining values. 
+                            Remove 5 values that are less important to you.
+                         </Typography>
+                    </div>
 
-                <div className="giph">
+                    <div className="giph">
 
-                </div>
+                    </div>
 
-                  <div className="button">
-                    <Button  
-                        justify="right"
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.props.history.push('/Elim5')}
-                        >
-                        Next
-                    </Button> 
-                  </div>
+                    <div className="button">
+                        <Button  
+                            justify="right"
+                            color="primary"
+                            variant="contained"
+                            onClick={() => this.props.history.push('/Elim5')}
+                            >
+                            Next
+                        </Button> 
+                    </div>
                 </Paper>
             </div>
         )
