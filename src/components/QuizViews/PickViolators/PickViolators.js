@@ -84,6 +84,17 @@ class PickViolators extends Component {
                 </Grid> 
                 <div className="paperContainer">
                     <h2 className="inst">Select five violator values</h2>
+                    <p className="corePar">Your five core values:   
+                        {coreValues.map((core, i) => {
+                            for (let value of this.props.values) {
+                                if (core === value.id && i === 0) {
+                                    return <span> {value.values}</span>
+                                } else if (core === value.id) {
+                                    return <span>, {value.values}</span>
+                                }
+                            }
+                        })}
+                    </p>
                     <Paper className ="paper">
                         <div className="valuesList">
                                 <ul className= "violist">
