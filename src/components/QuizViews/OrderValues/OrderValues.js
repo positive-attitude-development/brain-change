@@ -93,7 +93,7 @@ class OrderValues1 extends Component {
                     <Typography variant="h5">Rank your 5 core values in order of importance</Typography>
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {items.map((value, index) => (
-                                <SortableItem key={`item-${index}`} index={index} value={value} />
+                                <SortableItem key={`item-${index}`} index={index} value={value} className="sortableItem"/>
                             ))}
                         </SortableContainer>
                     
