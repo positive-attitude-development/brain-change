@@ -127,7 +127,7 @@ class RankPercents extends Component {
                    
                         <div className = "core">
                     
-                            <h3> Core Values </h3>
+                            <h3>Core Values</h3>
                             <ul >
                                 {this.state.core.map(value => {
                                     return <li key={value.id}
@@ -137,7 +137,7 @@ class RankPercents extends Component {
                         </div>
                     
                         <div className = "violators">
-                                <h3> Core Violators </h3>
+                                <h3>Core Violators</h3>
                                 <ul>
                                 {this.state.violators.map(value => {
                                     return <li key={value.id}
@@ -148,14 +148,18 @@ class RankPercents extends Component {
                     </div>
 
                       <div className = "grid2">
-                        <Typography className= {classes} gutterBottom align="center"> Percent</Typography>
+                        <Typography className= {classes} gutterBottom align="center"> </Typography>
+                            <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
-                                    className={classes.track}
-                                    slider
+                                    rail= {{
+                                        height: 8,
+                                        borderRadius: 20,
+                                    }}
+                                    className={classes.styles}
                                     value={violatorPercent}
-                                    aria-label="Percents" 
+                                    aria-label="Pretto slider" 
                                     defaultValue={50} />
-                
+                            </div>
                         </div>
                     
                     <h2 className = "title" >How do you live each day ?</h2>
