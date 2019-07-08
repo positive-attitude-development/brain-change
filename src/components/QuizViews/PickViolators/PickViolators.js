@@ -83,7 +83,7 @@ class PickViolators extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid> 
                 <div className="paperContainer">
-                    <h2 className="inst">Select five violator values</h2>
+                    <h2 className="inst">Select 5 values that cause you to violate your 5 core values</h2>
                     <p className="corePar">Your five core values:   
                         {coreValues.map((core, i) => {
                             for (let value of this.props.values) {

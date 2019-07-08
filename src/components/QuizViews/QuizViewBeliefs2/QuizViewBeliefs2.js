@@ -88,7 +88,7 @@ componentDidMount() {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <h2 className="inst">Choose your most conflicting belief.</h2>
+                <h2 className="inst">Choose the belief that causes the most internal or external conflict and categorize it.</h2>
                     <Paper className = "paper">
                         <div className = "backgroundBelief2">
                             <FormControl component="fieldset"

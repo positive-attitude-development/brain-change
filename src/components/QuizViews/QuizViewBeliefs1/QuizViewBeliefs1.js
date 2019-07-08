@@ -78,12 +78,12 @@ handleClick = (event) => {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                    <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>
+                    <h2 className="title">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper className = "paper">
                      <div className = "background" >
                    <div className="examples" >
-                       <h4 align="center"> Here are some examples: </h4>
+                       <h4 align="center" onClick={this.demoBelief}> Here are some examples: </h4>
                     <ul> 
                         <li>I believe people can change for the better</li>
                         <li>I believe taxes should be lowered</li>

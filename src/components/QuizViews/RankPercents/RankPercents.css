@@ -4,11 +4,20 @@
     grid-template-columns: auto auto auto; 
     padding: 10px; 
     text-align: center; 
+    padding-left:80px
+}
+
+.slider {
+    width: 80%;
+    margin: 20px; 
+    padding-left: 120px; 
+    /* padding-right:15px; */
 }
 
 .grid2{
     display: grid; 
     align-content: center; 
+    padding-left: 60px;
 }
 
 .grid3 {
@@ -17,20 +26,20 @@
     padding: 20px; 
 }
 
-/* .core {
+.core {
     grid-column-start: 2;
-    grid-column-end: 5;
-    align-items: center;
-    justify-self: start; 
-    padding: 200px; 
-} */
-
-.corePercents .core{
-    grid-column-start: 2;
-    grid-column-end: 5;
+    grid-column-end: 4;
     align-items: center;
     justify-self: start; 
     /* padding: 200px;  */
+}
+
+.corePercents {
+    grid-column-start: 2;
+    /* grid-column-end: 4; */
+    align-items: center;
+    justify-self: start; 
+    /* padding-right: 10px;  */
 }
 
 .violators {
@@ -47,11 +56,6 @@
 ul li {
     list-style-type: none;
 }
-
-/* .corePercents {
-    grid-column-start: 5;
-    align-items: center; 
-} */
 
 .violatorPercents {
     grid-column-start: 5;
