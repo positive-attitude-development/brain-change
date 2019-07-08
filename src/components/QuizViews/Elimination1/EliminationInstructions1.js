@@ -28,20 +28,19 @@ class EliminationInstructions1 extends Component {
                     </div>
                     
                     <div className="giph">
-                        <iframe src="https://giphy.com/embed/TFTrqBDuMNBpZFvhxu" width="600" height="400" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                        <iframe src="https://giphy.com/embed/RhGhQ1b4c2YvS74mam" frameBorder="0" class="giphy-embed"></iframe>             
                     </div>
-
-                        <div className="button">
-                            <Button  
-                                justify="right"
-                                color="primary"
-                                variant="contained"
-                                onClick={() => this.props.history.push('/Elim1')}
-                                >
-                                Next
-                            </Button> 
-                        </div>
-                    </Paper>
+                    <div className="button">
+                        <Button  
+                            justify="right"
+                            color="primary"
+                            variant="contained"
+                            onClick={() => this.props.history.push('/Elim1')}
+                            >
+                            Next
+                        </Button> 
+                    </div>
+                </Paper>
             </div>
         )
     }

@@ -9,6 +9,7 @@
     text-align: center;
     column-gap: 0px;
     padding: 10px;
+    padding-top: 35px;
 }
 
 .header {
@@ -39,17 +40,13 @@
     padding: 15px;
 }
 
-/* .paper {
-    text-align: center; 
-    margin: 30px 250px 0px 250px;
-} */
 
 .button {
     float: right; 
     padding-top: 10px; 
 }
 
-.background {
+/* .background {
     padding: 10px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
@@ -59,4 +56,4 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
-}
+} */

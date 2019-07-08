@@ -90,7 +90,7 @@ componentDidMount() {
                 </Grid>
                 <h2 className="inst">Choose your most conflicting belief.</h2>
                     <Paper className = "paper">
-                        <div className = "background">
+                        <div className = "backgroundBelief2">
                             <FormControl component="fieldset"
                             className={classes.formControl} >
                                     <RadioGroup
