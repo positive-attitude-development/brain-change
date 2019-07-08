@@ -9,11 +9,18 @@
   
 }
 
-.gigh {
-    
-}
-
 .button {
     float: right; 
     padding-top: 10px; 
+}
+
+.giph {
+    pointer-events: none;
+}
+
+iframe {
+    width: 900px;
+    height: 600px;
+    overflow: auto;
+    object-fit: cover;
 }

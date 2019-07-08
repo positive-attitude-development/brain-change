@@ -17,7 +17,7 @@
     padding: 15px; 
 }
 
-.background {
+.backgroundBelief2 {
     padding: 10px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
@@ -27,4 +27,5 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
+    height: 300px;
 }

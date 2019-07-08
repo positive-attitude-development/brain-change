@@ -26,7 +26,7 @@ class OrderValuesInstructions extends Component {
                     </div>
                 
                 <div className="giph">
-
+                        <iframe src="https://giphy.com/embed/QAhRaZjXZeAHj65DiN" frameBorder="0" class="giphy-embed" ></iframe>
                 </div>
 
                
