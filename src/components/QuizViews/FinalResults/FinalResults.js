@@ -18,7 +18,7 @@ class FinalResults extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
-                <h3>Final Result</h3>
+                <h3 align="center">Final Result</h3>
 
                 {this.props.snapshot[0] && <SnapShot /> }
 

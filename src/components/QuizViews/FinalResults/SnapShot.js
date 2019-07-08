@@ -15,8 +15,8 @@ class SnapShot extends Component {
                     <Table>
                         <TableHead>
                           <TableRow  className="header">
-                            <TableCell align="center" > Core Values </TableCell>
-                            <TableCell align="center" > Violator Values </TableCell>
+                            <TableCell style={{fontSize: '30px', fontWeight: 'bold'}} align="center" > Core Values </TableCell>
+                            <TableCell style={{fontSize: '30px', fontWeight: 'bold'}} align="center" > Violator Values </TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -46,13 +46,13 @@ class SnapShot extends Component {
                       </Paper>
                     
                         <div className="space"> </div>
-
+                        <div className ="tables">
                         <Paper>
                         <Table>
                           <TableHead>
                           <TableRow className="header">
-                            <TableCell align="center">Core Percent</TableCell>
-                            <TableCell align="center">Violator Percent</TableCell>
+                            <TableCell style={{fontSize: '30px', fontWeight: 'bold'}} align="center">Core Percent</TableCell>
+                            <TableCell style={{fontSize: '30px', fontWeight: 'bold'}} align="center">Violator Percent</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -63,14 +63,14 @@ class SnapShot extends Component {
                         </TableBody>
                     </Table>
                     </Paper>
-                    
+                    </div>
                     <div className="space"> </div>
                     
                     <Paper>
                       <Table>
                         <TableHead>
                           <TableRow className="header">
-                            <TableCell align="center">Beliefs</TableCell>
+                            <TableCell style={{fontSize: '30px', fontWeight: 'bold'}} align="center">Beliefs</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
