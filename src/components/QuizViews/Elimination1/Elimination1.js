@@ -68,7 +68,7 @@ class Elimination1 extends Component {
 
     handleClick = () => {
         this.setState({
-            round1: [25, 3, 5, 24, 12, 11, 2, 1, 7]
+            round1: [3, 36, 8, 30, 16, 37, 26, 22, 13]
         })
     }
 
@@ -81,7 +81,7 @@ class Elimination1 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove 9 least important values</h2>
+                    <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
                     <Paper className="paper">
                         <div className="valuesList">
                             <ul className="elim1List">

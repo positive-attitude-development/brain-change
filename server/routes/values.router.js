@@ -6,7 +6,8 @@ const router = express.Router();
 
 // GET list of all the values
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM value ORDER BY RANDOM();`;
+	// let queryText = `SELECT * FROM value ORDER BY RANDOM();`;
+	let queryText = `SELECT * FROM value;`;
     pool.query(queryText)
     .then((results) => {
         res.send(results.rows)
