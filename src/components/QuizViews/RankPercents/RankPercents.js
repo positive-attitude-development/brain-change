@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import {withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/lab/Slider';
 import { Button, Typography, Paper, Grid } from '@material-ui/core'
 import './RankPercents.css'
+import RankSlider from './RankSlider'
 
-const styles = {
-        root: {
-            color: '#52af77',
-            height: 8,
+
+const styles = ({
+       slider: {
+           selectionColor: '#F76B1C',
+           handleFillColor: '#F76B1C'
         },
         thumb: {
             height: "24px",
@@ -34,7 +36,7 @@ const styles = {
             height: 8,
             borderRadius: 20,
         }
-    }
+    })
 
 class RankPercents extends Component {
 
@@ -119,9 +121,10 @@ class RankPercents extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
-
-                <div className ="background" >          
+            <div>
+                <Paper >  
                     <div className = "grid">
+                   
                         <div className = "core">
                     
                             <h3> Core Values </h3>
@@ -142,19 +145,21 @@ class RankPercents extends Component {
                                 })}
                             </ul>
                         </div>
-             
                     </div>
-                    <div className= {classes.root}>
-                        <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
+
+                      <div className = "grid2">
+                        <Typography className= {classes} gutterBottom align="center"> Percent</Typography>
                             <Slider onChange={this.handleChange('violatorPercent')} 
+                                    className={classes.track}
+                                    slider
                                     value={violatorPercent}
-                                    // valueLabelDisplay="auto" 
-                                    // aria-label="Percents" 
+                                    aria-label="Percents" 
                                     defaultValue={50} />
                 
-                    </div>
+                        </div>
+                    
                     <h2 className = "title" >How do you live each day ?</h2>
-                    <div className = "grid2">
+                    <div className = "grid3">
                     
                         <h3 className="corePercents"> Core Values {this.state.valuesPercent} % </h3>
                         <h3 className="violatorPercents"> Violator Values {this.state.violatorPercent} % </h3>
@@ -169,9 +174,11 @@ class RankPercents extends Component {
                             >
                             Next
                         </Button> 
-                    </div>
-                </div> 
+                      
+                      </div>
+                  </Paper>
             </div>
+        </div> 
         )
     }
 }
