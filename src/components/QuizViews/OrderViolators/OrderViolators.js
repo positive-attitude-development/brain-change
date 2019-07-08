@@ -85,13 +85,10 @@ class OrderViolators extends Component {
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
-                </Grid>      
+                </Grid> 
+                <h2 className="inst">Rank your 5 violator values in order</h2>     
                 <Paper className = "paper">    
-                  <div className="background">
-                    <div className="violOrder">
-                        <Typography variant="h5">   
-                            Rank your 5 violator values in order
-                        </Typography>
+                    <div className="background">
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {this.state.items.map((value, index) => (
                                 <SortableItem key={`item-${index}`} index={index} value={value} />
@@ -107,7 +104,6 @@ class OrderViolators extends Component {
                             Next
                         </Button> 
                     </div>
-                  </div>    
                 </Paper>   
             </div>
         )

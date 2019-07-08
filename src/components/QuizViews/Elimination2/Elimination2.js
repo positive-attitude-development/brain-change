@@ -64,7 +64,7 @@ class Elimination2 extends Component {
 
     handleClick = () => {
         this.setState({
-            round2: [4, 8, 9, 10, 13, 14, 15, 16, 18]
+            round2: [24, 20, 10, 35, 7, 25, 1, 11, 28]
         })
     }
 
