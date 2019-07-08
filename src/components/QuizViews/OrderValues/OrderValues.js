@@ -87,25 +87,23 @@ class OrderValues1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>      
-
+                <h2 className="inst">Rank your 5 core values in order of importance</h2>
                 <Paper className="paper">
                     <div className="background">
-                    <Typography variant="h5">Rank your 5 core values in order of importance</Typography>
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {items.map((value, index) => (
                                 <SortableItem key={`item-${index}`} index={index} value={value} />
                             ))}
                         </SortableContainer>
-                    
-                        <div className="button">
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                onClick={this.handleNext}
-                                >
-                                Next
-                            </Button> 
-                        </div>
+                    </div>
+                    <div className="button">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleNext}
+                        >
+                            Next
+                            </Button>
                     </div>
                 </Paper>
             </div>

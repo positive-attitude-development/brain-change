@@ -65,9 +65,9 @@ handleClick = (event) => {
 
     demoBelief = () => {
         this.setState({
-            belief1: 'I believe global warming is real',
-            belief2: 'I believe the Loch Ness monster is real',
-            belief3: 'I believe in Santa Claus',
+            belief1: 'I believe in global climate change.',
+            belief2: 'I believe in taking risks and learning from mistakes.',
+            belief3: 'I believe by serving myself first, I can better serve the world.',
         })
     }
 
@@ -99,6 +99,7 @@ handleClick = (event) => {
                         style={{width:700}}
                         required
                         value={this.state.belief1}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief1")}
                         />
                 </div><div>
@@ -109,6 +110,7 @@ handleClick = (event) => {
                         name="belief2"
                         required
                         value={this.state.belief2}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief2")}
                         />
                     
@@ -120,6 +122,7 @@ handleClick = (event) => {
                         required
                         style={{width:700}}
                         value={this.state.belief3}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief3")}
                         />
                     </div>

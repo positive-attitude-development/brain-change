@@ -88,9 +88,8 @@ componentDidMount() {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-
+                <h2 className="inst">Choose your most conflicting belief.</h2>
                     <Paper className = "paper">
-                        <Typography variant="h5"> Choose your most conflicting belief.</Typography>
                         <div className = "background">
                             <FormControl component="fieldset"
                             className={classes.formControl} >
