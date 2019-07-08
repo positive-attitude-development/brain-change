@@ -91,7 +91,7 @@ class OrderViolators extends Component {
                     <div className="background">
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {this.state.items.map((value, index) => (
-                                <SortableItem key={`item-${index}`} index={index} value={value} />
+                                <SortableItem key={`item-${index}`} index={index} value={value} className="sortableItem"/>
                             ))}
                         </SortableContainer>
                     </div>    

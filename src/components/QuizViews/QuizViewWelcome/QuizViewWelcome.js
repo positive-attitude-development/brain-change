@@ -3,6 +3,7 @@ import { Button, Paper, Card, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 import QuizViewWelcomeForm from './QuizViewWelcomeForm';
 import './QuizViewWelcome.css';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 class QuizViewWelcome extends Component {
 
@@ -21,7 +22,10 @@ class QuizViewWelcome extends Component {
             <div>
                 <Card raised className="introCard">
                     <CardContent>
-                        <h2>Digital Brain Coach</h2>
+                        <CopyToClipboard text={`http://localhost:3000/#/quiz/Hfx3bFEJ5wPK`}>
+							<h2>Digital Brain Coach</h2>
+						</CopyToClipboard>
+                        
 
                         <p id="introPar">Our goal today is to help you identify your core values and key beliefs. To do this, we will ask you to work through a series of choices. These choices might become more difficult as you go through the exercise, but knowing these things will help you move forward in a positive direction.</p>
 
