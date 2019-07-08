@@ -1,15 +1,7 @@
-/* .instOrder {
-    text-align: center;
-} */
 
 .fiveVals {
     list-style-type: none;
-    padding: 20px;
     margin: auto;
-}
-
-.paperDrag {
-    width: 400px;
 }
 
 .listVals {
@@ -19,13 +11,12 @@
     padding: 20px;
     cursor: pointer;
     font-weight: bold;
-    margin: auto;
+    margin: 15px;
 }
 
 .listVals:hover {
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 800;
-    /* transition: .5s ease; */
 }
 
 .button {
@@ -34,7 +25,7 @@
 }
 
 .background {
-    padding: 10px;
+    padding: 0px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -43,10 +34,5 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
-}
-
-.sortableItem:hover {
-   background-color: lightblue;
-   margin: 5px;
-   border: 1px solid gray;
+    height: 500px;
 }

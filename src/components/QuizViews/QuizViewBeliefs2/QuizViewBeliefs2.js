@@ -90,7 +90,7 @@ componentDidMount() {
                 </Grid>
                 <h2 className="inst">Choose the belief that causes the most internal or external conflict and categorize it.</h2>
                     <Paper className = "paper">
-                        <div className = "background">
+                        <div className = "backgroundBelief2">
                             <FormControl component="fieldset"
                             className={classes.formControl} >
                                     <RadioGroup
