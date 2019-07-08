@@ -10,7 +10,7 @@ class SnapShot extends Component {
         let snap = this.props.snapshot[0];
 
         return (
-            <div>
+            <div className="table">
                  <Paper >
                     <Table>
                         <TableHead>
@@ -40,18 +40,38 @@ class SnapShot extends Component {
                               <TableCell align="center">{snap.core_values[4]}</TableCell>
                               <TableCell align="center">{snap.violator_values[4]}</TableCell>
                           </TableRow>
-                          <TableRow> 
-                              <TableCell align="center">{snap.core_values[5]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[5]}</TableCell>
+                          <TableRow></TableRow>
+                        </TableBody>
+                      </Table>
+                      </Paper>
+                      {/* <div className= "table"> */}
+                        <div className="space"> </div>
+                        <Paper>
+                        <Table>
+                          <TableHead>
+                          <TableRow className="header">
+                            <TableCell align="center">Core Percent</TableCell>
+                            <TableCell align="center">Violator Percent</TableCell>
                           </TableRow>
+                        </TableHead>
+                        <TableBody>
                           <TableRow>
                               <TableCell align="center" >{snap.percent_core}</TableCell>
                               <TableCell align="center" >{snap.percent_violators}</TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
-
-                    <Table>
+                    </Paper>
+                    
+                    <div className="space"> </div>
+                    
+                    <Paper>
+                      <Table>
+                        <TableHead>
+                          <TableRow className="header">
+                            <TableCell align="center">Beliefs</TableCell>
+                          </TableRow>
+                        </TableHead>
                         <TableBody>
                           <TableRow> 
                               <TableCell align="center" >{snap.beliefs[0]} </TableCell>
