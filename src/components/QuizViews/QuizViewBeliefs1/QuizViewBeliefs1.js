@@ -65,9 +65,9 @@ handleClick = (event) => {
 
     demoBelief = () => {
         this.setState({
-            belief1: 'I believe global warming is real',
-            belief2: 'I believe the Loch Ness monster is real',
-            belief3: 'I believe in Santa Claus',
+            belief1: 'I believe in global climate change.',
+            belief2: 'I believe in taking risks and learning from mistakes.',
+            belief3: 'I believe by serving myself first, I can better serve the world.',
         })
     }
 
@@ -78,12 +78,12 @@ handleClick = (event) => {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                    <h2 onClick={this.demoBelief} className="title">Write 3 beliefs you would not want to give up</h2>
+                    <h2 className="title">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper className = "paper">
                      <div className = "background" >
                    <div className="examples" >
-                       <h4 align="center"> Here are some examples: </h4>
+                       <h4 align="center" onClick={this.demoBelief}> Here are some examples: </h4>
                     <ul> 
                         <li>I believe people can change for the better</li>
                         <li>I believe taxes should be lowered</li>
@@ -99,6 +99,7 @@ handleClick = (event) => {
                         style={{width:700}}
                         required
                         value={this.state.belief1}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief1")}
                         />
                 </div><div>
@@ -109,6 +110,7 @@ handleClick = (event) => {
                         name="belief2"
                         required
                         value={this.state.belief2}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief2")}
                         />
                     
@@ -120,6 +122,7 @@ handleClick = (event) => {
                         required
                         style={{width:700}}
                         value={this.state.belief3}
+                        autoComplete="off"
                         onChange={this.propertyChange("belief3")}
                         />
                     </div>

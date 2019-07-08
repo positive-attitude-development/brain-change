@@ -93,7 +93,7 @@ class MyParticipants extends Component{
 		if (this.state.participant.category_id === 1) {
 			
 			return <div id="offenderInputs">
-				<h5>Offender Data:</h5>
+				<h5 onClick={this.demo2Button}>Offender Data:</h5>
 
 				<TextField
 					required
@@ -176,12 +176,12 @@ class MyParticipants extends Component{
 		this.setState({
 			participant: {
 				...this.state.participant,
-				first_name: 'Bobby',
-				last_name: 'Smith',
+				first_name: 'John',
+				last_name: 'Doe',
 				age: 25,
 				gender: 'M',
 				state: 'MN',
-				email_address: 'bobby@email.com',
+				email_address: 'johndoe@email.com',
 				phone_number: '612-123-4567'
 			}
 		});
@@ -201,7 +201,6 @@ class MyParticipants extends Component{
 	};//end demo2Button
 
 	render(){
-		console.log(this.state);
 		const {classes} = this.props;
 
 		//conditionally render submit button

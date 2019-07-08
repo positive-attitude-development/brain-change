@@ -24,7 +24,7 @@ class EliminationInstructions4 extends Component {
                     </Typography> 
                     </div>
                     <div className="giph">
-
+                        <iframe src="https://giphy.com/embed/JpZ0Uw8RjW2nVM5q2m" width="600" height="400" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                     </div>
                 
                   <div className="button">

@@ -8,6 +8,7 @@ import './RankPercents.css'
 import RankSlider from './RankSlider'
 
 
+
 const styles = ({
        slider: {
            selectionColor: '#F76B1C',

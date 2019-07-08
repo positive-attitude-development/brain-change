@@ -1,10 +1,11 @@
-.instOrder {
+/* .instOrder {
     text-align: center;
-}
+} */
 
 .fiveVals {
     list-style-type: none;
     padding: 20px;
+    margin: auto;
 }
 
 .paperDrag {
@@ -15,11 +16,21 @@
     list-style-type: none;
     text-align: center;
     font-size: 30px;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: auto;
+}
+
+.listVals:hover {
+    font-size: 36px;
+    font-weight: 800;
+    /* transition: .5s ease; */
 }
 
 .button {
     float: right; 
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 
 .background {
@@ -32,4 +43,10 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
+}
+
+.sortableItem:hover {
+   background-color: lightblue;
+   margin: 5px;
+   border: 1px solid gray;
 }
