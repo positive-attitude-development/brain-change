@@ -20,13 +20,11 @@ class BeliefInstructions1 extends Component {
                     <Typography variant="h5">
                         On the next screen please write 3 of your beliefs that you would not want to give up. 
                         <div>Beliefs can be personal, political, or religious.</div>
-                        <div className="giph">
-                            <iframe src="https://giphy.com/embed/Y4yeDJrqZFTHoHvVbP" width="600" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                        </div>
                     </Typography>
                 </div>
-                
-              
+                <div className="giph">
+                    <iframe src="https://giphy.com/embed/LSpXEqPsZqJdBVgGSt" frameBorder="0" class="giphy-embed"></iframe> 
+                </div>
                 <div className="button">
                 <Button  
                     color="primary"
