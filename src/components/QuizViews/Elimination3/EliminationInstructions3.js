@@ -23,7 +23,7 @@ class EliminationInstructions3 extends Component {
                         </Typography>
                         </div>
                     <div className="giph">
-
+                        <iframe src="https://giphy.com/embed/jptU5hpX3bDQDsgmF5" width="600" height="400" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                     </div>
 
                     <div className="button">
