@@ -9,9 +9,9 @@ import RankSlider from './RankSlider'
 
 
 const styles = ({
-        root: {
-            color: '#3920DC',
-            height: 30,
+       slider: {
+           selectionColor: '#F76B1C',
+           handleFillColor: '#F76B1C'
         },
         thumb: {
             height: "24px",
@@ -148,9 +148,10 @@ class RankPercents extends Component {
                     </div>
 
                       <div className = "grid2">
-                        <Typography className= "slider" gutterBottom align="center"> Percent</Typography>
-                            <RankSlider onChange={this.handleChange('violatorPercent')} 
+                        <Typography className= {classes} gutterBottom align="center"> Percent</Typography>
+                            <Slider onChange={this.handleChange('violatorPercent')} 
                                     className={classes.track}
+                                    slider
                                     value={violatorPercent}
                                     aria-label="Percents" 
                                     defaultValue={50} />

@@ -27,13 +27,6 @@ const PrettoSlider = withStyles({
     border: '2px solid currentColor',
     marginTop: -8,
     marginLeft: -12,
-    '&:focus,&:hover,&$active': {
-      boxShadow: 'inherit',
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: 'calc(-50% + 4px)',
   },
   track: {
     height: 8,
@@ -45,13 +38,21 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
+const handleChange = propertyName => (e, value) => {
+    e.preventDefault();
+    this.setState({
+            [propertyName]: value,
+            valuesPercent: (100 - value)
+    })
+}
+
 export default function CustomizedSlider() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Typography gutterBottom align="center" > Percents</Typography>
-      <PrettoSlider valueLabelDisplay="auto" aria-label="Pretto slider" defaultValue={50} />
+      <Typography gutterBottom align="center" > </Typography>
+      <PrettoSlider  defaultValue={50} />
       <div className={classes.margin} />
       </div>
    
