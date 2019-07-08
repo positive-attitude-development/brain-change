@@ -21,24 +21,24 @@ class SnapShot extends Component {
                         </TableHead>
                         <TableBody>
                           <TableRow> 
-                              <TableCell align="center" >{snap.core_values[0]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[0]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.core_values[0]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.violator_values[0]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                             <TableCell align="center">{snap.core_values[1]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[1]}</TableCell>
+                             <TableCell style={{fontWeight: '600'}} align="center">{snap.core_values[1]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.violator_values[1]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell align="center">{snap.core_values[2]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[2]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.core_values[2]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.violator_values[2]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell align="center">{snap.core_values[3]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[3]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.core_values[3]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.violator_values[3]}</TableCell>
                           </TableRow>
                           <TableRow> 
-                              <TableCell align="center">{snap.core_values[4]}</TableCell>
-                              <TableCell align="center">{snap.violator_values[4]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.core_values[4]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center">{snap.violator_values[4]}</TableCell>
                           </TableRow>
                           <TableRow></TableRow>
                         </TableBody>
@@ -57,8 +57,8 @@ class SnapShot extends Component {
                         </TableHead>
                         <TableBody>
                           <TableRow>
-                              <TableCell align="center" >{snap.percent_core}</TableCell>
-                              <TableCell align="center" >{snap.percent_violators}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.percent_core} %</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.percent_violators} %</TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
@@ -75,13 +75,13 @@ class SnapShot extends Component {
                         </TableHead>
                         <TableBody>
                           <TableRow> 
-                              <TableCell align="center" >{snap.beliefs[0]} </TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.beliefs[0]} </TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{snap.beliefs[1]}</TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.beliefs[1]}</TableCell>
                           </TableRow>
                           <TableRow>
-                              <TableCell align="center" >{snap.beliefs[2]} </TableCell>
+                              <TableCell style={{fontWeight: '600'}} align="center" >{snap.beliefs[2]} </TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
