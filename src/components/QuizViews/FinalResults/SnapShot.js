@@ -14,7 +14,7 @@ class SnapShot extends Component {
                  <Paper >
                     <Table>
                         <TableHead>
-                          <TableRow className="header">
+                          <TableRow  className="header">
                             <TableCell align="center" > Core Values </TableCell>
                             <TableCell align="center" > Violator Values </TableCell>
                           </TableRow>
@@ -44,8 +44,9 @@ class SnapShot extends Component {
                         </TableBody>
                       </Table>
                       </Paper>
-                      {/* <div className= "table"> */}
+                    
                         <div className="space"> </div>
+
                         <Paper>
                         <Table>
                           <TableHead>
@@ -92,7 +93,7 @@ class SnapShot extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        
+
         snapshot: reduxState.snapshotReducer
     }
 }
