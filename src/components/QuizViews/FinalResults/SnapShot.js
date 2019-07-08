@@ -92,6 +92,7 @@ class SnapShot extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
+        
         snapshot: reduxState.snapshotReducer
     }
 }
