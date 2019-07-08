@@ -26,7 +26,9 @@ class RankInstructions extends Component {
                             and the percentage that you are directed by your violators. 
                         </Typography>
                     </div>
-                
+                    <div className="giph">
+                        <iframe src="https://giphy.com/embed/lryXRzlarUKQQ6U6iE" frameBorder="0" class="giphy-embed"></iframe>
+                    </div>
                     <div className="button">
                         <Button  
                             color="primary"
