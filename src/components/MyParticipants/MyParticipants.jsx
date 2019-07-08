@@ -316,6 +316,7 @@ class MyParticipants extends Component{
 							className={classes.menu} 
 							label="Email Address:" 
 							helperText="Optional"
+							style={{ width : 200 }}
 							margin="normal"
 							onChange={this.handleInputChange('email_address')} 
 							value={this.state.participant.email_address}
@@ -326,6 +327,7 @@ class MyParticipants extends Component{
 							margin="normal"
 							label="Phone Number:" 
 							helperText="Optional"
+							style={{ width:200 }}
 							onChange={this.handleInputChange('phone_number')} 
 							value={this.state.participant.phone_number}
 						/>

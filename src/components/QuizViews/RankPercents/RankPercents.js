@@ -152,14 +152,15 @@ class RankPercents extends Component {
                         <Typography className= {classes} gutterBottom align="center"> </Typography>
                             <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
-                                    rail= {{
-                                        height: 8,
-                                        borderRadius: 20,
-                                    }}
+                                    
                                     className={classes.styles}
                                     value={violatorPercent}
                                     aria-label="Pretto slider" 
-                                    defaultValue={50} />
+                                    defaultValue={50} 
+                                    style={{ 
+                                        height: '25px'
+                                      
+                                       }}/>
                             </div>
                         </div>
                     
