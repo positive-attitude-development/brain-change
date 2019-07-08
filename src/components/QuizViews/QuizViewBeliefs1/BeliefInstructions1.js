@@ -16,35 +16,26 @@ class BeliefInstructions1 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
             <Paper contained className="paper">             
-                
                 <div className ="instructions">
                     <Typography variant="h5">
                         On the next screen please write 3 of your beliefs that you would not want to give up. 
                         <div>Beliefs can be personal, political, or religious.</div>
-                        <div className = "space"> </div>
+                        <div className="giph">
+                            <iframe src="https://giphy.com/embed/Y4yeDJrqZFTHoHvVbP" width="600" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                        </div>
                     </Typography>
                 </div>
-{/*             
-                <div> Here is a short tutorial </div>
-                    </Typography> */}
-
-                  {/* <Typography variant="h5">
-                Examples Being: 
-                <div>I believe people can change for the better. </div>
-                <div>I believe taxes should be lowered. </div>
-                <div>I believe in a higher power.</div>
-                    </Typography> */}
-                {/* </div> */}
+                
               
-                  <div className="button">
-                    <Button  
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.props.history.push('/Belief1')}
-                        >
-                        Next
-                    </Button> 
-                  </div>
+                <div className="button">
+                <Button  
+                    color="primary"
+                    variant="contained"
+                    onClick={() => this.props.history.push('/Belief1')}
+                    >
+                    Next
+                </Button> 
+                </div>
             </Paper> 
         </div>
         )

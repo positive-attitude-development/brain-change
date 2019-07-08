@@ -16,6 +16,8 @@ class DataView extends Component{
 			<Card raised className="card">
 				<CardContent>
 					<h3>Results Data:</h3>
+					<p>To download all assessment results in the system (CSV output), use the button below. Results include participant and offender general information, date of assessment, core values, core violators, percentages for each, beliefs, belief categorization, value elimination order, and time taken to complete each round of the assessment.</p>
+					<p>If button is gray, data is still being put together --- please wait.</p>
 					<CSVLink
 						className="CSVLink"
 						filename={"brain-change-export.csv"}

@@ -31,7 +31,7 @@ class LoginPage extends Component {
 
   demoClick = () => {
     this.setState({
-      username: 'bobsmith2',
+      username: 'lylewildes',
       password: 'password'
     })
   }

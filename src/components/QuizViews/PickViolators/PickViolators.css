@@ -1,11 +1,9 @@
+.corePar {
+    font-size: 18px;
+    text-align: center;
+}
 
 .violist {
-    /* list-style-type: none;
-    columns: 4;
-    text-align: center;
-    cursor: pointer;
-    margin: 18px ;
-    padding: 25px;  */
     list-style-type: none;
     columns: 4;
     text-align: center;
@@ -20,7 +18,7 @@
 
 .highlight {
     font-weight: bold;
-    color: rgb(162, 161, 161);
+    color: #ff7043;
     transition: color 1s ease-out;
     cursor: pointer;
     font-size: 18px;
