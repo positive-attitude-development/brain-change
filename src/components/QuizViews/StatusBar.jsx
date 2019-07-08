@@ -31,8 +31,6 @@ export default function CustomizedProgressBars(props) {
         variant="determinate"
         color="secondary"
         value={props.status}
-
-
       />
       
     </div>
