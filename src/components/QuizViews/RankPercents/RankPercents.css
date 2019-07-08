@@ -1,9 +1,3 @@
- .slider {
-    color: '#52af77';
-    height: "8px";
-    width: "100%"; 
- }
-
 .grid {
     display: grid;
     grid-column-gap: 20px; 
@@ -12,14 +6,34 @@
     text-align: center; 
 }
 
-.core .corePercents {
+.grid2{
+    display: grid; 
+    align-content: center; 
+}
+
+.grid3 {
+    display: grid;
+    grid-column-gap: 40px; 
+    padding: 20px; 
+}
+
+/* .core {
     grid-column-start: 2;
     grid-column-end: 5;
     align-items: center;
     justify-self: start; 
+    padding: 200px; 
+} */
+
+.corePercents .core{
+    grid-column-start: 2;
+    grid-column-end: 5;
+    align-items: center;
+    justify-self: start; 
+    /* padding: 200px;  */
 }
 
-.violators{
+.violators {
     grid-column-start: 5;
     grid-column-end: 8;
     align-items: center;
@@ -30,15 +44,14 @@
     padding: 20px; 
 }
 
-.grid2 {
-    display: grid;
-    grid-column-gap: 40px; 
-    padding: 20px; 
-}
-
 ul li {
     list-style-type: none;
 }
+
+/* .corePercents {
+    grid-column-start: 5;
+    align-items: center; 
+} */
 
 .violatorPercents {
     grid-column-start: 5;
