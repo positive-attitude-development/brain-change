@@ -16,14 +16,18 @@ class QuizViewWelcome extends Component {
         this.props.history.push('/ElimInstructions1');
     } //end startQuiz
 
+    demoClick = () => {
+        this.props.history.push('/quiz/v0L8l8RXSzqi');
+    }
+
     render() {
         console.log('this.props.match.params:', this.props.match.params)
         return (      
             <div>
                 <Card raised className="introCard">
                     <CardContent>
-                        <CopyToClipboard text={`http://localhost:3000/#/quiz/Hfx3bFEJ5wPK`}>
-							<h2>Digital Brain Coach</h2>
+                        <CopyToClipboard text={`http://localhost:3000/#/quiz/v0L8l8RXSzqi`}>
+							<h2 onClick={this.demoClick}>Digital Brain Coach</h2>
 						</CopyToClipboard>
                         
 
