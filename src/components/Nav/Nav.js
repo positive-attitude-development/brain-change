@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-
-
 class Nav extends Component{
 	render(){
 		let homeLink;

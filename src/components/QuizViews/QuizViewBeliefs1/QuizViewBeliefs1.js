@@ -68,55 +68,56 @@ handleClick = (event) => {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
-                    <h2 align="center" className="title">Write 3 beliefs you would not want to give up</h2>
+                <h2 align="center" className="title">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper className = "paper">
-                     <div className = "background" >
+
+                <div className = "background" >
                    <div className="examples" >
                        <h4 align="center"> Here are some examples: </h4>
-                    <ul> 
-                        <li>I believe people can change for the better</li>
-                        <li>I believe taxes should be lowered</li>
-                        <li>I believe in a higher power</li>
-                    </ul>
-                </div>
-            <div className ="inputs">
-                <div>
-                    <TextField
-                        type="text"
-                        label="First Belief"
-                        name="belief1"
-                        style={{width:700}}
-                        required
-                        value={this.state.belief1}
-                        autoComplete="off"
-                        onChange={this.propertyChange("belief1")}
-                        />
-                </div><div>
-                          <TextField
-                        type="text"
-                        label="Second Belief"
-                        style={{width:700}}
-                        name="belief2"
-                        required
-                        value={this.state.belief2}
-                        autoComplete="off"
-                        onChange={this.propertyChange("belief2")}
-                        />
-                    
-                </div><div>
-                          <TextField
-                        type="text"
-                        label="Third Belief"
-                        name="belief3"
-                        required
-                        style={{width:700}}
-                        value={this.state.belief3}
-                        autoComplete="off"
-                        onChange={this.propertyChange("belief3")}
-                        />
-                    </div>
-                </div>
+	                    <ul> 
+	                        <li>I believe people can change for the better</li>
+	                        <li>I believe taxes should be lowered</li>
+	                        <li>I believe in a higher power</li>
+	                    </ul>
+                	</div>
+
+                    <div className ="inputs">
+
+                        <TextField
+                            type="text"
+                            label="First Belief"
+                            name="belief1"
+                            style={{width:700}}
+                            required
+                            value={this.state.belief1}
+                            autoComplete="off"
+                            onChange={this.propertyChange("belief1")}
+                            />
+
+						<TextField
+	                        type="text"
+	                        label="Second Belief"
+	                        style={{width:700}}
+	                        name="belief2"
+	                        required
+	                        value={this.state.belief2}
+	                        autoComplete="off"
+	                        onChange={this.propertyChange("belief2")}
+	                        />
+
+						<TextField
+	                        type="text"
+	                        label="Third Belief"
+	                        name="belief3"
+	                        required
+	                        style={{width:700}}
+	                        value={this.state.belief3}
+	                        autoComplete="off"
+	                        onChange={this.propertyChange("belief3")}
+	                        />
+                	</div>
+					
                 </div>
             
                 <div className = "button">

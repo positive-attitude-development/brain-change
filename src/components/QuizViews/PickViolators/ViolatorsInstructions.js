@@ -9,10 +9,6 @@ class ViolatorsInstructions extends Component {
         statusBar : 68
     }
 
-    componentDidMount(){
-        console.log(this.props.reduxState.newValuesReducer.orderCore);
-    }
-
     render() {
         return (
             <div>
@@ -28,7 +24,7 @@ class ViolatorsInstructions extends Component {
                     </div>
 
                     <div className="giph" >
-                        <iframe src="https://giphy.com/embed/h45MFzDq40Kw2cnLig" frameBorder="0" class="giphy-embed" ></iframe>
+                        <iframe src="https://giphy.com/embed/h45MFzDq40Kw2cnLig" frameBorder="0" className="giphy-embed" title="violatorsInstructions"></iframe>
                     </div>
 
                     <div className="button">
