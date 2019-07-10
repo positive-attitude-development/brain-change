@@ -7,7 +7,7 @@ function* fetchValues() {
         let response = yield axios.get('/api/values');
         yield put({ type: 'SET_VALUES', payload: response.data });
     }catch(error) {
-        console.log('Error in fetchValues:', error)
+        // console.log('Error in fetchValues:', error)
     }
 }
 
@@ -20,7 +20,7 @@ function* addResults(action) {
         const snapshot = yield axios.get(`/api/participant/snapshot/${newValues.participantId}`);
         yield put({type: 'SET_SNAPSHOT', payload: snapshot.data});
     }catch(error) {
-        console.log('Error in addResults', error);
+        // console.log('Error in addResults', error);
     }
 }
 
