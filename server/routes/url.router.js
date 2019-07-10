@@ -42,7 +42,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     const addUrl = `UPDATE "url" SET url = $1, expiration_date = $2
         WHERE id = $3;`;
     const urlValues = [req.body.url, expirationDate, req.body.urlId];
-    const query = await connection.query(addUrl, urlValues)
+    await connection.query(addUrl, urlValues)
     await connection.query('COMMIT');
     res.sendStatus(201);
     }catch(error){

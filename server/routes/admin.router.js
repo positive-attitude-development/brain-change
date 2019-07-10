@@ -12,6 +12,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// GET logged in admin/owner's profile info
 router.get('/profile', rejectUnauthenticated, (req, res) => {
 	console.log('profile req.user:', req.user.id)
 	let queryText = `SELECT * FROM "admin"
@@ -28,9 +29,8 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
 	});
 })
 
-
+// POST self-register admin/owner
 router.post('/register', async (req, res, next) => {
-  console.log('register admin req.body:', req.body)
   const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
@@ -74,7 +74,6 @@ router.post('/logout', (req, res) => {
 
 //update owner/admin access level
 router.put('/level', rejectUnauthenticated, (req, res) => {
-  console.log('here is req.body', req.body);
       if (req.user.level >= 4) {
         let queryText = `UPDATE "admin" SET "level" = $1 WHERE id = $2;`;
         let queryValues = [req.body.level, req.body.id];
@@ -94,7 +93,6 @@ router.put('/level', rejectUnauthenticated, (req, res) => {
 
 //updates admin/owner profile info
 router.put('/profile/:id', rejectUnauthenticated, async (req, res) => {
-	console.log('req.body:', req.body)
   const connection = await pool.connect()
   try{
     await connection.query('BEGIN');
