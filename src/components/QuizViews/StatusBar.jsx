@@ -22,12 +22,10 @@ const BorderLinearProgress = withStyles({
 
 
 export default function CustomizedProgressBars(props) {
-// const {classes} = this.props; 
   return (
     <div>
       
       <BorderLinearProgress
-        // className={classes.bar}
         variant="determinate"
         color="secondary"
         value={props.status}

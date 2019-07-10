@@ -13,7 +13,6 @@ state = {
     belief2: "",
     belief3: "",
     statusBar : 21
-
 }
 
 componentDidMount() {
@@ -36,9 +35,7 @@ propertyChange = propertyName => (event) => {
     this.setState({
             [propertyName]: event.target.value
     })
-    console.log(this.state);
 }
-
 
 //send beliefs to reducer
 handleClick = (event) => {
@@ -53,7 +50,6 @@ handleClick = (event) => {
         let nextTime = ((min * 60 ) + (hour * 360) + sec)
         let belief1Time = nextTime - this.state.time 
 
-    console.log(this.state); 
     this.props.dispatch({ type: "SET_NEW_VALUES" , name:'beliefs', payload: this.state });
     this.props.dispatch({type: 'SET_NEW_TIME', name: 'belief1Time', payload: belief1Time });
     this.props.history.push('/ElimInstructions3')
@@ -63,27 +59,18 @@ handleClick = (event) => {
     }
 }
 
-    demoBelief = () => {
-        this.setState({
-            belief1: 'I believe in global climate change.',
-            belief2: 'I believe in taking risks and learning from mistakes.',
-            belief3: 'I believe by serving myself first, I can better serve the world.',
-        })
-    }
-
-
     render() {
         return (
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                    <h2 className="title">Write 3 beliefs you would not want to give up</h2>
+                    <h2 align="center">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper className = "paper">
                      <div className = "background" >
                    <div className="examples" >
-                       <h4 align="center" onClick={this.demoBelief}> Here are some examples: </h4>
+                       <h4 align="center"> Here are some examples: </h4>
                     <ul> 
                         <li>I believe people can change for the better</li>
                         <li>I believe taxes should be lowered</li>

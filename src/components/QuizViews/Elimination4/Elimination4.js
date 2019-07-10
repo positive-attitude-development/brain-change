@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar';
@@ -62,12 +61,6 @@ class Elimination4 extends Component {
         })
     }
 
-    handleClick = () => {
-        this.setState({
-            round4: [19, 15, 14, 12, 18]
-        })
-    }
-
     render() {
         // Creating array of all the values minus previous selected values
         let reducer = this.props.newValues;
@@ -90,7 +83,7 @@ class Elimination4 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
+                    <h2 className="inst"> Remove the 5 least important values</h2>
                     <Paper className="paper">
                         <div className="valuesList">
                             <ul className="elim4List">

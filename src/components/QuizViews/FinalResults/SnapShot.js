@@ -46,7 +46,6 @@ class SnapShot extends Component {
                       </Paper>
                     
                         <div className="space"> </div>
-                        <div className ="tables">
                         <Paper>
                         <Table>
                           <TableHead>
@@ -63,7 +62,6 @@ class SnapShot extends Component {
                         </TableBody>
                     </Table>
                     </Paper>
-                    </div>
                     <div className="space"> </div>
                     
                     <Paper>

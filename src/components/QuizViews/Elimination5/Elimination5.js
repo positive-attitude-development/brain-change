@@ -62,12 +62,6 @@ class Elimination5 extends Component {
         })
     }
 
-    handleClick = () => {
-        this.setState({
-            round5: [32, 21, 2, 23, 38]
-        })
-    }
-
     render() {
         // Creating an array of all values minus the previous selected values
         let reducer = this.props.newValues;
@@ -91,7 +85,7 @@ class Elimination5 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
+                    <h2 className="inst"> Remove the 5 least important values</h2>
                     <Paper className="paper5">
                         <div className="valuesList">
                             <ul className="elim5List">

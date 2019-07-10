@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper, Typography } from '@material-ui/core';
+import {  Button, Grid, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper, Typography } from '@material-ui/core';
+import {  Button, Grid, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
@@ -46,8 +46,6 @@ class OrderViolators extends Component {
         this.setState({
             time: totalTime
         })
-
-        console.log(this.state)
     }
 
     //Drag the values in any order
@@ -71,7 +69,6 @@ class OrderViolators extends Component {
             let nextTime = ((min * 60 ) + (hour * 360) + sec)
             let orderViolatorTime = nextTime - this.state.time 
 
-        console.log(idArray); 
         this.props.dispatch({type: 'SET_NEW_VALUES', name: 'orderViolators', payload: idArray})
         this.props.dispatch({type: 'SET_NEW_TIME', name: 'orderViolatorTime', payload: orderViolatorTime });
 

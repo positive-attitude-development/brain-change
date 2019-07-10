@@ -29,7 +29,6 @@ class OrderViolatorsInstructions extends Component {
                         <iframe src="https://giphy.com/embed/MDga3TwBlXkFIAuEN2" frameBorder="0" class="giphy-embed"></iframe>
                     </div>
   
-               
                     <div className = "button">
                         <Button  
                             color="primary"

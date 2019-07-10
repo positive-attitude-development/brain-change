@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Paper, Grid, Typography } from '@material-ui/core';
+import {  Button, Paper, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import './PickViolators.css'

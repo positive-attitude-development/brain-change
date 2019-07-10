@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import Slider from '@material-ui/lab/Slider';
 import { Button, Typography, Paper, Grid } from '@material-ui/core'
 import './RankPercents.css'
-import RankSlider from './RankSlider'
+
 
 
 
 const styles = ({
-    Root:{
+    root:{
        slider: {
            selectionColor: '#F76B1C',
            handleFillColor: '#F76B1C'
@@ -128,7 +128,7 @@ class RankPercents extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
-            <div>
+            <div className="container">
                 <Paper >  
                     <div className = "grid">
                    
@@ -144,7 +144,7 @@ class RankPercents extends Component {
                             </ul>
                         </div>
                     
-                                {/* mapping through violator values */}
+                                {/* mapping through violator */}
                         <div className = "violators">
                                 <h3>Core Violators</h3>
                                 <ul>
@@ -163,11 +163,10 @@ class RankPercents extends Component {
                                     
                                     className={classes.root}
                                     value={violatorPercent}
-                                    aria-label="Percent Slider" 
+                                    aria-label="Pretto slider" 
                                     defaultValue={50} 
                                     style={{ 
                                         height: '25px'
-                                      
                                        }}/>
                             </div>
                         </div>
