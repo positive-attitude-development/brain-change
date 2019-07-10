@@ -70,7 +70,6 @@ class Elimination1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div className="paperContainer">
                     <h2 className="inst" > Remove the 9 least important values</h2>
                     <Paper className="paper">
                         <div className="valuesList">
@@ -91,7 +90,6 @@ class Elimination1 extends Component {
                         </div>
                         <p className="valueCount">{this.state.round1.length} / 9 values selected</p>
                     </Paper>
-                </div>
             </div>
         )
     }
