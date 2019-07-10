@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { FormControl, FormControlLabel,
         RadioGroup, Button, Radio, Paper, InputLabel, 
-        MenuItem, Select, Grid, Typography } from"@material-ui/core";
+        MenuItem, Select, Grid} from"@material-ui/core";
 
 import StatusBar from '../StatusBar'; 
 
