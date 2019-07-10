@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-
-import { Route } from 'react-router-dom';
+import React, {Component} from 'react'
+import {Route} from 'react-router-dom';
 
 import EliminationInstructions1 from '../QuizViews/Elimination1/EliminationInstructions1'
 import EliminationInstructions2 from '../QuizViews/Elimination2/EliminationInstructions2'
@@ -33,11 +32,6 @@ import RankPercents from '../QuizViews/RankPercents/RankPercents';
 import RankInstructions from '../QuizViews/RankPercents/RankInstructions';
 
 import FinalResults from '../QuizViews/FinalResults/FinalResults';
-
-
-
-
-
 export class QuizRoutes extends Component {
     render() {
         return (
@@ -46,47 +40,45 @@ export class QuizRoutes extends Component {
             <div className="ElimInstructions">
                     <Route
                     exact path="/ElimInstructions1"
-                    component={EliminationInstructions1}
-                    />
+                    component={EliminationInstructions1}/>
+
                     <Route
                     exact path="/ElimInstructions2"
-                    component={EliminationInstructions2}
-                    />
+                    component={EliminationInstructions2}/>
+
                     <Route
                     exact path="/ElimInstructions3"
-                    component={EliminationInstructions3}
-                    />
+                    component={EliminationInstructions3}/>
+
                     <Route
                     exact path="/ElimInstructions4"
-                    component={EliminationInstructions4}
-                    />
+                    component={EliminationInstructions4}/>
+
                     <Route
                     exact path="/ElimInstructions5"
-                    component={EliminationInstructions5}
-                    />
+                    component={EliminationInstructions5}/>
             </div>
 
             <div className="Elim">
                     <Route
                     exact path="/Elim1"
-                    component={Elimination1}
-                    />
+                    component={Elimination1}/>
+
                     <Route
                     exact path="/Elim2"
-                    component={Elimination2}
-                    />
+                    component={Elimination2}/>
+
                     <Route
                     exact path="/Elim3"
-                    component={Elimination3}
-                    />
+                    component={Elimination3}/>
+
                     <Route
                     exact path="/Elim4"
-                    component={Elimination4}
-                    />
+                    component={Elimination4}/>
+
                     <Route
                     exact path="/Elim5"
-                    component={Elimination5}
-                    />
+                    component={Elimination5}/>
 
 
             </div>
@@ -94,23 +86,19 @@ export class QuizRoutes extends Component {
             <div className="Beliefs">
                      <Route
                     exact path="/BeliefInstruct1"
-                    component={BeliefInstructions1}
-                    />
+                    component={BeliefInstructions1}/>
 
                     <Route
                     exact path="/BeliefInstruct2"
-                    component={BeliefInstructions2}
-                    />
+                    component={BeliefInstructions2}/>
 
                     <Route
                     exact path="/Belief1"
-                    component={QuizViewBeliefs1}
-                    />
+                    component={QuizViewBeliefs1}/>
 
                     <Route
                     exact path="/Belief2"
-                    component={QuizViewBeliefs2}
-                    />
+                    component={QuizViewBeliefs2}/>
                 
                 </div>
 
@@ -118,48 +106,39 @@ export class QuizRoutes extends Component {
                      
                     <Route
                     exact path="/OrderValues"
-                    component={OrderValues}
-                    />
+                    component={OrderValues}/>
 
                     <Route
                     exact path="/OrderValuesInstructions"
-                    component={OrderValuesInstructions}
-                    />
+                    component={OrderValuesInstructions}/>
 
                     <Route
                     exact path="/PickViolators"
-                    component={PickViolators}
-                    />
+                    component={PickViolators}/>
 
                     <Route
                     exact path="/ViolatorsInstructions"
-                    component={ViolatorsInstructions}
-                    />
+                    component={ViolatorsInstructions}/>
 
                     <Route
                     exact path="/OrderViolators"
-                    component={OrderViolators}
-                    />
+                    component={OrderViolators}/>
 
                     <Route
                     exact path="/OrderViolatorsInstructions"
-                    component={OrderViolatorsInstructions}
-                    />
+                    component={OrderViolatorsInstructions}/>
                     
                     <Route
                     exact path="/RankPercents"
-                    component={RankPercents}
-                    />
+                    component={RankPercents}/>
 
                     <Route 
                     exact path="/RankInstructions"
-                    component={RankInstructions}
-                    />
+                    component={RankInstructions}/>
                 
                     <Route 
                     exact path="/FinalResults"
-                    component={FinalResults}
-                    />
+                    component={FinalResults}/>
 
                 </div>
         </div> 
