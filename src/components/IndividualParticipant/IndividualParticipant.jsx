@@ -44,17 +44,15 @@ class IndividualParticipant extends Component{
 	}
 
 	componentDidMount(){
-
 		this.props.dispatch({type: 'FETCH_INDIVIDUAL', payload: this.props.match.params.id});
 		this.props.dispatch({type: 'FETCH_CATEGORY'});
 		this.props.dispatch({type: 'FETCH_SYSTEM'});
 		this.props.dispatch({type: 'FETCH_POPULATION'});
 		this.props.dispatch({type: 'FETCH_SNAPSHOT', payload: this.props.match.params.id});
-    this.props.dispatch({type: 'FETCH_VALUES'})
+    	this.props.dispatch({type: 'FETCH_VALUES'})
 	}; //end componentDidMount
 
 	generateLink = urlid => {
-    
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
 		this.props.dispatch({type: 'NEW_URL', payload: {id: this.props.match.params.id, url: urlLink, urlId: urlid}})
@@ -62,7 +60,8 @@ class IndividualParticipant extends Component{
 
 	handleEdit = () => {
 		this.setState({ isEditable: true });
-		//need to set up separate editPartipcantReducer to handle any edits made to participant, this way any changes can be made to the editParticpantReducer so if Cancel Edit button is clicked, participant will revert back to individualPartipcantReducer info and no changes are made to database
+		//need to set up separate editPartipcantReducer to handle any edits made to participant, this way any changes can be made to the 
+		//editParticpantReducer so if Cancel Edit button is clicked, participant will revert back to individualPartipcantReducer info and no changes are made to database
 		this.props.dispatch({type: 'SET_EDIT_PARTICIPANT', payload: this.props.individual[0]})
 	}; //end handleEdit
 
@@ -108,12 +107,12 @@ class IndividualParticipant extends Component{
 			{
 				expiration_date: '00-00-00'
 			};
-		let formatExpiration = moment(person.expiration_date).format('YYYY-MM-DD')
+		let formattedExpiration = moment(new Date(person.expiration_date)).format('YYYY-MM-DD');
 		let today = new Date();
 		let expirationDate = new Date(person.expiration_date)
 		
 		let urlButton;
-
+		//check individualParticipant's url expiration date, if it's expired render urlButton, if still current disable urlButton
 		if (expirationDate >= today) {
 			urlButton = <Tooltip title="Invite Link Isn't Expired!" placement="right"><Button color="primary" size="large">Generate New Link</Button></Tooltip>
 		} else {
@@ -132,7 +131,9 @@ class IndividualParticipant extends Component{
 							<span className={classes.text}>Gender: {person.gender}</span>
 							{this.props.category.map(category => {
 								if (category.id === person.category_id) {
-									return <span className={classes.text}>Category: {category.category}</span>
+									return <span className={classes.text} key={category.id}>Category: {category.category}</span>
+								}else{
+									return false
 								}
 							})}
 							<span className={classes.text}>State: {person.state}</span>
@@ -144,13 +145,17 @@ class IndividualParticipant extends Component{
 									<h5>Offender Information:</h5>
 									{this.props.system.map(system => {
 										if (system.system === person.system) {
-											return <span className={classes.text}>System: {person.system}</span>
+											return <span className={classes.text} key={system.id}>System: {person.system}</span>
+										}else{
+											return false
 										}
 									})}
 									<span className={classes.text}>System ID: {person.system_id}</span>
 									{this.props.population.map(population => {
 										if (population.population === person.population) {
-											return <span className={classes.text}>Population: {person.population}</span>
+											return <span className={classes.text} key={population.id}>Population: {person.population}</span>
+										}else{
+											return false
 										}
 									})}
 									{person.felon ? <span className={classes.text}>Felon: Yes</span> : <span className={classes.text}>Felon: No</span>}
@@ -260,8 +265,8 @@ class IndividualParticipant extends Component{
 					<Card raised className={classes.card}>
 						<CardContent>
 							<h3>Invite to Assessment:</h3>
-							<span class={classes.text}>Unique Invite Link: localhost:3000/#/quiz/{person.url}</span>
-							<span className={classes.text}>Expiration Date: {formatExpiration}</span>
+							<span className={classes.text}>Unique Invite Link: localhost:3000/#/quiz/{person.url}</span>
+							<span className={classes.text}>Expiration Date: {formattedExpiration}</span>
 							<div className={classes.buttonArea}>
 								<CopyToClipboard text={`localhost:3000/#/quiz/${person.url}`}>
 									<Button className={classes.text} variant="contained" color="primary" size="large">Copy Link to Clipboard</Button>
@@ -288,7 +293,6 @@ class IndividualParticipant extends Component{
 
 const mapStateToProps = state => ({
   admin: state.admin,
-  profile: state.profile,
   individual: state.individual,
   category: state.category,
   stateNames: state.stateNames,

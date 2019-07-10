@@ -1,35 +1,22 @@
-.CSVLink {
-    display: inline-block;
-    margin: 20px auto;
-    text-decoration: none;
-}
-
 .searchInput {
     float: right !important;
     margin: 20px auto !important;
 }
 
 .card {
-    margin: auto;
-	margin-top: 30px;
-	margin-bottom: 40px;
+    margin: 30px auto;
 	width: 90%;
 }
 
 .container {
-    width: 100%;
     margin-top: 30px !important;
 }
 
-.paper {
-    width: 90%;
-    margin: 20px auto !important;
-}
-
 .table {
-    min-width: 600px;
+    max-width: 100% !important;
 }
 
 .wrapper {
+    width: 100%;
     overflow-x: auto;
 }

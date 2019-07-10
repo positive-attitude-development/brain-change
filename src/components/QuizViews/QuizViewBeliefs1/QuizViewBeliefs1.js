@@ -67,7 +67,8 @@ handleClick = (event) => {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                    <h2 align="center">Write 3 beliefs you would not want to give up</h2>
+
+                    <h2 align="center" className="title">Write 3 beliefs you would not want to give up</h2>
 
                  <Paper className = "paper">
                      <div className = "background" >

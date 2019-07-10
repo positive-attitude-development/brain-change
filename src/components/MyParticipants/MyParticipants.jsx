@@ -45,6 +45,7 @@ class MyParticipants extends Component{
 	}
 
 	componentDidMount(){
+		//on component mount, fetch all participants, as well as category, system, and population info from database to populate dropdowns
 		this.props.dispatch({type: 'FETCH_PARTICIPANTS'});
 		this.props.dispatch({type: 'FETCH_CATEGORY'});
 		this.props.dispatch({type: 'FETCH_SYSTEM'});
@@ -56,7 +57,6 @@ class MyParticipants extends Component{
 		//generate uniqure url invite link and assign to local state on page load
 		let chance = new Chance();
 		let urlLink = chance.string({length: 12, pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'});
-		console.log(urlLink);
 		this.setState({
 			participant: {
 				...this.state.participant,
@@ -93,7 +93,7 @@ class MyParticipants extends Component{
 		if (this.state.participant.category_id === 1) {
 			
 			return <div id="offenderInputs">
-				<h5 onClick={this.demo2Button}>Offender Data:</h5>
+				<h5>Offender Data:</h5>
 
 				<TextField
 					required
@@ -133,8 +133,7 @@ class MyParticipants extends Component{
 				>
 					{this.props.population.map(population => {
 						return (
-							<MenuItem key={population.id} value={population.id} >				{population.population}
-							</MenuItem>
+							<MenuItem key={population.id} value={population.id} >{population.population}</MenuItem>
 						)
 					})}
 				</TextField>
@@ -172,34 +171,6 @@ class MyParticipants extends Component{
 		this.props.history.push(`/individualparticipant/${id}`);
 	};//end viewParticipant
 
-	demoButton = () => {
-		this.setState({
-			participant: {
-				...this.state.participant,
-				first_name: 'John',
-				last_name: 'Doe',
-				age: 25,
-				gender: 'M',
-				state: 'MN',
-				email_address: 'johndoe@email.com',
-				phone_number: '612-123-4567'
-			}
-		});
-	};//end demoButton
-
-	demo2Button = () => {
-		this.setState({
-			...this.state,
-			offender: {
-				system_id: 123456,
-				offender_system_id: 2,
-				felon: true,
-				violent_offender: false,
-				population_id: 3
-			}
-		});
-	};//end demo2Button
-
 	render(){
 		const {classes} = this.props;
 
@@ -209,19 +180,18 @@ class MyParticipants extends Component{
 			&& this.state.participant.age && this.state.participant.gender
 			&& this.state.participant.category_id > 1 && this.state.participant.state
 			&& this.state.participant.url) {
-			//console.log('OK to submit non offender')
-			submitButton = <Button size="large" variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
-			
+				//if local state contains first name, last name, age, gender, state, url, and category isn't offender, enable submitButton
+				submitButton = <Button size="large" variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		} else if (this.state.participant.first_name && this.state.participant.last_name
 			&& this.state.participant.url && this.state.participant.age
 			&& this.state.participant.gender && this.state.participant.category_id === 1
 			&& this.state.participant.state && this.state.offender.system_id
 			&& this.state.offender.offender_system_id && this.state.offender.felon !== ''
 			&& this.state.offender.violent_offender !== '' && this.state.offender.population_id) {
-			//console.log('OK to submit offender')
+				//if category is offender and local state contains first name, last name, age, gender, state, url, system_id, offender_system_id, felon, and violent_offender, enable submitButton
 				submitButton = <Button size="large" variant="contained" color="primary" onClick={this.handleSubmit}>Add Participant</Button>
 		} else {
-			//console.log('Not OK to submit participant yet')
+				//otherwise, disable submit button
 				submitButton = <Button size="large" variant="contained" color="primary" disabled>Add Participant</Button>
 		} //end submitButton conditionals
 
@@ -230,8 +200,8 @@ class MyParticipants extends Component{
 				<Card raised className={classes.card}>
 					<CardContent>
 
-						<h3 onClick={this.demoButton}>Add a Participant:</h3>
-						<h5 onClick={this.demo2Button}>(*Required fields)</h5>
+						<h3>Add a Participant:</h3>
+						<h5>(*Required fields)</h5>
 
 						<TextField
 							required 
@@ -357,8 +327,6 @@ class MyParticipants extends Component{
 }
 
 const mapRedux = state => ({
-  admin: state.admin,
-  profile: state.profile,
   participant: state.participant,
   category: state.category,
   stateNames: state.stateNames,
