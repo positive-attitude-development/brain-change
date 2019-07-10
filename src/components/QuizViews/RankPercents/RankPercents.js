@@ -11,10 +11,7 @@ import './RankPercents.css'
 
 const styles = ({
     root:{
-       slider: {
-           selectionColor: '#F76B1C',
-           handleFillColor: '#F76B1C'
-        },
+     
         thumb: {
             height: "24px",
             width: "24px",
@@ -130,9 +127,9 @@ class RankPercents extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
             <div className="container">
-                <Paper >  
-                    <div className = "grid">
+                <Paper>  
                    
+                    <div className = "grid">
                         <div className = "core">
                     
                             {/* mapping through core values */}
@@ -188,8 +185,8 @@ class RankPercents extends Component {
                             >
                             Next
                         </Button> 
-                      
-                      </div>
+                        </div>
+                    
                   </Paper>
             </div>
         </div> 

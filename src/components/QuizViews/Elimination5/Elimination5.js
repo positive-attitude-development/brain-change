@@ -85,9 +85,8 @@ class Elimination5 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
-                <div className="paperContainer">
                     <h2 className="inst"> Remove the 5 least important values</h2>
-                    <Paper className="paper5">
+                    <Paper className="paper">
                         <div className="valuesList">
                             <ul className="elim5List">
                                 {newArray.map(value => {
@@ -105,9 +104,8 @@ class Elimination5 extends Component {
                                 Next
                             </Button>
                         </div> 
-                        <p className="valueCount">{this.state.round5.length} / 5 values selected</p>
-                    </Paper>
-                </div>
+                    <p className="valueCount">{this.state.round5.length} / 5 values selected</p>
+                </Paper>
             </div>
         )
     }
