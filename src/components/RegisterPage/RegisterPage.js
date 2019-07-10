@@ -4,9 +4,6 @@ import {Button, TextField, MenuItem, Card, CardContent} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
-	root: {
-
-	},
 	card: {
 		width: '90%',
 		margin: '30px auto',
@@ -56,21 +53,6 @@ class RegisterPage extends Component {
       this.props.dispatch({
         type: 'REGISTER',
         payload: this.state,
-        	// username: this.state.username,
-        	// password: this.state.password,
-			// firstName: this.state.firstName,
-			// lastName: this.state.lastName,
-			// organization: this.state.organization,
-			// title: this.state.title,
-			// phoneNumber: this.state.phoneNumber,
-			// emailAddress: this.state.emailAddress,
-			// streetAddress: this.state.streetAddress,
-			// streetAddressTwo: this.state.streetAddressTwo,
-			// city: this.state.city,
-			// state: this.state.state,
-			// zipcode: this.state.zipcode,
-			// level: this.state.level
-        
 		history: this.props.history
       });
     } else {
@@ -83,20 +65,6 @@ class RegisterPage extends Component {
       [propertyName]: event.target.value,
     });
   };
-
-  fillData = () =>{
-	  this.setState({
-		username: 'test',
-	    password: 'test',
-		firstName: 'test',
-		lastName: 'test',
-		organization: 'test',
-		title: 'test',
-		phoneNumber: 'test',
-		emailAddress: 'test',
-		state: 'MN',
-	  })
-  }
 
   render() {
 	  const {classes} = this.props;
@@ -112,87 +80,95 @@ class RegisterPage extends Component {
 			)}
 			{/* registration form */}
 			<form onSubmit={this.registerAdmin}>
-				<h2 onClick={this.fillData}>Admin Registration</h2>
-				<TextField
-					required 
-					label="Username" 
-					className={classes.menu}
-					value={this.state.username}
-					onChange={this.handleInputChangeFor('username')} />
-				<TextField 
-					required
-					type="password"
-					label="Password" 
-					className={classes.menu}
-					value={this.state.password} 
-					onChange={this.handleInputChangeFor('password')} />
-				<TextField 
-					required 
-					label="First Name" 
-					className={classes.menu}
-					value={this.state.firstName} 
-					onChange={this.handleInputChangeFor('firstName')} />
-				<TextField 
-					required 
-					label="Last Name"
-					className={classes.menu}
-					value={this.state.lastName} 
-					onChange={this.handleInputChangeFor('lastName')} />
-				<TextField 
-					required 
-					label="Organization" 
-					className={classes.menu}
-					value={this.state.organization} 
-					onChange={this.handleInputChangeFor('organization')} />
-				<TextField 
-					required 
-					label="Title" 
-					className={classes.menu}
-					value={this.state.title} 
-					onChange={this.handleInputChangeFor('title')} />
-				<TextField 
-					required 
-					label="Phone Number" 
-					className={classes.menu}
-					value={this.state.phoneNumber} 
-					onChange={this.handleInputChangeFor('phoneNumber')} />
-				<TextField 
-					required 
-					label="Email Address" 
-					className={classes.menu}
-					value={this.state.emailAddress} 
-					onChange={this.handleInputChangeFor('emailAddress')} />
-				<TextField 
-					value={this.state.streetAddress} 
-					label="Street Address" 
-					className={classes.menuLg}
-					onChange={this.handleInputChangeFor('streetAddress')} />
-				<TextField 
-					value={this.state.streetAddressTwo} 
-					label="Street Address Line 2" 
-					className={classes.menuLg}
-					onChange={this.handleInputChangeFor('streetAddressTwo')} />
-				<TextField 
-					value={this.state.city} 
-					label="City" 
-					className={classes.menu}
-					onChange={this.handleInputChangeFor('city')} />
-				<TextField 
-					select 
-					required 
-					value={this.state.state} 
-					className={classes.menu}
-					onChange={this.handleInputChangeFor('state')} 
-					label="State">
-					{this.props.stateNames.map(stateName => {
-						return ( <MenuItem key={stateName.abbr} value={stateName.abbr}>{stateName.full}</MenuItem> )
-					})}	
-				</TextField>
-				<TextField 
-					value={this.state.zipcode} 
-					label="Zipcode" 
-					className={classes.menu}
-					onChange={this.handleInputChangeFor('zipcode')}/>
+				<h2>Admin Registration</h2>
+				<div>
+					<TextField
+						required 
+						label="Username" 
+						className={classes.menu}
+						value={this.state.username}
+						onChange={this.handleInputChangeFor('username')} />
+					<TextField 
+						required
+						type="password"
+						label="Password" 
+						className={classes.menu}
+						value={this.state.password} 
+						onChange={this.handleInputChangeFor('password')} />
+				</div>
+				<div>
+					<TextField 
+						required 
+						label="First Name" 
+						className={classes.menu}
+						value={this.state.firstName} 
+						onChange={this.handleInputChangeFor('firstName')} />
+					<TextField 
+						required 
+						label="Last Name"
+						className={classes.menu}
+						value={this.state.lastName} 
+						onChange={this.handleInputChangeFor('lastName')} />
+					<TextField 
+						required 
+						label="Organization" 
+						className={classes.menu}
+						value={this.state.organization} 
+						onChange={this.handleInputChangeFor('organization')} />
+					<TextField 
+						required 
+						label="Title" 
+						className={classes.menu}
+						value={this.state.title} 
+						onChange={this.handleInputChangeFor('title')} />
+				</div>
+				<div>
+					<TextField 
+						required 
+						label="Phone Number" 
+						className={classes.menu}
+						value={this.state.phoneNumber} 
+						onChange={this.handleInputChangeFor('phoneNumber')} />
+					<TextField 
+						required 
+						label="Email Address" 
+						className={classes.menu}
+						value={this.state.emailAddress} 
+						onChange={this.handleInputChangeFor('emailAddress')} />
+					<TextField 
+						value={this.state.streetAddress} 
+						label="Street Address" 
+						className={classes.menuLg}
+						onChange={this.handleInputChangeFor('streetAddress')} />
+					<TextField 
+						value={this.state.streetAddressTwo} 
+						label="Street Address Line 2" 
+						className={classes.menuLg}
+						onChange={this.handleInputChangeFor('streetAddressTwo')} />
+				</div>
+				<div>
+					<TextField 
+						value={this.state.city} 
+						label="City" 
+						className={classes.menu}
+						onChange={this.handleInputChangeFor('city')} />
+					<TextField 
+						select 
+						required 
+						value={this.state.state} 
+						className={classes.menu}
+						onChange={this.handleInputChangeFor('state')} 
+						label="State">
+						{this.props.stateNames.map(stateName => {
+							return ( <MenuItem key={stateName.abbr} value={stateName.abbr}>{stateName.full}</MenuItem> )
+						})}	
+					</TextField>
+					<TextField 
+						value={this.state.zipcode} 
+						label="Zipcode" 
+						className={classes.menu}
+						onChange={this.handleInputChangeFor('zipcode')}/>
+				</div>
 				<div className={classes.buttonArea}>
 					<Button 
 						type="submit"

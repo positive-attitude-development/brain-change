@@ -158,38 +158,38 @@ export default function EnhancedTable(props) {
     //render table
     return (
         <div className="container">
+            {/* CSV exporter */}
+            <CSVLink
+                className="CSVLink"
+                filename={"brain-change-export.csv"}
+                data={filteredRows}
+                headers={headRows}>
+                <Button variant="contained" color="primary" size="large">
+                    Export to CSV
+                </Button>
+            </CSVLink>
+            {/* search input */}
+            <TextField
+                className="searchInput"
+                variant="outlined"
+                autoFocus
+                label="Search"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton
+                                disabled={!searchTerm}
+                                onClick={e => setSearchTerm("")}
+                            >
+                                <Clear color="inherit" fontSize="small" />
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
+            />
             <div className="wrapper">
-                {/* CSV exporter */}
-                <CSVLink
-                    className="CSVLink"
-                    filename={"brain-change-export.csv"}
-                    data={filteredRows}
-                    headers={headRows}>
-                    <Button variant="contained" color="primary" size="large">
-                        Export to CSV
-                    </Button>
-                </CSVLink>
-                {/* search input */}
-                <TextField
-                    className="searchInput"
-                    variant="outlined"
-                    autoFocus
-                    label="Search"
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    disabled={!searchTerm}
-                                    onClick={e => setSearchTerm("")}
-                                >
-                                    <Clear color="inherit" fontSize="small" />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                />
                 {/* table */}
                 <Table
                     className="table"
