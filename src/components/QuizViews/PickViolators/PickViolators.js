@@ -62,7 +62,6 @@ class PickViolators extends Component {
         this.setState({
             violators: [...this.state.violators, event.target.value]
         })
-        console.log(this.state.violators)
     }
 
     render() {

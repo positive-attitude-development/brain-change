@@ -81,13 +81,12 @@ class OrderViolators extends Component {
 
 
     render() {
-        // const {items} = this.state.items; 
         return (
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid> 
-                <h2 className="inst">Rank your 5 violator values in order</h2>     
+                <h2 className="inst">Rank your 5 violator values in order of most conflict to least</h2>     
                 <Paper className = "paper">    
                     <div className="background">
                         <SortableContainer onSortEnd={this.onSortEnd}>

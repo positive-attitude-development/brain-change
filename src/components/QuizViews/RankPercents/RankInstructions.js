@@ -26,7 +26,7 @@ class RankInstructions extends Component {
                         </Typography>
                     </div>
                     <div className="giph">
-                        <iframe src="https://giphy.com/embed/lryXRzlarUKQQ6U6iE" frameBorder="0" class="giphy-embed"></iframe>
+                        <iframe src="https://giphy.com/embed/lryXRzlarUKQQ6U6iE" frameBorder="0" class="giphy-embed" title="percentageInstructions"></iframe>
                     </div>
                     <div className="button">
                         <Button  
