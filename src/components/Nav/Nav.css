@@ -10,7 +10,7 @@
     text-shadow: 1px 1px #8faca8;
     line-height: 85%;
     vertical-align: 15%;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif,;
 }
 
 .nav {
@@ -23,7 +23,7 @@
   color: #f2f2f2;
   background-color: #003466;
   text-align: center;
-  padding: 60px 10px 0px 10px;
+  padding: 50px 10px 0px 10px;
   text-decoration: none;
   font-size: 20px;
   letter-spacing: -1px;
@@ -32,6 +32,7 @@
   border:none;
   cursor: pointer;
   outline:0;
+  margin-bottom: 5px;
 }
 
 .nav-link:hover {
@@ -48,4 +49,8 @@
   width: 70px;
   margin: 0px;
   padding: 0px;
+}
+
+.activeNav {
+  text-decoration: underline;
 }
