@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Button, Grid, Paper, Typography } from '@material-ui/core';
+import {  Button, Grid, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
 import {sortableContainer, sortableElement} from 'react-sortable-hoc';
@@ -40,7 +40,7 @@ class OrderValues1 extends Component {
         this.setState({
             items: newArray,
         })
-
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -66,7 +66,7 @@ class OrderValues1 extends Component {
         let idArray = this.state.items.map(value => {
             return value.id
         })
-
+        //subtracting end time of quiz from time quiz page originated
         let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 

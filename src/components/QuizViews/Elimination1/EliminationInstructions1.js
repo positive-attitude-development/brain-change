@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Grid, Button, Paper, Typography} from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-import './EliminationInstructions1.css';
+import '../EliminationInstructions.css'
 
 
 class EliminationInstructions1 extends Component {
-
-
 
 
     state = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Paper, Card, CardContent } from '@material-ui/core';
+import { Button, Card, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 import QuizViewWelcomeForm from './QuizViewWelcomeForm';
 import './QuizViewWelcome.css';
@@ -12,7 +12,6 @@ class QuizViewWelcome extends Component {
     } //end componentDidMount
 
     startQuiz = event => {
-        console.log('start the quiz');
         this.props.history.push('/ElimInstructions1');
     } //end startQuiz
 
@@ -21,7 +20,6 @@ class QuizViewWelcome extends Component {
     }
 
     render() {
-        console.log('this.props.match.params:', this.props.match.params)
         return (      
             <div>
                 <Card raised className="introCard">

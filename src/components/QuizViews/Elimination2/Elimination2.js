@@ -14,6 +14,8 @@ class Elimination2 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -24,12 +26,13 @@ class Elimination2 extends Component {
         this.setState({
             time: totalTime
         })
-        console.log(this.state)
     }
 
     // Send 9 selected values to reducer and route to beliefinstruct1 page, will alert if 
     // 9 values has not been selected
     handleNext = () => {
+
+            //capturing ending time, subtracting current time
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -61,13 +64,6 @@ class Elimination2 extends Component {
             round2: [...this.state.round2, event.target.value],
         })
     }
-
-    handleClick = () => {
-        this.setState({
-            round2: [24, 20, 10, 35, 7, 25, 1, 11, 28]
-        })
-    }
-
     
     render() {        
         let newArray = this.props.values.filter((value) => {
@@ -87,7 +83,7 @@ class Elimination2 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
+                    <h2 className="inst"> Remove the 9 least important values</h2>
                     <Paper className="paper2">
                         <div className="valuesList">
                             <ul className="elim2List">

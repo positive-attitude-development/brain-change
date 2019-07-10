@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
 import { connect } from 'react-redux';
-import './OrderValuesInstructions.css'
 
 class OrderValuesInstructions extends Component {
 

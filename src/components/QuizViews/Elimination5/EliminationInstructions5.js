@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Paper, Typography, Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
-import './EliminationInstructions5.css'
+import '../EliminationInstructions.css'
+
 
 class EliminationInstructions5 extends Component {
 

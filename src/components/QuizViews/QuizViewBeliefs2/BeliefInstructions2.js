@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import {  Button, Grid, Paper, Typography } from '@material-ui/core';
 import StatusBar from '../StatusBar'; 
@@ -44,4 +45,3 @@ class BeliefInstructions2 extends Component {
 }
 
 export default BeliefInstructions2
-

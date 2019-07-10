@@ -4,9 +4,6 @@ import './Elimination1.css';
 import { Paper, Button, Grid } from '@material-ui/core';
 import StatusBar from '../StatusBar';
 
-
-
-
 class Elimination1 extends Component {
 
     state = {
@@ -18,6 +15,8 @@ class Elimination1 extends Component {
     // Fetch all the value words
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_VALUES' });
+
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -28,11 +27,12 @@ class Elimination1 extends Component {
         this.setState({
             time: totalTime
         })
-        console.log(this.state)
     }
 
     // Send 9 selected values to reducer and route to Eliminationinstruction2 page
     handleNext = () => {
+
+            //capturing ending time, subtracting current time
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -41,8 +41,6 @@ class Elimination1 extends Component {
             let nextTime = ((min * 60 ) + (hour * 360) + sec)
             let totalTime1 = nextTime - this.state.time 
            
-
-            console.log(this.state.time)
             this.props.dispatch({ type: 'SET_NEW_VALUES', name: 'round1', payload: this.state.round1})
             this.props.dispatch({ type: 'SET_NEW_TIME', name: 'round1Time', payload: totalTime1})
             this.props.history.push('/ElimInstructions2')        
@@ -66,22 +64,14 @@ class Elimination1 extends Component {
         })
     }
 
-    handleClick = () => {
-        this.setState({
-            round1: [3, 36, 8, 30, 16, 37, 26, 22, 13]
-        })
-    }
-
-
     render() {
-        console.log(this.state.time)
         return (
             <div>
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove the 9 least important values</h2>
+                    <h2 className="inst" > Remove the 9 least important values</h2>
                     <Paper className="paper">
                         <div className="valuesList">
                             <ul className="elim1List">

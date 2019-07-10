@@ -14,6 +14,8 @@ class Elimination3 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -29,6 +31,8 @@ class Elimination3 extends Component {
     // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
     // Will send alert if 5 values are not selected
     handleNext = () => {
+
+            //capturing ending time, subtracting current time
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
@@ -59,12 +63,6 @@ class Elimination3 extends Component {
             round3: [...this.state.round3, event.target.value]
         })
     }
-
-    handleClick = () => {
-        this.setState({
-            round3: [29, 34, 31, 9, 5]
-        })
-    }
     
     render() {
         // Creating array of all the values minus the previous selected values
@@ -86,7 +84,7 @@ class Elimination3 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                 <div className="paperContainer">
-                    <h2 className="inst" onClick={this.handleClick}>Remove the 5 least important values</h2>
+                    <h2 className="inst"> Remove the 5 least important values</h2>
                     <Paper className="paper3">
                         <div className="valuesList">
                             <ul className="elim3List">
