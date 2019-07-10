@@ -1,14 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Button, IconButton, MenuItem, Table, TableBody, TableCell, 
-        TableHead, TablePagination, TableRow, TableSortLabel, TextField, 
-    InputAdornment, Paper, Dialog, DialogActions, DialogTitle, DialogContent} from '@material-ui/core';
+import {Button, IconButton, MenuItem, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment} from '@material-ui/core';
 import {CSVLink} from 'react-csv';
 import {Pageview, Clear} from '@material-ui/icons'
 import Swal from 'sweetalert2';
 import './Admin.css';
 
+//header rows for table and CSV export
 const headRows = [
     { key: 'name', label: 'Name' },
     { key: 'organization', label: 'Organization' },
@@ -86,7 +85,7 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table
+//table component
 export default function EnhancedTable(props) {
     const {history} = props;
     const [order, setOrder] = React.useState('asc');
@@ -99,7 +98,7 @@ export default function EnhancedTable(props) {
     //dispatch hook
     let dispatch = useDispatch();
 
-    //filter by search term
+    //filter listed columns by search term
     const [searchTerm, setSearchTerm] = React.useState('');
     const filteredRows = rows.filter(x =>
         x['name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -107,10 +106,11 @@ export default function EnhancedTable(props) {
         x['title'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['email_address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
         x['phone_number'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-        x['level'].toString().includes(searchTerm) 
-    )
+        x['address'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+        x['state'].toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-    //update access level
+    //update access level after confirming via sweet alert
     function changeAccessLevel(id, level) {
         Swal.fire({
             title: 'Update access level?',
@@ -155,54 +155,56 @@ export default function EnhancedTable(props) {
     //empty row handler
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, filteredRows.length - page * rowsPerPage);
 
-    
     //render table
     return (
         <div className="container">
+            {/* CSV exporter */}
+            <CSVLink
+                className="CSVLink"
+                filename={"brain-change-export.csv"}
+                data={filteredRows}
+                headers={headRows}>
+                <Button variant="contained" color="primary" size="large">
+                    Export to CSV
+                </Button>
+            </CSVLink>
+            {/* search input */}
+            <TextField
+                className="searchInput"
+                variant="outlined"
+                autoFocus
+                label="Search"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton
+                                disabled={!searchTerm}
+                                onClick={e => setSearchTerm("")}
+                            >
+                                <Clear color="inherit" fontSize="small" />
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
+            />
             <div className="wrapper">
-                {/* CSV exporter */}
-                <CSVLink
-                    className="CSVLink"
-                    filename={"brain-change-export.csv"}
-                    data={filteredRows}
-                    headers={headRows}>
-                    <Button variant="contained" color="primary" size="large">
-                        Export to CSV
-                    </Button>
-                </CSVLink>
-                {/* search input */}
-                <TextField
-                    className="searchInput"
-                    variant="outlined"
-                    autoFocus
-                    label="Search"
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    disabled={!searchTerm}
-                                    onClick={e => setSearchTerm("")}
-                                >
-                                    <Clear color="inherit" fontSize="small" />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                />
                 {/* table */}
                 <Table
                     className="table"
                     aria-labelledby="tableTitle"
                 >
+                    {/* table head */}
                     <EnhancedTableHead
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
                         rowCount={filteredRows.length}
                     />
+                    {/* table body */}
                     <TableBody>
+                        {/* map through search-filtered rows to create table rows */}
                         {stableSort(filteredRows, getSorting(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, i) => {
@@ -216,6 +218,7 @@ export default function EnhancedTable(props) {
                                         <TableCell>{row.address}</TableCell>
                                         <TableCell>{row.state}</TableCell>
                                         <TableCell>
+                                            {/* admin access level dropdown */}
                                             <TextField
                                                 disabled={row.level === 5}
                                                 select
@@ -247,6 +250,7 @@ export default function EnhancedTable(props) {
                     </TableBody>
                 </Table>
             </div>
+            {/* pagination at bottom of table */}
             <TablePagination
                 rowsPerPageOptions={[10, 20]}
                 component="div"

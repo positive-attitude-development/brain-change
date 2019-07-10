@@ -6,7 +6,7 @@ function* fetchAllRecords() {
         let response = yield axios.get('/api/participant/all');
         yield put({type: 'SET_ALL_RECORDS', payload: response.data});
     } catch (error) {
-        console.log('Error in fetchAllRecords:', error)
+        // console.log('Error in fetchAllRecords:', error)
     }
 }
 
@@ -15,7 +15,7 @@ function* downloadResultData() {
         let response = yield axios.get('/api/snapshot/all');
         yield put({type: 'SET_RESULT_DATA', payload: response.data});
     } catch (error) {
-        console.log('Error in downloadResultData:', error)
+        // console.log('Error in downloadResultData:', error)
     }
 }
 

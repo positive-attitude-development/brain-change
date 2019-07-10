@@ -4,9 +4,6 @@ import {Card, CardContent, CardActions, TextField, Button, MenuItem, Dialog, Dia
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
-	root: {
-
-	},
 	card: {
 		margin: 'auto',
 		marginTop: '30px',
@@ -65,7 +62,6 @@ class Profile extends Component{
 
 	render(){
 		const {classes} = this.props;
-		console.log('this.props.admin:', this.props.admin)
 		return(
 			<div>
 				{this.props.profile.map((profile) =>{

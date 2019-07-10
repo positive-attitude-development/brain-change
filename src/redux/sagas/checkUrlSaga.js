@@ -7,7 +7,7 @@ function* newUrl(action){
         yield axios.put(`/api/url/${urlid}`, action.payload)
         yield put({type: 'FETCH_INDIVIDUAL', payload: action.payload.id})
     }catch(error){
-        console.log('error in newUrl:', error)
+        // console.log('error in newUrl:', error)
     }
 }
 
@@ -16,13 +16,12 @@ function* retrieveUrl(action) {
         let response = yield axios.get(`/api/url/retrieve&id=${action.payload}`);
         yield put({type: 'SET_URL', payload: response.data});
     } catch (error) {
-        console.log('Error in fetchUrl:', error);
+        // console.log('Error in fetchUrl:', error);
     }
 }
 
 function* verifyUrl(action) {
     try {
-        console.log('verifyURL action', action.payload)
         let response = yield axios.get(`/api/url/verify?token=${action.payload}`);
         let expireDate = new Date(response.data.expiration_date);
         let today = new Date();
@@ -30,7 +29,7 @@ function* verifyUrl(action) {
             yield put({type: 'SET_URL', payload: response.data});
         }
     } catch(error) {
-        console.log('Error in checkUrl', error);
+        // console.log('Error in checkUrl', error);
     }
 }
 

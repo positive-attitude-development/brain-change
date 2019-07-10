@@ -12,17 +12,15 @@ class AllRecords extends Component {
 
     render() {
         return (
-            <div>
-                <Card raised className="card">
-                    <CardContent>
-                        <h3>All Participants:</h3>
-                        {this.props.allRecords[0] &&
-                            <AllRecordsTable history={this.props.history} />
-                        }
-                    </CardContent>
-                </Card>
-                
-            </div>
+            <Card raised className="card">
+                <CardContent>
+                    <h3>All Participants:</h3>
+                    {/* render all participants table if information is in reducer */}
+                    {this.props.allRecords[0] &&
+                        <AllRecordsTable history={this.props.history} />
+                    }
+                </CardContent>
+            </Card>
         )
     }
 }

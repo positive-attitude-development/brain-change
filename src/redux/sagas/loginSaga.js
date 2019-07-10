@@ -17,10 +17,6 @@ function* loginAdmin(action) {
     // allow the server session to recognize the admin
     const response = yield axios.post('api/admin/login', action.payload, config);
     let accessLevel = response.data.level;
-    console.log('login saga action:', action)
-    
-    console.log('action.payload.level:', action.payload.level );
-    console.log('accessLevel:', accessLevel );
 
     let levelCheck;
 
@@ -29,7 +25,6 @@ function* loginAdmin(action) {
     }else{
       levelCheck = action.payload.level;
     }
-    console.log( 'levelCheck:', levelCheck );
     // after the admin has logged in get the admin information from the server
     yield put({type: 'FETCH_ADMIN'});
     if (levelCheck === 1){
@@ -42,7 +37,7 @@ function* loginAdmin(action) {
 		  yield action.history.push('/allparticipants');
     }
   } catch (error) {
-    console.log('Error with admin login:', error);
+    // console.log('Error with admin login:', error);
     if (error.response.status === 401) {
       // The 401 is the error status sent from passport
       // if admin isn't in the database or if the username and password don't match in the database
@@ -72,7 +67,7 @@ function* logoutAdmin(action) {
     yield put({type: 'UNSET_ADMIN'});
 
   } catch (error) {
-    console.log('Error with admin logout:', error);
+    // console.log('Error with admin logout:', error);
   }
 }
 

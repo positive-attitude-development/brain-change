@@ -4,9 +4,6 @@ import {Button, TextField, Card, CardContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = {
-	root: {
-
-  },
   card: {
     width: '600px',
     margin: '30px auto',
@@ -28,13 +25,6 @@ class LoginPage extends Component {
     username: '',
     password: '',
   };
-
-  demoClick = () => {
-    this.setState({
-      username: 'lylewildes',
-      password: 'password'
-    })
-  }
 
   login = event => {
     event.preventDefault();
@@ -77,7 +67,7 @@ class LoginPage extends Component {
 
         {/* login form */}
         <form onSubmit={this.login}>
-          <h2 onClick={this.demoClick}>Admin Login</h2>
+          <h2>Admin Login</h2>
           <div>
             <TextField
               required
@@ -106,12 +96,11 @@ class LoginPage extends Component {
           </div>
         </form>
 
-        
+          {/* switch to registration mode */}
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
+            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}} >
             Register
           </button>
 

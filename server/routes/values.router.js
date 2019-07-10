@@ -16,33 +16,34 @@ router.get('/', (req, res) => {
     });
 })
 
+
+// GET list of all categories
 router.get('/category', rejectUnauthenticated, (req, res) => {
 	let queryText = `SELECT * FROM "category" ORDER BY "category"."id";`;
 	pool.query(queryText)
 	.then((result) => {
-		console.log('category GET results:', result.rows);
 		res.send(result.rows)
 	}).catch((error) => {
 		console.log('error in category GET:', error)
 	});
 })
 
+// GET list of all populations
 router.get('/population', rejectUnauthenticated, (req, res) => {
 	let queryText = `SELECT * FROM "offender_population" ORDER BY "offender_population"."id";`;
 	pool.query(queryText)
 	.then((result) => {
-		console.log('population GET results:', result.rows);
 		res.send(result.rows)
 	}).catch((error) => {
 		console.log('error in population GET:', error)
 	});
 })
 
+// GET list of all systems
 router.get('/system', rejectUnauthenticated, (req, res) => {
 	let queryText = `SELECT * FROM "offender_system" ORDER BY "offender_system"."id";`;
 	pool.query(queryText)
 	.then((result) => {
-		console.log('system GET results:', result.rows);
 		res.send(result.rows)
 	}).catch((error) => {
 		console.log('error in system GET:', error)

@@ -17,7 +17,7 @@ function* fetchAdmin() {
     // the client-side code know the admin is logged in
     yield put({type: 'SET_ADMIN', payload: response.data});
   } catch (error) {
-    console.log('Admin get request failed', error);
+    // console.log('Admin get request failed', error);
   }
 }
 
@@ -25,10 +25,9 @@ function* fetchAdminContact() {
 
   try {
     const response = yield axios.get('api/adminContact');
-
     yield put({type: 'SET_ADMIN_CONTACT', payload: response.data})
   } catch (error) {
-    console.log('Admin contact failed', error)
+    // console.log('Admin contact failed', error)
   }
 }
 
@@ -40,7 +39,7 @@ function* fetchProfile(action){
     //and send this info to the editProfileReducer so it's stored there if admin edits profile info
     yield put({type: 'EDIT_PROFILE', payload: response.data})
   }catch(error){
-    console.log('Profile get request failed', error)
+    // console.log('Profile get request failed', error)
   }
 }
 
@@ -52,7 +51,7 @@ function* updateAdminLevel(action) {
     //then, update the admin contact list
     yield put({type: 'FETCH_ADMIN_CONTACT'});
   } catch(error) {
-    console.log('Update access level failed', error);
+    // console.log('Update access level failed', error);
   }
 }
 
@@ -62,7 +61,7 @@ function* updateProfile(action){
     yield put({type: 'CANCEL_EDIT'})
     yield put({type: 'FETCH_PROFILE', payload: action.payload.admin_id})
   }catch(error){
-    console.log('error in updateProfile:', error)
+    // console.log('error in updateProfile:', error)
   }
 }
 

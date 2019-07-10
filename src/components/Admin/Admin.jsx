@@ -12,16 +12,15 @@ export class Admin extends Component {
 
     render() {
         return (
-            <div>
-                <Card raised className="card">
-                    <CardContent>
-                        <h3>Admins:</h3>
-                        {this.props.contactInfo[0] &&
-                            <AdminTable history={this.props.history}/>
-                        }
-                    </CardContent>
-                </Card>
-            </div>
+            <Card raised className="card">
+                <CardContent>
+                    <h3>Admins:</h3>
+                    {/* render admin table if information is in reducer */}
+                    {this.props.contactInfo[0] &&
+                        <AdminTable history={this.props.history}/>
+                    }
+                </CardContent>
+            </Card>
         )
     }
 }

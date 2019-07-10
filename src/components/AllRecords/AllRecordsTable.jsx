@@ -1,11 +1,12 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import PropTypes from 'prop-types';
-import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment, Paper} from '@material-ui/core';
+import {Button, IconButton, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel, TextField, InputAdornment} from '@material-ui/core';
 import {Pageview, Clear} from '@material-ui/icons'
 import {CSVLink} from 'react-csv';
 import './AllRecords.css';
 
+//header rows for table and CSV export
 const headRows = [
     { key: 'participant_name', label: 'Name' },
     { key: 'age', label: 'Age' },
@@ -83,7 +84,7 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table
+//table component
 export default function EnhancedTable(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('participant_name');
@@ -94,7 +95,7 @@ export default function EnhancedTable(props) {
     let rows = useSelector(redux => redux.allRecordsReducer);
     let search = useSelector(redux => redux.searchTermReducer);
 
-    //filter by search term
+    //filter listed columns by search term
     const [searchTerm, setSearchTerm] = React.useState(search);
     const filteredRows = rows.filter(x =>
         x['participant_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -167,13 +168,16 @@ export default function EnhancedTable(props) {
                     className="table"
                     aria-labelledby="tableTitle"
                 >
+                    {/* table head */}
                     <EnhancedTableHead
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
                         rowCount={filteredRows.length}
                     />
+                    {/* table body */}
                     <TableBody>
+                        {/* map through search-filtered rows to create table rows */}
                         {stableSort(filteredRows, getSorting(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, i) => {
@@ -204,6 +208,7 @@ export default function EnhancedTable(props) {
                     </TableBody>
                 </Table>
             </div>
+            {/* pagination at bottom of table */}
             <TablePagination
                 rowsPerPageOptions={[10, 20]}
                 component="div"

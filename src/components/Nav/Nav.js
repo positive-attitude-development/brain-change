@@ -3,12 +3,11 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-
-
 class Nav extends Component{
 	render(){
 		let homeLink;
 		let titleLink;
+		//determine where main logo link will redirect to onClick and determine where admin's "home" page will be based on access level
 		if (!this.props.admin.level){
 			homeLink = <Link className="nav-link" to="/quiz">Take Assessment</Link>
 			titleLink = <Link to="/quiz"><img className="logo" src="/headtree1.jpg" alt="brainchangelogo"/><h2 className="nav-title">Brain <br /> Change</h2></Link>
