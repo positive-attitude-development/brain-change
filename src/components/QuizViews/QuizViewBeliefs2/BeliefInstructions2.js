@@ -26,7 +26,7 @@ class BeliefInstructions2 extends Component {
 
 
                     <div className="giph"> 
-                        <iframe src="https://giphy.com/embed/Ve4m9xFaBaumcNPmUD" frameBorder="0" class="giphy-embed" title="belief2Instructions"></iframe>   
+                        <iframe src="https://giphy.com/embed/Ve4m9xFaBaumcNPmUD" frameBorder="0" className="giphy-embed" title="belief2Instructions"></iframe>   
                     </div>
 
                     <div className="button">

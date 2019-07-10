@@ -26,7 +26,7 @@ class OrderViolatorsInstructions extends Component {
                     </div>
 
                     <div className="giph">
-                        <iframe src="https://giphy.com/embed/MDga3TwBlXkFIAuEN2" frameBorder="0" class="giphy-embed" title="orderViolatorsInstructions"></iframe>
+                        <iframe src="https://giphy.com/embed/MDga3TwBlXkFIAuEN2" frameBorder="0" className="giphy-embed" title="orderViolatorsInstructions"></iframe>
                     </div>
   
                     <div className = "button">
