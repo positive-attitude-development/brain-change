@@ -109,6 +109,8 @@ class RegisterPage extends Component {
 						className={classes.menu}
 						value={this.state.lastName} 
 						onChange={this.handleInputChangeFor('lastName')} />
+				</div>
+				<div>
 					<TextField 
 						required 
 						label="Organization" 
@@ -123,18 +125,20 @@ class RegisterPage extends Component {
 						onChange={this.handleInputChangeFor('title')} />
 				</div>
 				<div>
+					<TextField
+						required
+						label="Email Address"
+						className={classes.menu}
+						value={this.state.emailAddress}
+						onChange={this.handleInputChangeFor('emailAddress')} />
 					<TextField 
 						required 
 						label="Phone Number" 
 						className={classes.menu}
 						value={this.state.phoneNumber} 
 						onChange={this.handleInputChangeFor('phoneNumber')} />
-					<TextField 
-						required 
-						label="Email Address" 
-						className={classes.menu}
-						value={this.state.emailAddress} 
-						onChange={this.handleInputChangeFor('emailAddress')} />
+				</div>
+				<div>
 					<TextField 
 						value={this.state.streetAddress} 
 						label="Street Address" 
