@@ -6,6 +6,7 @@ import {Pageview, Clear} from '@material-ui/icons'
 import {CSVLink} from 'react-csv';
 import './MyParticipants.css';
 
+//header rows for table and CSV export
 const headRows = [
     {key: 'participant_name', label: 'Name'},
     {key: 'age', label: 'Age'},
@@ -82,7 +83,7 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-//table
+//table component
 export default function EnhancedTable(props) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('participant_name');
@@ -92,7 +93,7 @@ export default function EnhancedTable(props) {
     //accessing redux store for participant information
     let rows = useSelector(redux => redux.participant);
 
-    //filter by search term
+    //filter listed columns by search term
     const [searchTerm, setSearchTerm] = React.useState("");
     const filteredRows = rows.filter(x =>
         x['participant_name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -164,13 +165,16 @@ export default function EnhancedTable(props) {
                     className="table"
                     aria-labelledby="tableTitle"
                 >
+                    {/* table head */}
                     <EnhancedTableHead
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
                         rowCount={filteredRows.length}
                     />
+                    {/* table body */}
                     <TableBody>
+                        {/* map through search-filtered rows to create table rows */}
                         {stableSort(filteredRows, getSorting(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, i) => {
@@ -200,6 +204,7 @@ export default function EnhancedTable(props) {
                     </TableBody>
                 </Table>
             </div>
+            {/* pagination at bottom of table */}
             <TablePagination
                 rowsPerPageOptions={[10, 20]}
                 component="div"
