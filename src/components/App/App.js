@@ -3,7 +3,7 @@ import {HashRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -22,7 +22,7 @@ import QuizViewWelcome from '../QuizViews/QuizViewWelcome/QuizViewWelcome';
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_ADMIN', history: this.props.history});
-  }
+  };//end componentDidMount
 
   render() {
     return (
@@ -86,11 +86,8 @@ class App extends Component {
               exact path="/quiz/:url"
               component={QuizViewWelcome}/>
 
-            {/* If none of the other routes matched, we will show a 404. */}
-            {/* <Route render={() => <h1>404</h1>} /> */}
           </Switch>
           <QuizRoutes />
-          {/* <Footer /> */}
         </div>
       </Router>
   )}
