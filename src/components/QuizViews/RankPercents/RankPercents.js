@@ -10,6 +10,7 @@ import RankSlider from './RankSlider'
 
 
 const styles = ({
+    Root:{
        slider: {
            selectionColor: '#F76B1C',
            handleFillColor: '#F76B1C'
@@ -37,6 +38,7 @@ const styles = ({
             height: 8,
             borderRadius: 20,
         }
+        }
     })
 
 class RankPercents extends Component {
@@ -55,6 +57,7 @@ class RankPercents extends Component {
         const violators = this.props.violators
         const core = this.props.core
 
+        //filters through violator values
         let violatorsArray = this.props.values.filter((value) =>{
             for (let newValue of violators) {
                 if(newValue === value.id) {
@@ -64,6 +67,7 @@ class RankPercents extends Component {
             return false; 
         })
 
+        //filters through core values
         let coreArray = this.props.values.filter((value) =>{
             for (let newValue of core) {
                 if(newValue === value.id) {
@@ -78,6 +82,7 @@ class RankPercents extends Component {
                 core: coreArray
         })
 
+        //capturing curren time
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -93,6 +98,7 @@ class RankPercents extends Component {
     handleNext = (event) => {
         event.preventDefault(); 
 
+        //capturing ending time, subtracting current time
         let next = new Date(); 
         let sec = next.getSeconds();
         let min = next.getMinutes(); 
@@ -128,6 +134,7 @@ class RankPercents extends Component {
                    
                         <div className = "core">
                     
+                            {/* mapping through core values */}
                             <h3>Core Values</h3>
                             <ul >
                                 {this.state.core.map(value => {
@@ -137,6 +144,7 @@ class RankPercents extends Component {
                             </ul>
                         </div>
                     
+                                {/* mapping through violator values */}
                         <div className = "violators">
                                 <h3>Core Violators</h3>
                                 <ul>
@@ -153,9 +161,9 @@ class RankPercents extends Component {
                             <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
                                     
-                                    className={classes.styles}
+                                    className={classes.root}
                                     value={violatorPercent}
-                                    aria-label="Pretto slider" 
+                                    aria-label="Percent Slider" 
                                     defaultValue={50} 
                                     style={{ 
                                         height: '25px'
