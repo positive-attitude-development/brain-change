@@ -61,6 +61,7 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 	});
 })
 
+// GET snapshot results
 router.get('/snapshot/:id', (req, res) => {
 	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators", "result"."dates",
 	(select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
@@ -80,12 +81,8 @@ router.get('/snapshot/:id', (req, res) => {
 	}); 
 })
 
-
 //POST route to add new participants
 router.post('/', rejectUnauthenticated, async (req, res, next) => {
-  console.log('add participant req.body:', req.body);
-  console.log('add participant req.body.participant:', req.body.participant);
-  console.log('add participant req.body.offender:', req.body.offender);
   const isOffender = (req.body.participant.category_id === 1);
   console.log('participant is offender:', isOffender);
   const connection = await pool.connect()
@@ -104,7 +101,7 @@ router.post('/', rejectUnauthenticated, async (req, res, next) => {
 	console.log('expiration date:', expirationDate)
 	const participantURL = `INSERT INTO "url" ("url", "expiration_date", "participant_id", "admin_id") VALUES ($1, $2, $3, $4);`;
 	const participantURLValues = [req.body.participant.url, expirationDate, participantId, req.user.id ]
-	const urlresult = await connection.query(participantURL, participantURLValues)
+	await connection.query(participantURL, participantURLValues)
 	
 	if (isOffender) {
 	  const addParticipantOffender = `INSERT INTO "offender" ("participant_id", "offender_system_id", "system_id", "violent_offender", "felon", "population_id")
@@ -127,7 +124,6 @@ router.post('/', rejectUnauthenticated, async (req, res, next) => {
 
 //POST route for self-registering participants
 router.post('/self-register', (req, res) => {
-	console.log('add participant req.body:', req.body);
 	const addParticipant = `INSERT INTO "participant" ("admin_id", "first_name", "last_name", "age", "gender", "category_id", "state", "email", "phone_number")
 		VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
 		RETURNING "id";`;
@@ -145,12 +141,8 @@ router.post('/self-register', (req, res) => {
 
 //GET route for all participants (owner only)
 router.get('/all', rejectUnauthenticated, (req, res) => {
-	console.log('req.user:', req.user.id)
-	//only owners (access level 3 can get results)
 	if (req.user.level >= 4) {
-
 		let queryText = `SELECT "participant"."id" AS "participant_id", concat("participant"."first_name", ' ', "participant"."last_name") AS "participant_name", "participant"."age", "participant"."gender", (select "category"."category" FROM "category" WHERE "category".id = "participant"."category_id"), "participant"."state", "participant"."email", "participant"."phone_number" AS "phone", concat("admin_contact"."first_name", ' ', "admin_contact"."last_name") AS "admin_name" 
-
 		FROM "participant" JOIN "admin_contact" ON "participant"."admin_id" = "admin_contact".id
 		ORDER BY "participant".id;`;
 		pool.query(queryText)
@@ -168,7 +160,6 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 
 //updates participant info
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
-  console.log('update participant req.body:', req.body);
   const isOffender = (req.body.category_id === 1);
   console.log('participant is offender:', isOffender);
   const connection = await pool.connect()
@@ -198,6 +189,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 	}
 });//end participant update PUT
 
+// remove participant from admin and reassign to admin_id of 1
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
 	let query = `UPDATE "participant" SET "admin_id" = 1 WHERE "participant".id = $1 AND "admin_id" = $2`;
 	let values = [req.params.id, req.user.id];
@@ -209,7 +201,5 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
 		res.sendStatus(500);
 	})
 })
-
-
 
 module.exports = router;
