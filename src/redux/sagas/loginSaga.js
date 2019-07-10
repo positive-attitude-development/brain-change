@@ -17,10 +17,6 @@ function* loginAdmin(action) {
     // allow the server session to recognize the admin
     const response = yield axios.post('api/admin/login', action.payload, config);
     let accessLevel = response.data.level;
-    console.log('login saga action:', action)
-    
-    console.log('action.payload.level:', action.payload.level );
-    console.log('accessLevel:', accessLevel );
 
     let levelCheck;
 
@@ -29,7 +25,6 @@ function* loginAdmin(action) {
     }else{
       levelCheck = action.payload.level;
     }
-    console.log( 'levelCheck:', levelCheck );
     // after the admin has logged in get the admin information from the server
     yield put({type: 'FETCH_ADMIN'});
     if (levelCheck === 1){

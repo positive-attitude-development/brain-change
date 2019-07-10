@@ -22,7 +22,6 @@ function* retrieveUrl(action) {
 
 function* verifyUrl(action) {
     try {
-        console.log('verifyURL action', action.payload)
         let response = yield axios.get(`/api/url/verify?token=${action.payload}`);
         let expireDate = new Date(response.data.expiration_date);
         let today = new Date();

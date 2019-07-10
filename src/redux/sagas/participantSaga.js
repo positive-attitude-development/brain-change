@@ -40,7 +40,6 @@ function* fetchSnapshot(action) {
     try {
         const response = yield axios.get(`/api/participant/snapshot/${action.payload}`); 
         yield put({type: 'SET_SNAPSHOT', payload: response.data});
-        console.log(response.data); 
     }catch(error){
         console.log('Error in fetchSnapshot:' , error)
     }
@@ -48,7 +47,6 @@ function* fetchSnapshot(action) {
 
 function* selfRegisterParticipant(action) {
     try {
-        console.log('selfRegisterParticipant action.payload:', action.payload)
         let response = yield axios.post('/api/participant/self-register', action.payload)
         console.log('selfRegisterParticipant returns:', response.data)
         yield put({type: 'SET_URL', payload: {
