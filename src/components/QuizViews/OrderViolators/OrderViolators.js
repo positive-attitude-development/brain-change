@@ -24,6 +24,7 @@ class OrderViolators extends Component {
 
         const violators = this.props.violators
 
+        //filtering values, returing only violater values
         let newArray = this.props.values.filter((value) =>{
             for (let newValue of violators) {
                 if(newValue === value.id) {
@@ -36,6 +37,8 @@ class OrderViolators extends Component {
         this.setState({
             items: newArray 
         })
+
+        //setting time state to current time
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -61,7 +64,8 @@ class OrderViolators extends Component {
         let idArray = this.state.items.map(value => {
             return value.id
         })
-        let next = new Date(); 
+            //subtracting end time of quiz from time quiz page originated
+            let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 
             let hour = next.getHours(); 

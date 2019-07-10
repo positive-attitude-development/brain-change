@@ -111,6 +111,7 @@ class RankPercents extends Component {
         this.props.history.push('FinalResults'); 
     }
 
+    // setting the percents 
     handleChange = propertyName => (e, value) => {
         e.preventDefault();
         this.setState({

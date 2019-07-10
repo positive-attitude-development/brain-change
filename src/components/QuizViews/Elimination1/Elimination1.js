@@ -15,6 +15,8 @@ class Elimination1 extends Component {
     // Fetch all the value words
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_VALUES' });
+
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -29,6 +31,8 @@ class Elimination1 extends Component {
 
     // Send 9 selected values to reducer and route to Eliminationinstruction2 page
     handleNext = () => {
+
+            //capturing ending time, subtracting current time
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 

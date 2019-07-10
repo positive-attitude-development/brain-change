@@ -16,6 +16,7 @@ class Elimination5 extends Component {
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
 
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();

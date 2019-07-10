@@ -18,6 +18,7 @@ state = {
 componentDidMount() {
     this.props.dispatch({type: 'FETCH_VALUES'})
 
+    // setting current time to state
     let now = new Date();
     let sec = now.getSeconds();
     let min = now.getMinutes();
@@ -42,6 +43,7 @@ handleClick = (event) => {
     event.preventDefault();
     if ( this.state.beief1 !== "" && this.state.belief2 !== "" && this.state.belief3 !== "") {
    
+        //capturing ending time, subtracting current time
         let next = new Date(); 
         let sec = next.getSeconds();
         let min = next.getMinutes(); 

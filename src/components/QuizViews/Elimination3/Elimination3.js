@@ -14,6 +14,8 @@ class Elimination3 extends Component {
     // Fetch all value words
     componentDidMount() {
         this.props.dispatch({type: 'FETCH_VALUES'});
+
+        // setting current time to state
         let now = new Date();
         let sec = now.getSeconds();
         let min = now.getMinutes();
@@ -29,6 +31,8 @@ class Elimination3 extends Component {
     // Send 5 selected values to reducer and route to EliminationInstruc4 page. 
     // Will send alert if 5 values are not selected
     handleNext = () => {
+
+            //capturing ending time, subtracting current time
             let next = new Date(); 
             let sec = next.getSeconds();
             let min = next.getMinutes(); 

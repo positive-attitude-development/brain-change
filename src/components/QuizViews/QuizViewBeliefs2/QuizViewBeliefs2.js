@@ -36,6 +36,7 @@ export class QuizViewBeliefs2 extends Component {
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_VALUES'})
 
+    // setting current time to state
     let now = new Date();
     let sec = now.getSeconds();
     let min = now.getMinutes();
@@ -48,6 +49,7 @@ componentDidMount() {
     })
 }
 
+    //sets testBelief to whichever radio button being chosen
     handleRadio = (event) => {
         event.preventDefault(); 
         this.setState({
@@ -55,6 +57,7 @@ componentDidMount() {
             })
         }
 
+    //sets type of belief
     handleChange = (event) => {
         event.preventDefault();
         this.setState({
@@ -66,6 +69,7 @@ componentDidMount() {
     handleClick = (event) => {
         event.preventDefault();
 
+        //capturing ending time, subtracting current time        
         let next = new Date(); 
         let sec = next.getSeconds();
         let min = next.getMinutes(); 
