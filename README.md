@@ -1,94 +1,222 @@
-# REACT AUTH SHELF
+# BRAIN CHANGE
 
-Our client, Prime Digital Academy: Room 2, has asked for an app to simulate the behavior of their shelf. That is, a list of items placed on the classroom shelf. More details about each of the features are listed below in the README.md.
+Brain Change is a digital version of an assessment activity called Positive Attitude Development by Lyle Wildes.  The purpose of the application is to help people identify their core values so they can make more informed choices about their behavior and to collect data such as core values, violator values, order of value words eliminated, and the time of completion of the assessment. This version uses React, Redux, Express, Passport, PostgreSQL, Material UI and SweetAlert2  (a full list of dependencies can be found in `package.json`).
 
-## DOWNLOAD THIS REPOSITORY
 
-> NOTE: Do not clone this repository.
 
-* Don't Fork or Clone. Instead, have one memeber of your group click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
-* Add members of your group to the repository.
+## PREREQUISITES
+
+Before you get started, make sure you have the following software installed on your computer:
+
+* An IDE [VSCode is recommended](https://code.visualstudio.com/)
+* [Node.js](https://nodejs.org/en/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Nodemon](https://nodemon.io/)
 
 ## CREATE DATABASE AND TABLE
 
-Create a new database called `auth_shelf` and create a `user` table:
+Create a new database called `brain_change` and create the following tables:
  user-update
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+```
+CREATE TABLE "admin" (
+  "id" SERIAL PRIMARY KEY, 
+  "username" VARCHAR UNIQUE NOT NULL,
+  "password" VARCHAR NOT NULL,
+  "level" INT
+  );
+  
+CREATE TABLE "admin_contact"(
+  "id" SERIAL PRIMARY KEY,
+  "admin_id" INT REFERENCES "admin",
+  "first_name" VARCHAR NOT NULL,
+  "last_name" VARCHAR NOT NULL,
+  "title" VARCHAR,
+  "organization" VARCHAR,
+  "phone_number" VARCHAR,
+  "email_address" VARCHAR,
+  "street_address" VARCHAR,
+  "street_address2" VARCHAR,
+  "city" VARCHAR,
+  "state" VARCHAR,
+  "zipcode" VARCHAR
 );
 
-CREATE TABLE "item" (
-    "id" SERIAL PRIMARY KEY,
-    "description" VARCHAR (80) NOT NULL,
-    "image_url" VARCHAR (2083),
-    "user_id" INT REFERENCES "user"
+CREATE TABLE "category" (
+"id" SERIAL PRIMARY KEY,
+"category" VARCHAR(50)
 );
+
+CREATE TABLE "participant" (
+  "id" SERIAL PRIMARY KEY,
+  "first_name" VARCHAR,
+  "last_name" VARCHAR,
+  "admin_id" INT REFERENCES "admin",
+  "age" INT,
+  "gender" VARCHAR,
+  "category_id" INT REFERENCES "category",
+  "state" VARCHAR,
+  "email" VARCHAR,
+  "phone_number" VARCHAR
+);
+
+CREATE TABLE "offender_system" (
+  "id" SERIAL PRIMARY KEY,
+  "system" VARCHAR
+);
+
+CREATE TABLE "offender_population" (
+  "id" SERIAL PRIMARY KEY,
+  "population" VARCHAR
+);
+
+CREATE TABLE "offender" (
+  "id" SERIAL PRIMARY KEY,
+  "participant_id" INT REFERENCES "participant",
+  "offender_system_id" INT REFERENCES "offender_system",
+  "system_id" INT,
+  "violent_offender" BOOLEAN,
+  "felon" BOOLEAN,
+  "population_id" INT REFERENCES "offender_population"
+);
+
+CREATE TABLE "value" (
+  "id" SERIAL PRIMARY KEY,
+  "values" VARCHAR
+);
+
+CREATE TABLE "result" (
+  "id" SERIAL PRIMARY KEY,
+  "dates" VARCHAR,
+  "participant_id" INT REFERENCES "participant",
+  "percent_core" INT,
+  "percent_violators" INT
+);
+
+CREATE TABLE "result_round" (
+  "id" SERIAL PRIMARY KEY,
+  "result_id" INT REFERENCES "result",
+  "elimination_round" INT,
+  "times" VARCHAR
+
+);
+
+CREATE TABLE "result_elimination" (
+  "id" SERIAL PRIMARY KEY,
+  "result_id" INT REFERENCES "result",
+  "value_id" INT REFERENCES "value",
+  "order" INT
+);
+
+CREATE TABLE "result_core" (
+  "id" SERIAL PRIMARY KEY,
+  "result_id" INT REFERENCES "result",
+  "value_id" INT REFERENCES "value",
+  "ranks" INT 
+);
+
+CREATE TABLE "result_belief" (
+  "id" SERIAL PRIMARY KEY,
+  "result_id" INT REFERENCES "result",
+  "belief" VARCHAR,
+  "challenged" BOOLEAN,
+  "type" VARCHAR
+);
+
+CREATE TABLE "result_violators"(
+  "id" SERIAL PRIMARY KEY,
+  "result_id" INT REFERENCES "result",
+  "value_id" INT REFERENCES "value",
+  "order" INT
+);
+
+CREATE TABLE "url" (
+  "id" SERIAL PRIMARY KEY,
+  "url" VARCHAR(20),
+  "expiration_date" DATE,
+  "participant_id" INT REFERENCES "participant",
+  "admin_id" INT REFERENCES "admin"
+);
+
+INSERT INTO "category" ("category")
+VALUES ('Offender'), ('General Public'), ('Student'), ('Other');
+
+INSERT INTO "value" ("values")
+VALUES ('Accountability'), ('Adventure'), ('Being Right'), ('Communication'), ('Community'), 
+('Compassion'), ('Confidentiality'), ('Control'), ('Courage'), ('Creativity'), ('Diversity'), 
+('Empathy'), ('Flexibility'), ('Forgiveness'), ('Fun'), ('Greed'), ('Happiness'), ('Humor'), 
+('Independence'), ('Instant Gratification'), ('Integrity'), ('Justice'), ('Loyalty'), ('Money'), 
+('Nonjudgmental'), ('Order'), ('Patience'), ('Perfection'), ('Persistence'), ('Power'), ('Privacy'), 
+('Relationships'), ('Respect'), ('Security'), ('Status'), ('Structure'), ('Transparency'), ('Wellness');
+
+INSERT INTO "offender_system" ("system")
+VALUES ('State Prison'), ('Federal Prison'), ('DAIP'), ('Juvenile System');
+
+INSERT INTO "offender_population" ("population")
+VALUES ('General Population'), ('Release'), ('Parole'), ('Other Program');
 ```
 
 ## DEVELOPMENT SETUP
 
-* Clone the repository for your group
 * Run `npm install`
 * Create a `.env` file at the root of the project and paste this line into the file:
     ```
-    SERVER_SESSION_SECRET=superDuperSecret
+    SERVER_SESSION_SECRET=sdlfnwn4ro2i3j042j3sdlf3242lkd
     ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm run server`
 * Run `npm run client`
 * Navigate to `localhost:3000`
 
 
-## Testing Routes with Postman
+## DEBUGGING
+To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+![alt text](https://github.com/PADgroup/positive-attitude-development/blob/master/public/debug.png)
+Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+![alt text](https://github.com/PADgroup/positive-attitude-development/blob/master/public/debugbutton.png)
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum. 
+## PRODUCTION BUILD
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
+Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
 
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Passport. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-    1. `POST /api/user/register` registers a new user, see body to change username/password
-    2. `POST /api/user/login` will login a user, see body to change username/password
-    3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## FEATURES
-
-We recommend working in groups of 4 or 6 and pair programming for this project. Each pair should take on one of the following features. You will want to identify any tasks that need to be finished in a particular order as a group to avoid merge conflicts. Each of the following features should be on a separate route.
-
-### View Shelf
-
-All logged in users should be able to view ALL items on the shelf (even items added by other users). On the view shelf page there should also be an option to delete the current users items on the shelf.
-
-### Add Items to the Shelf
-
-> NOTE: Image url should be a full path to an existing image on the web. You should not attempt to implement image upload for this.
+* Run `npm start`
+* Navigate to `localhost:5000`
 
 
-This page should include a form that allows user to add items to the shelf. Each item should have a description and an image url.
+## LAY OF THE LAND
 
+* `src/` contains the React application
+* `public/` contains static assets for the client-side
+* `server/` contains the Express App
 
+The code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making any changes. If you're wondering where to start, consider reading through component file comments in the following order:
 
-### Total Number of Items by User
+* src/components
+    * App/App
+    * App/QuizRoutes
+    * ProtectedRoute/ProtectedRoute
+    * Nav/Nav
+    * Admin/Admin
+    * IndividualParticipant/IndividualParticipant
+    * IndividualParticipant/SnapShot
+    * MyParticipants/MyParticipants
+    * MyParticipants/MyParticipantsTable
+    * QuizViews
+    * LoginPage/LoginPage
+    * LogOutButton/LogOutButton
 
-> NOTE: In a group of six, this feature should be completed as base functionality. In a group of four or five, this would be a stretch goal.
+## DEPLOYMENT
 
-This page should display a list of users along with the total number of items they have added to the shelf. Users with 0 items on the shelf should be displayed as well! 
+1. Create a new Heroku project
+2. Link the Heroku project to the project GitHub Repo
+3. Create an Heroku Postgres database
+4. Connect to the Heroku Postgres database from Postico
+5. In the deploy section, select manual deploy
 
-### Stretch Goals
+## Authors
 
-- Ability to edit an existing item on the shelf from the view page.
-- Have anyone, not just logged in users, be able to see what is on the shelf, but not edit, remove, nor add.
-- A new route to display all items for a specific user. `/shelf/2` would display items uploaded by user with the id of `2`.
-- Filestack for image upload on the add page.
-- Style with Material-UI
+* **Bobby Khounphinith** - *Initial work* - (https://github.com/koop212)
+* **Jesse Gjerde** - *Initial work* - (https://github.com/jessegjerde89)
+* **Rachel Schoenmann** - *Initial work* - (https://github.com/rschoenmann)
+* **Thomas Roselyn** - *Initial work* - (https://github.com/tgroselyn)
 
