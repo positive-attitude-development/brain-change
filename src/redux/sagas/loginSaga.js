@@ -37,7 +37,7 @@ function* loginAdmin(action) {
 		  yield action.history.push('/allparticipants');
     }
   } catch (error) {
-    console.log('Error with admin login:', error);
+    // console.log('Error with admin login:', error);
     if (error.response.status === 401) {
       // The 401 is the error status sent from passport
       // if admin isn't in the database or if the username and password don't match in the database
@@ -67,7 +67,7 @@ function* logoutAdmin(action) {
     yield put({type: 'UNSET_ADMIN'});
 
   } catch (error) {
-    console.log('Error with admin logout:', error);
+    // console.log('Error with admin logout:', error);
   }
 }
 

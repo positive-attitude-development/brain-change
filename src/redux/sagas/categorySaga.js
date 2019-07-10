@@ -6,7 +6,7 @@ function* fetchCategories() {
         let response = yield axios.get('/api/values/category');
         yield put({type: 'SET_CATEGORIES', payload: response.data });
     }catch(error) {
-        console.log('Error in fetchCategories:', error)
+        // console.log('Error in fetchCategories:', error)
     }
 }
 
@@ -15,7 +15,7 @@ function* fetchPopulation(){
         let response = yield axios.get('/api/values/population');
         yield put({type: 'SET_POPULATION', payload: response.data });
     }catch(error){
-        console.log('Error in fetchPopulation:', error)
+        // console.log('Error in fetchPopulation:', error)
     }
 }
 
@@ -24,7 +24,7 @@ function* fetchSystem(){
         let response = yield axios.get('/api/values/system');
         yield put({type: 'SET_SYSTEM', payload: response.data });
     }catch(error){
-        console.log('Error in fetchSystem:', error)
+        // console.log('Error in fetchSystem:', error)
     }
 }
 
