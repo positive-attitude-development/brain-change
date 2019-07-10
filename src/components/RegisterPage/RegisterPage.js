@@ -46,7 +46,7 @@ class RegisterPage extends Component {
 
   registerAdmin = (event) => {
     event.preventDefault();
-
+	// allow registration if all required fields filled out
     if (this.state.username && this.state.password && this.state.firstName && 
 	this.state.lastName && this.state.organization && this.state.title && 
 	this.state.phoneNumber && this.state.emailAddress && this.state.state) {
@@ -67,7 +67,7 @@ class RegisterPage extends Component {
   };
 
   render() {
-	  const {classes} = this.props;
+	const {classes} = this.props;
 
     return (
       <Card className={classes.card}>
@@ -185,6 +185,7 @@ class RegisterPage extends Component {
 			</form>
 
 			<center>
+			{/* switch to login mode */}
 			<button type="button" className="link-button"
 				onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
 				Login
