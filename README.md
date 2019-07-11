@@ -158,9 +158,9 @@ VALUES ('General Population'), ('Release'), ('Parole'), ('Other Program');
 ## DEVELOPMENT SETUP
 
 * Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
+* Create a `.env` file at the root of the project and paste this line into the file, changing the key to a new random string:
     ```
-    SERVER_SESSION_SECRET=sdlfnwn4ro2i3j042j3sdlf3242lkd
+    SERVER_SESSION_SECRET=(random string longer than 8 characters)
     ```
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm run server`
