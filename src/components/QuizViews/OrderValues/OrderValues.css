@@ -23,7 +23,7 @@
     padding-top: 10px; 
 }
 
-.background {
+.backgroundCore {
     padding: 0px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
@@ -33,5 +33,5 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
-    height: 500px;
+    height: 450px;
 }

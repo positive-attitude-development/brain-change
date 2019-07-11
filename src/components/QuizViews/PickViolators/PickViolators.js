@@ -91,7 +91,6 @@ class PickViolators extends Component {
                                 } else if (core === value.id) {
                                     return <span key={value.id}>, {value.values}</span>
                                 }
-
                             }
                             return null
                         })}
