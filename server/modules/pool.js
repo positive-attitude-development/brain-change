@@ -10,7 +10,7 @@ if (process.env.DATABASE_URL) {
   const auth = params.auth.split(':');
 
   config = {
-    admin: auth[0],
+    user: auth[0],
     password: auth[1],
     host: params.hostname,
     port: params.port,
