@@ -63,17 +63,16 @@ router.get('/individual/:id', rejectUnauthenticated, (req, res) => {
 
 // GET snapshot results
 router.get('/snapshot/:id', (req, res) => {
-	let queryText = `SELECT "participant"."id", "result"."percent_core", "result"."percent_violators", "result"."dates",
+	let queryText = `SELECT "participant"."id" as participantid, "result"."percent_core", "result".id as resultid, "result"."percent_violators", "result"."dates",
 	(select array_agg("result_belief".belief) AS "beliefs" FROM "result_belief" WHERE "result_belief".result_id = "result".id),
 	(select array_agg("value".values ORDER BY "result_core".ranks) AS "core_values" FROM "result_core" JOIN "value" ON "result_core".value_id = "value".id WHERE "result_core".result_id = "result".id),
-	(select array_agg("value".values ORDER BY "result_violators".order) AS "violator_values" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id)
-	FROM "participant"
+	(select array_agg("value".values ORDER BY "result_violators".order) AS "violator_values" FROM "result_violators" JOIN "value" ON "result_violators".value_id = "value".id WHERE "result_violators".result_id = "result".id) FROM "participant"
 	JOIN "result" ON "participant"."id" = "result"."participant_id"
-	WHERE "participant"."id" = $1;`
-
+	WHERE "participant"."id" = $1
+	ORDER BY "result".id DESC;`
 	pool.query(queryText, [req.params.id])
 	.then(result => {
-		console.log('individual snapshot results:', result.rows);
+		console.log('snapshot results:', result.rows)
 		res.send(result.rows); 
 	}).catch(error => {
 		console.log('error in get snapshot route:', error);

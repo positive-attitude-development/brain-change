@@ -70,7 +70,7 @@ handleClick = (event) => {
 
                 <h2 align="center" className="title">Write 3 beliefs you would not want to give up</h2>
 
-                 <Paper className = "paper">
+                 <Paper contained="true" className = "paper">
 
                 <div className = "background" >
                    <div className="examples" >
