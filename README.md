@@ -180,10 +180,15 @@ Once these accounts are created, they will need to be manually changed in the da
 
 ## DEBUGGING
 To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+   
 ![alt text](https://github.com/PADgroup/positive-attitude-development/blob/master/public/debug.png)
+   
+   
+   
+   
 Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
 ![alt text](https://github.com/PADgroup/positive-attitude-development/blob/master/public/debugbutton.png)
-
+   
 ## PRODUCTION BUILD
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
