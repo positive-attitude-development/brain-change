@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import Slider from '@material-ui/lab/Slider';
-import { Button, Typography, Paper, Grid } from '@material-ui/core'
+import { Button, Paper, Grid, Slider } from '@material-ui/core'
 import './RankPercents.css'
 
 
@@ -11,30 +10,6 @@ import './RankPercents.css'
 
 const styles = ({
     root:{
-     
-        thumb: {
-            height: "24px",
-            width: "24px",
-            backgroundColor: '#fff',
-            border: '2px solid currentColor',
-            marginTop: "-8px",
-            marginLeft: "-12px",
-            '&:focus,&:hover,&$active': {
-            boxShadow: 'inherit',
-            },
-        },
-        active: {},
-        valueLabel: {
-            left: 'calc(-50% + 4px)',
-        },
-        track: {
-            height: 8,
-            borderRadius: 4,
-        },
-        rail: {
-            height: 8,
-            borderRadius: 20,
-        }
         }
     })
 
@@ -127,7 +102,8 @@ class RankPercents extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
             <div className="container">
-                <Paper>  
+                <Paper contained="true" className="paper">  
+				<div className = "background">
                    
                     <div className = "grid">
                         <div className = "core">
@@ -155,16 +131,25 @@ class RankPercents extends Component {
                     </div>
 
                       <div className = "grid2">
-                        <Typography className= {classes} gutterBottom align="center"> </Typography>
                             <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
-                                    
-                                    className={classes.root}
+                                    className={classes.slider}
                                     value={violatorPercent}
                                     aria-label="Pretto slider" 
                                     defaultValue={50} 
                                     style={{ 
-                                        height: '25px'
+                                        height: '18',
+										width: '80%',
+										track: {
+											height: '8',
+											borderRadius: '4'
+											},
+										rail: {
+											height: '8',
+											borderRadius: '4'
+										},
+										margin: 'auto',
+										marginRight: '100px'
                                        }}/>
                             </div>
                         </div>
@@ -176,6 +161,7 @@ class RankPercents extends Component {
                         <h3 className="violatorPercents"> Violator Values {this.state.violatorPercent} % </h3>
 
                     </div>
+					</div>
 
                     <div className="button">
                         <Button

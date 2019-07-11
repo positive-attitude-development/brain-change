@@ -15,7 +15,7 @@ class BeliefInstructions1 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
-            <Paper contained className="paper">             
+            <Paper contained="true" className="paper">             
                 <div className ="instructions">
                     <Typography variant="h5">
                         On the next screen please write 3 of your beliefs that you would not want to give up. 
