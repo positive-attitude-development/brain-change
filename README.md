@@ -16,7 +16,6 @@ Before you get started, make sure you have the following software installed on y
 ## CREATE DATABASE AND TABLE
 
 Create a new database called `brain_change` and create the following tables:
- user-update
 
 ```
 CREATE TABLE "admin" (
