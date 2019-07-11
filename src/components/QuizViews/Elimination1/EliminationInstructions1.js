@@ -17,14 +17,16 @@ class EliminationInstructions1 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
 
-                <Paper justify="center"  className="paper">
+                <Paper justify="center" className="paper">
                     <div className="instructions">
                         <Typography variant="h5">
                             On the next screen there will be a list of values. 
                             Remove the 9 values that are the least important to you.
                         </Typography> 
-                    </div>
-                    
+                    </div>  
+                    {/* <div className="gifDiv"><iframe src="https://giphy.com/embed/RhGhQ1b4c2YvS74mam" width="100%" height="100%" frameBorder="0" className="gif" allowFullScreen></iframe></div> */}
+
+
                     <div className="giph">
                         <iframe src="https://giphy.com/embed/RhGhQ1b4c2YvS74mam" frameBorder="0" className="giphy-embed" title="elimination1instructions"></iframe>             
                     </div>

@@ -16,7 +16,7 @@ class BeliefInstructions2 extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>           
-                <Paper contained className="paper">        
+                <Paper contained="true" className="paper">        
                     <div className = "instructions">
                         <Typography variant="h5">
                         Choose the belief that causes the most internal or external conflict in your life 

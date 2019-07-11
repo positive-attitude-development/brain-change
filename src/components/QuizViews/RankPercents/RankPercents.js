@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import StatusBar from '../StatusBar'; 
-import Slider from '@material-ui/lab/Slider';
-import { Button, Typography, Paper, Grid } from '@material-ui/core'
+import { Button, Paper, Grid, Slider } from '@material-ui/core'
 import './RankPercents.css'
 
 
@@ -155,7 +154,6 @@ class RankPercents extends Component {
                     </div>
 
                       <div className = "grid2">
-                        <Typography className= {classes} gutterBottom align="center"> </Typography>
                             <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
                                     

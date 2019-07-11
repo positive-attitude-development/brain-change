@@ -17,7 +17,7 @@ class EliminationInstructions2 extends Component {
                     <StatusBar status={this.state.statusBar} />
                 </Grid>
                
-                <Paper container className ="paper">
+                <Paper justify="center" className="paper">
                     <div className="instructions">
                     <Typography variant="h5">
                 On the next screen you will see the updated list of values. 

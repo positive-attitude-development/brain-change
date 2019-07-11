@@ -87,11 +87,13 @@ class PickViolators extends Component {
                         {coreValues.map((core, i) => {
                             for (let value of this.props.values) {
                                 if (core === value.id && i === 0) {
-                                    return <span> {value.values}</span>
+                                    return <span key={value.id}> {value.values}</span>
                                 } else if (core === value.id) {
-                                    return <span>, {value.values}</span>
+                                    return <span key={value.id}>, {value.values}</span>
                                 }
+
                             }
+                            return null
                         })}
                     </p>
                     <Paper className ="paper">
