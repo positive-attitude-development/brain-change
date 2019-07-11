@@ -101,12 +101,12 @@ class RankPercents extends Component {
                 <Grid container justify="center" className="statusBar">
                     <StatusBar status={this.state.statusBar} />
                 </Grid>   
-            <div className="container">
+           
                 <Paper contained="true" className="paper">  
-				<div className = "background">
+				<div className="background">
                    
-                    <div className = "grid">
-                        <div className = "core">
+                    <div className="grid">
+                        <div className="core">
                     
                             {/* mapping through core values */}
                             <h3>Core Values</h3>
@@ -136,17 +136,19 @@ class RankPercents extends Component {
                                     className={classes.slider}
                                     value={violatorPercent}
                                     aria-label="Pretto slider" 
-                                    defaultValue={50} 
+                                    value={50} 
                                     style={{ 
                                         height: '18',
 										width: '80%',
 										track: {
 											height: '8',
-											borderRadius: '4'
+											borderRadius: '4',
+											margin: 'auto',
 											},
 										rail: {
 											height: '8',
-											borderRadius: '4'
+											borderRadius: '4',
+											margin: 'auto',
 										},
 										margin: 'auto',
 										marginRight: '100px'
@@ -175,7 +177,7 @@ class RankPercents extends Component {
                     </div>
                     
                   </Paper>
-            </div>
+ 
         </div> 
         )
     }
