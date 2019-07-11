@@ -168,6 +168,16 @@ VALUES ('General Population'), ('Release'), ('Parole'), ('Other Program');
 * Run `npm run client`
 * Navigate to `localhost:3000`
 
+## OWNER ACCOUNT SETUP
+
+There are two options for the initial Owner account set up. We recommend first registering an account to associate with ‘Unassigned’ participants. Enter ‘NA’ or ‘Unassigned’ into all fields in the registration form as needed.
+
+Then, log out and register your actual Owner account to use on a regular basis. 
+
+This setup will allow admins to remove / disassociate from their participants and reassign those participants to that Unassigned admin. To have those participants reassigned to the actual Owner instead, make the first created account your actual Owner account and do not create one for Unassigned.
+
+Once these accounts are created, they will need to be manually changed in the database so that they are permanently locked at the Owner access level (level 5).
+
 
 ## DEBUGGING
 To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
