@@ -88,7 +88,7 @@ class OrderViolators extends Component {
                 </Grid> 
                 <h2 className="inst">Rank your 5 violator values in order of most conflict to least</h2>     
                 <Paper className = "paper">    
-                    <div className="background">
+                    <div className="backgroundViolators">
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {this.state.items.map((value, index) => (
                                 <SortableItem key={`item-${index}`} index={index} value={value} className="sortableItem"/>

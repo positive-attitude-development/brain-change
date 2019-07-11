@@ -89,7 +89,7 @@ class OrderValues1 extends Component {
                 </Grid>      
                 <h2 className="inst">Rank your 5 core values in order of importance</h2>
                 <Paper className="paper">
-                    <div className="background">
+                    <div className="backgroundCore">
                         <SortableContainer onSortEnd={this.onSortEnd}>
                             {items.map((value, index) => (
                                 <SortableItem key={`item-${index}`} index={index} value={value} className="sortableItem"/>

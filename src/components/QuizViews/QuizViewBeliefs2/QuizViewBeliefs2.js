@@ -29,8 +29,8 @@ export class QuizViewBeliefs2 extends Component {
 
     state = {
         statusBar : 47,
-        testedBelief : "",
-        typeOfBelief : ""
+        testedBelief : '',
+        typeOfBelief : ''
     }
 
 componentDidMount() {
@@ -141,6 +141,7 @@ componentDidMount() {
                 </div>
                     <div className="button">
                         <Button
+                            disabled={this.state.testedBelief === '' || this.state.typeOfBelief === ''}
                             className={classes.button}
                             onClick={this.handleClick}
                             color="primary"

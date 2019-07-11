@@ -56,9 +56,6 @@ handleClick = (event) => {
     this.props.dispatch({type: 'SET_NEW_TIME', name: 'belief1Time', payload: belief1Time });
     this.props.history.push('/ElimInstructions3')
     }
-    else {
-        alert("Fill all the beliefs out first before advancing please")
-    }
 }
 
     render() {
@@ -72,7 +69,7 @@ handleClick = (event) => {
 
                  <Paper className = "paper">
 
-                <div className = "background" >
+                <div className= "backgroundBelief1" >
                    <div className="examples" >
                        <h4 align="center"> Here are some examples: </h4>
 	                    <ul> 
@@ -122,6 +119,7 @@ handleClick = (event) => {
             
                 <div className = "button">
                     <Button
+                        disabled={this.state.belief1 === '' || this.state.belief2 === '' || this.state.belief3 === ''}
                         onClick={this.handleClick}
                         color="primary"
                         variant="contained"

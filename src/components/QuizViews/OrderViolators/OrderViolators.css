@@ -2,13 +2,8 @@
     text-align: center; 
 }
 
-.button {
-    float: right; 
-    padding-top: 10px; 
-}
-
-.background {
-    padding: 10px;
+.backgroundViolators {
+    padding: 0px;
     background-image: url("/braintree.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -17,6 +12,7 @@
     object-fit: cover;
     text-align: center;
     margin: 0px;
+    height: 450px;
 }
 
 .sortableItem:hover {

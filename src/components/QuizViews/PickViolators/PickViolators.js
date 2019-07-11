@@ -92,6 +92,7 @@ class PickViolators extends Component {
                                     return <span>, {value.values}</span>
                                 }
                             }
+                            return core;
                         })}
                     </p>
                     <Paper className ="paper">

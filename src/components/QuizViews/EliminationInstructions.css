@@ -15,11 +15,13 @@
 
 .giph {
     pointer-events: none;
+    text-align: center;
 }
 
 iframe {
-    width: 900px;
+    width: 80%;
     height: 600px;
     overflow: auto;
     object-fit: cover;
+    margin: auto;
 }

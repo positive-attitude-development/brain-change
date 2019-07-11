@@ -179,13 +179,14 @@ class RankPercents extends Component {
 
                     <div className="button">
                         <Button
+                            disabled={this.state.valuesPercent === 0}
                             color="primary"
                             variant="contained"
                             onClick= {this.handleNext}
                             >
                             Next
                         </Button> 
-                        </div>
+                    </div>
                     
                   </Paper>
             </div>
