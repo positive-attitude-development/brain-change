@@ -17,8 +17,8 @@ class RankPercents extends Component {
 
     state = {
         statusBar : 95,
-        valuesPercent: 0,
-        violatorPercent: 0,
+        valuesPercent: 50,
+        violatorPercent: 50,
         violators: [],
         core: []
         
@@ -94,8 +94,6 @@ class RankPercents extends Component {
 
 
     render() {
-        const {classes} = this.props;
-        const { violatorPercent } = this.state;
         return (
             <div>
                 <Grid container justify="center" className="statusBar">
@@ -133,10 +131,7 @@ class RankPercents extends Component {
                       <div className = "grid2">
                             <div className ="slider" >
                             <Slider onChange={this.handleChange('violatorPercent')} 
-                                    className={classes.slider}
-                                    value={violatorPercent}
-                                    aria-label="Pretto slider" 
-                                    value={50} 
+                                    defaultValue={50} 
                                     style={{ 
                                         height: '18',
 										width: '80%',
