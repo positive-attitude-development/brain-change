@@ -265,10 +265,10 @@ class IndividualParticipant extends Component{
 					<Card raised className={classes.card}>
 						<CardContent>
 							<h3>Invite to Assessment:</h3>
-							<span className={classes.text}>Unique Invite Link: localhost:3000/#/quiz/{person.url}</span>
+							<span className={classes.text}>Unique Invite Link: brainchange.herokuapp.com/#/quiz/{person.url}</span>
 							<span className={classes.text}>Expiration Date: {formattedExpiration}</span>
 							<div className={classes.buttonArea}>
-								<CopyToClipboard text={`localhost:3000/#/quiz/${person.url}`}>
+								<CopyToClipboard text={`http://brainchange.herokuapp.com/#/quiz/${person.url}`}>
 									<Button className={classes.text} variant="contained" color="primary" size="large">Copy Link to Clipboard</Button>
 								</CopyToClipboard>
 								{urlButton}
