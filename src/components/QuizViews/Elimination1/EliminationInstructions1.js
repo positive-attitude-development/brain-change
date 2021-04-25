@@ -22,6 +22,9 @@ class EliminationInstructions1 extends Component {
                         <Typography variant="h5">
                             On the next screen there will be a list of values. 
                             Remove the 9 values that are the least important to you.
+							
+							An animated example of a user removing values is shown below.
+							Click on the "Next" button at the bottom to proceed.
                         </Typography> 
                     </div>  
                     {/* <div className="gifDiv"><iframe src="https://giphy.com/embed/RhGhQ1b4c2YvS74mam" width="100%" height="100%" frameBorder="0" className="gif" allowFullScreen></iframe></div> */}

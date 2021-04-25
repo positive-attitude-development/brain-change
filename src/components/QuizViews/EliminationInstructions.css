@@ -20,8 +20,8 @@
 
 iframe {
     width: 80%;
-    height: 600px;
+    height: 400px;
     overflow: auto;
-    object-fit: cover;
+    object-fit: contain;
     margin: auto;
 }
